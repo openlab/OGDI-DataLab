@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>
+
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        var map;
+        var kmlLayer;
+        var mapLoaded = false;
+        
+        function LoadMap() 
+        {
+            map = new VEMap('myMap');
+            map.onLoadMap = map_Loaded;
+            map.LoadMap();
+        }
+
+        function map_Loaded() 
+        {
+            mapLoaded = true;
+        }
+
+        function LoadKml() 
+        {
+
+            map.Clear();
+            
+            kmlLayer = new VEShapeLayer();
+			
+			// using &format=kml returns a KML document instead of AtomPub
+            var queryUrl =
+            "{0}?$filter={1}&format=kml";
+
+            var veLayerSpec = new VEShapeSourceSpecification(
+                            VEDataType.ImportXML,
+                            queryUrl,
+                            kmlLayer);
+
+            map.ImportShapeLayerData(veLayerSpec, Kml_Loaded, true);
+        }
+
+        function Kml_Loaded(veShapeLayer) 
+        {
+            var shapeCount = veShapeLayer.GetShapeCount();
+            for (var i = 0; i < shapeCount; i++)
+            {
+                var shape = veShapeLayer.GetShapeByIndex(i);
+
+                if (shape.GetType() == VEShapeType.Polygon) 
+                {
+                    shape.HideIcon();
+                }
+            }
+			var message = "KML Loaded.  Hover over the pushpins. " + 
+						  "You will see entity.entityid as the Description of the Bing Maps Infobox."
+            alert(message);
+        }
+
+        function LoadAdditionalData() 
+        {
+			// We don't want KML here.  We want additional "raw data" that we can match up 
+            // with the data in the KML using entity.entityid.  To do this we ask for JSON 
+            // using &format=json plus we provide a callback function name 
+            // using &callback=yourCallbackFunctionName (this is known as JSONP).
+            var queryUrl = 
+            "{0}?$filter={1}&format=json&callback=?";
+                           
+            $.getJSON(queryUrl, null, AdditionalData_Loaded);
+        }
+
+        function AdditionalData_Loaded(result)
+        {
+            result = result.d;
+
+            
+            for (var i = 0, length = kmlLayer.GetShapeCount(); i < length; i++) 
+            {
+                var shape = kmlLayer.GetShapeByIndex(i);
+
+                if (shape.GetType() == VEShapeType.Pushpin)
+                {
+                    // All KML queries contain entity.entityid as the value
+                    // for the description element of the Placemark.
+                    // You can use this to match up the results from the 
+                    // JSONP query by entity
+                    var entity = GetEntityById(shape.GetDescription(), result);
+                    if (entity != null)
+                    {
+                        // Here we can get at any of the returned object
+                        // properties and formulate whatever UI for the
+                        // Bing Maps InfoBox we want.  Since this sample
+                        // is designer to work with all possible queries, we
+                        // just use entity.entityid since every entity has 
+                        // an entityid.
+
+                        var description = "This entityid comes from the object returned from the JSONP query: " 
+										  + entity.entityid; 
+                        
+                        shape.SetDescription(description);
+                    }
+                }
+            }
+            
+            var message = "Additional Data Loaded.  Hover over the pushpins.  " +
+                          "You will see that the Description of the Bing Maps " +
+                          "Infobox has now been customized based on the additional data returned."
+
+            alert(message);
+        }
+
+        function GetEntityById(id, array) 
+        {
+            for (var i = 0, length = array.length; i < length; i++) 
+            {
+                if (array[i].entityid == id) 
+                {
+                    return array[i];
+                }
+            }
+
+            return null;
+        }
+    </script>
+
+</head>
+<body onload="LoadMap();">
+    <form id="form1" runat="server">
+    <div>
+        <div id='myMap' style="position: relative; width: 900px; height: 500px;">
+        </div>
+        <p>Click the button below to query the service for KML and use Bing Maps to load the KML on the map.  The 
+           default rendering of the KML puts the entity Id into the Bing Maps shape (VEShape) description.  You 
+           can use this Id to query the service for more data.</p>
+        <input id="btnLoadKml" type="button" value="Load Kml" onclick="LoadKml();" />
+        <br />
+        <p>Click the button below to query the service for the entities related to the original KML query.  The 
+           returned entities will be used to update the Bing Maps shape (VEShape) description from entity.Id 
+           to data from the returned entity.</p>
+        <input id="btnLoadAdditionalData" type="button" value="Load Additional Data" onclick="LoadAdditionalData();" />
+        <br />
+    </div>
+    </form>
+</body>
+</html>

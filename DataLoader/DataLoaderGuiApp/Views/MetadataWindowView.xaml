@@ -1,0 +1,30 @@
+﻿<Window x:Class="Ogdi.Data.DataLoaderGuiApp.Views.MetadataWindowView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Views="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Views" Title="OGDI Metadata Designer" Height="750" Width="875"
+        WindowStartupLocation="CenterOwner">
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TabControl TabStripPlacement="Top" >
+            <TabItem Header="Dataset Metadata">
+                <ContentControl Content="{Binding Metadata}" />
+            </TabItem>
+            <TabItem Header="Dataset Properties" Visibility="{Binding TabsVisibility}" >
+                <ContentControl Content="{Binding ProcessorParams}" />
+            </TabItem>
+            <TabItem Header="Dataset Columns" Visibility="{Binding TabsVisibility}" x:Name="ProducerParamsTab" >
+                <ContentControl Content="{Binding ProducerParams}"  />
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
+            <Button Name="SaveButton" Padding="2" Margin="1" MinWidth="100" Command="{Binding SaveCommand}">Save</Button>
+            <Button Name="CloseButton" Padding="2" Margin="5,1,1,1" MinWidth="100" Command="{Binding CloseCommand}">Close</Button>
+        </StackPanel>
+    </Grid>
+</Window>

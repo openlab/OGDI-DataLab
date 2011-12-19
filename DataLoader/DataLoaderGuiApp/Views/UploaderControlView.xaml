@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Ogdi.Data.DataLoaderGuiApp.Views.UploaderControlView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:DataLoader="clr-namespace:Ogdi.Data.DataLoader;assembly=DataLoader"
+    xmlns:DataLoaderUIMvvm1="clr-namespace:Ogdi.Data.DataLoaderGuiApp"
+    xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             >
+	
+	<Grid>
+		<Grid.Resources>
+            <!-- Brushes -->
+            <LinearGradientBrush x:Key="dgHeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF6B8E95" Offset="0"/>
+                <GradientStop Color="#FF14A7C1" Offset="1"/>
+                <GradientStop Color="#FF1E424E" Offset="0.509"/>
+                <GradientStop Color="#FF1D4855" Offset="0.542"/>
+                <GradientStop Color="#FF1D4855" Offset="0.542"/>
+                <GradientStop Color="#FF193A44" Offset="0.526"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="dgHeaderBorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF1D1D1D" Offset="0.614"/>
+                <GradientStop Color="#FF007F96" Offset="0.853"/>
+                <GradientStop Color="#FF0AEAFA" Offset="1"/>
+            </LinearGradientBrush>
+            
+			<DataLoaderUIMvvm1:ConfigurationStateConverter x:Key="ConfigurationStateConverter"/>
+
+			<DataTemplate x:Key="StatusImage">
+				<StackPanel Width="16">
+					<Image Source="{Binding Image}" ToolTip="{Binding Path=ConfigurationState, Converter={StaticResource ConfigurationStateConverter}}"/>
+				</StackPanel>
+			</DataTemplate>
+
+			<DataTemplate x:Key="Progress">
+				<ProgressBar Value="{Binding Progress}"/>
+			</DataTemplate>
+
+			<ObjectDataProvider MethodName="GetValues"
+		        ObjectType="{x:Type System:Enum}"
+				x:Key="TableOverwriteModeValues">
+				<ObjectDataProvider.MethodParameters>
+					<x:Type TypeName="DataLoader:TableOverwriteMode" />
+				</ObjectDataProvider.MethodParameters>
+			</ObjectDataProvider>           
+            
+			<DataTemplate x:Key="OverwriteSelector">
+				<ComboBox SelectedItem="{Binding Path=OverwriteMode, Mode=TwoWay}" Width="90"
+						  ItemsSource="{Binding Source={StaticResource TableOverwriteModeValues}}" ToolTip="Overwrite Mode"
+                          IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Fluent:RibbonWindow}}, Path=DataContext.IsIdle}" />
+			</DataTemplate>
+
+			<DataTemplate x:Key="SourceOrderSelector">
+				<CheckBox HorizontalAlignment="Center" IsChecked="{Binding SourceOrder}" ToolTip="Preserve the source order" />
+			</DataTemplate>
+			
+			<GridView x:Key="GridView">
+				<GridViewColumn CellTemplate="{StaticResource StatusImage}" />
+				<GridViewColumn Header="Dataset Name" DisplayMemberBinding="{Binding Name}"/>
+				<GridViewColumn Header="Is Planned?" DisplayMemberBinding="{Binding PlannedAsString}"/>
+				<GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" Width="100"/>
+				<GridViewColumn Header="Progress" CellTemplate="{StaticResource Progress}" Width="200"/>
+                <GridViewColumn Header="Upload Mode" CellTemplate="{StaticResource OverwriteSelector}" Width="110"/>
+                <GridViewColumn Header="Preserve Original Dataset Order" CellTemplate="{StaticResource SourceOrderSelector}" Width="140"/>
+			</GridView>
+
+		</Grid.Resources>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="29*"/>
+            <RowDefinition Height="87.891*" MinHeight="60" />
+            <RowDefinition Height="150"/>
+		</Grid.RowDefinitions>
+		
+		<ListView Name="DataSetListView" View="{StaticResource GridView}" ItemsSource="{Binding DataSetInfos}"  SelectedItem="{Binding SelectedItem}"
+				  MouseDoubleClick="DataSetListView_MouseDoubleClick" KeyUp="DataSetListView_KeyUp" ContextMenuService.ShowOnDisabled="True" Grid.RowSpan="2">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="{x:Type ListViewItem}">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+					<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="ToolTip" Value="Double click to open Metadata Editor" />
+				</Style>
+			</ListView.ItemContainerStyle>
+        </ListView>
+        
+		<GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="4"/>
+
+		<Grid Grid.Row="2"  Margin="0 4 0 0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			
+			<Border BorderThickness="0 1 1 1" BorderBrush="DarkGray" Background="#e8eeef">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<Border BorderThickness="0 0 1 0" BorderBrush="DarkGray" CornerRadius="0 4 4 0" Background="#c0cccf">
+                        <TextBlock Margin="2" Text="{Binding Path=SelectedItem.Name}" />
+					</Border>
+
+                    <TextBlock Grid.Column="1" Margin="2" Text="{Binding Path=SelectedItem.State}" />
+				</Grid>
+			</Border>
+			
+			<TextBox Name="MessageTextBox" Grid.Row="1" IsReadOnly="True" MinLines="3" BorderThickness="0" Text="{Binding Path=SelectedItem.Message, Mode=OneWay}"
+					 TextWrapping="NoWrap" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0,0,0,0">
+			</TextBox>
+		</Grid>
+	</Grid>
+</UserControl>

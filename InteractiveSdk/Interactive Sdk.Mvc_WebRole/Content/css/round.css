@@ -1,0 +1,44 @@
+﻿div.rounded {
+    clear:both;
+    max-width:2400px;
+}
+
+div.rounded div.top {
+    padding:0px;
+    width:100%;
+}
+
+div.rounded div.top div.right {
+    height:12px;
+    line-height:0.1em;
+    font-size:0.1em;
+    margin:0px;
+    margin-left:12px;
+}
+
+div.rounded div.middle {
+    clear:both;
+    width:100%;
+}
+
+div.rounded div.middle div.right {
+    margin-left:2px;
+}
+
+div.rounded div.middle div.right div.content {
+    margin-right:2px;
+}
+
+div.rounded div.bottom {
+    clear:both;
+    padding:0px;
+    width:100%;
+}
+
+div.rounded div.bottom div.right {
+    height:12px;
+    line-height:0.1em;
+    font-size:0.1em;
+    margin:0px;
+    margin-left:12px;
+}

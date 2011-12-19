@@ -1,0 +1,228 @@
+﻿<%@ Page Language="C#" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="System.Data.Services.Client" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+    // This sample requires the .NET Framework 3.5 SP1.
+    // To get this the sample to work, perform the 
+    // following steps:
+    //
+    //      1. Create a new Web Site in Visual Studio 2008 SP1
+    //      2. Add a new Web Form (name it what you like)
+    //      3. Make sure the "Place code in separate file" is unchecked in the 
+    //         Add New Item dialog
+    //      4. Replace the entire contents of the .aspx file with the entire 
+    //         text of this sample 
+    //      5. Right click on the project node in Solution Explorer
+    //      6. Select Add Service Reference
+    //      7. Enter service endpoint URL into the Address field
+    //         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc    
+    //
+    // The Ogdi.DataServiceContexts sample makes it
+    // very easy for .NET developers to query
+    // for data using LINQ.  This sample is uses code 
+    // generation and will enable you to automatically
+    // generate updated classes as new data is published
+    // into OGDI.
+    
+    // See the "C#/ASP.NET" sample for how to query the service by 
+    // composing an http query url. Look for the comment that reads
+    //
+    // // Execute the same query, but return KML
+    
+    [Serializable]
+    class ContinuationToken
+    {
+        public string NextPartitionKey { get; set; }
+        public string NextRowKey { get; set; }
+    }
+    
+    int pageSize = 10;
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // See "C#/.NET" sample for an intro to querying the service
+        if (!Page.IsPostBack)
+        {
+            var response = CreateDataServiceQuery().Execute() as QueryOperationResponse;
+            SetPagingAndBind(response, null, false);
+        }
+    }
+
+    protected void PreviousLink_Click(object sender, EventArgs e)
+    {
+        ContinuationToken nextContinuationToken = null;
+        ContinuationToken previousContinuationToken = null;
+        
+        var continuationTokenStack = GetContinuationTokenStack();
+        
+        // The current token on the stack is the "next" token for 
+        // the previous instance of the page.  Since this is a 
+        // "previous" click, we don't care about this token so we
+        // remove it ("throw it away")
+        continuationTokenStack.Pop();
+        // The current token on the stack is the "next" token for
+        // this instance of the page.  In order to execute the 
+        // "previous" query, we need to temporarily pop the "next" 
+        // token off the stack.
+        previousContinuationToken = continuationTokenStack.Pop();
+        // This is the token we need to execute the "previous" query.
+        nextContinuationToken = NullPeek(continuationTokenStack);
+        // We still need the "next" token to execute the "next" query
+        // when the user clicks the NextLink.  Therefore we put it 
+        // back on the stack.
+        continuationTokenStack.Push(previousContinuationToken);
+        
+        DataServiceQuery<Ogdi.BankLocationsItem> dataServiceQuery;
+        QueryOperationResponse response;
+        
+        if (nextContinuationToken != null)
+        {
+            dataServiceQuery = CreateDataServiceQuery()
+                                .AddQueryOption("NextPartitionKey", nextContinuationToken.NextPartitionKey)
+                                .AddQueryOption("NextRowKey", nextContinuationToken.NextRowKey);
+            response = dataServiceQuery.Execute() as QueryOperationResponse;
+        }
+        else
+        {
+            dataServiceQuery = CreateDataServiceQuery();
+            response = dataServiceQuery.Execute() as QueryOperationResponse;
+        }
+
+        SetPagingAndBind(response, continuationTokenStack, true);
+    }
+    
+    protected void NextLink_Click(object sender, EventArgs e)
+    {        
+        var continuationTokenStack = GetContinuationTokenStack();
+        
+        var nextContinuationToken = NullPeek(continuationTokenStack);
+
+        DataServiceQuery<Ogdi.BankLocationsItem> dataServiceQuery;
+        
+        if (nextContinuationToken != null)
+        {
+            dataServiceQuery = CreateDataServiceQuery()
+                                    .AddQueryOption("NextPartitionKey", nextContinuationToken.NextPartitionKey)
+                                    .AddQueryOption("NextRowKey", nextContinuationToken.NextRowKey);
+        }
+        else 
+        {
+            dataServiceQuery = CreateDataServiceQuery();    
+        }
+
+        var response = dataServiceQuery.Execute() as QueryOperationResponse;
+
+        SetPagingAndBind(response, continuationTokenStack, false);
+    }
+
+    private Stack<ContinuationToken> GetContinuationTokenStack()
+    {
+        return ViewState["ContinuationTokenStack"] as Stack<ContinuationToken>;
+    }
+
+    private ContinuationToken NullPeek(Stack<ContinuationToken> stack)
+    {
+        try
+        {
+            return stack.Peek();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private DataServiceQuery<Ogdi.BankLocationsItem> CreateDataServiceQuery()
+    {
+        var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
+
+        var query = (from locations in context.BankLocations
+                     select locations).Take(this.pageSize);
+
+        var dataServiceQuery = query as DataServiceQuery<Ogdi.BankLocationsItem>;
+
+        return dataServiceQuery;
+    }
+
+    private void SetPagingAndBind(QueryOperationResponse response,
+                           Stack<ContinuationToken> continuationTokenStack, 
+                           bool previousClicked)
+    {
+        if (!previousClicked)
+        {
+            string nextPartitionKey = null;
+            string nextRowKey = null;
+
+            response.Headers.TryGetValue("x-ms-continuation-NextPartitionKey",
+                                         out nextPartitionKey);
+            response.Headers.TryGetValue("x-ms-continuation-NextRowKey",
+                                         out nextRowKey);
+
+            if (nextPartitionKey != null && nextRowKey != null)
+            {
+                if (continuationTokenStack == null)
+                {
+                    continuationTokenStack = new Stack<ContinuationToken>();
+                }
+                else 
+                {
+                    PreviousLink.Enabled = true;
+                }
+
+                var token = new ContinuationToken
+                {
+                    NextPartitionKey = nextPartitionKey,
+                    NextRowKey = nextRowKey
+                };
+
+                continuationTokenStack.Push(token);
+                ViewState.Add("ContinuationTokenStack", continuationTokenStack);
+                NextLink.Enabled = true;
+            }
+            else
+            {            
+                // The else condition means there are no more pages of data.
+                // The PreviousLink click handler ALWAYS throws away what
+                // is on top of the stack.  Therefore, we add a bogus token.
+                continuationTokenStack.Push(new ContinuationToken 
+                                               { 
+                                                    NextPartitionKey= "X",
+                                                    NextRowKey = "X"
+                                               });
+                ViewState.Add("ContinuationTokenStack", continuationTokenStack);
+                NextLink.Enabled = false;
+            }
+        }
+        else 
+        {
+            if (continuationTokenStack.Count == 1)
+            {                
+                PreviousLink.Enabled = false;
+            }
+            ViewState.Add("ContinuationTokenStack", continuationTokenStack);
+            NextLink.Enabled = true;
+        }
+
+        GridView1.DataSource = response;
+        GridView1.DataBind();
+    }
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:GridView ID="GridView1" EnableViewState="false" runat="server"/>
+        <asp:LinkButton ID="PreviousLink" Enabled="false" onclick="PreviousLink_Click" runat="server">Previous</asp:LinkButton> 
+        <asp:LinkButton ID="NextLink" Enabled="false" onclick="NextLink_Click" runat="server">Next</asp:LinkButton>
+    </div>
+    </form>
+</body>
+</html>
