@@ -211,7 +211,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                 root.Add(new XAttribute("nextRowKey", nextRowKeyStr));
                 xmlData = StripNamespaces(root);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

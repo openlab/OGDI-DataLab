@@ -42,7 +42,7 @@
   <ItemGroup>
     <ServiceConfiguration Include="ServiceConfiguration.Regina.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
-    <ServiceConfiguration Include="ServiceConfiguration.DataDotGC.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interactive Sdk.Mvc_WebRole\InteractiveSdk.WebRole.csproj">

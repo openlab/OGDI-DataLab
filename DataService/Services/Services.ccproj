@@ -19,6 +19,7 @@
     </SccAuxPath>
     <SccLocalPath>
     </SccLocalPath>
+    <StartDevelopmentStorage>False</StartDevelopmentStorage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,9 +40,9 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
+    <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Regina.cscfg" />
-    <ServiceDefinition Include="ServiceDefinition.csdef" />
-    <ServiceConfiguration Include="ServiceConfiguration.DataDotGC.cscfg" />
+    <ServiceDefinition Include="ServiceDefinition.csdef" />    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Services_WebRole\Services_WebRole.csproj">
