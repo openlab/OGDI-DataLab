@@ -60,6 +60,11 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "InteractiveSdk", "Interacti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdPartyComponents", "Tests\ThirdPartyComponents\ThirdPartyComponents.csproj", "{C44C271D-CBBB-4516-9680-05B6C0E75958}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B30C533-A1ED-4037-851B-C8D6E4A2E456}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ogdi.vsmdi
