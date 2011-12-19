@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="InteractiveSdk" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WebRole name="InteractiveSdk.WebRole">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="HttpIn" endpointName="HttpIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="ChartImageHandler" />
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+      <Setting name="HeaderLogo" />
+      <Setting name="HeaderLogoAltText" />
+      <Setting name="HeaderLogoLongDesc" />
+      <Setting name="HeaderBackground" />
+      <Setting name="FooterBackground" />
+      <Setting name="BannerImage" />
+      <Setting name="TermsOfUseURL" />
+      <Setting name="TradeMarksURL" />
+      <Setting name="CopyRightsStatement" />
+      <Setting name="PrivacyPage" />
+      <Setting name="HomePageHeading" />
+      <Setting name="WelcomeVideoURL" />
+      <Setting name="HomePageContent" />
+      <Setting name="BlogPostsUrl" />
+      <Setting name="NumberOfBlogLinksOnPage" />
+      <Setting name="OgdiConfigConnectionString" />
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="RecaptchaPrivateKey" />
+      <Setting name="RecaptchaPupblicKey" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="HttpIn" protocol="http" port="80" />
+    </Endpoints>
+    <LocalResources>
+    </LocalResources>
+    <Certificates>
+    </Certificates>
+  </WebRole>
+  <WorkerRole name="InteractiveSdk.WorkerRole">
+    <ConfigurationSettings>
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="OgdiConfigConnectionString" />
+      <Setting name="SmtpSettings" />
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+    </ConfigurationSettings>
+  </WorkerRole>
+</ServiceDefinition>

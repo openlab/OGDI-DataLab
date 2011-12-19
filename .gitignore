@@ -1,0 +1,11 @@
+*.suo
+*.user
+*.dot[Cc]over
+*.vspscc
+*.[Cc]ache
+[Bb]in
+[Oo]bj
+[Cc]sx
+_[Rr]e[Ss]harper*/
+_[Uu]pgrade[Rr]eport_[Ff]iles*/
+[Uu]pgrade[Ll]og.XML

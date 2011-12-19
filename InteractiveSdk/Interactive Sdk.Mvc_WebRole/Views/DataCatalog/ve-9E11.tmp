@@ -1,0 +1,102 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/OGDIMasterPage.Master" Inherits="System.Web.Mvc.ViewPage" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript">
+        var ExpanderImage = '<%= ConfigurationSettings.AppSettings["ExpanderImage"].ToString() %>';
+        var ExpanderImageDescription = '<%= ConfigurationSettings.AppSettings["ExpanderImageDescription"].ToString() %>';
+        var CollapserImage = '<%= ConfigurationSettings.AppSettings["CollapserImage"].ToString() %>';
+        var RunLogoImage = '<%= ConfigurationSettings.AppSettings["RunLogoImage"].ToString() %>';
+        var HelpLogoImage = '<%= ConfigurationSettings.AppSettings["HelpLogoImage"].ToString() %>';
+        var RunLogoImageAlternateText = '<%= ConfigurationSettings.AppSettings["RunLogoImageAlternateText"].ToString() %>';
+        var HelpLogoImageAlternateText = '<%= ConfigurationSettings.AppSettings["HelpLogoImageAlternateText"].ToString() %>';
+        
+        function ShowHideDiv() {
+            if (document.getElementById("pDataBrowserIntro2").style.display == "none") {
+                document.getElementById("pDataBrowserIntro2").style.display = "block";
+                document.getElementById("imgExpand").alt = "Hide Details";
+                document.getElementById("imgExpand").src = CollapserImage;
+            }
+            else {
+                document.getElementById("pDataBrowserIntro2").style.display = "none";
+                document.getElementById("imgExpand").alt = "Show Details";
+                document.getElementById("imgExpand").src = ExpanderImage;
+            }
+        }
+    </script>
+
+    <%--<script language="javascript" type="text/javascript" src="../../js/jquery.clipboard.min.js" />    
+    <script language="javascript" type="text/javascript" src="../../js/jquery-1.3.1.min.js" />
+    <script language="javascript" type="text/javascript" src="../../js/jquery-ui-1.7.1.custom.min.js" />--%>
+    
+    <div>
+        <h1>Data Browser</h1>
+        
+        <p class="big">
+            <%= ConfigurationSettings.AppSettings["DataBrowserIntro1"].ToString()%>              
+            <a href="javascript:ShowHideDiv();">                    
+                                
+                <script type="text/javascript">
+                    document.write('<img id="imgExpand" src="' + ExpanderImage + '" alt="Show Details.." longdesc="' + ExpanderImageDescription + '"/>');
+                </script>
+            </a>
+        </p>
+        <p class="big" id="pDataBrowserIntro2" style="display:none">                     
+            <%= ConfigurationSettings.AppSettings["DataBrowserIntro2"].ToString()%>            
+        </p>
+    </div>
+    
+    <table>
+        <tr>
+            <td class="leftcolumn">
+                <b>Entity Set</b>:
+            </td>
+            <td colspan="2">
+                <label title="labelEntitySet" class="maintext"><%= Html.Encode(ViewData["EntitySet"]) %></label>                
+            </td>
+        </tr>
+        <tr>
+            <td class="leftcolumn">
+                <b>Base Query</b>:
+            </td>
+            <td colspan="2">
+                <label title="labelBaseQuery" class="maintext"><%= Html.Encode(ViewData["BaseQuery"])%></label>                
+            </td>
+        </tr>
+        <tr>
+            <td class="leftcolumn">
+                <b>Filter Expression</b>:
+                <br/>
+                <b>($filter)</b>
+            </td>
+            <td>
+                <textarea id="queryBox" class="nice" style="width:580px; height:48px;"></textarea>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <script type="text/javascript">
+                                document.write("<img id='helpButton' src='" + HelpLogoImage + "' alt='" + HelpLogoImageAlternateText + "' class='filterhints' /> ");               
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <script type="text/javascript">
+                                document.write("<img id='runButton' src='" + RunLogoImage + "' style='width:80px;' alt='" + RunLogoImageAlternateText + "' /> ");               
+                            </script>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+
+    <!-- Tabs -->
+   
+</asp:Content>

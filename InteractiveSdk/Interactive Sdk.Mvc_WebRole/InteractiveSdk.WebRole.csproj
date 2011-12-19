@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE3A2F55-8154-4478-8251-64D24D15DB79}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ogdi.InteractiveSdk.Mvc</RootNamespace>
+    <AssemblyName>InteractiveSdk.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSharpFormat, Version=2.5.3325.25047, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\CSharpFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Services.Client">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DataVisualization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization.Design">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Data\Xml\languages.cs">
+      <DependentUpon>Languages.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\DataBrowserController.cs" />
+    <Compile Include="Controllers\DataCatalogController.cs" />
+    <Compile Include="Controllers\DevelopersController.cs" />
+    <Compile Include="Controllers\HistoryIframeHelperController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PrivacyController.cs" />
+    <Compile Include="Controllers\RatesController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helper\Cache.cs" />
+    <Compile Include="Helper\HtmlExtender.cs" />
+    <Compile Include="Helper\OgdiViewUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Helper\Recaptcha.cs" />
+    <Compile Include="Models\AuthorInfo.cs" />
+    <Compile Include="Models\BlogsAndAnnouncements.cs" />
+    <Compile Include="Models\Comments\AgencyCommentViewModel.cs" />
+    <Compile Include="Models\Comments\Comment.cs" />
+    <Compile Include="Models\Comments\CommentEntry.cs" />
+    <Compile Include="Models\Comments\CommentInfo.cs" />
+    <Compile Include="Models\Comments\CommentsDataContext.cs" />
+    <Compile Include="Models\Comments\CommentsDataSource.cs" />
+    <Compile Include="Models\CommonListData.cs" />
+    <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\EntitySet.cs" />
+    <Compile Include="Models\EntitySetDetails.cs" />
+    <Compile Include="Models\EntitySetWrapper.cs" />
+    <Compile Include="Models\Enum.cs" />
+    <Compile Include="Models\Globals.cs" />
+    <Compile Include="Models\QueryString.cs" />
+    <Compile Include="Models\Rating\Rate.cs" />
+    <Compile Include="Models\Rating\RateDataContext.cs" />
+    <Compile Include="Models\Rating\RateDataSource.cs" />
+    <Compile Include="Models\Rating\RateEntry.cs" />
+    <Compile Include="Models\Rating\RateInfo.cs" />
+    <Compile Include="Models\Reports\ReportDataSource.cs" />
+    <Compile Include="Models\Reports\ReportEntry.cs" />
+    <Compile Include="Models\Request\AgencyRequestsViewModel.cs" />
+    <Compile Include="Models\Request\Request.cs" />
+    <Compile Include="Models\Request\RequestDataContext.cs" />
+    <Compile Include="Models\Request\RequestDataSource.cs" />
+    <Compile Include="Models\Request\RequestEntry.cs" />
+    <Compile Include="Models\Request\RequestListModel.cs" />
+    <Compile Include="Models\SampleCodeLanguage.cs" />
+    <Compile Include="Models\ViewData\AgencyTabsViewModel.cs" />
+    <Compile Include="Models\ViewData\DataBrowserModel.cs" />
+    <Compile Include="Models\ViewData\DataCatalogModel.cs" />
+    <Compile Include="Models\ViewData\DatasetInfo.cs" />
+    <Compile Include="Models\ViewData\DatasetListModel.cs" />
+    <Compile Include="Models\ViewData\HomeModel.cs" />
+    <Compile Include="Models\ViewData\ManageRoleModel.cs" />
+    <Compile Include="Reports\DatasetCommentsDataSource.cs" />
+    <Compile Include="Reports\DatasetsDataSource.cs" />
+    <Compile Include="Reports\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RequestsDataSource.cs" />
+    <Compile Include="Reports\ViewReportDataSource.cs" />
+    <Compile Include="Repository\BlobRepositary.cs" />
+    <Compile Include="Repository\BlogsAndAnnouncementsRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\EntitySetDetailsRepository.cs" />
+    <Compile Include="Repository\EntitySetRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_GlobalResources\UIConstants.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UIConstants.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\ContainerRepository.cs" />
+    <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Repository\RatingRepository.cs" />
+    <Compile Include="Repository\RequestRepository.cs" />
+    <Compile Include="Repository\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\SampleCodeGenerator.cs" />
+    <Compile Include="WebRole.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\WebConfigXML\appSettings.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\css\comments.css" />
+    <Content Include="Content\css\csharp.css" />
+    <Content Include="Content\css\icons.gif" />
+    <Content Include="Content\css\pngbehavior.htc" />
+    <Content Include="Content\css\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\css\redmond\jquery-ui-1.7.1.custom.css" />
+    <Content Include="Content\css\round-themes.css" />
+    <Content Include="Content\css\round.css" />
+    <Content Include="Content\css\static.gif" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\t.gif" />
+    <Content Include="Content\css\tab-themes.css" />
+    <Content Include="Content\css\tabs.css" />
+    <Content Include="App_Data\Xml\Languages.xml" />
+    <Content Include="Content\images\sort.jpg" />
+    <Content Include="Content\images\sorted_desc.jpg" />
+    <Content Include="Content\images\sorted_asc.jpg" />
+    <Content Include="Default.aspx" />
+    <Content Include="Descriptions\AddSvcRef.txt" />
+    <Content Include="Descriptions\ADOquerysyntax.txt" />
+    <Content Include="Descriptions\ADOServices.txt" />
+    <Content Include="Descriptions\AtomPB.txt" />
+    <Content Include="Descriptions\AtomPBExt.txt" />
+    <Content Include="Descriptions\azureservices.txt" />
+    <Content Include="Descriptions\Bookmark.txt" />
+    <Content Include="Descriptions\Clipboard.txt" />
+    <Content Include="Descriptions\CodePlex.txt" />
+    <Content Include="Descriptions\Collapse.txt" />
+    <Content Include="Descriptions\Download.txt" />
+    <Content Include="Descriptions\Expand.txt" />
+    <Content Include="Descriptions\ExternalLink.txt" />
+    <Content Include="Descriptions\Filter.txt" />
+    <Content Include="Descriptions\GoogleEarth.txt" />
+    <Content Include="Descriptions\GoogleMap.txt" />
+    <Content Include="Descriptions\Home.txt" />
+    <Content Include="Descriptions\IFRAMES.txt" />
+    <Content Include="Descriptions\Iso.txt" />
+    <Content Include="Descriptions\JavaLib.txt" />
+    <Content Include="Descriptions\Json.txt" />
+    <Content Include="Descriptions\JSONP.txt" />
+    <Content Include="Descriptions\KeyImg.txt" />
+    <Content Include="Descriptions\KML.txt" />
+    <Content Include="Descriptions\Load.txt" />
+    <Content Include="Descriptions\Logo.txt" />
+    <Content Include="Descriptions\longdesc.txt" />
+    <Content Include="Descriptions\NoScript.txt" />
+    <Content Include="Descriptions\PHPLib.txt" />
+    <Content Include="Descriptions\Privacy.txt" />
+    <Content Include="Descriptions\Publicsector.txt" />
+    <Content Include="Descriptions\QueryTimeoutPagination.txt" />
+    <Content Include="Descriptions\REST.txt" />
+    <Content Include="Descriptions\Run.txt" />
+    <Content Include="Descriptions\T4.txt" />
+    <Content Include="Descriptions\DaisyFormat.txt" />
+    <Content Include="Descriptions\VE.txt" />
+    <Content Include="Descriptions\VS2008.txt" />
+    <Content Include="Descriptions\YahooMaps.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\blank.gif" />
+    <Content Include="Images\blue_bl.gif" />
+    <Content Include="Images\blue_br.gif" />
+    <Content Include="Images\blue_left.gif" />
+    <Content Include="Images\blue_right.gif" />
+    <Content Include="Images\blue_side.gif" />
+    <Content Include="Images\blue_tr.gif" />
+    <Content Include="Images\bottomMedia.jpg" />
+    <Content Include="Images\clipboard.jpg" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\CloudBanner2.png" />
+    <Content Include="Images\collapse.jpg" />
+    <Content Include="Images\download.png" />
+    <Content Include="Images\example.png" />
+    <Content Include="Images\expand.jpg" />
+    <Content Include="Images\ExternalLink.png" />
+    <Content Include="Images\footer.gif" />
+    <Content Include="Images\gray_bl.gif" />
+    <Content Include="Images\gray_br.gif" />
+    <Content Include="Images\gray_left.gif" />
+    <Content Include="Images\gray_right.gif" />
+    <Content Include="Images\gray_side.gif" />
+    <Content Include="Images\gray_tl.gif" />
+    <Content Include="Images\gray_tr.gif" />
+    <Content Include="Images\HeadBG.gif" />
+    <Content Include="Images\help.JPG" />
+    <Content Include="Images\input.shadow.blue.gif" />
+    <Content Include="Images\input.shadow.white.gif" />
+    <Content Include="Images\key.png" />
+    <Content Include="Images\light.gif" />
+    <Content Include="Images\loading2.gif" />
+    <Content Include="Images\menu.gif" />
+    <Content Include="Images\middleMedia.jpg" />
+    <Content Include="Content\images\first.jpg" />
+    <Content Include="Content\images\last.jpg" />
+    <Content Include="Content\images\listrow.jpg" />
+    <Content Include="Content\images\listrowh.jpg" />
+    <Content Include="Content\images\next.jpg" />
+    <Content Include="Content\images\prev.jpg" />
+    <Content Include="Images\NoscriptInfo.gif" />
+    <Content Include="Images\pushpin-expand.png" />
+    <Content Include="Images\pushpin.png" />
+    <Content Include="Images\RefreshChart.png" />
+    <Content Include="Images\RefreshChart1.png" />
+    <Content Include="Images\RefreshChartButtonImage.png" />
+    <Content Include="Images\run.png" />
+    <Content Include="Images\t.gif" />
+    <Content Include="Images\thumbs_down.gif" />
+    <Content Include="Images\thumbs_up.gif" />
+    <Content Include="Images\topMedia.jpg" />
+    <Content Include="Reports\Reports.aspx" />
+    <Content Include="SampleCodeTemplates\SampleCode_CS_BarChart.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_CS_PieChart.txt" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\DataBrowser.min.js" />
+    <Content Include="Scripts\DataCatalog.min.js" />
+    <Content Include="SampleCodeTemplates\SampleCode_CS.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_CS_Paging.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_CS_Silverlight.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_FLEX.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_JS.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_JS_GoogleMaps.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_MAP.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_PHP.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_PYTHON.txt" />
+    <Content Include="SampleCodeTemplates\SampleCode_RUBY.txt" />
+    <Content Include="Scripts\DataBrowser.js" />
+    <Content Include="Scripts\DataCatalog.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\ogdi\list.js" />
+    <Content Include="Scripts\querybuilder.js" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\ManageRoles.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Account\UpdateUserInfo.aspx" />
+    <Content Include="Views\Comments\Test.aspx" />
+    <Content Include="Views\Comments\Unsubscribe.aspx" />
+    <Content Include="Views\Shared\OpenId.ascx" />
+    <Content Include="Views\DataBrowser\BarChart.ascx" />
+    <Content Include="Views\DataBrowser\DataSetView.ascx" />
+    <Content Include="Views\DataBrowser\Index.aspx" />
+    <Content Include="Views\DataBrowser\DataView.ascx" />
+    <Content Include="Views\DataBrowser\ErrorView.ascx" />
+    <Content Include="Views\DataBrowser\PieChart.ascx" />
+    <Content Include="Views\DataBrowser\SampleCodeBarChartView.ascx" />
+    <Content Include="Views\DataBrowser\SampleCodeDataView.ascx" />
+    <Content Include="Views\DataBrowser\SampleCodeMapView.ascx" />
+    <Content Include="Views\DataBrowser\SampleCodePieChartView.ascx" />
+    <Content Include="Views\DataCatalog\DataSetList.aspx" />
+    <Content Include="Views\DataCatalog\DataSets.ascx" />
+    <Content Include="Views\DataCatalog\DataSetsFilter.ascx" />
+    <Content Include="Views\DataCatalog\Index.aspx" />
+    <Content Include="Views\DataCatalog\DataCategories.ascx" />
+    <Content Include="Views\DataCatalog\EntitySets.ascx" />
+    <Content Include="Views\DataCatalog\TopList.ascx" />
+    <Content Include="Views\Developers\Index.aspx" />
+    <Content Include="Views\HistoryIframeHelper\Index.ascx" />
+    <Content Include="Views\Home\BlogsAndAnnouncements.ascx" />
+    <Content Include="Views\Privacy\Index.aspx" />
+    <Content Include="Views\Request\Details.aspx" />
+    <Content Include="Views\Request\Index.aspx" />
+    <Content Include="Views\Request\List.ascx" />
+    <Content Include="Views\Request\New.aspx" />
+    <Content Include="Views\Shared\Comments.ascx" />
+    <Content Include="Views\Shared\Rates.ascx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\OpenIDLogonControl.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\OGDIMasterPage.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\UIConstants.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIConstants.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\data\DailyViews.rdlc" />
+    <EmbeddedResource Include="Reports\data\DatasetCommentsReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\data\DatasetRatesReport.rdlc" />
+    <EmbeddedResource Include="Reports\data\RequestRatesReport.rdlc" />
+    <EmbeddedResource Include="Repository\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\Xml\Languages.xsd" />
+    <Content Include="Content\css\bg3.jpg" />
+    <Content Include="Content\css\buttons\btn-left.png" />
+    <Content Include="Content\css\buttons\btn-middle.png" />
+    <Content Include="Content\css\buttons\btn-right.png" />
+    <Content Include="Content\css\buttons\btn.png" />
+    <Content Include="Content\css\buttons\cancel.png" />
+    <Content Include="Content\css\buttons\clear.png" />
+    <Content Include="Content\css\buttons\create.png" />
+    <Content Include="Content\css\buttons\delete.png" />
+    <Content Include="Content\css\buttons\filter.png" />
+    <Content Include="Content\css\buttons\login.png" />
+    <Content Include="Content\css\buttons\mark-as-addressed.png" />
+    <Content Include="Content\css\buttons\mark-as-completed.png" />
+    <Content Include="Content\css\buttons\no-action-required.png" />
+    <Content Include="Content\css\buttons\ok.png" />
+    <Content Include="Content\css\buttons\post-comment.png" />
+    <Content Include="Content\css\buttons\refresh-chart.png" />
+    <Content Include="Content\css\buttons\reply.png" />
+    <Content Include="Content\css\buttons\run.png" />
+    <Content Include="Content\css\buttons\update-status.png" />
+    <Content Include="Content\css\calendar.gif" />
+    <Content Include="Content\css\icons.png" />
+    <Content Include="Content\css\updown.gif" />
+    <Content Include="Content\css\vtabs.png" />
+    <Content Include="Content\css\vtabs1.png" />
+    <Content Include="Content\ico.png" />
+    <Content Include="Content\css\bg-light-100.png" />
+    <Content Include="Content\images\rss.gif" />
+    <Content Include="Images\dk-button.png" />
+    <Content Include="Reports\Reports.Master" />
+    <Content Include="Scripts\jquery.clipboard.min.js" />
+    <Content Include="Scripts\jquery.clipboard.swf" />
+    <Content Include="Scripts\ogdi\list.min.js" />
+    <Content Include="Scripts\querybuilder.min.js" />
+    <Content Include="Views\Agency\Index.aspx" />
+    <Content Include="Views\Comments\AgencyComments.aspx" />
+    <Content Include="Views\DataBrowser\DataSetData.ascx" />
+    <Content Include="Views\DataBrowser\DataSetDetails.ascx" />
+    <Content Include="Views\DataBrowser\Query.ascx" />
+    <Content Include="Views\DataBrowser\SampleCode.ascx" />
+    <Content Include="Views\Request\RequestsManage.aspx" />
+    <Content Include="Views\Shared\AgencyTabs.ascx" />
+    <Content Include="Views\Shared\Bookmark.ascx" />
+    <Content Include="Views\Shared\Comment.ascx" />
+    <Content Include="Views\Shared\OpenIdControl.ascx" />
+    <Content Include="Views\Shared\OpenIdForm.ascx" />
+    <Content Include="Views\Shared\PageControl.ascx" />
+    <Content Include="Views\Shared\RatesPlusMinus.ascx" />
+    <Content Include="Views\Shared\AuthorInfo.ascx" />
+    <None Include="XmlValidation\dtbook-2005-3.dtd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DAISY\DTBookTranslation.csproj">
+      <Project>{F6CA53E8-CDEA-4FED-AC46-E44B7BBC0A8A}</Project>
+      <Name>DTBookTranslation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Ogdi.Azure\Ogdi.Azure.csproj">
+      <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
+      <Name>Ogdi.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
+      <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
+      <Name>Ogdi.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AspProviders\AspProviders.csproj">
+      <Project>{306D2F9E-D6D0-4D96-94F1-173C60A13875}</Project>
+      <Name>AspProviders</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageInterface\StorageInterface.csproj">
+      <Project>{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}</Project>
+      <Name>StorageInterface</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsAzureStorage\WindowsAzureStorage.csproj">
+      <Project>{281E6351-FA80-49F8-9A3A-80894F71548C}</Project>
+      <Name>WindowsAzureStorage</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TempChartImages\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>28454</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BMC_AddThisPubKey" xml:space="preserve">
+    <value>49f06d173d6ae88e</value>
+  </data>
+  <data name="BMC_BookmarkPath" xml:space="preserve">
+    <value>http://www.addthis.com/bookmark.php?v=20</value>
+  </data>
+  <data name="BMC_ImageAltText" xml:space="preserve">
+    <value>On click of Bookmark and Share, will open new window for saving this web page as a bookmark</value>
+  </data>
+  <data name="BMC_ImagePath" xml:space="preserve">
+    <value>http://s7.addthis.com/static/btn/lg-share-en.gif</value>
+  </data>
+  <data name="BMC_LongDescPath" xml:space="preserve">
+    <value>/Descriptions/Bookmark.txt</value>
+  </data>
+  <data name="ContainerComboBoxKeyAttribute" xml:space="preserve">
+    <value>Alias</value>
+    <comment>Container Alias</comment>
+  </data>
+  <data name="ContainerComboBoxValueAttribute" xml:space="preserve">
+    <value>Description</value>
+    <comment>Container Description</comment>
+  </data>
+  <data name="DataCatalogPagePath" xml:space="preserve">
+    <value>DataCatalog/DataCatalog</value>
+    <comment>DataCatalog Page Path from Home Page</comment>
+  </data>
+  <data name="DBPC_ADOqueryAltText" xml:space="preserve">
+    <value>Click to get WCF Data Services query syntax</value>
+  </data>
+  <data name="DBPC_CopyDataAltText" xml:space="preserve">
+    <value>Click for copy to clipboard</value>
+  </data>
+  <data name="DBPC_CopyDataImagePath" xml:space="preserve">
+    <value>/Images/clipboard.jpg</value>
+  </data>
+  <data name="DBPC_CopyDataLongDesc" xml:space="preserve">
+    <value>/Descriptions/Clipboard.txt</value>
+  </data>
+  <data name="DBPC_DaisyLink" xml:space="preserve">
+    <value>http://www.daisy.org/</value>
+  </data>
+  <data name="DBPC_DaisyLinkAltText" xml:space="preserve">
+    <value>Click to get Daisy Format</value>
+  </data>
+  <data name="DBPC_DataBrowserIntro1" xml:space="preserve">
+    <value>Interact with the data you selected. Enter filter expression into a text box (text edit area) below and click Run. If you leave the Filter Expression box blank, your query will return all of the data in the selected data set.</value>
+  </data>
+  <data name="DBPC_DataBrowserIntro2" xml:space="preserve">
+    <value>The results of your query will be shown in tabular format in the Data column. If your query returned KML data, the Map tab will show the geospatial data returned by your query on a [Bing Maps] map. The Code tab provides complete, working sample code for your query for a number of popular development environments.</value>
+  </data>
+  <data name="DBPC_DefaultFilterText" xml:space="preserve">
+    <value>(additional $filter parameters...)</value>
+  </data>
+  <data name="DBPC_DefaultMapViewLanguage" xml:space="preserve">
+    <value>Bing Maps</value>
+  </data>
+  <data name="DBPC_EntityDetailsTableSize" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="DBPC_ErrorChkQuery" xml:space="preserve">
+    <value>Please check your query syntax and try again.</value>
+  </data>
+  <data name="DBPC_ErrorServiceFail" xml:space="preserve">
+    <value>This indicates the request to the OGDI service failed.  Check your query for syntax errors and try again.</value>
+  </data>
+  <data name="DBPC_ErrorUnexpected" xml:space="preserve">
+    <value>Unexpected error.</value>
+  </data>
+  <data name="DBPC_ErrorZeroResults" xml:space="preserve">
+    <value>Your query returned 0 results.</value>
+  </data>
+  <data name="DBPC_HelpImageAltText" xml:space="preserve">
+    <value>Show Filter Hints</value>
+  </data>
+  <data name="DBPC_HelpImageLongDesc" xml:space="preserve">
+    <value>~/Descriptions/Filter.txt</value>
+  </data>
+  <data name="DBPC_HelpImagePath" xml:space="preserve">
+    <value>/Images/help.JPG</value>
+  </data>
+  <data name="DBPC_HelpLogoImage" xml:space="preserve">
+    <value>/Images/help.JPG</value>
+  </data>
+  <data name="DBPC_HelpLogoImageAlternateText" xml:space="preserve">
+    <value>Show Filter Hints</value>
+  </data>
+  <data name="DBPC_ISO8601AltText" xml:space="preserve">
+    <value>Click to get ISO 8601</value>
+  </data>
+  <data name="DBPC_ISO8601LongDesc" xml:space="preserve">
+    <value>/Descriptions/Iso.txt</value>
+  </data>
+  <data name="DBPC_KeyAltText" xml:space="preserve">
+    <value>.entityid</value>
+  </data>
+  <data name="DBPC_KeyImagePath" xml:space="preserve">
+    <value>/Images/key.png</value>
+  </data>
+  <data name="DBPC_KeyLongDesc" xml:space="preserve">
+    <value>/Descriptions/KeyImg.txt</value>
+  </data>
+  <data name="DBPC_LanguageFilePath" xml:space="preserve">
+    <value>App_Data\Xml\Languages.xml</value>
+  </data>
+  <data name="DBPC_MapViewNote" xml:space="preserve">
+    <value>NOTE: This is a working sample. You can copy / paste this code into an html file. However, you must download the dependent jquery-1.3.1.min.js file for successful execution. You can download jquery-1.3.1.min.js from</value>
+  </data>
+  <data name="DBPC_MapViewNoteLink" xml:space="preserve">
+    <value>http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js</value>
+  </data>
+  <data name="DBPC_MapViewNoteLinkText" xml:space="preserve">
+    <value>here</value>
+  </data>
+  <data name="DBPC_RunAltText" xml:space="preserve">
+    <value>Click to fetch data according to given filter expression</value>
+  </data>
+  <data name="DBPC_RunImagePath" xml:space="preserve">
+    <value>/Images/run.png</value>
+  </data>
+  <data name="DBPC_RunLogoImage" xml:space="preserve">
+    <value>/Images/run.png</value>
+  </data>
+  <data name="DBPC_RunLogoImageAlternateText" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="DBPC_RunLongDesc" xml:space="preserve">
+    <value>/Descriptions/Run.txt</value>
+  </data>
+  <data name="DBPC_SampleCodeFolderName" xml:space="preserve">
+    <value>SampleCodeTemplates</value>
+  </data>
+  <data name="DCPC_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="DCPC_AllDataSetsText" xml:space="preserve">
+    <value>All Available Data Sets</value>
+  </data>
+  <data name="DCPC_DataCatalogIntro1" xml:space="preserve">
+    <value>Data in the Open Government Data Initiative is organized into containers, each of which represents data from a specific jurisdiction or organization. Within a data set, containers are organized into categories.</value>
+  </data>
+  <data name="DCPC_DataCatalogIntro2" xml:space="preserve">
+    <value>To discover data sets, first select a container. The grid will show all of the data sets in that container. If you would like to only show data sets in a particular category, click one of the categories along the left side of this page.</value>
+  </data>
+  <data name="DCPC_DataCatalogIntro3" xml:space="preserve">
+    <value>To query data within a data set, click the name of the data set in the grid. The grid also shows the source of the data set and a brief description. To view extended information about a particular data set (if available), click the &amp;amp;ldquo;More Information&amp;amp;rdquo; link under the data set's description.</value>
+  </data>
+  <data name="DeveloperPagePath" xml:space="preserve">
+    <value>Developers/Developers</value>
+    <comment>Developers Page Path from Home Page</comment>
+  </data>
+  <data name="DPC_ADOLink" xml:space="preserve">
+    <value>http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx</value>
+  </data>
+  <data name="DPC_ADOLinkAltText" xml:space="preserve">
+    <value>Click to get WCF Data Services query syntax</value>
+  </data>
+  <data name="DPC_ADOLinkLongDescPath" xml:space="preserve">
+    <value>/Descriptions/ADOquerysyntax.txt</value>
+  </data>
+  <data name="DPC_ADONetAltText" xml:space="preserve">
+    <value>Click to get WCF Data Services</value>
+  </data>
+  <data name="DPC_ADONetLink" xml:space="preserve">
+    <value>http://msdn.microsoft.com/en-us/data/bb931106.aspx</value>
+  </data>
+  <data name="DPC_ADONetLongDescPath" xml:space="preserve">
+    <value>/Descriptions/ADOServices.txt</value>
+  </data>
+  <data name="DPC_DataBrowserPage" xml:space="preserve">
+    <value>/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results</value>
+  </data>
+  <data name="DPC_DownloadAltText" xml:space="preserve">
+    <value>Sample file of service context in ZIP format will be download from Azure data blob storage</value>
+  </data>
+  <data name="DPC_DownloadImagePath" xml:space="preserve">
+    <value>/images/download.png</value>
+  </data>
+  <data name="DPC_DownloadLink" xml:space="preserve">
+    <value>http://ogdidnld.blob.core.windows.net/samples/OgdiDataServicesContextSample.zip</value>
+  </data>
+  <data name="DPC_DownloadLongDescPath" xml:space="preserve">
+    <value>/Descriptions/Download.txt</value>
+  </data>
+  <data name="DPC_EquationLink" xml:space="preserve">
+    <value>http://ogdi.cloudapp.net/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;amp;format=json</value>
+  </data>
+  <data name="DPC_GoogleEarthAltText" xml:space="preserve">
+    <value>Click to get Google Earth</value>
+  </data>
+  <data name="DPC_GoogleEarthLink" xml:space="preserve">
+    <value>http://earth.google.com</value>
+  </data>
+  <data name="DPC_GoogleEarthLongDescPath" xml:space="preserve">
+    <value>/Descriptions/GoogleEarth.txt</value>
+  </data>
+  <data name="DPC_GoogleMapLink" xml:space="preserve">
+    <value>http://maps.google.com</value>
+  </data>
+  <data name="DPC_GoogleMapLongDescPath" xml:space="preserve">
+    <value>/Descriptions/GoogleMap.txt</value>
+  </data>
+  <data name="DPC_GoogleMapsAltText" xml:space="preserve">
+    <value>Click to get Google Maps</value>
+  </data>
+  <data name="DPC_HomeLinkAltText" xml:space="preserve">
+    <value>Click to get Azure Services Platform home page</value>
+  </data>
+  <data name="DPC_HomeLinkLongDescPath" xml:space="preserve">
+    <value>/Descriptions/Home.txt</value>
+  </data>
+  <data name="DPC_HomePageLink" xml:space="preserve">
+    <value>http://www.windowsazure.com/</value>
+  </data>
+  <data name="DPC_IFrameAltText" xml:space="preserve">
+    <value>Click to get IFRAMES-based technique</value>
+  </data>
+  <data name="DPC_IFrameLink" xml:space="preserve">
+    <value>http://softwareas.com/cross-domain-communication-with-iframes</value>
+  </data>
+  <data name="DPC_IFrameLongDescPath" xml:space="preserve">
+    <value>/Descriptions/IFRAMES.txt</value>
+  </data>
+  <data name="DPC_JSONLink" xml:space="preserve">
+    <value>http://en.wikipedia.org/wiki/JSON</value>
+  </data>
+  <data name="DPC_JSONLinkAltText" xml:space="preserve">
+    <value>Click to get JavaScript Object Notation</value>
+  </data>
+  <data name="DPC_JSONLinkLongDescPath" xml:space="preserve">
+    <value>/Descriptions/Json.txt</value>
+  </data>
+  <data name="DPC_JSONPAltText" xml:space="preserve">
+    <value>Click to get JSONP</value>
+  </data>
+  <data name="DPC_JSONPLink" xml:space="preserve">
+    <value>http://en.wikipedia.org/wiki/JSON#JSONP</value>
+  </data>
+  <data name="DPC_JSONPLongDescPath" xml:space="preserve">
+    <value>/Descriptions/JSONP.txt</value>
+  </data>
+  <data name="DPC_KMLLink" xml:space="preserve">
+    <value>http://en.wikipedia.org/wiki/Keyhole_Markup_Language</value>
+  </data>
+  <data name="DPC_KMLLinkAltText" xml:space="preserve">
+    <value>Click to get Keyhole Markup Language</value>
+  </data>
+  <data name="DPC_KMLLinkLongDescPath" xml:space="preserve">
+    <value>/Descriptions/KML.txt</value>
+  </data>
+  <data name="DPC_QueryTimeoutAltText" xml:space="preserve">
+    <value>Click to get Query Timeout and Pagination</value>
+  </data>
+  <data name="DPC_QueryTimeoutLink" xml:space="preserve">
+    <value>http://msdn.microsoft.com/en-us/library/dd135718.aspx</value>
+  </data>
+  <data name="DPC_QueryTimeoutLongDescPath" xml:space="preserve">
+    <value>/Descriptions/QueryTimeoutPagination.txt</value>
+  </data>
+  <data name="DPC_RESTLink" xml:space="preserve">
+    <value>http://en.wikipedia.org/wiki/Representational_State_Transfer</value>
+  </data>
+  <data name="DPC_T4AltText" xml:space="preserve">
+    <value>Click to get Template</value>
+  </data>
+  <data name="DPC_T4Link" xml:space="preserve">
+    <value>http://msdn.microsoft.com/en-us/library/bb126445.aspx</value>
+  </data>
+  <data name="DPC_T4LongDescPath" xml:space="preserve">
+    <value>/Descriptions/T4.txt</value>
+  </data>
+  <data name="DPC_VirtualEarthAltText" xml:space="preserve">
+    <value>Click to get Bing Maps</value>
+  </data>
+  <data name="DPC_VirtualEarthLink" xml:space="preserve">
+    <value>http://dev.live.com/virtualearth</value>
+  </data>
+  <data name="DPC_VirtualEarthLongDescPath" xml:space="preserve">
+    <value>/Descriptions/VE.txt</value>
+  </data>
+  <data name="DPC_VStudio" xml:space="preserve">
+    <value>http://www.microsoft.com/vstudio</value>
+  </data>
+  <data name="DPC_VStudioAltText" xml:space="preserve">
+    <value>Click to get Microsoft Visual Studio 2008, Service Pack 1</value>
+  </data>
+  <data name="DPC_VStudioLongDescPath" xml:space="preserve">
+    <value>/Descriptions/VS2008.txt</value>
+  </data>
+  <data name="DPC_YahooMapLink" xml:space="preserve">
+    <value>http://maps.yahoo.com</value>
+  </data>
+  <data name="DPC_YahooMapsAltText" xml:space="preserve">
+    <value>Click to get Yahoo! Maps</value>
+  </data>
+  <data name="DPC_YahooMapsLongDescPath" xml:space="preserve">
+    <value>/Descriptions/YahooMaps.txt</value>
+  </data>
+  <data name="GC_BadRequestErrorString" xml:space="preserve">
+    <value>"The remote server returned an error: (400) Bad Request." This indicates the request to the OGDI service failed. Check your query for syntax errors and try again.</value>
+    <comment>Remote server error string.</comment>
+  </data>
+  <data name="GC_CollapseImageLongDesc" xml:space="preserve">
+    <value>/Descriptions/Collapse.txt</value>
+    <comment>Collapse image Descriptions.</comment>
+  </data>
+  <data name="GC_CollapseImagePath" xml:space="preserve">
+    <value>/Images/collapse.jpg</value>
+    <comment>Collapse image path.</comment>
+  </data>
+  <data name="GC_ErrorString" xml:space="preserve">
+    <value>Your request could not be completed or result is empty. Please try again.</value>
+    <comment>Error string.</comment>
+  </data>
+  <data name="GC_ExpandCollapseImageAltText" xml:space="preserve">
+    <value>Click to show or hide details.</value>
+    <comment>Expand collapse image.</comment>
+  </data>
+  <data name="GC_ExpandImageLongDesc" xml:space="preserve">
+    <value>/Descriptions/Expand.txt</value>
+    <comment>Expand image long discription.</comment>
+  </data>
+  <data name="GC_ExpandImagePath" xml:space="preserve">
+    <value>/Images/expand.jpg</value>
+    <comment>Expand image path.</comment>
+  </data>
+  <data name="GC_ExternalLinkAltText" xml:space="preserve">
+    <value>Click to get detailed information</value>
+    <comment>Text for the external link.</comment>
+  </data>
+  <data name="GC_ExternalLinkImagePath" xml:space="preserve">
+    <value>/Images/ExternalLink.png</value>
+    <comment>path of external link.</comment>
+  </data>
+  <data name="GC_ExternalLinkLongDesc" xml:space="preserve">
+    <value>/Descriptions/ExternalLink.txt</value>
+    <comment>External link discription.</comment>
+  </data>
+  <data name="GC_LoadingAltText" xml:space="preserve">
+    <value>loading...</value>
+    <comment>Lodding text.</comment>
+  </data>
+  <data name="GC_LoadingImagePath" xml:space="preserve">
+    <value>/Images/loading2.gif</value>
+    <comment>Lodder image.</comment>
+  </data>
+  <data name="GC_LoadingLongDesc" xml:space="preserve">
+    <value>/Descriptions/Load.txt</value>
+    <comment>Loader long discription.</comment>
+  </data>
+  <data name="GC_NoScriptAltText" xml:space="preserve">
+    <value>Script is disabled on your browser</value>
+    <comment>No script text.</comment>
+  </data>
+  <data name="GC_NoScriptImagePath" xml:space="preserve">
+    <value>/Images/NoscriptInfo.gif</value>
+    <comment>No Script</comment>
+  </data>
+  <data name="GC_NoScriptLongDesc" xml:space="preserve">
+    <value>/Descriptions/NoScript.txt</value>
+    <comment>No script description.</comment>
+  </data>
+  <data name="GC_NoScriptMessage" xml:space="preserve">
+    <value>To use complete functionality of this website, script must be enabled on your browser. To get the information about how to enable script, please see your browser help.</value>
+    <comment>no script message.</comment>
+  </data>
+  <data name="HPC_CodeBase" xml:space="preserve">
+    <value>http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0</value>
+  </data>
+  <data name="HPC_ClassId" xml:space="preserve">
+    <value>clsid:d27cdb6e-ae6d-11cf-96b8-444553540000</value>
+  </data>
+  <data name="HPC_DataCatalogPagePath" xml:space="preserve">
+    <value>DataCatalog/DataSetList</value>
+  </data>
+  <data name="HPC_DeveloperPagePath" xml:space="preserve">
+    <value>Developers</value>
+    <comment>Relative path of aspx page.</comment>
+  </data>
+  <data name="HPC_Id" xml:space="preserve">
+    <value>flash_flv_player_4eb5d693-a896-4558-938a-466909aff5c0</value>
+  </data>
+  <data name="SiteTitle" xml:space="preserve">
+    <value>Open Government Data Initiative</value>
+    <comment>Title of the site.</comment>
+  </data>
+  <data name="BMC_BookmarkTitle" xml:space="preserve">
+    <value>Bookmark and Share</value>
+    <comment>Title of Bookmark image</comment>
+  </data>
+  <data name="DBPC_DaisyLinkLongDesc" xml:space="preserve">
+    <value>/Descriptions/DaisyFormat.txt</value>
+    <comment>Daisy Format long description</comment>
+  </data>
+  <data name="DBPC_DaisyLinkTitle" xml:space="preserve">
+    <value>Daisy Link</value>
+    <comment>Title of Daisy link image</comment>
+  </data>
+  <data name="DBPC_RunLogoTitle" xml:space="preserve">
+    <value>Run</value>
+    <comment>Title of Run button</comment>
+  </data>
+  <data name="DBPC_ADOqueryTitle" xml:space="preserve">
+    <value>WCF Data Services query syntax</value>
+    <comment>Title of WCF Data Services query syntax external link image</comment>
+  </data>
+  <data name="DBPC_ISO8601Title" xml:space="preserve">
+    <value>ISO 8601</value>
+    <comment>Title of ISO 8601 external link image</comment>
+  </data>
+  <data name="DPC_ADOLinkTitle" xml:space="preserve">
+    <value>WCF Data Services query syntax</value>
+  </data>
+  <data name="DPC_ADONetTitle" xml:space="preserve">
+    <value>WCF Data Services</value>
+  </data>
+  <data name="DPC_DownloadTitle" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DPC_GoogleEarthTitle" xml:space="preserve">
+    <value>Google Earth</value>
+  </data>
+  <data name="DPC_GoogleMapsTitle" xml:space="preserve">
+    <value>Google Maps</value>
+  </data>
+  <data name="DPC_HomeLinkTitle" xml:space="preserve">
+    <value>Azure Services Platform</value>
+    <comment>Title of Azure Services Platform link image</comment>
+  </data>
+  <data name="DPC_IFrameTitle" xml:space="preserve">
+    <value>IFRAMES-based technique</value>
+  </data>
+  <data name="DPC_JSONLinkTitle" xml:space="preserve">
+    <value>JavaScript Object Notation (JSON)</value>
+  </data>
+  <data name="DPC_JSONPTitle" xml:space="preserve">
+    <value>JSONP</value>
+  </data>
+  <data name="DPC_KMLLinkTitle" xml:space="preserve">
+    <value>Keyhole Markup Language (KML)</value>
+  </data>
+  <data name="DPC_QueryTimeoutTitle" xml:space="preserve">
+    <value>Query Timeout and Pagination</value>
+  </data>
+  <data name="DPC_RestLinkAltText" xml:space="preserve">
+    <value>Click to get REST article on the Wikipedia</value>
+  </data>
+  <data name="DPC_RestLinkLongDesc" xml:space="preserve">
+    <value>/Descriptions/REST.txt</value>
+  </data>
+  <data name="DPC_RestLinkTitle" xml:space="preserve">
+    <value>REST</value>
+  </data>
+  <data name="DPC_T4Title" xml:space="preserve">
+    <value>T4</value>
+  </data>
+  <data name="DPC_VirtualEarthTitle" xml:space="preserve">
+    <value>Bing Maps</value>
+  </data>
+  <data name="DPC_VStudioTitle" xml:space="preserve">
+    <value>Microsoft Visual Studio 2008, Service Pack 1</value>
+  </data>
+  <data name="DPC_YahooMapsTitle" xml:space="preserve">
+    <value>Yahoo! Maps</value>
+  </data>
+  <data name="DBPC_DefaultBarChartLanguage" xml:space="preserve">
+    <value>C#/ASP.NET</value>
+  </data>
+  <data name="DBPC_DefaultPieChartLanguage" xml:space="preserve">
+    <value>C#/ASP.NET</value>
+  </data>
+  <data name="DBPC_SelectOneText" xml:space="preserve">
+    <value>(Select one)</value>
+  </data>
+  <data name="DBPC_ChartErrorText" xml:space="preserve">
+    <value>Please select valid column from list.</value>
+  </data>
+  <data name="DBPC_DownloadContentType" xml:space="preserve">
+    <value>text/plain</value>
+  </data>
+  <data name="DBPC_GraphErrorNoColumnAvailable" xml:space="preserve">
+    <value>No Columns Available</value>
+  </data>
+  <data name="DBPC_GraphErrorNoGraphAvailable" xml:space="preserve">
+    <value>No graph available</value>
+  </data>
+  <data name="DBPC_GraphErrorVerticalAxisMissing" xml:space="preserve">
+    <value>Vertical axis column not available</value>
+  </data>
+  <data name="DBPC_GraphOccuranceText" xml:space="preserve">
+    <value>No. of occurrences of</value>
+  </data>
+  <data name="DBPC_NoFilterText" xml:space="preserve">
+    <value>NOFILTER</value>
+  </data>
+  <data name="GC_NoRunClickedError" xml:space="preserve">
+    <value>As the filter text has been changed, please click on Run button to get fresh data and then navigate</value>
+  </data>
+  <data name="DBPC_HorizontalAxisColumnText" xml:space="preserve">
+    <value>Horizontal Axis column</value>
+  </data>
+  <data name="DPC_AtomPublishingLink" xml:space="preserve">
+    <value>http://bitworking.org/projects/atom/rfc5023.html</value>
+  </data>
+  <data name="DPC_AtomPublishingLinkAltText" xml:space="preserve">
+    <value>Click to get Atom Publishing Protocol</value>
+  </data>
+  <data name="DPC_AtomPublishingLinkLongDescPath" xml:space="preserve">
+    <value>/Descriptions/AtomPB.tx</value>
+  </data>
+  <data name="DPC_AtomPublishingLinkTitle" xml:space="preserve">
+    <value>Atom Publishing Protocol</value>
+  </data>
+  <data name="DPC_AddServiceRefAltText" xml:space="preserve">
+    <value>A video showing how to consume ADO.NET Data Service in a .NET Application</value>
+  </data>
+  <data name="DPC_AddServiceRefLink" xml:space="preserve">
+    <value>http://msdn.microsoft.com/en-us/data/cc974504.aspx</value>
+  </data>
+  <data name="DPC_AddServiceRefLongDesc" xml:space="preserve">
+    <value>/Descriptions/AddSvcRef.txt</value>
+  </data>
+  <data name="DPC_ODataAltText" xml:space="preserve">
+    <value>Open Data Protocol (OData)</value>
+  </data>
+  <data name="DPC_ODataLink" xml:space="preserve">
+    <value>http://odata.org/</value>
+  </data>
+  <data name="DPC_OdataLongDesc" xml:space="preserve">
+    <value>/Descriptions/AtomPBExt.txt</value>
+  </data>
+  <data name="DPC_PHPToolkitAltText" xml:space="preserve">
+    <value>Toolkit for PHP with WCF Data Services</value>
+  </data>
+  <data name="DPC_PHPToolkitLink" xml:space="preserve">
+    <value>http://www.interoperabilitybridges.com/projects/toolkit-for-php-with-adonet-data-services-.aspx</value>
+  </data>
+  <data name="DPC_PHPToolkitLongDesc" xml:space="preserve">
+    <value>/Descriptions/PHPLib.txt</value>
+  </data>
+  <data name="DPC_RestletExtensionAltText" xml:space="preserve">
+    <value>Restlet Extension for WCF Data Services</value>
+  </data>
+  <data name="DPC_RestletExtensionLink" xml:space="preserve">
+    <value>http://www.interoperabilitybridges.com/projects/restlet-extension-for-adonet-data-services.aspx</value>
+  </data>
+  <data name="DPC_RestletExtensionLongDesc" xml:space="preserve">
+    <value>/Descriptions/JavaLib.txt</value>
+  </data>
+  <data name="HPC_BlogTitleLength" xml:space="preserve">
+    <value>52</value>
+  </data>
+  <data name="HPC_BlogDescriptionLength" xml:space="preserve">
+    <value>120</value>
+  </data>
+  <data name="DBPC_ADOqueryLongDesc" xml:space="preserve">
+    <value>/Descriptions/ADOquerysyntax.txt</value>
+  </data>
+  <data name="DBPC_TooLongURLForBookmark" xml:space="preserve">
+    <value>Request URI too large to bookmark</value>
+  </data>
+  <data name="DBPC_hashSeparator" xml:space="preserve">
+    <value>--</value>
+  </data>
+  <data name="DBPC_mapControlError" xml:space="preserve">
+    <value>VEMap control error occured !</value>
+  </data>
+</root>
