@@ -5,7 +5,7 @@ Governments across the globe are seeking more transparency to improve citizen se
 
 OGDI is a solution that makes it possible for agencies to publish government and public data more quickly and efficiently. 
 
-<div class="video" style="text-align:Center"><span class="player"><object type="application/x-mplayer2" height="285px" width="320px" classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"><param name="fileName" value="http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv"></param><param name="autostart" value="false"></param><embed type="application/x-mplayer2" height="285px" width="320px" src="http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv" pluginspage="http://www.microsoft.com/windows/windowsmedia/download/default.asp" autoplay="false" autostart="false" /></object></span><br /><span class="external"><a href="http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv" target="_blank">Launch in another window</a></span></div>
+To see OGDI in action please watch this [short video](http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv).
 
 OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
 
