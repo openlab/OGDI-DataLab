@@ -30,10 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Getting Started", "Getting Started", "{8149D266-4BA0-401F-AD27-8641E48A60D9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Getting Started", ".Getting Started", "{8149D266-4BA0-401F-AD27-8641E48A60D9}"
 	ProjectSection(SolutionItems) = preProject
 		build.ps1 = build.ps1
 		package.ps1 = package.ps1
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\ConfigTool.csproj", "{A65EAA96-F106-454A-B2D7-D5760EB44FB3}"
@@ -148,8 +149,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FC459A1A-1E95-4FF3-9981-97BC6D69410E} = {C9C519E9-B45C-40D8-A429-76B048743F83}
 		{B0688B03-9205-49BF-8CFF-44EAA3D113EC} = {C9C519E9-B45C-40D8-A429-76B048743F83}
+		{FC459A1A-1E95-4FF3-9981-97BC6D69410E} = {C9C519E9-B45C-40D8-A429-76B048743F83}
 		{F6CA53E8-CDEA-4FED-AC46-E44B7BBC0A8A} = {A72D4BDA-A0A5-42D7-BCA5-F0E4EF74D76B}
 		{CE3A2F55-8154-4478-8251-64D24D15DB79} = {F0AC7748-A11A-41B6-AF6C-A0DDAE2EF191}
 		{085EB9E2-4108-4721-9A06-3CF7DA63044D} = {F0AC7748-A11A-41B6-AF6C-A0DDAE2EF191}
