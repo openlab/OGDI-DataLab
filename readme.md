@@ -9,8 +9,6 @@ To see OGDI in action please watch this [short video](http://blip.tv/file/get/Og
 
 OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
 
-OGDI is Licensed under the [Microsoft Public License (Ms-PL)](#license)
-
 OGDI Components
 ---------------
 
@@ -30,7 +28,7 @@ Many of the data sets in OGDI also include geospatial data, which is returned in
 The data loader is a tool that helps implementers quickly start enjoying the benefits of OGDI. OGDI includes both GUI-based and console-based data loader tools. The console tool takes CSV formatted data and publishes it into OGDI. In the process of loading the data, the utility can create a new dataset, add data, or update data in an already published dataset. Console tool is controlled through command line parameters and can be automated using shell scripts.
 
 
-<h2 id="license">License</h2>
+##License
 
 ###Microsoft Public License (Ms-PL)
 
