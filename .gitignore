@@ -3,6 +3,7 @@
 *.dot[Cc]over
 *.vspscc
 *.[Cc]ache
+*.rtf
 [Bb]in
 [Oo]bj
 [Cc]sx
