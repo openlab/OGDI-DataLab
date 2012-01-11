@@ -9,7 +9,6 @@
       </Site>
     </Sites>
     <ConfigurationSettings>
-      <Setting name="ChartImageHandler" />
       <Setting name="serviceUri" />
       <Setting name="pathDTD" />
       <Setting name="HeaderLogo" />
