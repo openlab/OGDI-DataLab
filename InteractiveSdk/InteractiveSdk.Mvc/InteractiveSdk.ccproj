@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InteractiveSdk.Mvc</RootNamespace>
     <AssemblyName>InteractiveSdk.Mvc</AssemblyName>
-    <StartDevelopmentStorage>False</StartDevelopmentStorage>
+    <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>InteractiveSdk</Name>
     <SccProjectName>
     </SccProjectName>
@@ -40,9 +40,9 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
-    <ServiceConfiguration Include="ServiceConfiguration.Regina.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
-    <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interactive Sdk.Mvc_WebRole\InteractiveSdk.WebRole.csproj">
@@ -51,6 +51,7 @@
       <Private>True</Private>
       <RoleType>Web</RoleType>
       <RoleName>InteractiveSdk.WebRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
     <ProjectReference Include="..\InteractiveSdk.WorkerRole\InteractiveSdk.WorkerRole.csproj">
       <Name>InteractiveSdk.WorkerRole</Name>
@@ -58,6 +59,7 @@
       <Private>True</Private>
       <RoleType>Worker</RoleType>
       <RoleName>InteractiveSdk.WorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->

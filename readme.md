@@ -12,17 +12,18 @@ OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Az
 OGDI Components
 ---------------
 
-###Interactive SDK
-The Interactive SDK is an ASP.NET MVC 1.0 web application. It uses jQuery and a variety of other open source components and enables users to browse and query published data. The data can be conveniently visualized in widely used and recognizable formats such as tables, maps, bar graphs or pie charts. Thus, instead of downloading a file and poring over rows upon rows of data, end-users can interact with user-friendly visual tools that present complex data in a more meaningful manner.
-
-In addition to browsing the data, developers can quickly learn how to use published data exposed by OGDI in their own applications from ready-to-run samples available on the site. These samples are available in a variety of languages and frameworks widely used on the Web, including JavaScript, PHP, Python, Flex, Silverlight, C#, among others. 
-
 ###Data Service
 OGDI uses RESTful Web service – a web service implemented using HTTP and the principles of Representational State Transfer (REST) – to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources – just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
 
 In fact, OGDI-based web APIs can be accessed through a wide variety of client technologies, including: JavaScript, Flex, PHP, Python, Ruby, ASP.NET and Silverlight. These well understood formats allow developers to start quickly on new applications.
 
 Many of the data sets in OGDI also include geospatial data, which is returned in the KML format, making OGDI compatible with popular desktop and Web-based mapping technologies including Microsoft Bing Maps, Google Maps, Yahoo! Maps, and Google Earth. 
+
+
+###Data Browser
+The Data Browser is an ASP.NET MVC 1.0 web application. It uses jQuery and a variety of other open source components and enables users to browse and query published data. The data can be conveniently visualized in widely used and recognizable formats such as tables, maps, bar graphs or pie charts. Thus, instead of downloading a file and poring over rows upon rows of data, end-users can interact with user-friendly visual tools that present complex data in a more meaningful manner.
+
+In addition to browsing the data, developers can quickly learn how to use published data exposed by OGDI in their own applications from ready-to-run samples available on the site. These samples are available in a variety of languages and frameworks widely used on the Web, including JavaScript, PHP, Python, Flex, Silverlight, C#, among others. 
 
 ###Data Loader
 The data loader is a tool that helps implementers quickly start enjoying the benefits of OGDI. OGDI includes both GUI-based and console-based data loader tools. The console tool takes CSV formatted data and publishes it into OGDI. In the process of loading the data, the utility can create a new dataset, add data, or update data in an already published dataset. Console tool is controlled through command line parameters and can be automated using shell scripts.
