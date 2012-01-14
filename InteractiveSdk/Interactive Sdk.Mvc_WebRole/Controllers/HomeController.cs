@@ -39,21 +39,26 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
         HomeModel viewDataModel = new HomeModel();
 
         #endregion
-        
+
         #region Public Methods
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("DataSetList", "DataCatalog");
+        }
 
         /// <summary>
         /// This action provides required ViewData for loading Home page
         /// </summary>
         /// <returns>Returns view with all necessary data required for its rendering</returns>
         [OutputCache(Duration = 60, VaryByParam = "None")]
-        public ActionResult Index()
+        public ActionResult About()
         {
             GetRSS();
 
             ViewData.Model = viewDataModel;
 
-            return View();
+            return View("Index");
         }
 
         #endregion
