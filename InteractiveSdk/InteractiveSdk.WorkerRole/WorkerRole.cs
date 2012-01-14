@@ -17,7 +17,7 @@ namespace InteractiveSdk.WorkerRole
 	public class WorkerRole : RoleEntryPoint
 	{
 		private CloudQueue queue;
-        private CloudBlobContainer container;
+		private CloudBlobContainer container;
 		private IDictionary<string, IMessageHandler> handlers;
 
 		public override void Run()
@@ -53,14 +53,14 @@ namespace InteractiveSdk.WorkerRole
 		{
 			handlers = new Dictionary<string, IMessageHandler>
 			{				
-                {"SendMail", new SendMailHandler()},
-                {"ConvertData", new ConvertDataHandler(container)}                
+				{"SendMail", new SendMailHandler()},
+				{"ConvertData", new ConvertDataHandler(container)}
 			};
 		}
 
 		public void ProcessMessage(CloudQueueMessage msg)
 		{
-			var msgStr = msg.AsString;                
+			var msgStr = msg.AsString;
 			using (var strReader = new StringReader(msgStr ?? string.Empty))
 			using (var xmlReader = XmlReader.Create(strReader))
 			{
@@ -91,26 +91,26 @@ namespace InteractiveSdk.WorkerRole
 
 			var storageAccount = CloudStorageAccount.FromConfigurationSetting("OgdiConfigConnectionString");
 
-            // initialize blob storage
-            CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
-            container = blobStorage.GetContainerReference("converteddata");
+			// initialize blob storage
+			CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
+			container = blobStorage.GetContainerReference("converteddata");
 
 			// initialize queue storage 
 			CloudQueueClient queueStorage = storageAccount.CreateCloudQueueClient();
-            queue = queueStorage.GetQueueReference("workercommands");
+			queue = queueStorage.GetQueueReference("workercommands");
 
-            Trace.TraceInformation("Creating container and queue...");
+			Trace.TraceInformation("Creating container and queue...");
 
 			bool storageInitialized = false;
 			while (!storageInitialized)
 			{
 				try
 				{
-                    // create the blob container and allow public access
-                    container.CreateIfNotExist();
-                    var permissions = container.GetPermissions();
-                    permissions.PublicAccess = BlobContainerPublicAccessType.Container;
-                    container.SetPermissions(permissions);
+					// create the blob container and allow public access
+					container.CreateIfNotExist();
+					var permissions = container.GetPermissions();
+					permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+					container.SetPermissions(permissions);
 
 
 					// create the message queue

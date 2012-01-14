@@ -47,12 +47,10 @@
 <body>
     <div class="top">
         <div class="header" style="background-image: url('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderBackground") %>')">
-            <div class="headerPicture">
-                <img alt='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoAltText") %>'
-                    longdesc='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoLongDesc")%>'
-                    src='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogo") %>'
-                    title='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoAltText") %>' />
-            </div>
+            <div class="title">
+                DataLab</div>
+            <div class="subtitle">
+                Open Government Data Initiative</div>
         </div>
         <div class="navigation">
             <ul>
