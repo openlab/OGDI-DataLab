@@ -23,7 +23,7 @@ namespace InteractiveSdk.WorkerRole.MessageHandlers
         {            
             var messageParts = msg.Split(new char[] { ',' });
             var containerName = messageParts[0];
-            var tableName = messageParts[1];            
+            var tableName = messageParts[1];
 
             // Get service interface to access azure storage
             string serviceUri = RoleEnvironment.GetConfigurationSettingValue("serviceUri");
@@ -31,7 +31,7 @@ namespace InteractiveSdk.WorkerRole.MessageHandlers
             IsdkStorageProviderInterface service = IsdkStorageProviderInterface.GetServiceObject(serviceUri, pathDTD);
 
             // Get dbf data and save to blob
-            XDocument dataInDbfFormat = service.GetDataAsDaisy(containerName, tableName, null);            
+            XDocument dataInDbfFormat = service.GetDataAsDaisy(containerName, tableName, null);
             CloudBlockBlob dbfBlob = container.GetBlockBlobReference(tableName + ".xml");
             using (MemoryStream xmlStream = new MemoryStream())
             {

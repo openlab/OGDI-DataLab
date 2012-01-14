@@ -111,7 +111,7 @@ namespace Ogdi.InteractiveSdk.Mvc
             routes.MapRoute(
                 "Default",                                              // Route name
                 "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "DataCatalog", action = "DataSetList", id = "" }  // Parameter defaults
+                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
             );
         }
 
