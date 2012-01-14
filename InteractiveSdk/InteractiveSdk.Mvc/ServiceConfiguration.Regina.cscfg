@@ -3,6 +3,7 @@
   <Role name="InteractiveSdk.WebRole">
     <Instances count="1" />
     <ConfigurationSettings>
+      <!-- Data Browser Configurations -->
       <Setting name="ChartImageHandler" value="storage=memory;deleteAfterServicing=true;" />
       <Setting name="serviceUri" value="http://127.0.0.1:81/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
@@ -21,8 +22,16 @@
       <Setting name="HomePageContent" value="&lt;p class=&quot;big&quot;&gt;The Open Government Data Initiative (OGDI) is an initiative led by Microsoft &lt;A href=&quot;http://blogs.msdn.com/publicsector/default.aspx&quot; target=_blank&gt;Public Sector Developer Evangelism team&lt;/A&gt;&lt;IMG alt=&quot;External link for Public Sector Developer Evangelism team&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/Publicsector.txt&quot;&gt;. OGDI uses the &lt;A href=&quot;http://www.windowsazure.com&quot; target=_blank&gt;Windows Azure Platform&lt;/A&gt;&lt;IMG alt=&quot;External link for Windows Azure Platform&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/azureservices.txt&quot;&gt; to make it easier to publish and use a wide variety of public data from government agencies. OGDI is also a free, open source 'starter kit' with &lt;A href=&quot;http://ogdi.codeplex.com&quot; target=_blank&gt;code&lt;/A&gt;&lt;IMG alt=&quot;External link for OGDI project on CodePlex.com&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/codeplex.txt&quot;&gt; that can be used to publish data on the Internet in a Web-friendly format with easy-to-use, open API's. OGDI-based web API's can be accessed from a variety of client technologies such as Silverlight, Flash, JavaScript, PHP, Python, Ruby, mapping web sites, etc.&lt;/p&gt;&lt;p class=&quot;big&quot;&gt;Whether you are a business wishing to use government data, a government developer, or a 'citizen developer', these open API's will enable you to build innovative applications, visualizations and mash-ups that empower people through access to government information. This site is built using the OGDI starter kit software assets and provides interactive access to some publicly-available data sets along with sample code and resources for writing applications using the OGDI API's. &lt;/p&gt;&lt;p class=&quot;big&quot;&gt;Email us at &lt;A href=&quot;mailto:askogdi@microsoft.com&quot;&gt;askogdi@microsoft.com&lt;/A&gt; if you have government data sets that you would like us to publish or if you have other questions.&lt;/p&gt;" />
       <Setting name="BlogPostsUrl" value="http://ogdi.wordpress.com/feed/" />
       <Setting name="NumberOfBlogLinksOnPage" value="3" />
+      
+      <!-- Data Service Configurations -->
+      <Setting name="RootServiceNamespace" value="OGDI" />
+      <Setting name="TableStorageBaseUrl" value="https://{0}.table.core.windows.net/" />
+      <Setting name="BlobStorageBaseUrl" value="https://{0}.blob.core.windows.net/" />
+      
+      <!-- Shared Configurations -->
       <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
+
       <!--
          Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html.
      -->
