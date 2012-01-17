@@ -1,19 +1,19 @@
-Open Government Data Initiative (OGDI)
-======================================
+DataLab: Open Government Data Initiative (OGDI) v4
+==================================================
 
 Governments across the globe are seeking more transparency to improve citizen services and enhance accountability with constituencies. This global drive for governmental transparency has created demand for new technologies that can quickly help agencies comply with open data, open government initiatives. 
 
-OGDI is a solution that makes it possible for agencies to publish government and public data more quickly and efficiently. 
+DataLab (OGDI) is a solution that makes it possible for agencies to publish government and public data more quickly and efficiently. 
 
 To see OGDI in action please watch this [short video](http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv).
 
-OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
+DataLab / OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
 
-OGDI Components
+DataLab Components
 ---------------
 
 ###Data Service
-OGDI uses RESTful Web service – a web service implemented using HTTP and the principles of Representational State Transfer (REST) – to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources – just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
+OGDI uses RESTful Web service ï¿½ a web service implemented using HTTP and the principles of Representational State Transfer (REST) ï¿½ to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources ï¿½ just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
 
 In fact, OGDI-based web APIs can be accessed through a wide variety of client technologies, including: JavaScript, Flex, PHP, Python, Ruby, ASP.NET and Silverlight. These well understood formats allow developers to start quickly on new applications.
 
