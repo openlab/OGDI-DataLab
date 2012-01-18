@@ -6,7 +6,7 @@
       <!-- Data Browser Configurations -->
       
       <Setting name="ChartImageHandler" value="storage=memory;deleteAfterServicing=true;" />
-      <Setting name="serviceUri" value="http://datadotgcds2.cloudapp.net/v1/" />
+      <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
       <Setting name="HeaderLogo" value="../../Images/CloudBanner2.png" />
       <Setting name="HeaderLogoAltText" value="OGDI Logo" />
@@ -48,7 +48,7 @@
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=v2datadotgccfg;AccountKey=QPbM/nDpX6Kg1gjrPwS29jv5gmgKmJFCYZgU+6GE5czzgoz7U2/jE+iu4n9BAQI4XW4TBBu+6H9gA/6CShjVLA==" />
       <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=v2datadotgccfg;AccountKey=QPbM/nDpX6Kg1gjrPwS29jv5gmgKmJFCYZgU+6GE5czzgoz7U2/jE+iu4n9BAQI4XW4TBBu+6H9gA/6CShjVLA==" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://datadotgcds2.cloudapp.net/v1/" />
+      <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>
