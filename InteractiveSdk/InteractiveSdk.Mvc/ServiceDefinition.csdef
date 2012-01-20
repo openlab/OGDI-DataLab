@@ -4,7 +4,12 @@
     <Sites>
       <Site name="Web">
         <Bindings>
-          <Binding name="HttpIn" endpointName="HttpIn" />
+          <Binding name="DataBrowserIn" endpointName="DataBrowserIn" />
+        </Bindings>
+      </Site>
+      <Site name="Data" physicalDirectory="..\..\DataService\Services_WebRole">
+        <Bindings>
+          <Binding name="DataServiceIn" endpointName="DataServiceIn"/>
         </Bindings>
       </Site>
     </Sites>
@@ -30,9 +35,13 @@
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="RecaptchaPrivateKey" />
       <Setting name="RecaptchaPupblicKey" />
+      <Setting name="RootServiceNamespace" />
+      <Setting name="TableStorageBaseUrl" />
+      <Setting name="BlobStorageBaseUrl" />
     </ConfigurationSettings>
     <Endpoints>
-      <InputEndpoint name="HttpIn" protocol="http" port="80" />
+      <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
+      <InputEndpoint name="DataServiceIn" protocol="http" port="8080"/>
     </Endpoints>
     <LocalResources>
     </LocalResources>
