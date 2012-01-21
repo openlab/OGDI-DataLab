@@ -205,9 +205,6 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\WebConfigXML\appSettings.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\css\comments.css" />
     <Content Include="Content\css\csharp.css" />
     <Content Include="Content\css\icons.gif" />
@@ -475,6 +472,12 @@
     <Content Include="Views\Shared\PageControl.ascx" />
     <Content Include="Views\Shared\RatesPlusMinus.ascx" />
     <Content Include="Views\Shared\AuthorInfo.ascx" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
     <None Include="XmlValidation\dtbook-2005-3.dtd" />
   </ItemGroup>
   <ItemGroup>
