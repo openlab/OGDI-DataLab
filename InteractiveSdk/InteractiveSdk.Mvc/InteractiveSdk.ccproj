@@ -40,9 +40,10 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Regina.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
-    <ServiceConfiguration Include="ServiceConfiguration.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interactive Sdk.Mvc_WebRole\InteractiveSdk.WebRole.csproj">
