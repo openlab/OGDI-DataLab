@@ -4,8 +4,6 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="RootServiceNamespace" value="ogdiservicetest" />
-      <Setting name="TableStorageBaseUrl" value="https://{0}.table.core.windows.net/" />
-      <Setting name="BlobStorageBaseUrl" value="https://{0}.blob.core.windows.net/" />
       <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
     </ConfigurationSettings>
