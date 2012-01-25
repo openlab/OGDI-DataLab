@@ -23,7 +23,6 @@
       </Site>
     </Sites>
     <ConfigurationSettings>
-      <Setting name="ChartImageHandler" />
       <Setting name="serviceUri" />
       <Setting name="pathDTD" />
       <Setting name="HeaderLogo" />
@@ -46,15 +45,11 @@
       <Setting name="RecaptchaPrivateKey" />
       <Setting name="RecaptchaPupblicKey" />
       <Setting name="RootServiceNamespace" />
-      <Setting name="TableStorageBaseUrl" />
-      <Setting name="BlobStorageBaseUrl" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
       <InputEndpoint name="DataServiceIn" protocol="http" port="8080" />
     </Endpoints>
-    <LocalResources></LocalResources>
-    <Certificates></Certificates>
   </WebRole>
   <WorkerRole name="InteractiveSdk.WorkerRole">
     <ConfigurationSettings>

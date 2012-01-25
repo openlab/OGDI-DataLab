@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InteractiveSdk.Mvc</RootNamespace>
     <AssemblyName>InteractiveSdk.Mvc</AssemblyName>
-    <StartDevelopmentStorage>False</StartDevelopmentStorage>
+    <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>InteractiveSdk</Name>
     <SccProjectName>
     </SccProjectName>

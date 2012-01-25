@@ -9,17 +9,17 @@ namespace Ogdi.DataServices
 {
     public static class AppSettings
     {
+        private static readonly CloudStorageAccount _account;
+
         static AppSettings()
         {
+            _account = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("OgdiConfigConnectionString"));
             RefreshAvailableEndpoints();
         }
 
         internal static Dictionary<string, AvailableEndpoint> RefreshAvailableEndpoints()
         {
-            var ta =
-                CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("OgdiConfigConnectionString"));
-
-            var ogdiConfigContext = new OgdiConfigDataServiceContext(ta.TableEndpoint.AbsoluteUri, ta.Credentials);
+            var ogdiConfigContext = new OgdiConfigDataServiceContext(_account.TableEndpoint.AbsoluteUri, _account.Credentials);
 
             var availableEndpoints = ogdiConfigContext.AvailableEndpoints.ToDictionary(item => item.alias);
 
@@ -63,19 +63,29 @@ namespace Ogdi.DataServices
             return (length > 0) ? cs.Substring(index, length) : cs.Substring(index);
         }
 
+        private static string _tableStorageBaseUrl;
         public static string TableStorageBaseUrl
         {
             get
             {
-                return RoleEnvironment.GetConfigurationSettingValue("TableStorageBaseUrl");
+                if (string.IsNullOrWhiteSpace(_tableStorageBaseUrl))
+                {
+                    _tableStorageBaseUrl = _account.TableEndpoint.AbsoluteUri;
+                }
+                return _tableStorageBaseUrl;
             }
         }
 
+        private static string _blobStorageBaseUrl ;
         public static string BlobStorageBaseUrl
         {
             get
             {
-                return RoleEnvironment.GetConfigurationSettingValue("BlobStorageBaseUrl");
+                if (string.IsNullOrWhiteSpace(_blobStorageBaseUrl))
+                {
+                    _blobStorageBaseUrl = _account.BlobEndpoint.AbsoluteUri;
+                }
+                return _blobStorageBaseUrl;
             }
         }
 
@@ -93,7 +103,7 @@ namespace Ogdi.DataServices
 
         public static AvailableEndpoint GetAvailableEndpointByAccountName(string accountName)
         {
-            return EnabledStorageAccounts.Values.Where(r => r.storageaccountname == accountName).FirstOrDefault();
+            return EnabledStorageAccounts.Values.FirstOrDefault(r => r.storageaccountname == accountName);
 
         }
 

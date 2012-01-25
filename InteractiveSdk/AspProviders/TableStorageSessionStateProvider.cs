@@ -20,6 +20,7 @@ using System.Security;
 using System.Web;
 using System.Web.SessionState;
 using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 
 
@@ -29,7 +30,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
     /// This class allows DevtableGen to generate the correct table (named 'Sessions')
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-        Justification="Class is used by the devtablegen tool to generate a database for the development storage tool")]
+        Justification = "Class is used by the devtablegen tool to generate a database for the development storage tool")]
     internal class SessionDataServiceContext : TableServiceContext
     {
         public SessionDataServiceContext() : base(null, null) { }
@@ -37,7 +38,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         {
             get
             {
-                return this.CreateQuery<SessionRow>("Sessions");
+                return CreateQuery<SessionRow>("Sessions");
             }
         }
     }
@@ -54,7 +55,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
 
         // application name + session id is partitionKey
-        public SessionRow(string sessionId, string applicationName) 
+        public SessionRow(string sessionId, string applicationName)
             : base()
         {
             SecUtility.CheckParameter(ref sessionId, true, true, true, Configuration.MaxStringPropertySizeInChars, "sessionId");
@@ -79,13 +80,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public string Id
         {
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new ArgumentException("To ensure string values are always updated, this implementation does not allow null as a string value.");
                 }
                 _id = value;
-                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id); 
+                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id);
             }
             get
             {
@@ -102,7 +104,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     throw new ArgumentException("To ensure string values are always updated, this implementation does not allow null as a string value.");
                 }
                 _applicationName = value;
-                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id); 
+                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id);
             }
             get
             {
@@ -194,17 +196,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         #region Member variables and constants
 
         private string _applicationName;
-        private string _accountName;
-        private string _sharedKey;
         private string _tableName;
-        private string _tableServiceBaseUri;
-        private string _blobServiceBaseUri;
         private string _containerName;
+        private CloudStorageAccount _account;
         private CloudTableClient _tableStorage;
         private BlobProvider _blobProvider;
         private const int NumRetries = 3;
-        private RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
-        private ProviderRetryPolicy _providerRetry = ProviderRetryPolicies.RetryN(NumRetries, TimeSpan.FromSeconds(1));
+        private readonly RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
+        private readonly ProviderRetryPolicy _providerRetry = ProviderRetryPolicies.RetryN(NumRetries, TimeSpan.FromSeconds(1));
 
         #endregion
 
@@ -242,12 +241,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             _applicationName = Configuration.GetStringValueWithGlobalDefault(config, "applicationName",
                                                             Configuration.DefaultProviderApplicationNameConfigurationString,
                                                             Configuration.DefaultProviderApplicationName, false);
-            _accountName = Configuration.GetStringValue(config, "accountName", null, true);
-            _sharedKey = Configuration.GetStringValue(config, "sharedKey", null, true);
+
+            _account =
+                CloudStorageAccount.Parse(
+                    RoleEnvironment.GetConfigurationSettingValue(Configuration.ConfigurationStorageConnectionStringName));
+
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "sessionTableName", 
                                                 Configuration.DefaultSessionTableNameConfigurationString,
                                                 Configuration.DefaultSessionTableName, false);
-            _tableServiceBaseUri = Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);
+
             _containerName = Configuration.GetStringValueWithGlobalDefault(config, "containerName", 
                                                 Configuration.DefaultSessionContainerNameConfigurationString,
                                                 Configuration.DefaultSessionContainerName, false);
@@ -257,15 +259,10 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                             "Please refer to the documentation for the concrete rules for valid container names." +
                                             "The current container name is: " + _containerName);
             }
-            _blobServiceBaseUri = Configuration.GetStringValue(config, "blobServiceBaseUri", null, true);
 
             config.Remove("allowInsecureRemoteEndpoints");
-            config.Remove("accountName");
-            config.Remove("sharedKey");
             config.Remove("containerName");
             config.Remove("applicationName");
-            config.Remove("blobServiceBaseUri");
-            config.Remove("tableServiceBaseUri");
             config.Remove("sessionTableName");
 
             // Throw an exception if unrecognized attributes remain
@@ -277,44 +274,18 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     ("Unrecognized attribute: " + attr);
             }
 
-            StorageCredentialsAccountAndKey tableInfo = null;
-            StorageCredentialsAccountAndKey blobInfo = null;
-            string tableBaseUri = null;
-            string blobBaseUri = null;
+            if(_account == null)
+                throw new ConfigurationErrorsException("Account information incomplete!");
+            
+            _tableStorage = _account.CreateCloudTableClient();
+            _tableStorage.RetryPolicy = _tableRetry;
+            var _blobStorage = _account.CreateCloudBlobClient();
+
             try
             {
-                var sharedKey = Configuration.TryGetAppSetting(Configuration.DefaultAccountSharedKeyConfigurationString);
-                var accountName = Configuration.TryGetAppSetting(Configuration.DefaultAccountNameConfigurationString);
+                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri );
+                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _blobStorage.BaseUri);
 
-                tableBaseUri = Configuration.TryGetAppSetting(Configuration.DefaultTableStorageEndpointConfigurationString);
-                blobBaseUri = Configuration.TryGetAppSetting(Configuration.DefaultBlobStorageEndpointConfigurationString);
-
-                if (_tableServiceBaseUri != null)
-                {
-                    tableBaseUri = _tableServiceBaseUri;
-                }
-                if (_blobServiceBaseUri != null)
-                {
-                    blobBaseUri = _blobServiceBaseUri;
-                }
-                if (_accountName != null)
-                {
-                    accountName = _accountName;
-                }
-                if (_sharedKey != null)
-                {
-                    sharedKey = _sharedKey;
-                }
-
-                if (String.IsNullOrEmpty(sharedKey) || String.IsNullOrEmpty(accountName) || String.IsNullOrEmpty(tableBaseUri) || String.IsNullOrEmpty(blobBaseUri))
-                    throw new ConfigurationErrorsException("Account information incomplete!");
-
-                tableInfo = new StorageCredentialsAccountAndKey(accountName, sharedKey);
-                blobInfo = new StorageCredentialsAccountAndKey(accountName, sharedKey);
-                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, tableInfo, new Uri(tableBaseUri));
-                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, blobInfo, new Uri(blobBaseUri));
-                _tableStorage = new CloudTableClient(tableBaseUri, tableInfo);
-                _tableStorage.RetryPolicy = _tableRetry;
                 if (_tableStorage.CreateTableIfNotExist(_tableName))
                 {
                     var ctx = _tableStorage.GetDataServiceContext();
@@ -324,7 +295,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     ctx.DeleteObject(dummyRow);
                     ctx.SaveChangesWithRetries();
                 }
-                _blobProvider = new BlobProvider(blobInfo, new Uri(blobBaseUri), _containerName);
+                _blobProvider = new BlobProvider(_blobStorage, _containerName);
             }
             catch (SecurityException)
             {
@@ -333,9 +304,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             // catch InvalidOperationException as well as StorageException
             catch (Exception e)
             {
-                string exceptionDescription = Configuration.GetInitExceptionDescription(tableInfo, new Uri(tableBaseUri), blobInfo, new Uri(blobBaseUri));
-                string tableName = (_tableName == null) ? "no session table name specified" : _tableName;
-                string containerName = (_containerName == null) ? "no container name specified" : _containerName;
+                string exceptionDescription = Configuration.GetInitExceptionDescription(_blobStorage, _tableStorage);
+                string tableName = _tableName ?? "no session table name specified";
+                string containerName = _containerName ?? "no container name specified";
                 Log.Write(EventKind.Error, "Initialization of data service structures (tables and/or blobs) failed!" +
                                             exceptionDescription + Environment.NewLine +
                                             "Configured blob container: " + containerName + Environment.NewLine +
@@ -367,7 +338,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 throw new ArgumentException("Parameter timeout must be a non-negative integer!");
             }
-         
+
             try
             {
                 TableServiceContext svc = CreateDataServiceContext();
@@ -380,7 +351,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 session.ExpiresUtc = DateTime.UtcNow.AddMinutes(timeout);
                 svc.AddObject(_tableName, session);
                 svc.SaveChangesWithRetries();
-            } catch (InvalidOperationException e) {
+            }
+            catch (InvalidOperationException e)
+            {
                 throw new ProviderException("Error accessing the data store.", e);
             }
         }
@@ -410,7 +383,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             Debug.Assert(context != null);
             SecUtility.CheckParameter(ref id, true, true, false, Configuration.MaxStringPropertySizeInChars, "id");
 
-            _providerRetry(() => 
+            _providerRetry(() =>
             {
                 TableServiceContext svc = CreateDataServiceContext();
                 SessionRow session;
@@ -438,8 +411,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 // yes, we always create a new blob here
                 session.BlobName = GetBlobNamePrefix(id) + Guid.NewGuid().ToString("N");
-
-
+                
                 // Serialize the session and write the blob
                 byte[] items, statics;
                 SerializeSession(item, out items, out statics);
@@ -482,7 +454,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 if (newItem)
                 {
-                    svc.AddObject(_tableName, session);                    
+                    svc.AddObject(_tableName, session);
                     svc.SaveChangesWithRetries();
                 }
                 else
@@ -509,14 +481,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 //throw new ProviderException("Error accessing the data store!", e);
             }
-        }        
+        }
 
         public override void ResetItemTimeout(HttpContext context, string id)
         {
             Debug.Assert(context != null);
             SecUtility.CheckParameter(ref id, true, true, false, Configuration.MaxStringPropertySizeInChars, "id");
 
-            _providerRetry(() => {
+            _providerRetry(() =>
+            {
                 TableServiceContext svc = CreateDataServiceContext();
                 SessionRow session = GetSession(id, svc);
                 session.ExpiresUtc = DateTime.UtcNow.AddMinutes(session.Timeout);
@@ -571,13 +544,16 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     if (props.Current != null)
                     {
-                        if (!_blobProvider.DeleteBlob(props.Current.Uri.ToString())) {
+                        if (!_blobProvider.DeleteBlob(props.Current.Uri.ToString()))
+                        {
                             // ignore this; it is possible that another thread could try to delete the blob
                             // at the same time
                         }
                     }
                 }
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw new ProviderException("Error accessing blob storage.", e);
             }
         }
@@ -655,7 +631,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 if (sessionList != null && sessionList.Count() == 1)
                 {
                     return sessionList.First();
-                } else if (sessionList != null && sessionList.Count() > 1) {
+                }
+                else if (sessionList != null && sessionList.Count() > 1)
+                {
                     throw new ProviderException("Multiple sessions with the same name!");
                 }
                 else
@@ -810,7 +788,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     reader.Close();
                 }
-            }           
+            }
             return result;
         }
 
@@ -824,7 +802,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             bool hasItems = (store.Items != null && store.Items.Count > 0);
             bool hasStaticObjects = (store.StaticObjects != null && store.StaticObjects.Count > 0 && !store.StaticObjects.NeverAccessed);
             items = null;
-            statics = new byte [0];
+            statics = new byte[0];
 
             using (MemoryStream stream1 = new MemoryStream())
             {
@@ -867,11 +845,13 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
 
             if (HttpContext.Current != null && HttpContext.Current.Application != null &&
-                HttpContext.Current.Application.StaticObjects != null && HttpContext.Current.Application.StaticObjects.Count > 0) {
+                HttpContext.Current.Application.StaticObjects != null && HttpContext.Current.Application.StaticObjects.Count > 0)
+            {
                 throw new ProviderException("This provider does not support static session objects because of security-related hosting constraints.");
             }
 
-            if (statics != null && statics.Count() > 0) {
+            if (statics != null && statics.Count() > 0)
+            {
                 throw new ProviderException("This provider does not support static session objects because of security-related hosting constraints.");
             }
 

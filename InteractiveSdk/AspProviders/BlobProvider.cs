@@ -11,11 +11,11 @@ using System.Linq;
 using System.Net;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
+using System.Diagnostics.Contracts;
 
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
 {
-
      public enum EventKind
      {
           Critical,
@@ -51,17 +51,23 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         private CloudBlobClient _client;
         private CloudBlobContainer _container;
         private string _containerName;
-        private object _lock = new object();
+        private static object _lock = new object();
 
         private static readonly TimeSpan _Timeout = TimeSpan.FromSeconds(30);
         private static readonly RetryPolicy _RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1));
         private const string _PathSeparator = "/";
 
-
+        [Obsolete("This constructor has been replaced by BlobProvider(CloudStorageAccount, string)")]
         internal BlobProvider(StorageCredentialsAccountAndKey info, Uri baseUri, string containerName)
         {
-            this._containerName = containerName;
-            this._client = new CloudBlobClient(baseUri.ToString(), info);
+            _containerName = containerName;
+            _client = new CloudBlobClient(baseUri.ToString(), info);
+        }
+
+        internal BlobProvider(CloudBlobClient blobClient, string containerName)
+        {
+            _containerName = containerName;
+            _client = blobClient;
         }
 
         internal string ContainerUrl
