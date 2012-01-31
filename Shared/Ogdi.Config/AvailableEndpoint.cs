@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.StorageClient;
+﻿using System;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace Ogdi.Config
 {

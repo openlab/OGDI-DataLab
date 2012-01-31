@@ -15,7 +15,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Models.Request
 
         static RequestDataSource()
 		{
-			account = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("OgdiConfigConnectionString"));
+			account = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 			CloudTableClient.CreateTablesFromModel(typeof(RequestDataContext), account.TableEndpoint.AbsoluteUri, account.Credentials);
 		}
 

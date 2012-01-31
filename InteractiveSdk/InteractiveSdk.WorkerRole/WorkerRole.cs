@@ -89,7 +89,7 @@ namespace InteractiveSdk.WorkerRole
 			CloudStorageAccount.SetConfigurationSettingPublisher((configName, configSetter)
 				=> configSetter(RoleEnvironment.GetConfigurationSettingValue(configName)));
 
-			var storageAccount = CloudStorageAccount.FromConfigurationSetting("OgdiConfigConnectionString");
+			var storageAccount = CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
 
 			// initialize blob storage
 			CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();

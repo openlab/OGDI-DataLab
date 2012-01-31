@@ -4,7 +4,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <!-- Data Browser Configurations -->
-            <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
+      <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
       <Setting name="HeaderLogo" value="../../Images/CloudBanner2.png" />
       <Setting name="HeaderLogoAltText" value="OGDI Logo" />
@@ -21,12 +21,12 @@
       <Setting name="HomePageContent" value="&lt;p class=&quot;big&quot;&gt;The Open Government Data Initiative (OGDI) is an initiative led by Microsoft &lt;A href=&quot;http://blogs.msdn.com/publicsector/default.aspx&quot; target=_blank&gt;Public Sector Developer Evangelism team&lt;/A&gt;&lt;IMG alt=&quot;External link for Public Sector Developer Evangelism team&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/Publicsector.txt&quot;&gt;. OGDI uses the &lt;A href=&quot;http://www.windowsazure.com&quot; target=_blank&gt;Windows Azure Platform&lt;/A&gt;&lt;IMG alt=&quot;External link for Windows Azure Platform&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/azureservices.txt&quot;&gt; to make it easier to publish and use a wide variety of public data from government agencies. OGDI is also a free, open source 'starter kit' with &lt;A href=&quot;http://ogdi.codeplex.com&quot; target=_blank&gt;code&lt;/A&gt;&lt;IMG alt=&quot;External link for OGDI project on CodePlex.com&quot; src=&quot;/images/ExternalLink.png&quot; longDesc=&quot;desc/codeplex.txt&quot;&gt; that can be used to publish data on the Internet in a Web-friendly format with easy-to-use, open API's. OGDI-based web API's can be accessed from a variety of client technologies such as Silverlight, Flash, JavaScript, PHP, Python, Ruby, mapping web sites, etc.&lt;/p&gt;&lt;p class=&quot;big&quot;&gt;Whether you are a business wishing to use government data, a government developer, or a 'citizen developer', these open API's will enable you to build innovative applications, visualizations and mash-ups that empower people through access to government information. This site is built using the OGDI starter kit software assets and provides interactive access to some publicly-available data sets along with sample code and resources for writing applications using the OGDI API's. &lt;/p&gt;&lt;p class=&quot;big&quot;&gt;Email us at &lt;A href=&quot;mailto:askogdi@microsoft.com&quot;&gt;askogdi@microsoft.com&lt;/A&gt; if you have government data sets that you would like us to publish or if you have other questions.&lt;/p&gt;" />
       <Setting name="BlogPostsUrl" value="http://ogdi.wordpress.com/feed/" />
       <Setting name="NumberOfBlogLinksOnPage" value="3" />
-      
+
       <!-- Data Service Configurations -->
       <Setting name="RootServiceNamespace" value="OGDI" />
 
       <!-- Shared Configurations -->
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
 
       <!--
@@ -42,7 +42,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
       <Setting name="SmtpSettings" value="" />
       <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />

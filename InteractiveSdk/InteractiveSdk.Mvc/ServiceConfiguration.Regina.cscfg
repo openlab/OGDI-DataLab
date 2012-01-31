@@ -26,7 +26,7 @@
       <Setting name="RootServiceNamespace" value="OGDI" />
       
       <!-- Shared Configurations -->
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
 
       <!--
@@ -42,7 +42,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
       <Setting name="SmtpSettings" value="" />
       <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />

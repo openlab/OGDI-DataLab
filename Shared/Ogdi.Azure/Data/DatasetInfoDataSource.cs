@@ -16,7 +16,7 @@ namespace Ogdi.Azure.Data
 
         static DatasetInfoDataSource()
         {
-            string connectionString = OgdiConfiguration.GetValue("OgdiConfigConnectionString");
+            string connectionString = OgdiConfiguration.GetValue("DataConnectionString");
             StorageAccount = CloudStorageAccount.Parse(connectionString);
 
             CloudTableClient.CreateTablesFromModel(
@@ -27,8 +27,8 @@ namespace Ogdi.Azure.Data
 
         public DatasetInfoDataSource()
         {
-            _context = new DatasetInfoDataContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials);
-            _context.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1));
+            _context = new DatasetInfoDataContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials)
+                           {RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1))};
         }
 
         public void IncrementView(string itemKey)

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
@@ -27,15 +28,18 @@ namespace Ogdi.DataServices
 
         private const string _connString = "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}";
 
+        [Obsolete]
         protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
-                                                     string accountName, string storageAccountKey,
-                                                     string requestUrl,
-                                                     bool isAvailableEndpointsRequest)
+                                                             string accountName, 
+                                                             string storageAccountKey,
+                                                             string requestUrl,
+                                                             bool isAvailableEndpointsRequest)
         {
             return CreateTableStorageSignedRequest(context, accountName, storageAccountKey, requestUrl,
                                             isAvailableEndpointsRequest, false);
         }
 
+        [Obsolete]
         protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
                                                              string accountName, string storageAccountKey,
                                                              string requestUrl,
@@ -65,6 +69,48 @@ namespace Ogdi.DataServices
             var request = WebRequest.Create(azureTableRequestUrlBuilder.ToString());
 
             cloudStorageAccount.Credentials.SignRequestLite((HttpWebRequest)request);
+
+            return request;
+        }
+
+        protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
+                                                             CloudStorageAccount account,
+                                                             string requestUrl,
+                                                             bool isAvailableEndpointRequest)
+        {
+            return CreateTableStorageSignedRequest(context, account, requestUrl, isAvailableEndpointRequest, false);
+        }
+
+        protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
+                                                             CloudStorageAccount account,
+                                                             string requestUrl,
+                                                             bool isAvailableEndpointsRequest,
+                                                             bool ignoreQueryOptions)
+        {
+            if(account == null)
+                throw new ArgumentNullException("Storage Account is not properly configured.");
+
+            var azureTableRequestUrlBuilder = new StringBuilder(string.Format(requestUrl, account.Credentials.AccountName));
+
+            if (isAvailableEndpointsRequest)
+            {
+                azureTableRequestUrlBuilder.Append("AvailableEndpoints");
+            }
+
+            if (!ignoreQueryOptions)
+            {
+                var queryString = context.Request.QueryString.ToString();
+
+                if (!string.IsNullOrEmpty(queryString))
+                {
+                    azureTableRequestUrlBuilder.Append("?");
+                    azureTableRequestUrlBuilder.Append(queryString);
+                }
+            }
+
+            var request = WebRequest.Create(azureTableRequestUrlBuilder.ToString());
+
+            account.Credentials.SignRequestLite((HttpWebRequest)request);
 
             return request;
         }
