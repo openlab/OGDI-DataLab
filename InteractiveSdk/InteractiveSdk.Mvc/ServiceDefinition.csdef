@@ -31,7 +31,7 @@
       <Setting name="HomePageContent" />
       <Setting name="BlogPostsUrl" />
       <Setting name="NumberOfBlogLinksOnPage" />
-      <Setting name="OgdiConfigConnectionString" />
+      <Setting name="DataConnectionString" />
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="RecaptchaPrivateKey" />
       <Setting name="RecaptchaPupblicKey" />
@@ -45,7 +45,7 @@
   <WorkerRole name="InteractiveSdk.WorkerRole">
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
-      <Setting name="OgdiConfigConnectionString" />
+      <Setting name="DataConnectionString" />
       <Setting name="SmtpSettings" />
       <Setting name="serviceUri" />
       <Setting name="pathDTD" />

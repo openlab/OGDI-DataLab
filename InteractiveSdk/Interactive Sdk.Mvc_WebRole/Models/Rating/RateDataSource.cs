@@ -13,7 +13,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Models.Rating
 
         static RateDataSource()
         {
-			storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("OgdiConfigConnectionString"));
+			storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 
             CloudTableClient.CreateTablesFromModel(
                 typeof(RateDataContext),

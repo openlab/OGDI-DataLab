@@ -14,7 +14,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Repository
 
         static BlobRepositary()
         {
-			CloudStorageAccount storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("OgdiConfigConnectionString"));
+			CloudStorageAccount storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 
             // initialize blob storage
             CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();

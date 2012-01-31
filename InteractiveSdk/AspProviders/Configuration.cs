@@ -25,7 +25,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         internal const string DefaultSessionContainerNameConfigurationString = "DefaultSessionContainerName";
         internal const string DefaultProfileContainerNameConfigurationString = "DefaultProfileContainerName";
         internal const string DefaultProviderApplicationNameConfigurationString = "DefaultProviderApplicationName";
-        internal const string ConfigurationStorageConnectionStringName = "OgdiConfigConnectionString";
+        internal const string ConfigurationStorageConnectionStringName = "DataConnectionString";
 
         internal const string DefaultMembershipTableName = "Membership";
         internal const string DefaultRoleTableName = "Roles";
