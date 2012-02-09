@@ -16,9 +16,9 @@ namespace Ogdi.InteractiveSdk.Mvc
 			return @"<span class=""button""><img src=""" + ui.SpecialUrls.InvisibleImageUrl + @""" class=""btn-left"" /><input type=""image"" src=""" + ui.SpecialUrls.Button(name) + @""" value=""UpdateStatus"" onclick=""" + onclick + @""" /><img src=""" + ui.SpecialUrls.InvisibleImageUrl + @""" class=""btn-right"" /></span>";
 		}
 
-        public static bool HasFile(this HttpPostedFileBase file)
-        {
-            return (file != null && file.ContentLength > 0) ? true : false;
-        }
+		public static bool HasFile(this HttpPostedFileBase file)
+		{
+			return (file != null && file.ContentLength > 0);
+		}
 	}
 }

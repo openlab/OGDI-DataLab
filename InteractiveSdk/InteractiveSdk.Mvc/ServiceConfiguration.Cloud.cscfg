@@ -4,7 +4,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <!-- Data Browser Configurations -->
-      <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
+      <Setting name="serviceUri" value="http://[DataServiceDNS].cloudapp.net:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
       <Setting name="HeaderLogo" value="../../Images/CloudBanner2.png" />
       <Setting name="HeaderLogoAltText" value="OGDI Logo" />
@@ -26,8 +26,8 @@
       <Setting name="RootServiceNamespace" value="OGDI" />
 
       <!-- Shared Configurations -->
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
 
       <!--
          Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html.
@@ -41,10 +41,10 @@
   <Role name="InteractiveSdk.WorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
+      <Setting name="serviceUri" value="http://[DataServiceDNS].cloudapp.net:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>

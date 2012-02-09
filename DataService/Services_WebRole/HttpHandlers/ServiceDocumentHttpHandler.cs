@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Xml;
@@ -48,7 +49,13 @@ namespace Ogdi.DataServices
                 var xmlBase = "http://" + context.Request.Url.Host + context.Request.Url.AbsolutePath;
 
                 var requestUrl = AppSettings.TableStorageBaseUrl + "TableMetadata";
-                WebRequest request = CreateTableStorageSignedRequest(context, AppSettings.Account, requestUrl, false);
+
+                WebRequest request = 
+                    CreateTableStorageSignedRequest(context, 
+                        AppSettings.ParseStorageAccount(
+                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                            requestUrl, false);
 
                 try
                 {
