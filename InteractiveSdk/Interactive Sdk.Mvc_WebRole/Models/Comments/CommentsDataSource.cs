@@ -14,7 +14,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Models.Comments
 
 		static CommentsDataSource()
 		{
-			account = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("OgdiConfigConnectionString"));
+			account = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 			CloudTableClient.CreateTablesFromModel(typeof(CommentsDataContext), account.TableEndpoint.AbsoluteUri, account.Credentials);
 			
 		}

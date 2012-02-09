@@ -16,6 +16,7 @@ using System.Net;
 using System.Security;
 using System.Web.Security;
 using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 
 
@@ -33,7 +34,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         {
             get
             {
-                return this.CreateQuery<RoleRow>("Roles");
+                return CreateQuery<RoleRow>("Roles");
             }
         }
     }
@@ -131,13 +132,10 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         // member variables shared between most providers
         private string _applicationName;
-        private string _accountName;
-        private string _sharedKey;
         private string _tableName;
-        private string _membershipTableName;
-        private string _tableServiceBaseUri;
         private CloudTableClient _tableStorage;
-        private object _lock = new object();
+        private CloudStorageAccount _account;
+        private static readonly object _lock = new object();
         private RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
         // private ProviderRetryPolicy _providerRetry = ProviderRetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
 
@@ -152,7 +150,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 lock (_lock)
                 {
-                    SecUtility.CheckParameter(ref value, true, true, true, Constants.MaxTableApplicationNameLength, "ApplicationName");                    
+                    SecUtility.CheckParameter(ref value, true, true, true, Constants.MaxTableApplicationNameLength, "ApplicationName");
                     _applicationName = value;
                 }
             }
@@ -194,25 +192,24 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             ApplicationName = Configuration.GetStringValueWithGlobalDefault(config, "applicationName",
                                                 Configuration.DefaultProviderApplicationNameConfigurationString,
                                                 Configuration.DefaultProviderApplicationName, false);
-            _accountName = Configuration.GetStringValue(config, "accountName", null, true);
-            _sharedKey = Configuration.GetStringValue(config, "sharedKey", null, true);
+
+            _account =
+                CloudStorageAccount.Parse(
+                    RoleEnvironment.GetConfigurationSettingValue(Configuration.ConfigurationStorageConnectionStringName));
+
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "roleTableName", 
                                                 Configuration.DefaultRoleTableNameConfigurationString,
                                                 Configuration.DefaultRoleTableName, false);
-            _membershipTableName = Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName", 
-                                                Configuration.DefaultMembershipTableNameConfigurationString,
-                                                Configuration.DefaultMembershipTableName, false);    
-            _tableServiceBaseUri = Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);            
+            Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName", 
+                                                          Configuration.DefaultMembershipTableNameConfigurationString,
+                                                          Configuration.DefaultMembershipTableName, false);
+            Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);
 
             // remove required attributes
             config.Remove("allowInsecureRemoteEndpoints");
             config.Remove("applicationName");
-            config.Remove("accountName");
-            config.Remove("sharedKey");
             config.Remove("roleTableName");
             config.Remove("membershipTableName");
-            config.Remove("tableServiceBaseUri");
-
 
             // Throw an exception if unrecognized attributes remain
             if (config.Count > 0)
@@ -224,35 +221,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 }
             }
 
-            StorageCredentialsAccountAndKey info = null;
-            string baseUri = null;
+            if(_account == null)
+                throw new ConfigurationErrorsException("Account information incomplete!");
+
+            _tableStorage = _account.CreateCloudTableClient();
             try
             {
-                var sharedKey = Configuration.TryGetAppSetting(Configuration.DefaultAccountSharedKeyConfigurationString);
-                var accountName = Configuration.TryGetAppSetting(Configuration.DefaultAccountNameConfigurationString);
-
-                baseUri = Configuration.TryGetAppSetting(Configuration.DefaultTableStorageEndpointConfigurationString);
-
-                if (_tableServiceBaseUri != null)
-                {
-                    baseUri = _tableServiceBaseUri;
-                }
-                if (_accountName != null)
-                {
-                    accountName = _accountName;
-                }
-                if (_sharedKey != null)
-                {
-                    sharedKey = _sharedKey;
-                }
-
-                if (String.IsNullOrEmpty(sharedKey) || String.IsNullOrEmpty(accountName) || String.IsNullOrEmpty(baseUri))
-                    throw new ConfigurationErrorsException("Account information incomplete!");
-
-                info = new StorageCredentialsAccountAndKey(accountName, sharedKey);
-                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, info, new Uri(baseUri));
-                _tableStorage = new CloudTableClient(baseUri, info);
                 _tableStorage.RetryPolicy = _tableRetry;
+                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri);
+                
                 if (_tableStorage.CreateTableIfNotExist(_tableName))
                 {
                     var ctx = _tableStorage.GetDataServiceContext();
@@ -270,8 +247,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             // catch InvalidOperationException as well as StorageException
             catch (Exception e)
             {
-                string exceptionDescription = Configuration.GetInitExceptionDescription(info, new Uri(baseUri), "table storage configuration");
-                string tableName = (_tableName == null) ? "no role table name specified" : _tableName;
+                string exceptionDescription = Configuration.GetInitExceptionDescription(_tableStorage.Credentials as StorageCredentialsAccountAndKey, _tableStorage.BaseUri, "table storage configuration");
+                string tableName = _tableName ?? "no role table name specified";
                 Log.Write(EventKind.Error, "Could not create or find role table: " + tableName + "!" + Environment.NewLine +
                                             exceptionDescription + Environment.NewLine +
                                             e.Message + Environment.NewLine + e.StackTrace);
@@ -299,7 +276,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 DataServiceQuery<RoleRow> queryObj = svc.CreateQuery<RoleRow>(_tableName);
 
                 var query = (from user in queryObj
-                             where (user.PartitionKey == SecUtility.CombineToKey(_applicationName, username) ||                                                     
+                             where (user.PartitionKey == SecUtility.CombineToKey(_applicationName, username) ||
                                     user.PartitionKey == SecUtility.CombineToKey(_applicationName, string.Empty)) &&
                                     user.RowKey == SecUtility.Escape(roleName)
                              select user).AsTableServiceQuery();
@@ -331,7 +308,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 return true;
             }
             catch (InvalidOperationException e)
-            {              
+            {
                 throw new ProviderException("Error while accessing the data store.", e);
             }
         }
@@ -598,7 +575,6 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             SecUtility.CheckArrayParameter(ref roleNames, true, true, true, MaxTableRoleNameLength, "roleNames");
             SecUtility.CheckArrayParameter(ref usernames, true, true, true, Constants.MaxTableUsernameLength, "usernames");
 
-            RoleRow row;
             try
             {
                 TableServiceContext svc = CreateDataServiceContext();
@@ -610,7 +586,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     }
                     foreach (string user in usernames)
                     {
-                        row = new RoleRow(_applicationName, role, user);
+                        RoleRow row = new RoleRow(_applicationName, role, user);
                         try
                         {
                             svc.AddObject(_tableName, row);
@@ -740,7 +716,6 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             SecUtility.CheckArrayParameter(ref roleNames, true, true, true, MaxTableRoleNameLength, "roleNames");
             SecUtility.CheckArrayParameter(ref usernames, true, true, true, Constants.MaxTableUsernameLength, "usernames");
 
-            RoleRow row;
             try
             {
                 TableServiceContext svc = CreateDataServiceContext();
@@ -752,7 +727,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     }
                     foreach (string user in usernames)
                     {
-                        row = GetUserInRole(svc, role, user);
+                        RoleRow row = GetUserInRole(svc, role, user);
                         if (row == null)
                         {
                             Log.Write(EventKind.Warning, string.Format(CultureInfo.InstalledUICulture, "The user {0} does not exist in the role {1}.", user, role));
@@ -808,7 +783,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     return false;
                 }
             }
-            return true;            
+            return true;
         }
 
 

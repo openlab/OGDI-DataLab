@@ -57,12 +57,10 @@ namespace Ogdi.DataServices
 
                 var xmlBase = "http://" + context.Request.Url.Host + context.Request.Url.AbsolutePath;
 
-                var accountName = AppSettings.OgdiConfigTableStorageAccountName;
-                var accountKey = AppSettings.OgdiConfigTableStorageAccountKey;
-
+                var account = AppSettings.Account;
                 var requestUrl = AppSettings.TableStorageBaseUrl + "Comments";
-                WebRequest request = this.CreateTableStorageSignedRequest(context, accountName, accountKey,
-                                                                          requestUrl, false);
+
+                WebRequest request = CreateTableStorageSignedRequest(context, account, requestUrl, false);
 
                 try
                 {
@@ -75,8 +73,7 @@ namespace Ogdi.DataServices
                         {
                             var feed = XElement.Load(XmlReader.Create(responseStream));
 
-                            context.Response.Write(string.Format(START_SERVICEDOCUMENT_TEMPLATE,
-                                                                 xmlBase));
+                            context.Response.Write(string.Format(START_SERVICEDOCUMENT_TEMPLATE, xmlBase));
 
                             var propertiesElements =
                                 feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");

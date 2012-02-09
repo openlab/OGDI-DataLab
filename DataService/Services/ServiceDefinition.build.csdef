@@ -20,8 +20,6 @@
     <ConfigurationSettings>
       <Setting name="RootServiceNamespace" />
       <Setting name="OgdiConfigConnectionString" />
-      <Setting name="TableStorageBaseUrl" />
-      <Setting name="BlobStorageBaseUrl" />
       <Setting name="DiagnosticsConnectionString" />
     </ConfigurationSettings>
     <LocalResources></LocalResources>

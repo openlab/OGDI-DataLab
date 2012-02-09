@@ -1,7 +1,5 @@
-<%@ Import Namespace="Ogdi.InteractiveSdk.Mvc.App_GlobalResources" %>
 <%@ Import Namespace="Ogdi.InteractiveSdk.Mvc.Models" %>
 <%@ Import Namespace="Ogdi.InteractiveSdk.Mvc" %>
-<%@ Import Namespace="Ogdi.InteractiveSdk.Mvc.Models.Comments" %>
 <%@ Control Language="C#" Inherits="OgdiViewUserControl<DataBrowserModel>" %>
 
 <div class="query">
@@ -19,7 +17,7 @@
 		<div>
 			<div class="expression left" id="eidQueryBoxContainer" style="display:none;">
 				<div class="left"><textarea id="queryBox" rows="3" cols="20" ><%=  ViewData.Model.FilterText %></textarea></div>
-				<div class="left"><a onclick="javascript:ShowFilterHintsDialog()"><img src="<%= this.ResolveUrl("~/Content/ico.png") %>" class="ico icoQuestion" title="Show Filter Hints" /></a></div>
+				<div class="left"><a onclick="javascript:ShowFilterHintsDialog()"><img src="<%= ResolveUrl("~/Content/ico.png") %>" class="ico icoQuestion" title="Show Filter Hints" /></a></div>
 				<div class="clear"></div>
 			</div>
 			<div id="eidBuilder" class="query-builder left" ></div>

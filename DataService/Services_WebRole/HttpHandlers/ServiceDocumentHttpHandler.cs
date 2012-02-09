@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Xml;
@@ -47,12 +48,14 @@ namespace Ogdi.DataServices
 
                 var xmlBase = "http://" + context.Request.Url.Host + context.Request.Url.AbsolutePath;
 
-                var accountName = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountname;
-                var accountKey = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountkey;
-
                 var requestUrl = AppSettings.TableStorageBaseUrl + "TableMetadata";
-                WebRequest request = this.CreateTableStorageSignedRequest(context, accountName, accountKey,
-                                                                          requestUrl, false);
+
+                WebRequest request = 
+                    CreateTableStorageSignedRequest(context, 
+                        AppSettings.ParseStorageAccount(
+                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                            requestUrl, false);
 
                 try
                 {
@@ -65,8 +68,7 @@ namespace Ogdi.DataServices
                         {
                             var feed = XElement.Load(XmlReader.Create(responseStream));
 
-                            context.Response.Write(string.Format(START_SERVICEDOCUMENT_TEMPLATE,
-                                                                 xmlBase));
+                            context.Response.Write(string.Format(START_SERVICEDOCUMENT_TEMPLATE, xmlBase));
 
                             var propertiesElements =
                                 feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");

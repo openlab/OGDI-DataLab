@@ -10,7 +10,6 @@ using System.Xml.Linq;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
-
     public class IsdkWindowsAzureStorageProvider : IsdkStorageProviderInterface
     {
         #region Properties
@@ -30,7 +29,6 @@ namespace Ogdi.InteractiveSdk.Mvc
 
         #endregion
 
-
         #region Helper Methods
 
         /// <summary>
@@ -49,8 +47,6 @@ namespace Ogdi.InteractiveSdk.Mvc
         {
             var serviceUriBuilder = new StringBuilder();
 
-            //serviceUriBuilder.Append(ConfigurationManager.AppSettings["serviceUri"]);
-            //serviceUriBuilder.Append(RoleEnvironment.GetConfigurationSettingValue("serviceUri"));
             serviceUriBuilder.Append(ServiceUri);
             serviceUriBuilder.Append(container);
             serviceUriBuilder.Append("/");
@@ -96,7 +92,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                 {
                     e.Name = XNamespace.None.GetName(e.Name.LocalName);
                 }
-                if (e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != XNamespace.None).Any())
+                if (e.Attributes().Any(a => a.IsNamespaceDeclaration || a.Name.Namespace != XNamespace.None))
                 {
                     e.ReplaceAttributes(e.Attributes().Select(a => a.IsNamespaceDeclaration ? null : a.Name.Namespace != XNamespace.None ? new XAttribute(XNamespace.None.GetName(a.Name.LocalName), a.Value) : a));
                 }
@@ -160,61 +156,54 @@ namespace Ogdi.InteractiveSdk.Mvc
                 throw new ArgumentException(AzureResources.PagesizeNotZEROOrNegative);
             }
 
-            try
+            Uri serviceUri = LoadServiceUri(container, tableName, filter, pageSize, nextPartitionKey, nextRowKey);
+
+            // Store the partitionkey and rowkey as prevpartitionkey and prevrowkey before getting new set of data.
+            string currentPartitionKeyStr = string.Empty;
+            string currentRowKeyStr = string.Empty;
+            if (!string.IsNullOrEmpty(nextPartitionKey))
             {
-                Uri serviceUri = LoadServiceUri(container, tableName, filter, pageSize, nextPartitionKey, nextRowKey);
-
-                // Store the partitionkey and rowkey as prevpartitionkey and prevrowkey before getting new set of data.
-                string currentPartitionKeyStr = string.Empty;
-                string currentRowKeyStr = string.Empty;
-                if (!string.IsNullOrEmpty(nextPartitionKey))
-                {
-                    currentPartitionKeyStr = nextPartitionKey;
-                }
-
-                if (!string.IsNullOrEmpty(nextRowKey))
-                {
-                    currentRowKeyStr = nextRowKey;
-                }
-
-                string nextPartitionKeyStr = string.Empty;
-                string nextRowKeyStr = string.Empty;
-
-                var webRequest = HttpWebRequest.Create(serviceUri);
-                var response = webRequest.GetResponse();
-                var responseStream = response.GetResponseStream();
-
-                if (response.Headers[AzureResources.continuation_nextPartionKey] != null)
-                    nextPartitionKeyStr = response.Headers[AzureResources.continuation_nextPartionKey];
-
-                if (response.Headers[AzureResources.continuation_nextRowKey] != null)
-                    nextRowKeyStr = response.Headers[AzureResources.continuation_nextRowKey];
-
-                var feed = XElement.Load(XmlReader.Create(responseStream));
-
-                var propertiesElements = feed.Elements(XNamespace.Get(AzureResources.nsAtom) + "entry").Elements(XNamespace.Get(AzureResources.nsAtom) + "content").Elements(XNamespace.Get(AzureResources.nsMetadata) + "properties");
-                // Remove PartitionKey, RowKey, and Timestamp because we don't want users to focus on these.
-                // They are required by Azure Table storage, but will most likely go away
-                // when we move to SDS.
-                propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "PartitionKey").Remove();
-                propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "RowKey").Remove();
-                propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "Timestamp").Remove();
-
-                // XmlDataSource doesn't support namespaces well
-                // http://www.hanselman.com/blog/PermaLink,guid,8147b263-24fc-498d-83d1-546f4dde3fc3.aspx
-                // Therefore, we will return XML that doesn't have any
-                var root = new XElement("Root", propertiesElements);
-                root.Add(new XAttribute("tableName", tableName));
-                root.Add(new XAttribute("currentPartitionKey", currentPartitionKeyStr));
-                root.Add(new XAttribute("currentRowKey", currentRowKeyStr));
-                root.Add(new XAttribute("nextPartitionKey", nextPartitionKeyStr));
-                root.Add(new XAttribute("nextRowKey", nextRowKeyStr));
-                xmlData = StripNamespaces(root);
+                currentPartitionKeyStr = nextPartitionKey;
             }
-            catch (Exception)
+
+            if (!string.IsNullOrEmpty(nextRowKey))
             {
-                throw;
+                currentRowKeyStr = nextRowKey;
             }
+
+            string nextPartitionKeyStr = string.Empty;
+            string nextRowKeyStr = string.Empty;
+
+            var webRequest = HttpWebRequest.Create(serviceUri);
+            var response = webRequest.GetResponse();
+            var responseStream = response.GetResponseStream();
+
+            if (response.Headers[AzureResources.continuation_nextPartionKey] != null)
+                nextPartitionKeyStr = response.Headers[AzureResources.continuation_nextPartionKey];
+
+            if (response.Headers[AzureResources.continuation_nextRowKey] != null)
+                nextRowKeyStr = response.Headers[AzureResources.continuation_nextRowKey];
+
+            var feed = XElement.Load(XmlReader.Create(responseStream));
+
+            var propertiesElements = feed.Elements(XNamespace.Get(AzureResources.nsAtom) + "entry").Elements(XNamespace.Get(AzureResources.nsAtom) + "content").Elements(XNamespace.Get(AzureResources.nsMetadata) + "properties");
+            // Remove PartitionKey, RowKey, and Timestamp because we don't want users to focus on these.
+            // They are required by Azure Table storage, but will most likely go away
+            // when we move to SDS.
+            propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "PartitionKey").Remove();
+            propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "RowKey").Remove();
+            propertiesElements.Elements(XNamespace.Get(AzureResources.nsDataServices) + "Timestamp").Remove();
+
+            // XmlDataSource doesn't support namespaces well
+            // http://www.hanselman.com/blog/PermaLink,guid,8147b263-24fc-498d-83d1-546f4dde3fc3.aspx
+            // Therefore, we will return XML that doesn't have any
+            var root = new XElement("Root", propertiesElements);
+            root.Add(new XAttribute("tableName", tableName));
+            root.Add(new XAttribute("currentPartitionKey", currentPartitionKeyStr));
+            root.Add(new XAttribute("currentRowKey", currentRowKeyStr));
+            root.Add(new XAttribute("nextPartitionKey", nextPartitionKeyStr));
+            root.Add(new XAttribute("nextRowKey", nextRowKeyStr));
+            xmlData = StripNamespaces(root);
             return xmlData;
         }
 
@@ -242,42 +231,35 @@ namespace Ogdi.InteractiveSdk.Mvc
                 throw new ArgumentNullException(AzureResources.ContainerCannotBeNull);
             }
 
-            try
+            //handling internal paging.
+            do
             {
-                //handling internal paging.
-                do
+                if (tempGetData == null)
                 {
-                    if (tempGetData == null)
-                    {
-                        // 1000 is the max results Azure Table Storage allows per query
-                        tempGetData = GetData(container, tableName, filter, 1000, null, null);
-                        tempNextPartitionKey = tempGetData.Attribute("nextPartitionKey").Value;
-                        tempNextRowKey = tempGetData.Attribute("nextRowKey").Value;
-                    }
-                    else
-                    {
-                        // 1000 is the max results Azure Table Storage allows per query
-                        XElement tp = GetData(container, tableName, filter, 1000, tempNextPartitionKey, tempNextRowKey);
-                        tempGetData.Add(tp.Elements("properties"));
-
-                        // Update the partitionkey values at the top.
-                        tempGetData.SetAttributeValue("currentPartitionKey", tp.Attribute("currentPartitionKey").Value);
-                        tempGetData.SetAttributeValue("currentRowKey", tp.Attribute("currentRowKey").Value);
-                        tempGetData.SetAttributeValue("nextPartitionKey", tp.Attribute("nextPartitionKey").Value);
-                        tempGetData.SetAttributeValue("nextRowKey", tp.Attribute("nextRowKey").Value);
-
-                        tempNextPartitionKey = tp.Attribute("nextPartitionKey").Value;
-                        tempNextRowKey = tp.Attribute("nextRowKey").Value;
-                    }
+                    // 1000 is the max results Azure Table Storage allows per query
+                    tempGetData = GetData(container, tableName, filter, 1000, null, null);
+                    tempNextPartitionKey = tempGetData.Attribute("nextPartitionKey").Value;
+                    tempNextRowKey = tempGetData.Attribute("nextRowKey").Value;
                 }
-                while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));
+                else
+                {
+                    // 1000 is the max results Azure Table Storage allows per query
+                    XElement tp = GetData(container, tableName, filter, 1000, tempNextPartitionKey, tempNextRowKey);
+                    tempGetData.Add(tp.Elements("properties"));
 
-                return tempGetData;
+                    // Update the partitionkey values at the top.
+                    tempGetData.SetAttributeValue("currentPartitionKey", tp.Attribute("currentPartitionKey").Value);
+                    tempGetData.SetAttributeValue("currentRowKey", tp.Attribute("currentRowKey").Value);
+                    tempGetData.SetAttributeValue("nextPartitionKey", tp.Attribute("nextPartitionKey").Value);
+                    tempGetData.SetAttributeValue("nextRowKey", tp.Attribute("nextRowKey").Value);
+
+                    tempNextPartitionKey = tp.Attribute("nextPartitionKey").Value;
+                    tempNextRowKey = tp.Attribute("nextRowKey").Value;
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));
+
+            return tempGetData;
         }
 
         /// <summary>
@@ -306,59 +288,51 @@ namespace Ogdi.InteractiveSdk.Mvc
                 throw new ArgumentNullException(AzureResources.ContainerCannotBeNull);
             }
 
-            try
+            //handling internal paging.
+            do
             {
-                //handling internal paging.
-                do
+                if (tempGetData == null)
                 {
-                    if (tempGetData == null)
-                    {
-                        // 1000 is the max results Azure Table Storage allows per query
-                        tempGetData = GetData(container, tableName, filter, 1000, null, null);
-                        tempNextPartitionKey = tempGetData.Attribute("nextPartitionKey").Value;
-                        tempNextRowKey = tempGetData.Attribute("nextRowKey").Value;
-                    }
-                    else
-                    {
-                        // 1000 is the max results Azure Table Storage allows per query
-                        XElement tp = GetData(container, tableName, filter, 1000, tempNextPartitionKey, tempNextRowKey);
-                        tempGetData.Add(tp.Elements("properties"));
-
-                        // Update the partitionkey values at the top.
-                        tempGetData.SetAttributeValue("currentPartitionKey", tp.Attribute("currentPartitionKey").Value);
-                        tempGetData.SetAttributeValue("currentRowKey", tp.Attribute("currentRowKey").Value);
-                        tempGetData.SetAttributeValue("nextPartitionKey", tp.Attribute("nextPartitionKey").Value);
-                        tempGetData.SetAttributeValue("nextRowKey", tp.Attribute("nextRowKey").Value);
-
-                        tempNextPartitionKey = tp.Attribute("nextPartitionKey").Value;
-                        tempNextRowKey = tp.Attribute("nextRowKey").Value;
-                    }
+                    // 1000 is the max results Azure Table Storage allows per query
+                    tempGetData = GetData(container, tableName, filter, 1000, null, null);
+                    tempNextPartitionKey = tempGetData.Attribute("nextPartitionKey").Value;
+                    tempNextRowKey = tempGetData.Attribute("nextRowKey").Value;
                 }
-                while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));
+                else
+                {
+                    // 1000 is the max results Azure Table Storage allows per query
+                    XElement tp = GetData(container, tableName, filter, 1000, tempNextPartitionKey, tempNextRowKey);
+                    tempGetData.Add(tp.Elements("properties"));
 
-                //Function to get the header information of a particular entity set
-                AddMetadataToXElement(container, tempGetData);
+                    // Update the partitionkey values at the top.
+                    tempGetData.SetAttributeValue("currentPartitionKey", tp.Attribute("currentPartitionKey").Value);
+                    tempGetData.SetAttributeValue("currentRowKey", tp.Attribute("currentRowKey").Value);
+                    tempGetData.SetAttributeValue("nextPartitionKey", tp.Attribute("nextPartitionKey").Value);
+                    tempGetData.SetAttributeValue("nextRowKey", tp.Attribute("nextRowKey").Value);
 
-                String xmlDataFromAzure = tempGetData.ToString();
-
-                TextReader inputXMLDataForTrans = new StringReader(xmlDataFromAzure);
-                XmlReader xmlReader = XmlReader.Create(inputXMLDataForTrans);
-
-                // Translate dat in daisy format.
-                DTBookTranslation.DTBook objBook = new DTBookTranslation.DTBook();
-
-                TextReader validatedDTBookXml;
-                //Xml got from azure environment is given as input for DTBook translation method
-                string mappedPath = (HttpContext.Current != null) ? HttpContext.Current.Server.MapPath(PathDTD)
-                    : Path.Combine(Environment.CurrentDirectory, PathDTD);
-                validatedDTBookXml = objBook.TranslationOfAzureXml(xmlReader, mappedPath);
-                daisyDataXml = XDocument.Load(validatedDTBookXml);
-
+                    tempNextPartitionKey = tp.Attribute("nextPartitionKey").Value;
+                    tempNextRowKey = tp.Attribute("nextRowKey").Value;
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));
+
+            //Function to get the header information of a particular entity set
+            AddMetadataToXElement(container, tempGetData);
+
+            String xmlDataFromAzure = tempGetData.ToString();
+
+            TextReader inputXMLDataForTrans = new StringReader(xmlDataFromAzure);
+            XmlReader xmlReader = XmlReader.Create(inputXMLDataForTrans);
+
+            // Translate dat in daisy format.
+            DTBookTranslation.DTBook objBook = new DTBookTranslation.DTBook();
+
+            TextReader validatedDTBookXml;
+            //Xml got from azure environment is given as input for DTBook translation method
+            string mappedPath = (HttpContext.Current != null) ? HttpContext.Current.Server.MapPath(PathDTD)
+                                    : Path.Combine(Environment.CurrentDirectory, PathDTD);
+            validatedDTBookXml = objBook.TranslationOfAzureXml(xmlReader, mappedPath);
+            daisyDataXml = XDocument.Load(validatedDTBookXml);
             return daisyDataXml;
         }
 

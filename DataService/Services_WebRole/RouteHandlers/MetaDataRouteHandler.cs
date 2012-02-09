@@ -14,7 +14,6 @@ namespace Ogdi.DataServices
                 OgdiAlias = requestContext.RouteData.Values["OgdiAlias"] as string
             };
 
-
             return metaDataHttpHandler;
         }
 

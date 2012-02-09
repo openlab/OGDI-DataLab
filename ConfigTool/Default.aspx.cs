@@ -23,7 +23,7 @@ namespace ConfigTool
             string statusMessage = String.Empty;
             try
             {
-                var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["OgdiConfigConnectionString"]);
+                var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["DataConnectionString"]);
                 var context = new OgdiConfigDataServiceContext(ta.TableEndpoint.AbsoluteUri, ta.Credentials);
 
                 var empty = true;
@@ -63,7 +63,7 @@ namespace ConfigTool
                 esa.disclaimer = DisclaimerBox.Text.Replace('\n', ' ');
             }
 
-            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["OgdiConfigConnectionString"]);
+            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["DataConnectionString"]);
             var ctx = new OgdiConfigDataServiceContext(ta.TableEndpoint.AbsoluteUri, ta.Credentials);
 
             ctx.AddObject(OgdiConfigDataServiceContext.EndpointsTableName, esa);
@@ -85,7 +85,7 @@ namespace ConfigTool
                 RowKey = rowKey
             };
 
-            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["OgdiConfigConnectionString"]);
+            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["DataConnectionString"]);
             var context = new OgdiConfigDataServiceContext(ta.TableEndpoint.AbsoluteUri, ta.Credentials);
 
             context.AttachTo(OgdiConfigDataServiceContext.EndpointsTableName, availableEndpoint, "*");

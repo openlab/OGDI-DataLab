@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -8,13 +10,12 @@ using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Ogdi.Azure;
+using Ogdi.DataServices.Properties;
 
 namespace Ogdi.DataServices
 {
-
     public class V1OgdiTableStorageProxyHttpHandler : TableStorageHttpHandlerBase, IHttpHandler
     {
-
         private HttpContext _context;
         private string _afdPublicServiceReplacementUrl;
         private string _azureTableUrlToReplace;
@@ -33,14 +34,15 @@ namespace Ogdi.DataServices
             get { return true; }
         }
 
-
         private string LoadEntityKind(HttpContext context, string entitySet)
         {
-            var accountName = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountname;
-            var accountKey = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountkey;
-
             var requestUrl = AppSettings.TableStorageBaseUrl + "TableMetadata";
-            WebRequest request = this.CreateTableStorageSignedRequest(context, accountName, accountKey, requestUrl, false, true);
+
+            WebRequest request = CreateTableStorageSignedRequest(context,
+                                                                 AppSettings.ParseStorageAccount(
+                                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                                                 requestUrl, false, true);
 
             try
             {
@@ -89,28 +91,21 @@ namespace Ogdi.DataServices
             else
             {
                 _context = context;
-                string accountName;
-                string accountKey;
 
-                if (!this.IsAvailableEndpointsRequest)
-                {
-                    // See AvailableEndpoint.cs for explanation why properties are all lowercase
-                    accountName = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountname;
-                    accountKey = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountkey;
-
-                }
-                else
-                {
-                    accountName = AppSettings.OgdiConfigTableStorageAccountName;
-                    accountKey = AppSettings.OgdiConfigTableStorageAccountKey;
-                }
-
-                WebRequest request = this.CreateTableStorageSignedRequest(context, accountName, accountKey,
-                                                                          this.AzureTableRequestEntityUrl,
-                                                                          this.IsAvailableEndpointsRequest);
+                WebRequest request = (IsAvailableEndpointsRequest)
+                                     ? CreateTableStorageSignedRequest(context,
+                                                                       AppSettings.Account,
+                                                                       AzureTableRequestEntityUrl,
+                                                                       IsAvailableEndpointsRequest)
+                                     : CreateTableStorageSignedRequest(context,
+                                                                       AppSettings.ParseStorageAccount(
+                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                                                       AzureTableRequestEntityUrl,
+                                                                       IsAvailableEndpointsRequest);
 
                 Action<string, string, string> incView = AnalyticsRepository.RegisterView;
-                incView.BeginInvoke(String.Format("{0}||{1}", this.OgdiAlias, this.EntitySet),
+                incView.BeginInvoke(String.Format("{0}||{1}", OgdiAlias, EntitySet),
                     context.Request.RawUrl,
                     context.Request.UserHostName,
                     null, null);
@@ -141,19 +136,19 @@ namespace Ogdi.DataServices
 
                     string format = _context.Request.QueryString["format"];
 
-                    this.SetupReplacementUrls();
+                    SetupReplacementUrls();
 
                     switch (format)
                     {
                         case "kml":
-                            this.RenderKml(feed);
+                            RenderKml(feed);
                             break;
                         case "json":
-                            this.RenderJson(feed);
+                            RenderJson(feed);
                             break;
                         default:
                             // If "format" is not kml or json, then assume AtomPub
-                            this.RenderAtomPub(feed);
+                            RenderAtomPub(feed);
                             break;
                     }
                 }
@@ -201,7 +196,7 @@ namespace Ogdi.DataServices
                     if (kmlSnippetValue.Contains("KmlSnippetReference"))
                     {
                         var blobId = XElement.Parse(kmlSnippetValue).Element("Blob").Value;
-                        var request = this.CreateBlobStorageSignedRequest(blobId, this.OgdiAlias, this.EntitySet);
+                        var request = this.CreateBlobStorageSignedRequest(blobId, OgdiAlias, EntitySet);
                         var response = request.GetResponse();
                         var strReader = new StreamReader(response.GetResponseStream());
                         var kmlSnippetString = strReader.ReadToEnd();
@@ -274,9 +269,9 @@ namespace Ogdi.DataServices
             string idValue = feed.Element(_idXName).Value;
             string baseValue = feed.Attribute(XNamespace.Xml + "base").Value;
 
-            feed.Attribute(XNamespace.Xml + "base").Value = this.ReplaceAzureUrlInString(baseValue);
+            feed.Attribute(XNamespace.Xml + "base").Value = ReplaceAzureUrlInString(baseValue);
 
-            feed.Element(_idXName).Value = this.ReplaceAzureUrlInString(idValue);
+            feed.Element(_idXName).Value = ReplaceAzureUrlInString(idValue);
 
             // The xml payload coming back has a <kmlsnippet> property.  We want to
             // hide that from the consumer of our service by removing it.
@@ -296,13 +291,13 @@ namespace Ogdi.DataServices
                 isSingleEntry = false;
 
                 idValue = entry.Element(_idXName).Value;
-                entry.Element(_idXName).Value = this.ReplaceAzureUrlInString(idValue);
+                entry.Element(_idXName).Value = ReplaceAzureUrlInString(idValue);
 
                 ReplaceAzureNamespaceInCategoryTermValue(entry);
 
                 var properties = entry.Elements(_contentXName).Elements(_propertiesXName);
 
-                if (!this.IsAvailableEndpointsRequest)
+                if (!IsAvailableEndpointsRequest)
                 {
                     properties.Elements(_kmlSnippetXName).Remove();
                 }
@@ -335,17 +330,15 @@ namespace Ogdi.DataServices
             var term = entry.Element(_categoryXName).Attribute("term");
 
             //TODO: apply real fix. OgdiAlias is null for AvailableEndpoints
-            if (this.OgdiAlias != null)
+            if (OgdiAlias == null) return;
+            if (_entityKind == null)
             {
-                if (_entityKind == null)
-                {
-                    var termValue = term.Value;
-                    var dotLocation = termValue.ToString().IndexOf(".");
-                    var entitySet = termValue.Substring(dotLocation + 1);
-                    _entityKind = LoadEntityKind(_context, entitySet);
-                }
-                term.Value = string.Format(_termNameString, this.OgdiAlias.ToLower(), _entityKind);
+                var termValue = term.Value;
+                var dotLocation = termValue.IndexOf(".");
+                var entitySet = termValue.Substring(dotLocation + 1);
+                _entityKind = LoadEntityKind(_context, entitySet);
             }
+            term.Value = string.Format(_termNameString, OgdiAlias.ToLower(), _entityKind);
         }
 
         private void SetupReplacementUrls()
@@ -358,20 +351,18 @@ namespace Ogdi.DataServices
             sb.Append(_context.Request.Url.Host);
             sb.Append("/v1/");
 
-            if (!this.IsAvailableEndpointsRequest)
+            if (!IsAvailableEndpointsRequest)
             {
-                sb.Append(this.OgdiAlias);
+                sb.Append(OgdiAlias);
                 sb.Append("/");
 
-                _azureTableUrlToReplace =
-                    string.Format(AppSettings.TableStorageBaseUrl,
-                                                AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountname);
+                _azureTableUrlToReplace = string.Format(AppSettings.TableStorageBaseUrl,
+                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname);
             }
             else
             {
-                _azureTableUrlToReplace =
-                    string.Format(AppSettings.TableStorageBaseUrl,
-                                                AppSettings.OgdiConfigTableStorageAccountName);
+                _azureTableUrlToReplace = string.Format(AppSettings.TableStorageBaseUrl,
+                                                    AppSettings.OgdiConfigTableStorageAccountName);
             }
 
             _afdPublicServiceReplacementUrl = sb.ToString();

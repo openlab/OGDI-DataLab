@@ -125,7 +125,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
         {
             var ce = ni.CommentEntry;
 
-            var storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("OgdiConfigConnectionString"));
+            var storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
             var queueStorage = storageAccount.CreateCloudQueueClient();
             var queue = queueStorage.GetQueueReference("workercommands");
 
