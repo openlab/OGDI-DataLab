@@ -620,19 +620,19 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
             try
             {
-                DataServiceQuery<SessionRow> queryObj = context.CreateQuery<SessionRow>(_tableName);
+                var queryObj = context.CreateQuery<SessionRow>(_tableName);
                 var query = (from session in queryObj
                              where session.PartitionKey == SecUtility.CombineToKey(_applicationName, id)
                              select session).AsTableServiceQuery();
                 IEnumerable<SessionRow> sessions = query.Execute();
 
                 // enumerate the result and store it in a list
-                List<SessionRow> sessionList = new List<SessionRow>(sessions);
-                if (sessionList != null && sessionList.Count() == 1)
+                var sessionList = new List<SessionRow>(sessions);
+                if (sessionList.Count() == 1)
                 {
                     return sessionList.First();
                 }
-                else if (sessionList != null && sessionList.Count() > 1)
+                else if (sessionList.Count() > 1)
                 {
                     throw new ProviderException("Multiple sessions with the same name!");
                 }
@@ -764,7 +764,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 reader = new StreamReader(stream);
                 if (actions == SessionStateActions.InitializeItem)
                 {
-                    // Return an empty SessionStateStoreData                    
+                    // Return an empty SessionStateStoreData
                     result = new SessionStateStoreData(new SessionStateItemCollection(),
                                                        SessionStateUtility.GetSessionStaticObjects(context), session.Timeout);
                 }
@@ -833,14 +833,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 using (BinaryReader reader1 = new BinaryReader(stream1))
                 {
                     bool hasItems = reader1.ReadBoolean();
-                    if (hasItems)
-                    {
-                        itemCol = SessionStateItemCollection.Deserialize(reader1);
-                    }
-                    else
-                    {
-                        itemCol = new SessionStateItemCollection();
-                    }
+                    itemCol = hasItems ? SessionStateItemCollection.Deserialize(reader1) : new SessionStateItemCollection();
                 }
             }
 
@@ -850,7 +843,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 throw new ProviderException("This provider does not support static session objects because of security-related hosting constraints.");
             }
 
-            if (statics != null && statics.Count() > 0)
+            if (statics != null && statics.Any())
             {
                 throw new ProviderException("This provider does not support static session objects because of security-related hosting constraints.");
             }

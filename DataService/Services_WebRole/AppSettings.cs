@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Microsoft.WindowsAzure;
@@ -10,6 +11,7 @@ namespace Ogdi.DataServices
     public static class AppSettings
     {
         public static readonly CloudStorageAccount Account;
+        private const string ConnString = "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}";
 
         static AppSettings()
         {
@@ -60,7 +62,7 @@ namespace Ogdi.DataServices
             {
                 if (string.IsNullOrWhiteSpace(_tableStorageBaseUrl))
                 {
-                    _tableStorageBaseUrl = Account.TableEndpoint.AbsoluteUri;
+                    _tableStorageBaseUrl = "https://{0}.table.core.windows.net/";
                 }
                 return _tableStorageBaseUrl;
             }
@@ -73,7 +75,7 @@ namespace Ogdi.DataServices
             {
                 if (string.IsNullOrWhiteSpace(_blobStorageBaseUrl))
                 {
-                    _blobStorageBaseUrl = Account.BlobEndpoint.AbsoluteUri;
+                    _blobStorageBaseUrl = "https://{0}.blob.core.windows.net/";
                 }
                 return _blobStorageBaseUrl;
             }
@@ -94,6 +96,11 @@ namespace Ogdi.DataServices
         public static AvailableEndpoint GetAvailableEndpointByAccountName(string accountName)
         {
             return EnabledStorageAccounts.Values.FirstOrDefault(r => r.storageaccountname == accountName);
+        }
+
+        public static CloudStorageAccount ParseStorageAccount(string accountName, string accountKey)
+        {
+            return CloudStorageAccount.Parse(string.Format(ConnString, accountName, accountKey));
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -8,13 +10,12 @@ using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Ogdi.Azure;
+using Ogdi.DataServices.Properties;
 
 namespace Ogdi.DataServices
 {
-
     public class V1OgdiTableStorageProxyHttpHandler : TableStorageHttpHandlerBase, IHttpHandler
     {
-
         private HttpContext _context;
         private string _afdPublicServiceReplacementUrl;
         private string _azureTableUrlToReplace;
@@ -33,11 +34,15 @@ namespace Ogdi.DataServices
             get { return true; }
         }
 
-
         private string LoadEntityKind(HttpContext context, string entitySet)
         {
             var requestUrl = AppSettings.TableStorageBaseUrl + "TableMetadata";
-            WebRequest request = CreateTableStorageSignedRequest(context, AppSettings.Account, requestUrl, false, true);
+
+            WebRequest request = CreateTableStorageSignedRequest(context,
+                                                                 AppSettings.ParseStorageAccount(
+                                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                                                 requestUrl, false, true);
 
             try
             {
@@ -86,24 +91,18 @@ namespace Ogdi.DataServices
             else
             {
                 _context = context;
-                string accountName;
-                string accountKey;
 
-                if (!IsAvailableEndpointsRequest)
-                {
-                    // See AvailableEndpoint.cs for explanation why properties are all lowercase
-                    accountName = AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname;
-                    accountKey = AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey;
-                }
-                else
-                {
-                    accountName = AppSettings.OgdiConfigTableStorageAccountName;
-                    accountKey = AppSettings.OgdiConfigTableStorageAccountKey;
-                }
-
-                WebRequest request = CreateTableStorageSignedRequest(context, accountName, accountKey,
-                                                                          AzureTableRequestEntityUrl,
-                                                                          IsAvailableEndpointsRequest);
+                WebRequest request = (IsAvailableEndpointsRequest)
+                                     ? CreateTableStorageSignedRequest(context,
+                                                                       AppSettings.Account,
+                                                                       AzureTableRequestEntityUrl,
+                                                                       IsAvailableEndpointsRequest)
+                                     : CreateTableStorageSignedRequest(context,
+                                                                       AppSettings.ParseStorageAccount(
+                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                                                       AzureTableRequestEntityUrl,
+                                                                       IsAvailableEndpointsRequest);
 
                 Action<string, string, string> incView = AnalyticsRepository.RegisterView;
                 incView.BeginInvoke(String.Format("{0}||{1}", OgdiAlias, EntitySet),
@@ -137,7 +136,7 @@ namespace Ogdi.DataServices
 
                     string format = _context.Request.QueryString["format"];
 
-                    this.SetupReplacementUrls();
+                    SetupReplacementUrls();
 
                     switch (format)
                     {
@@ -197,7 +196,7 @@ namespace Ogdi.DataServices
                     if (kmlSnippetValue.Contains("KmlSnippetReference"))
                     {
                         var blobId = XElement.Parse(kmlSnippetValue).Element("Blob").Value;
-                        var request = this.CreateBlobStorageSignedRequest(blobId, this.OgdiAlias, this.EntitySet);
+                        var request = this.CreateBlobStorageSignedRequest(blobId, OgdiAlias, EntitySet);
                         var response = request.GetResponse();
                         var strReader = new StreamReader(response.GetResponseStream());
                         var kmlSnippetString = strReader.ReadToEnd();
@@ -357,16 +356,13 @@ namespace Ogdi.DataServices
                 sb.Append(OgdiAlias);
                 sb.Append("/");
 
-                //Hack: This needs to be able to replace the table storage base url based on the current alias.
-                _azureTableUrlToReplace =
-                    string.Format(AppSettings.TableStorageBaseUrl,
-                                  AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname);
+                _azureTableUrlToReplace = string.Format(AppSettings.TableStorageBaseUrl,
+                                                    AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname);
             }
             else
             {
-                _azureTableUrlToReplace =
-                    string.Format(AppSettings.TableStorageBaseUrl,
-                                  AppSettings.OgdiConfigTableStorageAccountName);
+                _azureTableUrlToReplace = string.Format(AppSettings.TableStorageBaseUrl,
+                                                    AppSettings.OgdiConfigTableStorageAccountName);
             }
 
             _afdPublicServiceReplacementUrl = sb.ToString();

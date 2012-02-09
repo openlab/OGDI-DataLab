@@ -38,7 +38,7 @@ namespace Ogdi.DataServices
         public static void RegisterRoutes(RouteCollection routes)
         {
             // We use ASP.NET Routing to determine whether or not to handle incoming requests
-            
+
             var v1RouteHandler = new V1RouteHandler();
 
             routes.Add("V1AvailableEndpoints", new Route("v1/AvailableEndpoints", v1RouteHandler));
@@ -47,7 +47,6 @@ namespace Ogdi.DataServices
             routes.Add("V1PrimaryRoute", new Route("v1/{OgdiAlias}/{EntitySet}/{*remainder}", v1RouteHandler));
             routes.Add("V1ServiceDocument", new Route("v1/{OgdiAlias}", new ServiceDocumentRouteHandler()));
             routes.Add("V1NestedServiceDocuments", new Route("v1", new NestedServiceDocumentRouteHandler()));
-            
         }
 
         protected void Session_Start(object sender, EventArgs e)

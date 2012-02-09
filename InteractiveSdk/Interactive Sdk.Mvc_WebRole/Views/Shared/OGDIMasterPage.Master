@@ -46,7 +46,7 @@
 </head>
 <body>
     <div class="top">
-        <div class="header" style="background-image: url('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderBackground") %>')">
+        <div class="header">
             <div class="title">
                 DataLab</div>
             <div class="subtitle">
