@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ServiceConfiguration serviceName="Services" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
+  <Role name="Services_WebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="RootServiceNamespace" value="ogdiservicetest" />
+      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=Bc1grex3twnH2UY0sZv7y1orsnN3T5SC4JR8j/aXpfgX5f8artr20ay9ONKr1Nr6MArRirpsUWZCldKf5AB0bQ==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

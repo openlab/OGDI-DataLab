@@ -72,7 +72,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Repository
 
             // Validatie the parameters
             if ((!String.IsNullOrEmpty(container)) && 
-                !(String.IsNullOrEmpty(tableName))               
+                !(String.IsNullOrEmpty(tableName))
                && pageSize > 0)
             {
 

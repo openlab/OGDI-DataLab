@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Web;
 using System.Web.Routing;
 
 namespace Ogdi.DataServices
@@ -43,7 +44,7 @@ namespace Ogdi.DataServices
                     else
                     {
                         //Possile OgdiAlias is acccountName
-                        Ogdi.Config.AvailableEndpoint endPoint = AppSettings.GetAvailableEndpointByAccountName(_ogdiAlias);
+                        Config.AvailableEndpoint endPoint = AppSettings.GetAvailableEndpointByAccountName(_ogdiAlias);
 
                         if (endPoint != null)
                         {
@@ -76,12 +77,12 @@ namespace Ogdi.DataServices
                 _azureTableRequestEntityUrl += _remainder;
             }
 
-            var azureTableStorageProxyHttpHandler = new V1OgdiTableStorageProxyHttpHandler 
-            { 
-                OgdiAlias = _ogdiAlias, 
-                EntitySet = _entitySet, 
-                IsAvailableEndpointsRequest = _isAvailableEndpointsRequest, 
-                AzureTableRequestEntityUrl = _azureTableRequestEntityUrl 
+            var azureTableStorageProxyHttpHandler = new V1OgdiTableStorageProxyHttpHandler
+            {
+                OgdiAlias = _ogdiAlias,
+                EntitySet = _entitySet,
+                IsAvailableEndpointsRequest = _isAvailableEndpointsRequest,
+                AzureTableRequestEntityUrl = _azureTableRequestEntityUrl
             };
 
             return azureTableStorageProxyHttpHandler;

@@ -30,14 +30,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
 
             param = param.Trim();
-            if ((checkIfEmpty && param.Length < 1) ||
-                 (maxSize > 0 && param.Length > maxSize) ||
-                 (checkForCommas && param.Contains(",")))
-            {
-                return false;
-            }
-
-            return true;
+            return (!checkIfEmpty || param.Length >= 1) && (maxSize <= 0 || param.Length <= maxSize) && (!checkForCommas || !param.Contains(","));
         }
 
         internal static void CheckParameter(ref string param, bool checkForNull, bool checkIfEmpty, bool checkForCommas, int maxSize, string paramName)
@@ -86,13 +79,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 SecUtility.CheckParameter(ref param[i], checkForNull, checkIfEmpty, checkForCommas, maxSize,
                     paramName + "[ " + i.ToString(CultureInfo.InvariantCulture) + " ]");
-                if (values.Contains(param[i]))
+                if (!values.Contains(param[i]))
                 {
-                    throw new ArgumentException(string.Format(CultureInfo.InstalledUICulture, "The array '{0}' should not contain duplicate values.", paramName), paramName);
+                    values.Add(param[i], param[i]);
                 }
                 else
                 {
-                    values.Add(param[i], param[i]);
+                    throw new ArgumentException(
+                        string.Format(CultureInfo.InstalledUICulture,
+                                      "The array '{0}' should not contain duplicate values.", paramName), paramName);
                 }
             }
         }
@@ -105,14 +100,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 throw new ArgumentException("Invalid time value!");
             }
-            if (value.Kind == DateTimeKind.Local)
-            {
-                res = value.ToUniversalTime();
-            }
-            else
-            {
-                res = value;
-            }
+            res = value.Kind == DateTimeKind.Local ? value.ToUniversalTime() : value;
         }
 
         internal const string ValidTableNameRegex = @"^([a-z]|[A-Z]){1}([a-z]|[A-Z]|\d){2,62}$";
@@ -124,14 +112,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 return false;
             }
             Regex reg = new Regex(ValidTableNameRegex);
-            if (reg.IsMatch(name))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return reg.IsMatch(name);
         }
 
         internal const string ValidContainerNameRegex = @"^([a-z]|\d){1}([a-z]|-|\d){1,61}([a-z]|\d){1}$";
@@ -141,16 +122,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             if (string.IsNullOrEmpty(name))
             {
                 return false;
-            }            
+            }
             Regex reg = new Regex(ValidContainerNameRegex);
-            if (reg.IsMatch(name))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return reg.IsMatch(name);
         }
 
         // the table storage system currently does not support the StartsWith() operation in 
@@ -165,12 +139,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
             string ret;
             char last = s[s.Length - 1];
-            if ((int)last + 1 > (int)char.MaxValue)
+            if (last + 1 > char.MaxValue)
             {
                 throw new ArgumentException("Cannot convert the string.");
             }
             // don't use "as" because we want to have an explicit exception here if something goes wrong
-            last = (char)((int)last + 1);
+            last = (char)(last + 1);
             ret = s.Substring(0, s.Length - 1) + last;
             return ret;
         }
@@ -200,9 +174,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 ); 
         }
 
-        internal static string CharToEscapeSequence(char c) {
-            string ret;
-            ret = EscapeCharacterString + string.Format(CultureInfo.InvariantCulture, "{0:X2}", (int)c);
+        internal static string CharToEscapeSequence(char c)
+        {
+            string ret = EscapeCharacterString + string.Format(CultureInfo.InvariantCulture, "{0:X2}", (int)c);
             return ret;
         }
 
@@ -278,6 +252,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             return UnEscape(second);
         }
 
+        [Obsolete("Replaced with CheckAllowInsecureEndpoints(bool, Uri)")]
         internal static void CheckAllowInsecureEndpoints(bool allowInsecureRemoteEndpoints, StorageCredentialsAccountAndKey info, Uri baseUri)
         {
             if (info == null)
@@ -305,6 +280,30 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             throw new SecurityException("The provider is configured with allowInsecureRemoteEndpoints set to false (default setting) but the endpoint for " +
                                         "the storage system does not seem to be an https or local endpoint. " +
                                         "Please configure the provider to use an https enpoint for the storage endpoint or " +
+                                        "explicitly set the configuration option allowInsecureRemoteEndpoints to true.");
+        }
+
+        internal static void CheckAllowInsecureEndpoints(bool allowInsecureRemoteEndpoints, Uri baseUri)
+        {
+            if (allowInsecureRemoteEndpoints) return;
+
+            if (baseUri == null || string.IsNullOrEmpty(baseUri.Scheme))
+            {
+                throw new SecurityException("allowInsecureRemoteEndpoints is set to false (default setting) but the endpoint URL seems to be empty or there is no URL scheme." +
+                                            "Please configure the provider to use an https endpoint for the storage endpoint or " +
+                                            "explicitly set the configuration option allowInsecureRemoteEndpoints to true.");
+            }
+            if (baseUri.Scheme.ToUpper(CultureInfo.InvariantCulture) == Uri.UriSchemeHttps.ToUpper(CultureInfo.InvariantCulture))
+            {
+                return;
+            }
+            if (baseUri.IsLoopback)
+            {
+                return;
+            }
+            throw new SecurityException("The provider is configured with allowInsecureRemoteEndpoints set to false (default setting) but the endpoint for " +
+                                        "the storage system does not seem to be an https or local endpoint. " +
+                                        "Please configure the provider to use an https endpoint for the storage endpoint or " +
                                         "explicitly set the configuration option allowInsecureRemoteEndpoints to true.");
         }
     }
@@ -364,11 +363,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// Otherwise, the backoff is calculated as random(2^currentRetry) * deltaBackoff.</remarks>
         public static ProviderRetryPolicy RetryN(int numberOfRetries, TimeSpan deltaBackoff)
         {
-            return new ProviderRetryPolicy((Action action) =>
-            {
-                RetryNImpl(action, numberOfRetries, StandardMinBackoff, StandardMaxBackoff, deltaBackoff);
-            }
-            );
+            return action => RetryNImpl(action, numberOfRetries, StandardMinBackoff, StandardMaxBackoff, deltaBackoff);
         }
 
         /// <summary>
@@ -384,11 +379,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// Otherwise, the backoff is calculated as random(2^currentRetry) * deltaBackoff.</remarks>
         public static ProviderRetryPolicy RetryN(int numberOfRetries, TimeSpan minBackoff, TimeSpan maxBackoff, TimeSpan deltaBackoff)
         {
-            return new ProviderRetryPolicy((Action action) =>
-            {
-                RetryNImpl(action, numberOfRetries, minBackoff, maxBackoff, deltaBackoff);
-            }
-            );
+            return action => RetryNImpl(action, numberOfRetries, minBackoff, maxBackoff, deltaBackoff);
         }
 
 

@@ -1,7 +1,9 @@
+using System.Configuration;
 using System.Net;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using Ogdi.DataServices.Properties;
 
 namespace Ogdi.DataServices
 {
@@ -80,12 +82,15 @@ namespace Ogdi.DataServices
                 context.Response.CacheControl = "no-cache";
                 context.Response.ContentType = "application/xml;charset=utf-8";
 
-                var accountName = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountname;
-                var accountKey = AppSettings.EnabledStorageAccounts[this.OgdiAlias].storageaccountkey;
-
                 var requestUrl = AppSettings.TableStorageBaseUrl + "EntityMetadata";
-                WebRequest request = this.CreateTableStorageSignedRequest(context, accountName, accountKey,
-                                                                          requestUrl, false);
+
+                WebRequest request = 
+                    CreateTableStorageSignedRequest(context,
+                                                    AppSettings.ParseStorageAccount(
+                                                        AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                                        AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                                    requestUrl,
+                                                    false);
 
                 try
                 {
@@ -95,7 +100,7 @@ namespace Ogdi.DataServices
                     var feed = XElement.Load(XmlReader.Create(responseStream));
 
                     // Removed .ToLower() from this.OgdiAlias (Bug Fix: WorkItem #14794)
-                    context.Response.Write(string.Format(START_DATASERVICES_TEMPLATE, this.OgdiAlias));
+                    context.Response.Write(string.Format(START_DATASERVICES_TEMPLATE, OgdiAlias));
 
                     var propertiesElements = feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");
 
@@ -118,7 +123,7 @@ namespace Ogdi.DataServices
 
                         context.Response.Write(string.Format(ENTITYSET_TEMPLATE,
                                                              entitySet != null ? entitySet.Value : string.Empty,
-                                                             this.OgdiAlias,
+                                                             OgdiAlias,
                                                              entityKind != null ? entityKind.Value : string.Empty));
                     }
 

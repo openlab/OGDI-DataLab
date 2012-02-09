@@ -25,12 +25,10 @@
 
       <!-- Data Service Configurations -->
       <Setting name="RootServiceNamespace" value="OGDI" />
-      <Setting name="TableStorageBaseUrl" value="https://{0}.table.core.windows.net/" />
-      <Setting name="BlobStorageBaseUrl" value="https://{0}.blob.core.windows.net/" />
 
       <!-- Shared Configurations -->
-      <Setting name="OgdiConfigConnectionString" value="usedevelopmentstorage=true" />
-      <Setting name="DiagnosticsConnectionString" value="usedevelopmentstorage=true" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
 
       <!-- Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html. -->
       <Setting name="RecaptchaPrivateKey" value="" />
@@ -42,8 +40,8 @@
   <Role name="InteractiveSdk.WorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DiagnosticsConnectionString" value="usedevelopmentstorage=true" />
-      <Setting name="OgdiConfigConnectionString" value="usedevelopmentstorage=true" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
       <Setting name="SmtpSettings" value="" />
       <Setting name="serviceUri" value="http://127.0.0.1:8081/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />

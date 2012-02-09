@@ -1,8 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Configuration;
+using System.Diagnostics;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
 using Microsoft.WindowsAzure;
+using Ogdi.DataServices.Properties;
 
 namespace Ogdi.DataServices
 {
@@ -25,26 +29,26 @@ namespace Ogdi.DataServices
 
         protected static string _termNameString = AppSettings.RootServiceNamespace + ".{0}.{1}";
 
-        private const string _connString = "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}";
-
         protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
-                                                     string accountName, string storageAccountKey,
-                                                     string requestUrl,
-                                                     bool isAvailableEndpointsRequest)
+                                                             CloudStorageAccount account,
+                                                             string requestUrl,
+                                                             bool isAvailableEndpointRequest)
         {
-            return CreateTableStorageSignedRequest(context, accountName, storageAccountKey, requestUrl,
-                                            isAvailableEndpointsRequest, false);
+            return CreateTableStorageSignedRequest(context, account, requestUrl, isAvailableEndpointRequest, false);
         }
 
         protected WebRequest CreateTableStorageSignedRequest(HttpContext context,
-                                                             string accountName, string storageAccountKey,
+                                                             CloudStorageAccount account,
                                                              string requestUrl,
                                                              bool isAvailableEndpointsRequest,
                                                              bool ignoreQueryOptions)
         {
-            var azureTableRequestUrlBuilder = new StringBuilder(string.Format(requestUrl, accountName));
+            if (account == null)
+                throw new ArgumentNullException("Storage Account is not properly configured.");
 
-            var cloudStorageAccount = CloudStorageAccount.Parse(string.Format(_connString, accountName, storageAccountKey));
+            Debug.WriteLine(requestUrl);
+
+            var azureTableRequestUrlBuilder = new StringBuilder(string.Format(requestUrl, account.Credentials.AccountName));
 
             if (isAvailableEndpointsRequest)
             {
@@ -64,28 +68,33 @@ namespace Ogdi.DataServices
 
             var request = WebRequest.Create(azureTableRequestUrlBuilder.ToString());
 
-            cloudStorageAccount.Credentials.SignRequestLite((HttpWebRequest)request);
+            account.Credentials.SignRequestLite((HttpWebRequest)request);
 
             return request;
         }
 
         protected WebRequest CreateBlobStorageSignedRequest(string blobId, string ogdiAlias, string entitySet)
         {
-            var accountName =
-                    AppSettings.EnabledStorageAccounts[ogdiAlias].storageaccountname;
-            var accountKey =
-                    AppSettings.EnabledStorageAccounts[ogdiAlias].storageaccountkey;
+            if (string.IsNullOrWhiteSpace(ogdiAlias))
+                return WebRequest.Create(string.Format(AppSettings.BlobStorageBaseUrl,
+                    AppSettings.OgdiConfigTableStorageAccountName));
 
             var blobRequestUrlBuilder = new StringBuilder();
-            blobRequestUrlBuilder.Append(string.Format(AppSettings.BlobStorageBaseUrl, accountName));
+            blobRequestUrlBuilder.Append(string.Format(AppSettings.BlobStorageBaseUrl,
+                                                       AppSettings.EnabledStorageAccounts[ogdiAlias].storageaccountname));
             blobRequestUrlBuilder.Append(entitySet.ToLower());
             blobRequestUrlBuilder.Append("/");
             blobRequestUrlBuilder.Append(blobId);
 
-            var cloudStorageAccount = CloudStorageAccount.Parse(string.Format(_connString, accountName, accountKey));
+            if (!AppSettings.EnabledStorageAccounts.ContainsKey(ogdiAlias))
+                throw new ConfigurationErrorsException(Resources.AliasNotConfiguredExceptionMessage);
+
+            var cloudStorageAccount =
+                AppSettings.ParseStorageAccount(AppSettings.EnabledStorageAccounts[ogdiAlias].storageaccountname,
+                                                AppSettings.EnabledStorageAccounts[ogdiAlias].storageaccountkey);
 
             var request = WebRequest.Create(blobRequestUrlBuilder.ToString());
-            request.Headers.Add("x-ms-version", "2009-09-19");
+            request.Headers.Add("x-ms-version", "2011-08-18");
 
             cloudStorageAccount.Credentials.SignRequest((HttpWebRequest)request);
 

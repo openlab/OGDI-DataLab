@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Text;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using Microsoft.WindowsAzure.StorageClient;
 
 [assembly: CLSCompliant(true)]
 
@@ -24,6 +25,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         internal const string DefaultSessionContainerNameConfigurationString = "DefaultSessionContainerName";
         internal const string DefaultProfileContainerNameConfigurationString = "DefaultProfileContainerName";
         internal const string DefaultProviderApplicationNameConfigurationString = "DefaultProviderApplicationName";
+        internal const string ConfigurationStorageConnectionStringName = "DataConnectionString";
 
         internal const string DefaultMembershipTableName = "Membership";
         internal const string DefaultRoleTableName = "Roles";
@@ -31,11 +33,6 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         internal const string DefaultSessionContainerName = "sessionprovidercontainer";
         internal const string DefaultProfileContainerName = "profileprovidercontainer";
         internal const string DefaultProviderApplicationName = "appname";
-
-        internal static readonly string DefaultTableStorageEndpointConfigurationString = "TableStorageEndpoint";
-        internal static readonly string DefaultAccountNameConfigurationString = "AccountName";
-        internal static readonly string DefaultAccountSharedKeyConfigurationString = "AccountSharedKey";
-        internal static readonly string DefaultBlobStorageEndpointConfigurationString = "BlobStorageEndpoint";
 
         internal static readonly DateTime MinSupportedDateTime = DateTime.FromFileTime(0).ToUniversalTime().AddYears(200);
         internal static readonly int MaxStringPropertySizeInBytes = 64 * 1024;
@@ -242,6 +239,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             StringBuilder builder = new StringBuilder();
             builder.Append(GetInitExceptionDescription(table, tableBaseUri, "table storage configuration"));
             builder.Append(GetInitExceptionDescription(blob, blobBaseUri, "blob storage configuration"));
+            return builder.ToString();
+        }
+
+        internal  static string GetInitExceptionDescription(CloudBlobClient blob, CloudTableClient table)
+        {
+            var builder = new StringBuilder();
+            builder.Append(GetInitExceptionDescription(table.Credentials as StorageCredentialsAccountAndKey, table.BaseUri, "table storage configuration"));
+            builder.Append(GetInitExceptionDescription(blob.Credentials as StorageCredentialsAccountAndKey, blob.BaseUri, "blob storage configuration"));
             return builder.ToString();
         }
 

@@ -21,6 +21,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
@@ -29,7 +30,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
     /// This class allows DevtableGen to generate the correct table (named 'Membership') 
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-        Justification="Class is used by devtablegen to generate database for the development storage tool")]
+        Justification = "Class is used by devtablegen to generate database for the development storage tool")]
     internal class MembershipDataServiceContext : TableServiceContext
     {
         public MembershipDataServiceContext()
@@ -39,7 +40,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         {
             get
             {
-                return this.CreateQuery<MembershipRow>("Membership");
+                return CreateQuery<MembershipRow>("Membership");
             }
         }
     }
@@ -73,7 +74,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         public MembershipRow(string applicationName, string userName)
             : base()
         {
-            if (string.IsNullOrEmpty(applicationName)) {
+            if (string.IsNullOrEmpty(applicationName))
+            {
                 throw new ProviderException("Partition key cannot be empty!");
             }
             if (string.IsNullOrEmpty(userName))
@@ -143,13 +145,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public string UserName
         {
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new ArgumentException("To ensure string values are always updated, this implementation does not allow null as a string value.");
                 }
                 _userName = value;
-                PartitionKey = SecUtility.CombineToKey(ApplicationName, UserName); 
+                PartitionKey = SecUtility.CombineToKey(ApplicationName, UserName);
             }
             get
             {
@@ -157,9 +160,10 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
         }
 
-        public Guid UserId {
+        public Guid UserId
+        {
             set;
-            get;            
+            get;
         }
 
         public string Password
@@ -281,28 +285,31 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         }
 
         public bool IsApproved
-        {            
+        {
             set;
             get;
         }
 
         public bool IsAnonymous
-        {            
+        {
             set;
             get;
         }
 
         public bool IsLockedOut
-        {            
+        {
             set;
             get;
         }
 
-        public DateTime CreateDateUtc {
-            set {
+        public DateTime CreateDateUtc
+        {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _createDate);
             }
-            get {
+            get
+            {
                 return _createDate;
             }
         }
@@ -321,10 +328,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public DateTime LastPasswordChangedDateUtc
         {
-            set {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _lastPasswordChangedDate);
             }
-            get {
+            get
+            {
                 return _lastPasswordChangedDate;
             }
         }
@@ -341,11 +350,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
         }
 
-        public DateTime LastActivityDateUtc {
-            set {
+        public DateTime LastActivityDateUtc
+        {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _lastActivityDate);
             }
-            get {
+            get
+            {
                 return _lastActivityDate;
             }
         }
@@ -358,10 +370,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public DateTime FailedPasswordAttemptWindowStartUtc
         {
-            set {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _failedPasswordAttemptWindowStart);
             }
-            get {
+            get
+            {
                 return _failedPasswordAttemptWindowStart;
             }
         }
@@ -374,10 +388,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public DateTime FailedPasswordAnswerAttemptWindowStartUtc
         {
-            set {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _failedPasswordAnswerAttemptWindowStart);
             }
-            get {
+            get
+            {
                 return _failedPasswordAnswerAttemptWindowStart;
             }
         }
@@ -402,10 +418,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         public DateTime ProfileLastUpdatedUtc
         {
-            set {
+            set
+            {
                 SecUtility.SetUtcTime(value, out _profileLastUpdated);
             }
-            get {
+            get
+            {
                 return _profileLastUpdated;
             }
         }
@@ -456,7 +474,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
     }
 
-    internal class EmailComparer: IComparer<MembershipRow> {
+    internal class EmailComparer : IComparer<MembershipRow>
+    {
         public int Compare(MembershipRow x, MembershipRow y)
         {
             if (x == null)
@@ -495,12 +514,10 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
         // member variables shared between most providers
         private string _applicationName;
-        private string _accountName;
-        private string _sharedKey;
         private string _tableName;
-        private string _tableServiceBaseUri;
+        private CloudStorageAccount _account;
         private CloudTableClient _tableStorage;
-        private object _lock = new object();
+        private static object _lock = new object();
         // retry policies are used sparingly throughout this class because we often want to be
         // very conservative when it comes to security-related functions
         private RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
@@ -711,12 +728,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             _applicationName = Configuration.GetStringValueWithGlobalDefault(config, "applicationName",
                                                                         Configuration.DefaultProviderApplicationNameConfigurationString,
                                                                         Configuration.DefaultProviderApplicationName, false);
-            _accountName = Configuration.GetStringValue(config, "accountName", null, true);
-            _sharedKey = Configuration.GetStringValue(config, "sharedKey", null, true);
+
+            _account =
+                CloudStorageAccount.Parse(
+                    RoleEnvironment.GetConfigurationSettingValue(Configuration.ConfigurationStorageConnectionStringName));
+
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName", 
                                                                        Configuration.DefaultMembershipTableNameConfigurationString, 
                                                                        Configuration.DefaultMembershipTableName, false);
-            _tableServiceBaseUri = Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);
 
             config.Remove("allowInsecureRemoteEndpoints");
             config.Remove("enablePasswordRetrieval");
@@ -730,11 +749,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             config.Remove("minRequiredNonalphanumericCharacters");
             config.Remove("passwordStrengthRegularExpression");
             config.Remove("applicationName");
-            config.Remove("accountName");
-            config.Remove("sharedKey");
             config.Remove("membershipTableName");
-            config.Remove("tableServiceBaseUri");
-
 
             // Throw an exception if unrecognized attributes remain
             if (config.Count > 0)
@@ -744,36 +759,16 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     throw new ProviderException("Unrecognized attribute: " + attr);
             }
 
-            StorageCredentialsAccountAndKey info = null;
-            string baseUri = null;
+if(_account == null)
+    throw new ConfigurationErrorsException("Account information incomplete!");
+
+            _tableStorage = _account.CreateCloudTableClient();
+            _tableStorage.RetryPolicy = _tableRetry;
+
             try
             {
-                var sharedKey = Configuration.TryGetAppSetting(Configuration.DefaultAccountSharedKeyConfigurationString);
-                var accountName = Configuration.TryGetAppSetting(Configuration.DefaultAccountNameConfigurationString);
-
-                baseUri = Configuration.TryGetAppSetting(Configuration.DefaultTableStorageEndpointConfigurationString);
-
-                if (_tableServiceBaseUri != null)
-                {
-                    baseUri = _tableServiceBaseUri;
-                }
-                if (_accountName != null)
-                {
-                    accountName = _accountName;
-                }
-                if (_sharedKey != null)
-                {
-                    sharedKey = _sharedKey;
-                }
-                
-                if (String.IsNullOrEmpty(sharedKey) || String.IsNullOrEmpty(accountName) || String.IsNullOrEmpty(baseUri))
-                    throw new ConfigurationErrorsException("Account information incomplete!");
-
-                info = new StorageCredentialsAccountAndKey(accountName, sharedKey);
-
-                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, info, new Uri(baseUri));
-                _tableStorage = new CloudTableClient(baseUri, info);
-                _tableStorage.RetryPolicy = _tableRetry;
+                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri);
+            
                 if (_tableStorage.CreateTableIfNotExist(_tableName))
                 {
                     var ctx = _tableStorage.GetDataServiceContext();
@@ -790,7 +785,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
             catch (Exception e)
             {
-                string exceptionDescription = Configuration.GetInitExceptionDescription(info, new Uri(baseUri), "table storage configuration");
+                string exceptionDescription = Configuration.GetInitExceptionDescription(_tableStorage.Credentials as StorageCredentialsAccountAndKey, _tableStorage.BaseUri, "table storage configuration");
                 string tableName = (_tableName == null) ? "no membership table name specified" : _tableName;
                 Log.Write(EventKind.Error, "Could not create or find membership table: " + tableName + "!" + Environment.NewLine +
                                             exceptionDescription + Environment.NewLine +
@@ -811,16 +806,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// </summary>
         public override bool ValidateUser(string username, string password)
         {
-            if (SecUtility.ValidateParameter(ref username, true, true, true, Constants.MaxTableUsernameLength) &&
-                SecUtility.ValidateParameter(ref password, true, true, false, MaxTablePasswordSize) &&
-                CheckPassword(username, password, true, true))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return SecUtility.ValidateParameter(ref username, true, true, true, Constants.MaxTableUsernameLength) &&
+                   SecUtility.ValidateParameter(ref password, true, true, false, MaxTablePasswordSize) &&
+                   CheckPassword(username, password, true, true);
         }
 
         /// <summary>
@@ -835,7 +823,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 throw new ArgumentNullException("providerUserKey");
             }
 
-            if (providerUserKey.GetType() != typeof(Guid)) {
+            if (providerUserKey.GetType() != typeof(Guid))
+            {
                 throw new ArgumentException("Provided key is not a Guid!");
             }
             Guid key = (Guid)providerUserKey;
@@ -862,10 +851,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -899,15 +885,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 return ProcessGetUserQuery(svc, query, userIsOnline);
             }
             catch (InvalidOperationException e)
-            {                
+            {
                 if (e.InnerException is DataServiceClientException)
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -916,23 +899,27 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// </summary>
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            if ( pageIndex < 0 ) {
+            if (pageIndex < 0)
+            {
                 throw new ArgumentException("The page index cannot be negative.");
             }
-            if ( pageSize < 1 ) {
+            if (pageSize < 1)
+            {
                 throw new ArgumentException("The page size can only be a positive integer.");
             }
 
 
             long upperBound = (long)pageIndex * pageSize + pageSize - 1;
-            if ( upperBound > Int32.MaxValue ) {
+            if (upperBound > Int32.MaxValue)
+            {
                 throw new ArgumentException("pageIndex and pageSize are too big.");
             }
 
-            totalRecords = 0;                
+            totalRecords = 0;
             MembershipUserCollection users = new MembershipUserCollection();
             TableServiceContext svc = CreateDataServiceContext();
-            try {               
+            try
+            {
                 DataServiceQuery<MembershipRow> queryObj = svc.CreateQuery<MembershipRow>(_tableName);
 
                 var query = (from user in queryObj
@@ -953,7 +940,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 int startIndex = pageIndex * pageSize;
                 int endIndex = startIndex + pageSize;
                 MembershipRow row;
-                for (int i = startIndex; i < endIndex && i < allUsersSorted.Count; i++) {
+                for (int i = startIndex; i < endIndex && i < allUsersSorted.Count; i++)
+                {
                     row = allUsersSorted.ElementAt<MembershipRow>(i);
                     users.Add(new MembershipUser(this.Name,
                                                  row.UserName,
@@ -969,7 +957,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                                  row.LastPasswordChangedDateUtc.ToLocalTime(),
                                                  row.LastLockoutDateUtc.ToLocalTime()));
                 }
-            } catch (InvalidOperationException e) {
+            }
+            catch (InvalidOperationException e)
+            {
                 if (e.InnerException is DataServiceClientException)
                 {
                     throw new ProviderException("Error accessing the data source.", e);
@@ -980,7 +970,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 }
             }
             totalRecords = users.Count;
-            return users;             
+            return users;
         }
 
 
@@ -1051,10 +1041,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     {
                         throw e.FailureInformation;
                     }
-                    else
-                    {
-                        throw new ArgumentException("Password validation failure!");
-                    }
+                    throw new ArgumentException("Password validation failure!");
                 }
 
                 member.Password = pass;
@@ -1072,10 +1059,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -1083,8 +1067,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// Creates a new user and stores it in the membership table. We do not use retry policies in this 
         /// highly security-related function. All error conditions are directly exposed to the user.
         /// </summary>
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, 
-                                                  string passwordAnswer, bool isApproved, object providerUserKey, 
+        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion,
+                                                  string passwordAnswer, bool isApproved, object providerUserKey,
                                                   out MembershipCreateStatus status)
         {
             if (!SecUtility.ValidateParameter(ref password, true, true, false, MaxTablePasswordSize))
@@ -1202,12 +1186,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 newUser.UserId = (Guid)providerUserKey;
                 newUser.Password = pass;
                 newUser.PasswordSalt = salt;
-                newUser.Email = (email == null) ? string.Empty : email; ;
-                newUser.PasswordQuestion = (passwordQuestion == null) ? string.Empty : passwordQuestion;
-                newUser.PasswordAnswer = (encodedPasswordAnswer == null) ? string.Empty : encodedPasswordAnswer;
+                newUser.Email = email ?? string.Empty; ;
+                newUser.PasswordQuestion = passwordQuestion ?? string.Empty;
+                newUser.PasswordAnswer = encodedPasswordAnswer ?? string.Empty;
                 newUser.IsApproved = isApproved;
                 newUser.PasswordFormat = (int)_passwordFormat;
-                DateTime now = DateTime.UtcNow;                
+                DateTime now = DateTime.UtcNow;
                 newUser.CreateDateUtc = now;
                 newUser.LastActivityDateUtc = now;
                 newUser.LastPasswordChangedDateUtc = now;
@@ -1232,7 +1216,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                                now.ToLocalTime(),
                                                Configuration.MinSupportedDateTime);
             }
-            catch (InvalidOperationException ex) 
+            catch (InvalidOperationException ex)
             {
                 if (ex.InnerException is DataServiceClientException && (ex.InnerException as DataServiceClientException).StatusCode == (int)HttpStatusCode.Conflict)
                 {
@@ -1241,14 +1225,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     status = MembershipCreateStatus.DuplicateUserName;
                     return null;
                 }
-                else if (ex.InnerException is DataServiceClientException)
+                if (ex.InnerException is DataServiceClientException)
                 {
                     throw new ProviderException("Cannot add user to membership data store because of problems when accessing the data store.", ex);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -1271,23 +1252,17 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
             catch (InvalidOperationException e)
             {
-                if (e.InnerException is DataServiceClientException)
-                {
-                    var dsce = e.InnerException as DataServiceClientException;
-
-                    if (dsce.StatusCode == (int)HttpStatusCode.NotFound)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        throw new ProviderException("Error accessing the data source.", e);
-                    }
-                }
-                else
+                if (!(e.InnerException is DataServiceClientException))
                 {
                     throw;
                 }
+                var dsce = e.InnerException as DataServiceClientException;
+
+                if (dsce.StatusCode == (int)HttpStatusCode.NotFound)
+                {
+                    return false;
+                }
+                throw new ProviderException("Error accessing the data source.", e);
             }
         }
 
@@ -1298,7 +1273,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         {
             SecUtility.CheckParameter(ref email, false, false, false, MaxTableEmailLength, "email");
 
-            string nonNullEmail = (email == null) ? string.Empty : email;
+            string nonNullEmail = email ?? string.Empty;
 
             try
             {
@@ -1346,7 +1321,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         /// Updates a user. The username will not be changed. We explicitly don't use a large retry policy statement between 
         /// reading the user data and updating the user data. 
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration",
                                                          MessageId = "0#", Justification = "Code clarity.")]
         public override void UpdateUser(MembershipUser updatedUser)
         {
@@ -1398,7 +1373,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 svc.UpdateObject(userToUpdate);
                 svc.SaveChangesWithRetries();
-            } 
+            }
             catch (Exception e)
             {
                 if (e.InnerException is DataServiceClientException)
@@ -1418,7 +1393,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                       MinRequiredPasswordLength < MinGeneratedPasswordSize ? MinGeneratedPasswordSize : MinRequiredPasswordLength,
                       MinRequiredNonAlphanumericCharacters);
         }
-        
+
         /// <summary>
         /// Reset the password of a user. No retry policies are used in this function.
         /// </summary>
@@ -1452,14 +1427,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     answer = answer.Trim();
                 }
-                if (!string.IsNullOrEmpty(answer))
-                {
-                    encodedPasswordAnswer = EncodePassword(answer.ToLowerInvariant(), passwordFormat, salt);
-                }
-                else
-                {
-                    encodedPasswordAnswer = answer;
-                }
+                encodedPasswordAnswer = !string.IsNullOrEmpty(answer) ? EncodePassword(answer.ToLowerInvariant(), passwordFormat, salt) : answer;
                 SecUtility.CheckParameter(ref encodedPasswordAnswer, RequiresQuestionAndAnswer, RequiresQuestionAndAnswer, false, MaxTablePasswordSize, "passwordAnswer");
 
                 string newPassword = GeneratePassword();
@@ -1471,10 +1439,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     {
                         throw e.FailureInformation;
                     }
-                    else
-                    {
-                        throw new ProviderException("Password validation failed.");
-                    }
+                    throw new ProviderException("Password validation failed.");
                 }
 
                 DateTime now = DateTime.UtcNow;
@@ -1524,13 +1489,10 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
-        
+
         /// <summary>
         /// Unlock a user
         /// </summary>
@@ -1558,13 +1520,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
             catch (Exception e)
             {
-                if (e.InnerException is DataServiceClientException) {
+                if (e.InnerException is DataServiceClientException)
+                {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -1616,13 +1576,16 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 DataServiceQuery<MembershipRow> queryObj = svc.CreateQuery<MembershipRow>(_tableName);
 
                 CloudTableQuery<MembershipRow> query;
-                if (startswith && string.IsNullOrEmpty(emailToMatch)) {
+                if (startswith && string.IsNullOrEmpty(emailToMatch))
+                {
                     query = (from user in queryObj
                              where user.PartitionKey.CompareTo(SecUtility.EscapedFirst(_applicationName)) > 0 &&
                                    user.PartitionKey.CompareTo(SecUtility.NextComparisonString(SecUtility.EscapedFirst(_applicationName))) < 0 &&
                                    user.ProfileIsCreatedByProfileProvider == false
                              select user).AsTableServiceQuery();
-                } else if (startswith) {
+                }
+                else if (startswith)
+                {
                     // so far, the table storage service does not support StartsWith; thus, we retrieve all users whose email is "larger" than the one 
                     // specified and do the comparison locally
                     // this can result in significant overhead
@@ -1632,7 +1595,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                    user.ProfileIsCreatedByProfileProvider == false &&
                                    user.Email.CompareTo(emailToMatch) >= 0
                              select user).AsTableServiceQuery();
-                } else {
+                }
+                else
+                {
                     query = (from user in queryObj
                              where user.PartitionKey.CompareTo(SecUtility.EscapedFirst(_applicationName)) > 0 &&
                                    user.PartitionKey.CompareTo(SecUtility.NextComparisonString(SecUtility.EscapedFirst(_applicationName))) < 0 &&
@@ -1650,7 +1615,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 allUsersList.Sort(new EmailComparer());
                 MembershipRow row;
                 bool userMatches = true;
-                for (i = startIndex; i < endIndex && i < allUsersList.Count && userMatches; i++) {
+                for (i = startIndex; i < endIndex && i < allUsersList.Count && userMatches; i++)
+                {
                     row = allUsersList.ElementAt<MembershipRow>(i);
                     Debug.Assert(emailToMatch != null);
                     if (startswith && !string.IsNullOrEmpty(emailToMatch))
@@ -1661,7 +1627,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                             continue;
                         }
                     }
-                    users.Add(new MembershipUser(this.Name,
+                    users.Add(new MembershipUser(Name,
                                                  row.UserName,
                                                  row.UserId,
                                                  row.Email,
@@ -1682,10 +1648,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             totalRecords = users.Count;
@@ -1737,13 +1700,16 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 DataServiceQuery<MembershipRow> queryObj = svc.CreateQuery<MembershipRow>(_tableName);
 
                 CloudTableQuery<MembershipRow> query;
-                if (startswith && string.IsNullOrEmpty(usernameToMatch)) {
+                if (startswith && string.IsNullOrEmpty(usernameToMatch))
+                {
                     query = (from user in queryObj
                              where user.PartitionKey.CompareTo(SecUtility.EscapedFirst(_applicationName)) > 0 &&
                                    user.PartitionKey.CompareTo(SecUtility.NextComparisonString(SecUtility.EscapedFirst(_applicationName))) < 0 &&
                                    user.ProfileIsCreatedByProfileProvider == false
                              select user).AsTableServiceQuery();
-                } else if (startswith) {
+                }
+                else if (startswith)
+                {
                     // note that we cannot include the usernameToMatch in the query over the partition key because the partitionkey is escaped, which destroys
                     // the sorting order
                     // and yes, we get all users here whose username is larger than the usernameToMatch because StartsWith is not supported in the current
@@ -1752,9 +1718,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                              where user.PartitionKey.CompareTo(SecUtility.EscapedFirst(_applicationName)) > 0 &&
                                    user.PartitionKey.CompareTo(SecUtility.NextComparisonString(SecUtility.EscapedFirst(_applicationName))) < 0 &&
                                    user.UserName.CompareTo(usernameToMatch) >= 0 &&
-                                   user.ProfileIsCreatedByProfileProvider == false 
+                                   user.ProfileIsCreatedByProfileProvider == false
                              select user).AsTableServiceQuery();
-                } else {
+                }
+                else
+                {
                     query = (from user in queryObj
                              where user.PartitionKey == SecUtility.CombineToKey(_applicationName, usernameToMatch) &&
                                    user.ProfileIsCreatedByProfileProvider == false
@@ -1771,7 +1739,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 allUsersList.Sort();
                 MembershipRow row;
                 bool userMatches = true;
-                for (i = startIndex; i < endIndex && i < allUsersList.Count && userMatches; i++) {
+                for (i = startIndex; i < endIndex && i < allUsersList.Count && userMatches; i++)
+                {
                     row = allUsersList.ElementAt<MembershipRow>(i);
                     if (startswith && !string.IsNullOrEmpty(usernameToMatch))
                     {
@@ -1781,7 +1750,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                             continue;
                         }
                     }
-                    users.Add(new MembershipUser(this.Name,
+                    users.Add(new MembershipUser(Name,
                                                  row.UserName,
                                                  row.UserId,
                                                  row.Email,
@@ -1802,10 +1771,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             totalRecords = users.Count;
@@ -1834,11 +1800,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 return 0;
             }
-            List<MembershipRow> allUsersList = new List<MembershipRow>(allUsers);
-            if (allUsersList == null)
-            {
-                return 0;
-            }
+            var allUsersList = new List<MembershipRow>(allUsers);
             return allUsersList.Count;
         }
 
@@ -1850,7 +1812,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             SecUtility.CheckParameter(ref username, true, true, true, Constants.MaxTableUsernameLength, "username");
             SecUtility.CheckParameter(ref password, true, true, false, MaxTablePasswordSize, "password");
 
-            try {
+            try
+            {
                 MembershipRow member;
                 TableServiceContext svc = CreateDataServiceContext();
                 if (!CheckPassword(svc, username, password, false, false, out member))
@@ -1882,15 +1845,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 svc.UpdateObject(member);
                 svc.SaveChanges();
                 return true;
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 if (e.InnerException is DataServiceClientException)
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -1904,14 +1866,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 throw new NotSupportedException("Membership provider is configured to reject password retrieval.");
             }
 
-            SecUtility.CheckParameter(ref username, true, true, true, Constants.MaxTableUsernameLength, "username" );
+            SecUtility.CheckParameter(ref username, true, true, true, Constants.MaxTableUsernameLength, "username");
 
-            try {
+            try
+            {
                 if (answer != null)
                 {
                     answer = answer.Trim();
                 }
-                string encodedPasswordAnswer;                        
+                string encodedPasswordAnswer;
                 DataServiceContext svc = CreateDataServiceContext();
                 MembershipRow member = GetUserFromTable(svc, username);
                 if (member == null)
@@ -1933,11 +1896,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 SecUtility.CheckParameter(ref encodedPasswordAnswer, RequiresQuestionAndAnswer, RequiresQuestionAndAnswer, false, MaxTablePasswordAnswerLength, "passwordAnswer");
 
                 Exception ex = null;
-                if (RequiresQuestionAndAnswer) {
+                if (RequiresQuestionAndAnswer)
+                {
                     DateTime now = DateTime.UtcNow;
-                    if (string.IsNullOrEmpty(member.PasswordAnswer) || encodedPasswordAnswer != member.PasswordAnswer) {
+                    if (string.IsNullOrEmpty(member.PasswordAnswer) || encodedPasswordAnswer != member.PasswordAnswer)
+                    {
                         ex = new MembershipPasswordException("Password answer is invalid.");
-                        if (now > member.FailedPasswordAnswerAttemptWindowStartUtc.Add(TimeSpan.FromMinutes(PasswordAttemptWindow))) {
+                        if (now > member.FailedPasswordAnswerAttemptWindowStartUtc.Add(TimeSpan.FromMinutes(PasswordAttemptWindow)))
+                        {
                             member.FailedPasswordAnswerAttemptWindowStartUtc = now;
                             member.FailedPasswordAnswerAttemptCount = 1;
                         }
@@ -1951,8 +1917,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                             member.IsLockedOut = true;
                             member.LastLockoutDateUtc = now;
                         }
-                    } else {
-                        if (member.FailedPasswordAnswerAttemptCount > 0) {
+                    }
+                    else
+                    {
+                        if (member.FailedPasswordAnswerAttemptCount > 0)
+                        {
                             member.FailedPasswordAnswerAttemptCount = 0;
                             member.FailedPasswordAnswerAttemptWindowStartUtc = Configuration.MinSupportedDateTime;
                         }
@@ -1960,19 +1929,19 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 }
                 svc.UpdateObject(member);
                 svc.SaveChanges();
-                if (ex != null) {
+                if (ex != null)
+                {
                     throw ex;
                 }
                 return UnEncodePassword(member.Password, member.PasswordFormat);
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 if (e.InnerException is DataServiceClientException)
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -2004,7 +1973,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     return null;
                 }
-                
+
                 var l = new List<MembershipRow>(qResult);
                 if (l.Count == 0)
                 {
@@ -2019,7 +1988,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     MembershipRow row = l.First();
                     result = new AdditionalUserData(row.FirstName, row.LastName);
                 }
-                return result;                
+                return result;
             }
             catch (InvalidOperationException e)
             {
@@ -2027,12 +1996,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-            
         }
 
         public void SetUserAdditionalData(string username, AdditionalUserData data)
@@ -2059,7 +2024,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 IEnumerable<MembershipRow> qResult = query.AsTableServiceQuery().Execute();
                 if (qResult == null)
                 {
-                    throw new AbandonedMutexException(String.Format("Can't execute query: {0}", query)); 
+                    throw new AbandonedMutexException(String.Format("Can't execute query: {0}", query));
                 }
 
                 var l = new List<MembershipRow>(qResult);
@@ -2086,12 +2051,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     throw new ProviderException("Error accessing the data source.", e);
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
         }
         #endregion
 
@@ -2116,7 +2077,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             query = query.Take(2);
 
             IEnumerable<MembershipRow> qResult = query.AsTableServiceQuery().Execute();
-            if (qResult == null) {
+            if (qResult == null)
+            {
                 return null;
             }
             List<MembershipRow> l = new List<MembershipRow>(qResult);
@@ -2127,13 +2089,15 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             else if (l.Count > 1)
             {
                 throw new ProviderException("Non-unique primary keys!");
-            } else {
+            }
+            else
+            {
                 MembershipRow row = l.First();
                 if (updateLastActivityDate)
                 {
                     row.LastActivityDateUtc = DateTime.UtcNow;
                 }
-                res = new MembershipUser(this.Name,
+                res = new MembershipUser(Name,
                                          row.UserName,
                                          row.UserId,
                                          row.Email,
@@ -2280,14 +2244,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     member = null;
                     return false;
                 }
-                else
-                {
-                    throw new ProviderException("Error accessing the data store!", e);
-                }
+                throw new ProviderException("Error accessing the data store!", e);
             }
         }
-            
-        private TimeSpan PasswordAttemptWindowAsTimeSpan() 
+
+        private TimeSpan PasswordAttemptWindowAsTimeSpan()
         {
             return new TimeSpan(0, PasswordAttemptWindow, 0);
         }

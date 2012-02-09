@@ -48,7 +48,7 @@ namespace Ogdi.DataServices
 
                 var xmlBase = "http://" + context.Request.Url.Host + context.Request.Url.AbsolutePath;
 
-                var ta = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("OgdiConfigConnectionString"));
+                var ta = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("DataConnectionString"));
                 var ogdiConfigContext = new OgdiConfigDataServiceContext(ta.TableEndpoint.AbsoluteUri, ta.Credentials);
 
                 try

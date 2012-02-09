@@ -25,11 +25,9 @@
 
       <!-- Data Service Configurations -->
       <Setting name="RootServiceNamespace" value="OGDI" />
-      <Setting name="TableStorageBaseUrl" value="https://{0}.table.core.windows.net/" />
-      <Setting name="BlobStorageBaseUrl" value="https://{0}.blob.core.windows.net/" />
 
       <!-- Shared Configurations -->
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
 
       <!-- Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html. -->
@@ -43,7 +41,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
-      <Setting name="OgdiConfigConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="SmtpSettings" value="" />
       <Setting name="serviceUri" value="http://[DataServiceDNS].cloudapp.net/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />

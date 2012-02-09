@@ -11,7 +11,7 @@ namespace ConfigTool
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["OgdiConfigConnectionString"]);
+            var ta = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["DataConnectionString"]);
             var tc = ta.CreateCloudTableClient();
             if (!tc.DoesTableExist(OgdiConfigDataServiceContext.EndpointsTableName))
             {
