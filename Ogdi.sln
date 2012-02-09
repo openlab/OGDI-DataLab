@@ -22,9 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAzureStorage", "InteractiveSdk\WindowsAzureStorage\WindowsAzureStorage.csproj", "{281E6351-FA80-49F8-9A3A-80894F71548C}"
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "InteractiveSdk", "InteractiveSdk\InteractiveSdk.Mvc\InteractiveSdk.ccproj", "{E2426D10-5335-4996-8B5C-8A1459F76270}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4A1A1A18-A220-4724-8276-E8924A3A2D2E} = {4A1A1A18-A220-4724-8276-E8924A3A2D2E}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0688B03-9205-49BF-8CFF-44EAA3D113EC}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,7 +34,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Getting Started", ".Gettin
 	ProjectSection(SolutionItems) = preProject
 		build.ps1 = build.ps1
 		package.ps1 = package.ps1
-		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\ConfigTool.csproj", "{A65EAA96-F106-454A-B2D7-D5760EB44FB3}"
