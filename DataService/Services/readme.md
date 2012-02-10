@@ -1,6 +1,6 @@
 This project is provided to add the ability to split the Data Service from the Data Browser for scalability purposes.
 
-To do this, add the Services.ccproj back to the Ogdi.sln and Remove the following section from the ServiceDefinition.csdef & ServiceConfiguration.cscfg.
+To do this, add the Services.ccproj back to the Ogdi.sln and Remove the following section from the ServiceDefinition.csdef & ServiceConfiguration.cscfg in the InteractiveSDK Cloud Project.
 
 ### csdef
 
