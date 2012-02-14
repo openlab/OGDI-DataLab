@@ -2,6 +2,7 @@ DataLab: Open Government Data Initiative (OGDI) v4
 ==================================================
 
 DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations looking to:
+
 * Enable citizens to access government data by browsing, visualizing and downloading data
 * Give developers access to the data via open standards Application Programming Interfaces (APIs) 
 * Streamline publishing data from government systems or by government employees from their desktops
@@ -9,7 +10,9 @@ DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations looking to
 * Ensure reliability and scalability (grow compute requirements as catalogue grows) via cloud
 * Full access to the code to modify & customize the catalogue as you see fit.
 
-OGDI is being used by a number of organizations such as [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat] (http://data.medicinehat.ca/) and others. 
+DataLab (OGDI v4) includes a number of updates & improvements. 
+
+OGDI is being used by a number of organizations such as the [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat] (http://data.medicinehat.ca/) and others. 
 
 The older versions of [OGDI v1/v2] (http://ogdi.codeplex.com) are available on CodePlex, those been forked by [City of Nanaimo] (http://www.nanaimo.ca/EN/main/departments/106/DataCatalogue/About.html) 
 
