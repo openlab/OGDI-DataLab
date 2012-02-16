@@ -1,12 +1,12 @@
 DataLab: Open Government Data Initiative (OGDI) v4
 ==================================================
 
-DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations looking to:
+DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations that seek to:
 
-* Enable citizens to access government data by browsing, visualizing and downloading data
-* Give developers access to the data via open standards Application Programming Interfaces (APIs) 
+* Give citizens access to government data, including browse, visualize, analyze & download in multiple formats
+* Enable developers access the data via open standards Application Programming Interfaces (APIs) 
 * Streamline publishing data from government systems or by government employees from their desktops
-* Not worry about up-front infrastructure costs (servers, software, etc.) by moving to a cloud service
+* Reduce up-front infrastructure costs (servers, software, etc.) by moving to a cloud service
 * Ensure reliability and scalability (grow compute requirements as catalogue grows) via cloud
 * Full access to the code to modify & customize the catalogue as you see fit.
 
