@@ -32,8 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Getting Started", ".Getting Started", "{8149D266-4BA0-401F-AD27-8641E48A60D9}"
 	ProjectSection(SolutionItems) = preProject
-		build.ps1 = build.ps1
-		package.ps1 = package.ps1
+		Build.cmd = Build.cmd
+		FullBuild.msbuild = FullBuild.msbuild
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\ConfigTool.csproj", "{A65EAA96-F106-454A-B2D7-D5760EB44FB3}"
