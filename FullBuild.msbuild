@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<TargetProfile>Cloud</TargetProfile>
+		<BuildConfiguration>Release</BuildConfiguration>
+		<OutputDirectory>$(MSBuildThisFileDirectory)\Deployment\</OutputDirectory>
+		<OutputDataBrowser>$(OutputDirectory)\DataBrowser\</OutputDataBrowser>
+		<OutputDataLoader>$(OutputDirectory)\DataLoader\</OutputDataLoader>
+		<OutputConfigTool>$(OutputDirectory)\ConfigTool\</OutputConfigTool>
+		<VisualStudioVersion>10.0</VisualStudioVersion>
+		<WindowsAzureSDKVersion>1.6</WindowsAzureSDKVersion>
+		<TargetServiceDefinition>ServiceDefinition.csdef</TargetServiceDefinition>
+		<CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\$(WindowsAzureSDKVersion)\</CloudExtensionsDir>
+	</PropertyGroup>
+	<Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
+	<Target Name="Build">
+		<MakeDir Directories="$(OutputDirectory)" />
+		<MSBuild Projects="DataLoader\DataLoaderGuiApp\DataLoaderGuiApp.csproj" Targets="Build" Properties="Configuration=$(BuildConfiguration);OutDir=$(OutputDataLoader)" />
+		<MSBuild Projects="ConfigTool\ConfigTool.csproj" Targets="_WPPCopyWebApplication" Properties="WebProjectOutputDir=$(OutputConfigTool)" />
+		<MSBuild Projects="InteractiveSdk\InteractiveSdk.Mvc\InteractiveSdk.ccproj" Targets="Publish" Properties="Configuration=$(BuildConfiguration);TargetProfile=$(TargetProfile);PublishDir=$(OutputDataBrowser)" />
+	</Target>
+</Project>
