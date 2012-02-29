@@ -9,7 +9,7 @@
       </Site>
       <Site name="Data" physicalDirectory="..\..\DataService\Services_WebRole">
         <Bindings>
-          <Binding name="DataServiceIn" endpointName="DataServiceIn"/>
+          <Binding name="DataServiceIn" endpointName="DataServiceIn" />
         </Bindings>
       </Site>
     </Sites>
@@ -39,7 +39,7 @@
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
-      <InputEndpoint name="DataServiceIn" protocol="http" port="8080"/>
+      <InputEndpoint name="DataServiceIn" protocol="http" port="8080" />
     </Endpoints>
   </WebRole>
   <WorkerRole name="InteractiveSdk.WorkerRole">
