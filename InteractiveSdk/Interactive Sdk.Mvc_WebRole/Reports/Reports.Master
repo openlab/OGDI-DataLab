@@ -47,13 +47,8 @@
     <body>
     
 		<div class="top">
-			<div class="header" style="background-image:url('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderBackground") %>') " >
-				<div class="headerPicture">            
-					<img 
-						alt='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoAltText") %>'
-						longdesc='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoLongDesc")%>'
-						src='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogo") %>'  
-						title='<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("HeaderLogoAltText") %>'/> 
+			<div class="header">
+				<div class="headerPicture">
 				</div>
 			</div>
 			
@@ -73,5 +68,5 @@
 			| <span id="copyright">©<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("CopyRightsStatement")%></span>
         </div>
         
-        <div class="betabanner" style="background-image:url('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("BannerImage") %>');"></div>
+        <div class="betabanner"></div>
     </body>

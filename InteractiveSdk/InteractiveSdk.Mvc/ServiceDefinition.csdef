@@ -16,12 +16,6 @@
     <ConfigurationSettings>
       <Setting name="serviceUri" />
       <Setting name="pathDTD" />
-      <Setting name="HeaderLogo" />
-      <Setting name="HeaderLogoAltText" />
-      <Setting name="HeaderLogoLongDesc" />
-      <Setting name="HeaderBackground" />
-      <Setting name="FooterBackground" />
-      <Setting name="BannerImage" />
       <Setting name="TermsOfUseURL" />
       <Setting name="TradeMarksURL" />
       <Setting name="CopyRightsStatement" />
