@@ -7,4 +7,6 @@
             parent.Sys.Application._onIFrameLoad();
         </script>
     </head>
+    <body>
+    </body>
 </html>

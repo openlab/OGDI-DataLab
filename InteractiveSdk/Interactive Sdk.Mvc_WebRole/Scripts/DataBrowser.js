@@ -257,22 +257,22 @@ function onChangeSceneIdOfBirdsEye() {
 /// the DOM is loaded and before the page contents are loaded
 /// </summary>
 $(document).ready(
-function() {
+function () {
 
     //  This is executed when Ajax calls begin
-    $("#LoadingIndicatorPanel").ajaxStart(function() {
+    $("#LoadingIndicatorPanel").ajaxStart(function () {
         //  Call to showLoadingIndicator function
         showLoadingIndicator();
     });
 
     //  This is executed when Ajax calls Stop
-    $("#LoadingIndicatorPanel").ajaxStop(function() {
+    $("#LoadingIndicatorPanel").ajaxStop(function () {
         //  Call to hideLoadingIndicator function
         hideLoadingIndicator();
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesDataView").change(function() {
+    $("select#languagesDataView").change(function () {
 
         //  Call to languageDataViewSelectedIndexChanged function
         languageDataViewSelectedIndexChanged();
@@ -280,7 +280,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesMapView").change(function() {
+    $("select#languagesMapView").change(function () {
 
         //  Call to languageMapViewSelectedIndexChanged function
         languageMapViewSelectedIndexChanged();
@@ -288,7 +288,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesBarChartView").change(function() {
+    $("select#languagesBarChartView").change(function () {
 
         //  Call to languageBarChartViewSelectedIndexChanged function
         languageBarChartViewSelectedIndexChanged();
@@ -296,7 +296,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesPieChartView").change(function() {
+    $("select#languagesPieChartView").change(function () {
 
         //  Call to languagePieChartViewSelectedIndexChanged function
         languagePieChartViewSelectedIndexChanged();
@@ -304,7 +304,7 @@ function() {
     });
 
     //  This is executed when user clicks on 1st paragraph on this page
-    $("#Para1").click(function() {
+    $("#Para1").click(function () {
 
         //  Slide toggle Para2 panel with 350 ms delay
         $(this).next("#Para2").slideToggle(350);
@@ -316,7 +316,7 @@ function() {
     //  Does things when Para1 toggles
     $('#Para1').toggle(
 
-       function() {
+       function () {
 
            //  Change Expand Collapse image to CollapserImage
            $('#ExpandCollapseImage').attr('src', CollapserImage);
@@ -327,7 +327,7 @@ function() {
            //  Change alt of that image to "Hide Details"
            $('#ExpandCollapseImage').attr('alt', "Hide Details");
 
-       }, function() {
+       }, function () {
 
            //  Change Expand/Collapse image to ExpanderImage
            $('#ExpandCollapseImage').attr('src', ExpanderImage);
@@ -374,31 +374,31 @@ function initializePage() {
     //  Set filter dialog CSS properties
     $("#filterDialog").css({ visibility: "visible", cursor: "pointer" });
 
-/*
+    /*
     //  Set Result accordion as Active accordion and 
     //  bind dataViewAccordionChanged function to dataViewAccordion change event
     $("#dataViewAccordion").accordion({
 
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
+    //  Selector for the active element.Set to false to display none 
+    //  at start. Needs collapsible: true.
+    active: 1,
 
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
+    //  Whether all the sections can be closed at once. 
+    //  Allows collapsing the active section by the triggering event 
+    //  (click is the default).
+    collapsible: true,
 
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
+    //  If set, the highest content part is used as height reference 
+    //  for all other parts.
+    autoHeight: true,
 
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: dataViewAccordionChanged,
+    //  This event is triggered every time the accordion changes. 
+    //  If the accordion is animated, the event will be triggered upon 
+    //  completion of the animation; otherwise, it is triggered immediately.
+    change: dataViewAccordionChanged,
 
-        //  NO animation is used for this accordion
-        animated: false
+    //  NO animation is used for this accordion
+    animated: false
 
     });
 
@@ -406,26 +406,26 @@ function initializePage() {
     //  bind mapViewAccordionChanged function to mapViewAccordion change event
     $("#mapViewAccordion").accordion({
 
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
+    //  Selector for the active element.Set to false to display none 
+    //  at start. Needs collapsible: true.
+    active: 1,
 
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
+    //  Whether all the sections can be closed at once. 
+    //  Allows collapsing the active section by the triggering event 
+    //  (click is the default).
+    collapsible: true,
 
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
+    //  If set, the highest content part is used as height reference 
+    //  for all other parts.
+    autoHeight: true,
 
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: mapViewAccordionChanged,
+    //  This event is triggered every time the accordion changes. 
+    //  If the accordion is animated, the event will be triggered upon 
+    //  completion of the animation; otherwise, it is triggered immediately.
+    change: mapViewAccordionChanged,
 
-        //  NO animation is used for this accordion
-        animated: false
+    //  NO animation is used for this accordion
+    animated: false
 
     });
 
@@ -433,26 +433,26 @@ function initializePage() {
     //  bind barChartAccordionChanged function to barChartAccordion change event
     $("#barChartAccordion").accordion({
 
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
+    //  Selector for the active element.Set to false to display none 
+    //  at start. Needs collapsible: true.
+    active: 1,
 
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
+    //  Whether all the sections can be closed at once. 
+    //  Allows collapsing the active section by the triggering event 
+    //  (click is the default).
+    collapsible: true,
 
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
+    //  If set, the highest content part is used as height reference 
+    //  for all other parts.
+    autoHeight: true,
 
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: barChartAccordionChanged,
+    //  This event is triggered every time the accordion changes. 
+    //  If the accordion is animated, the event will be triggered upon 
+    //  completion of the animation; otherwise, it is triggered immediately.
+    change: barChartAccordionChanged,
 
-        //  NO animation is used for this accordion
-        animated: false
+    //  NO animation is used for this accordion
+    animated: false
 
     });
 
@@ -460,29 +460,29 @@ function initializePage() {
     //  bind pieChartAccordionChanged function to pieChartAccordion change event
     $("#pieChartAccordion").accordion({
 
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
+    //  Selector for the active element.Set to false to display none 
+    //  at start. Needs collapsible: true.
+    active: 1,
 
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
+    //  Whether all the sections can be closed at once. 
+    //  Allows collapsing the active section by the triggering event 
+    //  (click is the default).
+    collapsible: true,
 
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
+    //  If set, the highest content part is used as height reference 
+    //  for all other parts.
+    autoHeight: true,
 
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: pieChartAccordionChanged,
+    //  This event is triggered every time the accordion changes. 
+    //  If the accordion is animated, the event will be triggered upon 
+    //  completion of the animation; otherwise, it is triggered immediately.
+    change: pieChartAccordionChanged,
 
-        //  NO animation is used for this accordion
-        animated: false
+    //  NO animation is used for this accordion
+    animated: false
 
     });
-*/
+    */
 
     //  Attach function with select event(triggered when clicking a tab).
     $('#tabs').tabs({ select: tabsSelected });
@@ -518,13 +518,11 @@ function initializePage() {
 
 }
 
-
-
 /// <summary>
 /// This function sets the elements on the page when page gets loaded
 /// </summary>
 function page_init() {
-    
+
     //  Normal page load URL is considered as bookmarked URL
     isBookmarkedUrl = true;
     isHashChangeRoute = false;
@@ -891,7 +889,7 @@ function setPageAccordingToHashVariables() {
             isBookmarkedUrl = false;
             break;
 
-        
+
     }
 }
 
@@ -948,7 +946,7 @@ function isDeltaInHashAndCurrent() {
                         return false;
                     }
                     break;
-                
+
             }
             break;
         case "MapView":
@@ -979,7 +977,7 @@ function isDeltaInHashAndCurrent() {
                             break;
                     }
                     break;
-               
+
             }
             break;
 
@@ -1000,10 +998,10 @@ function isDeltaInHashAndCurrent() {
                         return false;
                     }
                     break;
-               
+
             }
             break;
-       
+
 
     }
 }
@@ -1038,7 +1036,7 @@ function errorFunction(error, isString) {
                     dataType: 'html',
 
                     //  A function to be called if the request succeeds.
-                    success: function(html) {
+                    success: function (html) {
 
                         //  Set display Style for tabs to block
                         //  (Set matched element with id == divError VISIBLE)
@@ -1079,12 +1077,12 @@ function getData(filter) {
             dataType: 'html',
 
             //  A function to be called if the request fails.
-            error: function(error) {
+            error: function (error) {
                 errorFunction(error, false);
             },
-            
+
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  If substring 'id="pError"' is present in 
                 //  html data  returned from server then ...
@@ -1205,7 +1203,7 @@ function ShowHideError() {
 /// in combo box in Data View
 /// </summary>
 function languageDataViewSelectedIndexChanged() {
-	current_language = readSampleCodeLanguageFromActiveViewType();
+    current_language = readSampleCodeLanguageFromActiveViewType();
     var hashValue = createHashValue();
     changeDataViewLanguage(current_language);
     if (isBookmarkedUrl == false) {
@@ -1235,13 +1233,13 @@ function changeDataViewLanguage(selectedLanguage) {
             url: "../LoadSampleCodeDataView/",
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the tag(id == divDataViewSampleCode) with 
                 //  html in "html" variable passed to this function
@@ -1273,13 +1271,13 @@ function changeMapViewLanguage(selectedLanguage) {
 
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the tag(id == divMapViewSampleCode) with 
                 //  html in "html" variable passed to this function
@@ -1340,13 +1338,13 @@ function changeBarChartViewLanguage(selectedLanguage) {
             url: "../LoadSampleCodeBarChartView/",
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the 
                 //  tag(id == divBarChartViewSampleCode) with 
@@ -1399,7 +1397,7 @@ function changePieChartViewLanguage(selectedLanguage) {
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the 
                 //  tag(id == divPieChartViewSampleCode) with 
@@ -1443,12 +1441,12 @@ function previousClicked() {
                 dataType: 'html',
 
                 //  A function to be called if the request fails.
-                error: function(error) {
+                error: function (error) {
                     errorFunction(error, false);
                 },
 
                 //  A function to be called if the request succeeds.
-                success: function(html) {
+                success: function (html) {
 
                     //  If substring 'id="pError"' is present in 
                     //  html data  returned from server then ...
@@ -1525,12 +1523,12 @@ function nextClicked() {
                 dataType: 'html',
 
                 //  A function to be called if the request fails.
-                error: function(error) {
+                error: function (error) {
                     errorFunction(error, false);
                 },
 
                 //  A function to be called if the request succeeds.
-                success: function(html) {
+                success: function (html) {
 
                     //  If substring 'id="pError"' is present in 
                     //  html data  returned from server then ...
@@ -1584,13 +1582,13 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
             hash_viewType = "DataView";
             switch (defaultTagToGo) {
 
-                //  NOFILTER--DataView--SampleCode--SampleCode_CS.txt    
+                //  NOFILTER--DataView--SampleCode--SampleCode_CS.txt      
                 case "SampleCode":
                     hash_tagType = "SampleCode";
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--DataView--Results    
+                //  NOFILTER--DataView--Results      
                 case "Results":
                     hash_tagType = "Results";
                     break;
@@ -1602,13 +1600,13 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
             hash_viewType = "MapView";
             switch (defaultTagToGo) {
 
-                //  NOFILTER--MapView--SampleCode--SampleCode_MAP.txt   
+                //  NOFILTER--MapView--SampleCode--SampleCode_MAP.txt     
                 case "SampleCode":
                     hash_tagType = "SampleCode";
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--MapView--Results--r--4---99.49218750000001--37.02009820136811 
+                //  NOFILTER--MapView--Results--r--4---99.49218750000001--37.02009820136811   
                 case "Results":
                     hash_tagType = "Results";
                     hash_mapStyle = "r";
@@ -1623,13 +1621,13 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
             hash_viewType = "BarChartView";
             switch (defaultTagToGo) {
 
-                //  NOFILTER--BarChartView--SampleCode--SampleCode_CS_BarChart.txt   
+                //  NOFILTER--BarChartView--SampleCode--SampleCode_CS_BarChart.txt     
                 case "SampleCode":
                     hash_tagType = "SampleCode";
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--BarChartView--Results--X--X--Option1--X--Aggregate   
+                //  NOFILTER--BarChartView--Results--X--X--Option1--X--Aggregate     
                 case "Results":
                     hash_tagType = "Results";
                     hash_horizontalColumnName = "X";
@@ -1645,13 +1643,13 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
             hash_viewType = "PieChartView";
             switch (defaultTagToGo) {
 
-                //  NOFILTER--PieChartView--SampleCode--SampleCode_CS_PieChart.txt        
+                //  NOFILTER--PieChartView--SampleCode--SampleCode_CS_PieChart.txt          
                 case "SampleCode":
                     hash_tagType = "SampleCode";
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--PieChartView--Results--X--X--Option1--X--Aggregate   
+                //  NOFILTER--PieChartView--Results--X--X--Option1--X--Aggregate     
                 case "Results":
                     hash_tagType = "Results";
                     hash_horizontalColumnName = "X";
@@ -1662,7 +1660,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     break;
             }
             break;
-    }    
+    }
 }
 
 
@@ -1671,7 +1669,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
 /// dropdownlist or not
 /// </summary>
 function isValuePresentInLanguageComboBox(languageInHash, viewType) {
-    var dropDownList = $("[id =" + "languages" + viewType + "]");        
+    var dropDownList = $("[id =" + "languages" + viewType + "]");
     for (var i = 0; i < dropDownList[0].length; i++) {
         if (dropDownList[0][i].value == languageInHash) {
             return true;
@@ -1692,14 +1690,14 @@ function readHashValueIntoHashVariables() {
         getDefaultHashValueFor("DataView", "Results");
         return;
     }
-    
+
     //  Since length of string "#param=" is 7 ...
-    var hashParametersArray = decodeURI((hashURL)).substr(7).split(hashSeparator);    
+    var hashParametersArray = decodeURI((hashURL)).substr(7).split(hashSeparator);
     if (hashParametersArray.length <= 2) {
         getDefaultHashValueFor("DataView", "Results");
         return;
     }
-    
+
     if (hashParametersArray.length >= 2) {
         hash_filter = unescape(hashParametersArray[0]);
         hash_viewType = hashParametersArray[1];
@@ -1709,9 +1707,9 @@ function readHashValueIntoHashVariables() {
                 switch (hash_tagType) {
                     case 'SampleCode':
                         hash_language = hashParametersArray[3];
-                        if (hash_language == "" || (!isValuePresentInLanguageComboBox(hash_language,"DataView"))) {
+                        if (hash_language == "" || (!isValuePresentInLanguageComboBox(hash_language, "DataView"))) {
                             getDefaultHashValueFor("DataView", "SampleCode");
-                        } 
+                        }
                         break;
 
                     case 'Results':
@@ -1768,7 +1766,7 @@ function readHashValueIntoHashVariables() {
                                 if (hash_birdseyeSceneOrientation != 'North' && hash_birdseyeSceneOrientation != 'South' && hash_birdseyeSceneOrientation != 'East' && hash_birdseyeSceneOrientation != 'West') {
                                     getDefaultHashValueFor("MapView", "Results");
                                     return;
-                                }                                
+                                }
                                 break;
                         }
                         break;
@@ -1836,7 +1834,7 @@ function readHashValueIntoHashVariables() {
 /// into the map
 /// </summary>
 function runClicked() {
-	current_filter = GetFilter();
+    current_filter = GetFilter();
     getData(current_filter);
     loadKml(current_filter);
     if (isBookmarkedUrl == false) {
@@ -2068,12 +2066,12 @@ function drawBarChart(filter, xCol, xRange, yOption, yCol, yColOption) {
         dataType: 'html',
 
         //  A function to be called if the request fails.
-        error: function(error) {
+        error: function (error) {
             errorFunction(error, false);
         },
 
         //  A function to be called if the request succeeds.
-        success: function(html) {
+        success: function (html) {
             //  If substring 'id="pError"' is present in 
             //  html data  returned from server then ...
             if (html.toString().indexOf('id="pError"', 0) >= 0) {
@@ -2412,12 +2410,12 @@ function drawPieChart(filter, xCol, xRange, yOption, yCol, yColOption) {
             dataType: 'html',
 
             //  A function to be called if the request fails.
-            error: function(error) {
+            error: function (error) {
                 errorFunction(error, false);
             },
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  If substring 'id="pError"' is present in 
                 //  html data  returned from server then ...
@@ -2551,7 +2549,7 @@ function loadKml(filter) {
                         VEDataType.ImportXML,
                         kmlQuery + "&$top=50",
                         kmlLayer);
-    
+
     //  Imports data from a GeoRSS feed, Bing Maps (http://maps.live.com)
     //  collection, or KML URL.
     map.ImportShapeLayerData(veLayerSpec, kmlLoaded, true);
@@ -2594,7 +2592,7 @@ function kmlLoaded(veShapeLayer) {
 
         //  Hide mapNoResultsDiv
         $("#mapNoResultsDiv").hide();
-        
+
         //  Give notice of large placemarkers number
         if (shapeCount == 50) {
             // Show mapManyPlacemarksDiv
@@ -2609,7 +2607,7 @@ function kmlLoaded(veShapeLayer) {
 
         //  Hide mapFullQueryPanel
         $("#mapFullQueryPanel").hide();
-        
+
         //  Show mapNoResultsDiv
         $("#mapNoResultsDiv").show();
 

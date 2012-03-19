@@ -258,7 +258,6 @@
     <Content Include="Descriptions\JSONP.txt" />
     <Content Include="Descriptions\KeyImg.txt" />
     <Content Include="Descriptions\KML.txt" />
-    <Content Include="Descriptions\Load.txt" />
     <Content Include="Descriptions\Logo.txt" />
     <Content Include="Descriptions\longdesc.txt" />
     <Content Include="Descriptions\NoScript.txt" />
@@ -285,13 +284,10 @@
     <Content Include="Images\bottomMedia.jpg" />
     <Content Include="Images\clipboard.jpg" />
     <Content Include="Images\close.png" />
-    <Content Include="Images\CloudBanner2.png" />
     <Content Include="Images\collapse.jpg" />
     <Content Include="Images\download.png" />
-    <Content Include="Images\example.png" />
     <Content Include="Images\expand.jpg" />
     <Content Include="Images\ExternalLink.png" />
-    <Content Include="Images\footer.gif" />
     <Content Include="Images\gray_bl.gif" />
     <Content Include="Images\gray_br.gif" />
     <Content Include="Images\gray_left.gif" />
@@ -299,7 +295,6 @@
     <Content Include="Images\gray_side.gif" />
     <Content Include="Images\gray_tl.gif" />
     <Content Include="Images\gray_tr.gif" />
-    <Content Include="Images\HeadBG.gif" />
     <Content Include="Images\help.JPG" />
     <Content Include="Images\input.shadow.blue.gif" />
     <Content Include="Images\input.shadow.white.gif" />

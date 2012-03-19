@@ -48,7 +48,7 @@ meta.push({ name: "<%= column.ColumnName %>", type: "<%= column.DataType %>" });
 	{
 	    builder.clearFilter();
 		builder.addFilter();
-		builder.dump();	    
+		builder.dump();
 	}
 	
 </script>

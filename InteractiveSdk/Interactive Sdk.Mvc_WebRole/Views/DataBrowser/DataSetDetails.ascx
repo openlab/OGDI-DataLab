@@ -1,5 +1,4 @@
 <%@ Import Namespace="Ogdi.InteractiveSdk.Mvc.Models" %>
-<%@ Import Namespace="Ogdi.InteractiveSdk.Mvc.Models.Rating" %>
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EntitySetWrapper>" %>
 
 
