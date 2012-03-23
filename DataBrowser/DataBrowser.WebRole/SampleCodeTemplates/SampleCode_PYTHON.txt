@@ -1,0 +1,43 @@
+﻿import urllib
+from xml.dom import minidom
+from xml.dom.minidom import parse, parseString
+
+def GetData():
+    url = "{0}"
+    xmldoc = minidom.parse(urllib.urlopen(url))
+    contentNodes = xmldoc.getElementsByTagName("content")
+    for contentNode in contentNodes:
+        partitionKeyNodes = contentNode.getElementsByTagName("d:PartitionKey")
+        for node in partitionKeyNodes:
+            print node.childNodes[0].nodeValue
+               
+        rowKeyNodes = contentNode.getElementsByTagName("d:RowKey")
+        for node in rowKeyNodes:
+            print node.childNodes[0].nodeValue
+            
+        timestampNodes = contentNode.getElementsByTagName("d:TimeStamp")
+        for node in timestampNodes:
+            print node.childNodes[0].nodeValue
+            
+        entityidNodes = contentNode.getElementsByTagName("d:entityid")
+        for node in entityidNodes:
+            print node.childNodes[0].nodeValue
+            
+        nameNodes = contentNode.getElementsByTagName("d:name")
+        for node in nameNodes:
+            print node.childNodes[0].nodeValue
+            
+        addressNodes = contentNode.getElementsByTagName("d:address")
+        for node in addressNodes:
+            print node.childNodes[0].nodeValue
+            
+        weburlNodes = contentNode.getElementsByTagName("d:weburl")
+        for node in weburlNodes:
+            print node.childNodes[0].nodeValue
+            
+        gis_idNodes = contentNode.getElementsByTagName("d:gis_id")
+        for node in gis_idNodes:
+            print node.childNodes[0].nodeValue
+            
+        
+GetData()

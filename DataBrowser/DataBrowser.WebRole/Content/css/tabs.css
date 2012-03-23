@@ -1,0 +1,36 @@
+﻿/* ajax__tab_xp-theme theme */
+.ajax__tab_default .ajax__tab_header 
+{
+	font-size:11px;
+	font-weight:bold;
+    font-family:arial, sans-serif;
+    margin-left:25px; /* move the header to the right 25 pixels */
+}
+.ajax__tab_default .ajax__tab_active .ajax__tab_outer,
+.ajax__tab_default .ajax__tab_header .ajax__tab_outer,
+.ajax__tab_default .ajax__tab_hover .ajax__tab_outer
+{
+    margin-right:4px;
+}
+.ajax__tab_default .ajax__tab_active .ajax__tab_inner,
+.ajax__tab_default .ajax__tab_header .ajax__tab_inner,
+.ajax__tab_default .ajax__tab_hover .ajax__tab_inner
+{
+    margin-left:3px; /* offset the width of the left image */
+}
+.ajax__tab_default .ajax__tab_active .ajax__tab_tab,
+.ajax__tab_default .ajax__tab_hover .ajax__tab_tab,
+.ajax__tab_default .ajax__tab_header .ajax__tab_tab
+{
+	margin-right:0px;	
+	padding:8px 23px 8px 20px;
+}
+.ajax__tab_default .ajax__tab_body 
+{
+    font-family:verdana,tahoma,helvetica;
+    font-size:10pt;
+    width:auto;
+    height: auto;
+    border: solid 1px #CCCCCC;
+    padding: 10px;
+}

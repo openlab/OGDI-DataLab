@@ -7,21 +7,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTBookTranslation", "DAISY\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAISY", "DAISY", "{A72D4BDA-A0A5-42D7-BCA5-F0E4EF74D76B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InteractiveSDK", "InteractiveSDK", "{F0AC7748-A11A-41B6-AF6C-A0DDAE2EF191}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBrowser", "DataBrowser", "{F0AC7748-A11A-41B6-AF6C-A0DDAE2EF191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveSdk.WebRole", "InteractiveSdk\Interactive Sdk.Mvc_WebRole\InteractiveSdk.WebRole.csproj", "{CE3A2F55-8154-4478-8251-64D24D15DB79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBrowser.WebRole", "DataBrowser\DataBrowser.WebRole\DataBrowser.WebRole.csproj", "{CE3A2F55-8154-4478-8251-64D24D15DB79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveSdk.WorkerRole", "InteractiveSdk\InteractiveSdk.WorkerRole\InteractiveSdk.WorkerRole.csproj", "{085EB9E2-4108-4721-9A06-3CF7DA63044D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBrowser.WorkerRole", "DataBrowser\DataBrowser.WorkerRole\DataBrowser.WorkerRole.csproj", "{085EB9E2-4108-4721-9A06-3CF7DA63044D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Samples", "Microsoft.Samples", "{219CC595-D603-42D7-8153-EB1E1DBCDBC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspProviders", "InteractiveSdk\AspProviders\AspProviders.csproj", "{306D2F9E-D6D0-4D96-94F1-173C60A13875}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspProviders", "DataBrowser\AspProviders\AspProviders.csproj", "{306D2F9E-D6D0-4D96-94F1-173C60A13875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageInterface", "InteractiveSdk\StorageInterface\StorageInterface.csproj", "{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageInterface", "DataBrowser\StorageInterface\StorageInterface.csproj", "{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAzureStorage", "InteractiveSdk\WindowsAzureStorage\WindowsAzureStorage.csproj", "{281E6351-FA80-49F8-9A3A-80894F71548C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAzureStorage", "DataBrowser\WindowsAzureStorage\WindowsAzureStorage.csproj", "{281E6351-FA80-49F8-9A3A-80894F71548C}"
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "InteractiveSdk", "InteractiveSdk\InteractiveSdk.Mvc\InteractiveSdk.ccproj", "{E2426D10-5335-4996-8B5C-8A1459F76270}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "DataBrowser.Cloud", "DataBrowser\DataBrowser.Cloud\DataBrowser.Cloud.ccproj", "{E2426D10-5335-4996-8B5C-8A1459F76270}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0688B03-9205-49BF-8CFF-44EAA3D113EC}"
 	ProjectSection(SolutionItems) = preProject
@@ -50,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaderGuiApp", "DataLoa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataService", "DataService", "{05187B65-F75F-49F1-8690-82F6231F4D3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services_WebRole", "DataService\Services_WebRole\Services_WebRole.csproj", "{AEB151B4-69CA-4870-90E7-86FCFDBAD718}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService.WebRole", "DataService\DataService.WebRole\DataService.WebRole.csproj", "{AEB151B4-69CA-4870-90E7-86FCFDBAD718}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdPartyComponents", "Tests\ThirdPartyComponents\ThirdPartyComponents.csproj", "{C44C271D-CBBB-4516-9680-05B6C0E75958}"
 EndProject
