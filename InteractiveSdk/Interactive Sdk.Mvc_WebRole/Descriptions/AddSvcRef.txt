@@ -1,1 +1,0 @@
-﻿External Link for a video showing how to consume WCF Data Service in a .NET Application
