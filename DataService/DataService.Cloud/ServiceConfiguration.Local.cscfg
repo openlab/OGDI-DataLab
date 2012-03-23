@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ServiceConfiguration serviceName="Services" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
+  <Role name="DataService.WebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="RootServiceNamespace" value="OGDI" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
