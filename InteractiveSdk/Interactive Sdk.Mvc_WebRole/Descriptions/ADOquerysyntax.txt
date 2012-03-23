@@ -1,1 +1,0 @@
-﻿External link for WCF Data Services query syntax
