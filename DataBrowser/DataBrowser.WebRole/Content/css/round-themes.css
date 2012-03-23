@@ -1,0 +1,47 @@
+﻿.blue div.rounded div.top {
+    background:url(../images/blue_tl.gif) no-repeat left bottom;
+}
+
+.blue div.rounded div.top div.right {
+    background:url(../images/blue_tr.gif) no-repeat right bottom;
+}
+
+.blue div.rounded div.middle {
+    background:url(../images/blue_side.gif) repeat-y left;
+}
+
+.blue div.rounded div.middle div.right {
+    background:url(../images/blue_side.gif) repeat-y right;
+}
+
+.blue div.rounded div.bottom {
+    background:url(../images/blue_bl.gif) no-repeat left top;
+}
+
+.blue div.rounded div.bottom div.right {
+    background:url(../images/blue_br.gif) no-repeat right top;
+}
+
+.gray div.rounded div.top {
+    background:url(../images/gray_tl.gif) no-repeat left bottom;
+}
+
+.gray div.rounded div.top div.right {
+    background:url(../images/gray_tr.gif) no-repeat right bottom;
+}
+
+.gray div.rounded div.middle {
+    background:url(../images/gray_side.gif) repeat-y left;
+}
+
+.gray div.rounded div.middle div.right {
+    background:url(../images/gray_side.gif) repeat-y right;
+}
+
+.gray div.rounded div.bottom {
+    background:url(../images/gray_bl.gif) no-repeat left top;
+}
+
+.gray div.rounded div.bottom div.right {
+    background:url(../images/gray_br.gif) no-repeat right top;
+}

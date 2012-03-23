@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="InteractiveSdk" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WebRole name="DataBrowser.WebRole">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="DataBrowserIn" endpointName="DataBrowserIn" />
+        </Bindings>
+      </Site>
+      <Site name="Data" physicalDirectory="..\..\DataService\DataService.WebRole">
+        <Bindings>
+          <Binding name="DataServiceIn" endpointName="DataServiceIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+      <Setting name="TermsOfUseURL" />
+      <Setting name="TradeMarksURL" />
+      <Setting name="CopyRightsStatement" />
+      <Setting name="PrivacyPage" />
+      <Setting name="DataConnectionString" />
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="RecaptchaPrivateKey" />
+      <Setting name="RecaptchaPupblicKey" />
+      <Setting name="RootServiceNamespace" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
+      <InputEndpoint name="DataServiceIn" protocol="http" port="8080" />
+    </Endpoints>
+  </WebRole>
+  <WorkerRole name="DataBrowser.WorkerRole">
+    <ConfigurationSettings>
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="DataConnectionString" />
+      <Setting name="SmtpSettings" />
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+    </ConfigurationSettings>
+  </WorkerRole>
+</ServiceDefinition>

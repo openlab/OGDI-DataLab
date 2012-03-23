@@ -1,0 +1,223 @@
+﻿<%@ Page Language="C#" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+    //  This sample requires the .NET Framework 3.5 SP1 & Microsoft Chart Controls for Microsoft .NET Framework 3.5
+    //  To get this the sample to work, perform the 
+    //  following steps:
+    //  
+    //      1. Create a new Web Site in Visual Studio 2008 SP1.
+    //      2. Add a new Web Form (name it what you like).
+    //      3. Make sure the "Place code in separate file" is unchecked in the 
+    //         Add New Item dialog
+    //      4. Replace the entire contents of the .aspx file with the entire 
+    //         text of this sample 
+    //      5. Right click on the project node in Solution Explorer
+    //      6. Select Add Service Reference
+    //      7. Enter service endpoint URL into the Address field
+    //         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc
+    //      8. Right click on the project node in Solution Explorer
+    //      9. Select Add Reference..
+    //      10.In .Net tab select component name "System.Web.DataVisualization"
+    //      11.Click OK button
+    //      12.Open Web.config and add following tags in that file at respective locations mentioned below
+    //         a. In <controls> tag add following tag 
+    //            <add 
+    //					tagPrefix="asp" 
+    //					namespace="System.Web.UI.DataVisualization.Charting" 
+    //					assembly="System.Web.DataVisualization, 
+    //					Version=3.5.0.0, 
+    //					Culture=neutral, 
+    //					PublicKeyToken=31bf3856ad364e35"/>          
+    //         b. In <httpHandlers> tag add following tag 
+    //            <add 
+    //					path="ChartImg.axd" 
+	//					verb="GET,HEAD" type="System.Web.UI.DataVisualization.Charting.ChartHttpHandler, 
+	//					System.Web.DataVisualization, 
+	//					Version=3.5.0.0, 
+	//					Culture=neutral, 
+	//					PublicKeyToken=31bf3856ad364e35" 
+	//					validate="false"/>
+    //      
+    //      The generated proxy makes it very easy for .NET developers to query for data using LINQ.
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
+
+        // NOTE: You can replace CrimeIncidents with any EntitySet available
+        //       See http://ogdisdk.cloudapp.net/DataCatalog.aspx
+        //       for a full list.
+
+        var query = from crimeIncident in context.CrimeIncidents
+                    select crimeIncident;
+
+        // The query above translates into the following URL:
+        //      http://ogdi.cloudapp.net/v1/dc/CrimeIncidents()
+
+        // Execute query
+        List<Ogdi.CrimeIncidentsItem> results = query.ToList();
+
+        //  Set entityset name
+        var entitySetName = "CrimeIncidents";
+
+        //  Set Horizontal Axis Column Name
+        var horizontalColName = "offense";
+
+        // Create an object of type Dictionary<string, double> to store keyvalue pairs
+        Dictionary<string, double> keyValueList = new Dictionary<string, double>();
+
+        // Fetch the required data by firing LINQ query on DataTable
+        var lstData = from d in results
+                      orderby d.offense
+                      group d by d.offense into grp
+                      select new
+                      {
+                          xValue = grp.Key.ToString(),
+                          yValue = grp.Count()
+                      };
+
+        keyValueList = lstData.ToDictionary(t => t.xValue.ToString(), t => Convert.ToDouble(t.yValue));
+
+
+        //  Number of elements on X-axis
+        int calculatedWidth = Convert.ToInt32(keyValueList.Keys.Count) * 15;
+
+        //  If calculated width is greater than 860 then ...
+        if (calculatedWidth > 860)
+        {
+            //  Set Bar Chart width to Calculated width
+            OgdiBarChart.Width = calculatedWidth;
+
+        }
+        else
+        {
+            //  Set Bar Chart width to 860
+            OgdiBarChart.Width = 860;
+
+        }
+
+        //  Set Bar Chart height to 500
+        OgdiBarChart.Height = 500;
+
+        //  Specify how the image of the chart will be rendered. 
+        //  BinaryStreaming --> Chart is streamed directly to the client. 
+        //  ImageMap --> Chart is rendered as an image map. 
+        //  ImageTag --> Chart is rendered using an HTML image tag. 
+        OgdiBarChart.RenderType = RenderType.ImageTag;
+
+        //  Set the palette for the Chart control. 
+        //  Berry --> utilizes blues and purples. 
+        //  Bright  --> utilizes bright colors. 
+        //  BrightPastel  --> utilizes bright pastel colors. 
+        //  Chocolate  --> utilizes shades of brown. 
+        //  EarthTones  --> utilizes earth tone colors such as green and brown. 
+        //  Excel  --> utilizes Excel-style colors. 
+        //  Fire  --> utilizes red, orange and yellow colors. 
+        //  Grayscale  --> utilizes grayscale colors, that is, shades of black and white. 
+        //  Light --> utilizes light colors. 
+        //  None --> No palette is used.  
+        //  Pastel --> utilizes pastel colors. 
+        //  SeaGreen --> utilizes colors that range from green to blue. 
+        //  SemiTransparent --> utilizes semi-transparent colors. 
+        OgdiBarChart.Palette = ChartColorPalette.BrightPastel;
+
+        //  Add a Title object to the end of the title collection. 
+        OgdiBarChart.Titles.Add(
+        new Title(entitySetName, Docking.Top, new System.Drawing.Font(
+			"Calibri", 
+			14, 
+			System.Drawing.FontStyle.Bold), 
+		System.Drawing.Color.FromArgb(26, 59, 105)));
+
+        //  Create a ChartArea class object which represents a chart area on the chart image. 
+        ChartArea chartArea = new ChartArea("ColumnChartArea");
+
+        //  Create a Series class object which stores data points and series attributes. 
+        Series series = new Series("Series 1");
+
+        //  Set an Axis object that represents the primary X-axis.
+        chartArea.AxisX.Title = horizontalColName;
+        chartArea.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12, System.Drawing.FontStyle.Bold);
+        chartArea.AxisX.IsLabelAutoFit = true;
+        chartArea.AxisX.IntervalType = DateTimeIntervalType.Auto;
+        chartArea.AxisX.LabelStyle.Font = new System.Drawing.Font("Calibri", 9);
+        chartArea.AxisX.Interval = 1;
+
+        //  Set an Axis object that represents the primary Y-axis.
+        chartArea.AxisY.Title = "No. of occurrences of  \"" + horizontalColName + "\"";
+        chartArea.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12, System.Drawing.FontStyle.Bold);
+        chartArea.AxisY.IsLabelAutoFit = true;
+        chartArea.AxisY.LabelStyle.Font = new System.Drawing.Font("Calibri", 9);
+
+        //  Add a ChartArea object to the  ChartAreas collection. 
+        OgdiBarChart.ChartAreas.Add(chartArea);
+
+        //  Set the chart type of a series. 
+        series.ChartType = SeriesChartType.Column;
+
+        //  Set the value type plotted along the X-axis to String
+        series.XValueType = ChartValueType.String;
+
+        //  Set the value type plotted along the Y-axis to Double
+        series.YValueType = ChartValueType.Double;
+
+        //  Set the font of the data point. 
+        series.Font = new System.Drawing.Font("Calibri", 8, System.Drawing.FontStyle.Bold);
+
+        //  Set a flag that indicates whether to show the value of the data point on the label.
+        series.IsValueShownAsLabel = true;
+
+        //  Set the tooltip
+        series.ToolTip = "'#VALX' with value '#VALY'";
+
+        //  Add a Series object to the  Series collection. 
+        OgdiBarChart.Series.Add(series);
+
+
+        //  If there is data for representing chart in Viewdata then ...
+        if (keyValueList != null)
+        {
+            //  For each XY value pair do ...   
+            foreach (KeyValuePair<string, double> XyPair in keyValueList)
+            {
+                //  Add a DataPoint object to the end of the collection,
+                //  with the specified X-value and Y-value. 
+                this.OgdiBarChart.Series[0].Points.AddXY(
+
+                    //  If key is empty then put xValue = <<BLANK>>...
+                    XyPair.Key.Trim().Equals(string.Empty) ? "<<BLANK>>" :
+
+                    //  else if Key length is greater than 20 then xValue becomes 
+                    //  first 18 characters appeneded with two dots
+                    //  else if Key length is less than or equal to 20 then 
+                    //  xValue will be considered as entire value of key
+                    XyPair.Key.Length > 20 ? XyPair.Key.Substring(0, 18) + ".." : XyPair.Key
+
+                    ,
+
+                    //  yValue is assigned to value in Xypair
+                    XyPair.Value);
+            }
+        }
+    }
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:Chart ID="OgdiBarChart" runat="server">
+        </asp:Chart>
+    </div>
+    </form>
+</body>
+</html>
+

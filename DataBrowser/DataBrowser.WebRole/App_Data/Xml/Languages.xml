@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Languages>
+    <DVLanguage>
+      <Text>C#/ASP.NET</Text>
+      <Path>SampleCode_CS.txt</Path>
+    </DVLanguage>
+    <DVLanguage>    
+      <Text>C#/ASP.NET Paging</Text>
+      <Path>SampleCode_CS_Paging.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>C#/Silverlight</Text>
+      <Path>SampleCode_CS_Silverlight.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>JavaScript</Text>
+      <Path>SampleCode_JS.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>PHP</Text>
+      <Path>SampleCode_PHP.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>Python</Text>
+      <Path>SampleCode_PYTHON.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>Ruby</Text>
+      <Path>SampleCode_RUBY.txt</Path>
+    </DVLanguage>
+    <DVLanguage>
+      <Text>Flex</Text>
+      <Path>SampleCode_FLEX.txt</Path>
+    </DVLanguage>
+  
+    <MVLanguage>
+      <Text>Bing Maps</Text>
+      <Path>SampleCode_MAP.txt</Path>
+    </MVLanguage>
+    <MVLanguage>
+      <Text>Google Maps</Text>
+      <Path>SampleCode_JS_GoogleMaps.txt</Path>
+    </MVLanguage>
+
+    <BarChartLanguage>
+      <Text>C#/ASP.NET</Text>
+      <Path>SampleCode_CS_BarChart.txt</Path>
+    </BarChartLanguage>
+  
+    <PieChartLanguage>
+      <Text>C#/ASP.NET</Text>
+      <Path>SampleCode_CS_PieChart.txt</Path>
+    </PieChartLanguage> 
+  
+</Languages>
