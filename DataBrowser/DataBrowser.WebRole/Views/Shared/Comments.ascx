@@ -17,7 +17,7 @@ link += "?$filter=" + "DatasetId eq '" + Model.DatasetId + "' and PartitionKey e
 	function renderDate(date) { return Comments.months[date.getMonth()] + ""; }
 
 	function showCaptcha() {
-	  Recaptcha.create('<%=Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPupblicKey")%>', 'eidCommentsRecaptcha', RecaptchaOptions);
+	  Recaptcha.create('<%=Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPublicKey")%>', 'eidCommentsRecaptcha', RecaptchaOptions);
 	}
 
 	$().ready(function() {

@@ -84,7 +84,7 @@ namespace MvcColudWeb.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("About", "Home");
             }
         }
 
@@ -93,7 +93,7 @@ namespace MvcColudWeb.Controllers
             Session["UserRole"] = null;
             FormsAuth.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("About", "Home");
         }
 
         public ActionResult Register()
@@ -126,7 +126,7 @@ namespace MvcColudWeb.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuth.SignIn(userName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("About", "Home");
                 }
                 else
                 {
@@ -191,7 +191,7 @@ namespace MvcColudWeb.Controllers
                 }
                 if (changePasswordResult)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("About", "Home");
                 }
                 ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");
                 return View();
@@ -248,9 +248,9 @@ namespace MvcColudWeb.Controllers
                         return View(new ManageRolesModel());
                     }
                     RoleService.RemoveUserFromRole(UserName, RoleName);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("About", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("About", "Home");
             }
             catch
             {
@@ -284,7 +284,7 @@ namespace MvcColudWeb.Controllers
                 RoleService.AddUserToRole("admin", "Administrator");
                 FormsAuth.SignIn("admin", false /* createPersistentCookie */);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("About", "Home");
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

@@ -40,8 +40,6 @@ namespace Ogdi.Data.DataLoaderConsoleApp
             long elapsedTicks = DateTime.Now.Ticks - start.Ticks;
             TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
             Console.WriteLine("\tProcessing time: {0:N2} seconds", elapsedSpan.TotalSeconds);
-            Console.WriteLine("\nHit enter to exit...");
-            Console.ReadLine();
         }
 
         private static void LoadDataset(string[] args)
@@ -89,7 +87,7 @@ namespace Ogdi.Data.DataLoaderConsoleApp
             }
 
             Console.ForegroundColor = (isOnContinue) ? ConsoleColor.Yellow : ConsoleColor.Red;
-            Console.WriteLine(sb.ToString());            
+            Console.WriteLine(sb.ToString());
             Console.ResetColor();
             Trace.WriteLine(sb.ToString());
         }

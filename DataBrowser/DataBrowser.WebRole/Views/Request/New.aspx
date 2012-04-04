@@ -6,7 +6,7 @@
 <script type="text/javascript">
 
     function showCaptcha() {
-      Recaptcha.create('<%=Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPupblicKey")%>', 'eidCommentsRecaptcha', RecaptchaOptions);
+      Recaptcha.create('<%=Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPublicKey")%>', 'eidCommentsRecaptcha', RecaptchaOptions);
     }
 
     $().ready(function() {
