@@ -10,9 +10,15 @@ DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations that seek 
 * Ensure reliability and scalability (grow compute requirements as catalogue grows) via cloud
 * Full access to the code to modify & customize the catalogue as you see fit.
 
+<<<<<<< HEAD
 DataLab (OGDI v4) includes a number of updates & improvements. 
 
 OGDI is being used by a number of organizations such as the [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat] (http://data.medicinehat.ca/) and others. 
+=======
+DataLab (OGDI v4) includes a number of [updates & improvements] (https://github.com/openlab/DataLab/wiki/DataLab-v4-Updates-and-Improvements). 
+
+OGDI is being used by a number of organizations such as the [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat, AB, Canada] (http://data.medicinehat.ca/), most recently [City of Regina, SK, Canada] (http://www.regina.ca/residents/open-government/data/) and others. 
+>>>>>>> 54151a7f95ae9e881ae8250253e4da6f26ae0093
 
 The older versions of [OGDI v1/v2] (http://ogdi.codeplex.com) are available on CodePlex, those been forked by [City of Nanaimo] (http://www.nanaimo.ca/EN/main/departments/106/DataCatalogue/About.html) 
 
@@ -24,7 +30,11 @@ DataLab Components
 ---------------
 
 ###Data Service
+<<<<<<< HEAD
 OGDI uses RESTful Web service � a web service implemented using HTTP and the principles of Representational State Transfer (REST) � to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources � just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
+=======
+OGDI uses RESTful Web service [a web service implemented using HTTP and the principles of Representational State Transfer (REST)] to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
+>>>>>>> 54151a7f95ae9e881ae8250253e4da6f26ae0093
 
 In fact, OGDI-based web APIs can be accessed through a wide variety of client technologies, including: JavaScript, Flex, PHP, Python, Ruby, ASP.NET and Silverlight. These well understood formats allow developers to start quickly on new applications.
 
