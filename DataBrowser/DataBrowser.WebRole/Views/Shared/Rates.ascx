@@ -69,7 +69,7 @@
 	}
 
 	function ShowRecaptcha() {
-		Recaptcha.create('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPupblicKey")%>', "RecaptchaDiv", { callback: Recaptcha.focus_response_field });
+		Recaptcha.create('<%= Ogdi.Azure.Configuration.OgdiConfiguration.GetValue("RecaptchaPublicKey")%>', "RecaptchaDiv", { callback: Recaptcha.focus_response_field });
 		document.getElementById('RecaptchaButtons').style.display = "block";
 	}
 

@@ -170,12 +170,12 @@
 
 	<div class="tabs">
 		<% if (!Model.IsPlanned) { %>
-		<div class="tab tc1 t1" title="Data"><div class="active" onclick='q.Tabs.switchTabs(this, "eidDataTabContent")'></div></div>
+		<div class="tab t1" title="Data"><div class="active" onclick='q.Tabs.switchTabs(this, "eidDataTabContent")'></div></div>
 		<% } %>
-		<div class="tab tc2 t2" title="Comments"><div onclick='q.Tabs.switchTabs(this, "eidCommentsTabContent")'></div></div>
-		<div class="tab tc3 t3" title="Details"><div <%if(Model.IsPlanned){%>class="active"<%}%> onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div></div>
+		<div class="tab t2" title="Comments"><div onclick='q.Tabs.switchTabs(this, "eidCommentsTabContent")'></div></div>
+		<div class="tab t3" title="Details"><div <%if(Model.IsPlanned){%>class="active"<%}%> onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div></div>
 		<% if (!Model.IsPlanned) { %>
-		<div class="tab tc4 t4" title="Developers"><div onclick='q.Tabs.switchTabs(this, "eidDevelopersTabContent")'></div></div>
+		<div class="tab  t4" title="Developers"><div onclick='q.Tabs.switchTabs(this, "eidDevelopersTabContent")'></div></div>
 		<% } %>
 	</div>
 	
