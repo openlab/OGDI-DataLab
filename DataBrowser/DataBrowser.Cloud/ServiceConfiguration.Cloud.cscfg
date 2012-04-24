@@ -3,7 +3,7 @@
   <Role name="DataBrowser.WebRole">
     <Instances count="1"/>
     <ConfigurationSettings>
-      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net/v1/"/>
+      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net:8080/v1/"/>
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd"/>
       <Setting name="TermsOfUseURL" value="http://go.microsoft.com/?linkid=4412892"/>
       <Setting name="TradeMarksURL" value="http://www.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx"/>
