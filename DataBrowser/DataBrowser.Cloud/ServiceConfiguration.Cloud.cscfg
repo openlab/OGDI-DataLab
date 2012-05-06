@@ -12,6 +12,7 @@
       <Setting name="RecaptchaPrivateKey" value=""/>
       <Setting name="RecaptchaPublicKey" value=""/>
       <Setting name="RootServiceNamespace" value="OGDI"/>
+      <Setting name="EnableAnalytics" value="true"/>
       <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]"/>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]"/>
     </ConfigurationSettings>

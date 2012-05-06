@@ -12,6 +12,7 @@
       <Setting name="RecaptchaPrivateKey" value=""/>
       <Setting name="RecaptchaPublicKey" value=""/>
       <Setting name="RootServiceNamespace" value="OGDI"/>
+      <Setting name="EnableAnalytics" value="true"/>
       <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="/>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="/>
     </ConfigurationSettings>
