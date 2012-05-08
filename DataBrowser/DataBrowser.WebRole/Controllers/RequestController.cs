@@ -79,9 +79,12 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
             if (request == null)
                 throw new ApplicationException("Selected request does not exist any more.");
 
-            AnalyticsRepository.RegisterView(Helper.GenerateRequestKey(id),
-                HttpContext.Request.RawUrl,
-                HttpContext.Request.UserHostName);
+            if (SettingsResolver.EnableAnalytics)
+            {
+                AnalyticsRepository.RegisterView(Helper.GenerateRequestKey(id),
+                                                 HttpContext.Request.RawUrl,
+                                                 HttpContext.Request.UserHostName);
+            }
 
             return View(request);
         }

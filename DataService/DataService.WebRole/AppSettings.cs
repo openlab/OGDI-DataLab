@@ -34,6 +34,14 @@ namespace Ogdi.DataServices
             get { return RoleEnvironment.GetConfigurationSettingValue("RootServiceNamespace"); }
         }
 
+        public static bool TrackAnalytics
+        {
+            get
+            {
+                return bool.Parse(RoleEnvironment.GetConfigurationSettingValue("EnableAnalytics"));
+            }
+        }
+
         public static string OgdiConfigTableStorageAccountName
         {
             get { return ParseFromConnectionString(ConnectionStringElement.AccountName); }
