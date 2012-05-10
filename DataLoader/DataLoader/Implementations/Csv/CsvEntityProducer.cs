@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using LumenWorks.Framework.IO.Csv;
+using System.Globalization;
 
 //http://www.codeproject.com/KB/database/CsvReader.aspx
 
@@ -23,7 +23,7 @@ namespace Ogdi.Data.DataLoader.Csv
         {
             // Calculate entities count
             // TODO: Need to rewrite in better way.
-            using (var countReader = new CsvReader(new StreamReader(fileSetName + DataLoaderConstants.FileExtCsv), true))
+            using (var countReader = new CsvReader(new StreamReader(fileSetName + DataLoaderConstants.FileExtCsv), true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]))
             {
                 while (countReader.ReadNextRecord())
                 {
@@ -32,7 +32,7 @@ namespace Ogdi.Data.DataLoader.Csv
             }
 
             var reader = new StreamReader(string.Concat(fileSetName, DataLoaderConstants.FileExtCsv));
-            _csvReader = new CsvReader(reader, true);
+            _csvReader = new CsvReader(reader, true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]);
 
             _params = parameters;
             _schemaEntity = GetSchemaEntity(entitySet, entityKind, parameters.PropertyToTypeMap);
@@ -53,7 +53,7 @@ namespace Ogdi.Data.DataLoader.Csv
                     if (!isContain)
                         throw new ParamsValidationException(pair.Key);
                 }
-            }
+        }
 
             if (_params.PlacemarkParams != null)
             {
@@ -69,12 +69,13 @@ namespace Ogdi.Data.DataLoader.Csv
                 }
             }
         }
+
         public override Entity SchemaEntity
         {
             get { return _schemaEntity; }
         }
 
-        public override IEnumerable<Entity> GetEntitiesEnumerator(OnContinueExceptionCallback exceptionNotifier)
+        public override IEnumerable<Entity> GetEntitiesEnumerator(OnContinueExceptionCallback exceptionNotifier, DataLoaderParams Params)
         {
             int count = 0;
             string initialTimePrefix = GetSecondsFrom2000Prefix();
@@ -82,10 +83,63 @@ namespace Ogdi.Data.DataLoader.Csv
             string[] headers = _csvReader.GetFieldHeaders();
             bool isInlineKmlSnippetProvided = false;
 
+            #region RDF
+            string entitySet = SchemaEntity["EntitySet"].ToString();
+
+            // rdf get the columns namespaces
+            List<TableColumnsMetadataEntity> columnMetadata = TableDataLoader.GetRdfMetadataColumnNamespace(entitySet);
+            List<string> namespacesRdf = new List<string>();
+            List<string> validNamespaces = new List<string>();
+
+            string namespaceToAdd = string.Empty;
+            if (columnMetadata != null)
+            {
+                foreach (TableColumnsMetadataEntity columnMeta in columnMetadata)
+                {
+                    if (!string.IsNullOrEmpty(columnMeta.columnnamespace))
+                    {
+                        namespaceToAdd = columnMeta.columnnamespace.Split('=')[0] + '=';
+
+                        if (namespaceToAdd.Split('=')[0] != string.Empty)
+                        {
+                            if (!validNamespaces.Contains(namespaceToAdd))
+                            {
+                                namespacesRdf.Add(columnMeta.columnnamespace);
+                                validNamespaces.Add(namespaceToAdd);
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
             while (_csvReader.ReadNextRecord())
             {
                 var entity = new Entity();
                 bool isExceptionOccured = false;
+
+                #region RDF
+
+                XNamespace rdfNamespace = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+
+                XElement rdfXml = new XElement(rdfNamespace + "RDF",
+                new XAttribute(XNamespace.Xmlns + "rdf", rdfNamespace.ToString()));
+
+                // add new namespaces to the rdf snippet if they exist
+                if (namespacesRdf != null)
+                {
+                    foreach (string ns in namespacesRdf)
+                    {
+                        if (!string.IsNullOrEmpty(ns))
+                        {
+                            rdfXml.Add(new XAttribute(XNamespace.Xmlns + ns.ToString().Split('=')[0], ns.ToString().Split('=')[1]));
+                        }
+                    }
+                }
+
+                XElement rdfXmlDescriptionElement = new XElement(rdfNamespace + "Description");
+                rdfXml.Add(rdfXmlDescriptionElement);
+                #endregion
 
                 try
                 {
@@ -94,16 +148,19 @@ namespace Ogdi.Data.DataLoader.Csv
                         if (_csvReader[i] == null)
                             continue;
 
+                        if (_csvReader[i].GetType() == typeof(DBNull))
+                            continue;
+
                         var header = headers[i];
 
                         if (!isInlineKmlSnippetProvided)
                             isInlineKmlSnippetProvided = header.Equals(DataLoaderConstants.PropNameKmlSnippet,
                                                                        StringComparison.InvariantCultureIgnoreCase);
-
+                        
                         try
                         {
                             if (!properties.ContainsKey(header.ToLower()))
-                                throw new ApplicationException("The row data is mismatched with column definitions in data file.");
+                                throw new ApplicationException("The row data is mismached with column definitions in data file.");
 
                             var stringType = properties[header.ToLower()];
                             var stringValue = _csvReader[i];
@@ -113,6 +170,28 @@ namespace Ogdi.Data.DataLoader.Csv
 
                             var v = GetPropertyValue(stringType, stringValue);
                             entity.AddProperty(header, v);
+
+                            #region RDF
+
+                            if (header == Params.ProcessorParams.PartitionKeyPropertyName)
+                            {
+                                rdfXmlDescriptionElement.Add(new XAttribute(rdfNamespace + "about", stringValue));
+                            }
+
+                            var datatype = GetRdfType(stringType);
+                            var cleanHeader = CleanStringLower(header);
+
+                            var columnNs = columnMetadata.First(column => column.column == header);
+                            XNamespace customNS = columnNs.columnnamespace.ToString().Split('=')[1];
+
+                            if (stringValue != string.Empty)
+                            {
+                                rdfXmlDescriptionElement.Add(new XElement(customNS + cleanHeader, v.ToString(), new XAttribute(rdfNamespace + "datatype", datatype)));
+                            }
+                            else
+                                rdfXmlDescriptionElement.Add(new XElement(customNS + cleanHeader));
+
+                            #endregion
                         }
                         catch (FormatException ex)
                         {
@@ -125,6 +204,10 @@ namespace Ogdi.Data.DataLoader.Csv
                             exceptionNotifier(new EntityProcessingException(sb.ToString(), ex));
                         }
                     }
+
+                    #region RDF
+                    entity.AddProperty(DataLoaderConstants.PropNameRdfSnippet, rdfXml.ToString(SaveOptions.DisableFormatting));
+                    #endregion
 
                     if (!isInlineKmlSnippetProvided && _params.PlacemarkParams != null)
                     {
@@ -164,7 +247,6 @@ namespace Ogdi.Data.DataLoader.Csv
                                 entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet, ps);
                             }
                         }
-
                     }
                     if (_sourceOrder)
                     {
@@ -176,6 +258,7 @@ namespace Ogdi.Data.DataLoader.Csv
                     exceptionNotifier(new EntityProcessingException(entity.ToString(), ex));
                     isExceptionOccured = true;
                 }
+
 
                 if (isExceptionOccured) continue;
 

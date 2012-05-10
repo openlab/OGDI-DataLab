@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Aggregate" xml:space="preserve">
+    <value>Agréger</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
+  <data name="BarChart" xml:space="preserve">
+    <value>Graphique en colonnes</value>
+  </data>
+  <data name="ClickToViewResultsAsXMLKML" xml:space="preserve">
+    <value>(Cliquer pour voir les résultats au format XML/KML)</value>
+  </data>
+  <data name="CrimeIncidentsWhereTheMethodCode" xml:space="preserve">
+    <value>Incidents criminels où le code de la méthode est égal à 2. les autres opérateurs de comparaison
+incluent &amp;quot;gt&amp;quot; pour plus grand que, &amp;quot;lt&amp;quot; pour moins que,
+&amp;quot;ge&amp;quot; pour plus grand que ou égal à, et &amp;quot;le&amp;quot; pour moins que ou égal à.</value>
+  </data>
+  <data name="CrimeIncidentsWhereTheReportDatetime" xml:space="preserve">
+    <value>Incidents criminels dont la date/heure du rapport est à ou après minuit, 1er Juin
+2008 UTC. Les dates/heures sont exprimées dans le format &lt;a href="http://en.wikipedia.org/wiki/ISO_8601"
+    target="_blank"&gt;ISO 8601&lt;/a&gt;
+    &lt;img src="/Images/ExternalLink.png"
+        alt="Click to get ISO 8601" title="ISO 8601"
+        longdesc="/Descriptions/Iso.txt" /&gt;, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;,
+où &lt;i&gt;yyyy&lt;/i&gt; est l'année sur 4 digits, &lt;i&gt;mm&lt;/i&gt; est le numéro du mois sur 2 digits,
+&lt;i&gt;dd&lt;/i&gt; est le jour du mois sur 2 digits, &lt;i&gt;HH&lt;/i&gt; est l'heure sur 2 digits (dans
+le format 24H), &lt;i&gt;MM&lt;/i&gt; représente les minutes, et &lt;i&gt;SS&lt;/i&gt; les secondes.</value>
+  </data>
+  <data name="CrimeIncidentsWhereTheShiftIsEqualTo" xml:space="preserve">
+    <value>Incidents criminels où le &amp;quot;shift&amp;quot; est égal à &amp;quot;EVN;&amp;quot; ou &amp;quot;MID&amp;quot;.
+La syntaxe de filtrage supporte les opérateurs logiques &amp;quot;and&amp;quot;, &amp;quot;or&amp;quot;, and &amp;quot;not&amp;quot;
+Les expressions peuvent être groupées avec des parenthèses, comme dans de nombreux langages de programmation.</value>
+  </data>
+  <data name="CrimeIncidentsWhereTheShiftProperty" xml:space="preserve">
+    <value>Incidents criminels où la propriété &amp;quot;shift&amp;quot; est égale à &amp;quot;EVN&amp;quot;.
+Les chaines de caractères doivent être entourées par des guillemets simples.
+Les booléens sont représentées par les chaines de caractères &amp;quot;true&amp;quot; ou &amp;quot;false&amp;quot; (sans les guillemets doubles).</value>
+  </data>
+  <data name="DataView" xml:space="preserve">
+    <value>Vue données</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="EntitysetColumn" xml:space="preserve">
+    <value>Colonne&lt;br /&gt; des valeurs:&amp;nbsp;&amp;nbsp;</value>
+  </data>
+  <data name="FullQueryURL" xml:space="preserve">
+    <value>URL de la requête complète :</value>
+  </data>
+  <data name="HorizontalAxis" xml:space="preserve">
+    <value>Axe horizontal</value>
+  </data>
+  <data name="MapView" xml:space="preserve">
+    <value>Vue carte</value>
+  </data>
+  <data name="NoOfOccurrencesOf" xml:space="preserve">
+    <value>Nb d'occurrences de</value>
+  </data>
+  <data name="NumberOfPlacemarksInAResultSetExceedsThePinDisplayCountLimit" xml:space="preserve">
+    <value>Nombre d'emplacements dans le résultat excède la limite d'affichage du nombre de points  (50 emplacements)</value>
+  </data>
+  <data name="OGDIUsesASubsetOf" xml:space="preserve">
+    <value>OGDI utilise un sous-ensemble de &lt;a href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx"&gt;
+la syntaxe de requête de WCF Data Services&lt;/a&gt;
+&lt;img src='/Images/ExternalLink.png' alt='Click to get WCF Data Services query syntax' 
+title='WCF Data Services query syntax' 
+longdesc='/Descriptions/ADOquerysyntax.txt' /&gt;. Le format basique d'une
+expression de filtrage est &lt;i&gt;propriété&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparaison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
+où &lt;i&gt;propriété&lt;/i&gt; est le nom de la propriété, &lt;i&gt;comparaison&lt;/i&gt; est l'opérateur
+de comparaison, et &lt;i&gt;expression&lt;/i&gt; est l'expression à laquelle la valeur de la
+propriété est comparée.</value>
+  </data>
+  <data name="Option1" xml:space="preserve">
+    <value>Option 1</value>
+  </data>
+  <data name="Option2" xml:space="preserve">
+    <value>Option 2</value>
+  </data>
+  <data name="PieChart" xml:space="preserve">
+    <value>Graphique en camembert</value>
+  </data>
+  <data name="PleaseSelectValidColumnFromList" xml:space="preserve">
+    <value>Veuillez sélectionner une colonne valide depuis la liste.</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Etendue:</value>
+  </data>
+  <data name="SelectedDataDoesNotHaveLocationInformation" xml:space="preserve">
+    <value>La donnée sélectionnée n'a pas d'information de localisation.</value>
+  </data>
+  <data name="SelectOne" xml:space="preserve">
+    <value>(Sélectionner...)</value>
+  </data>
+  <data name="SomeExamplesOfFilterExpressions" xml:space="preserve">
+    <value>Quelques exemples d'expressions de filtrage utilisant les données de CrimeIncidents du conteneur DC:</value>
+  </data>
+  <data name="VerticalAxis" xml:space="preserve">
+    <value>Axe vertical</value>
+  </data>
+  <data name="AdditionalFilterParameters" xml:space="preserve">
+    <value>(paramètres $filter additionnels...)</value>
+  </data>
+  <data name="RefreshChart" xml:space="preserve">
+    <value>refresh-chart-fr</value>
+  </data>
+</root>

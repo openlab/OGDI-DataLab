@@ -2,7 +2,7 @@
 {
     public class DbaseKmlEntityProducerParams
     {
-        // Unnecessary placemark element names that will not be part of KML snippets
+        // Unnecessary placemark element names that will not be part of KML sinppets
         public string[] KmlElementsToStrip { get; set; }
 
         // Values of this property are used to find corresponding placemark elements in KML file

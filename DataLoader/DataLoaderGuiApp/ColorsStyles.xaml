@@ -1,117 +1,117 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--<LinearGradientBrush x:Key="whiteBackBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Offset="0" Color="#80FFFFFF" />
-        <GradientStop Offset="1" Color="#80F0F0FB" />
-    </LinearGradientBrush>-->
+	<!--<LinearGradientBrush x:Key="whiteBackBrush" StartPoint="0,0" EndPoint="0,1">
+		<GradientStop Offset="0" Color="#80FFFFFF" />
+		<GradientStop Offset="1" Color="#80F0F0FB" />
+	</LinearGradientBrush>-->
 
-    <Style x:Key="toggleBlueButtonStyle" TargetType="ToggleButton">
-        <Setter Property="Padding" Value="20,0" />
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="MinHeight" Value="25" />
-        <Setter Property="MinWidth" Value="50" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FocusVisualStyle">
-            <Setter.Value>
-                <Style>
-                    <Setter Property="Control.Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Rectangle RadiusX="10" RadiusY="10" Stroke="Gold" StrokeThickness="1" />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid x:Name="rootGrid" RenderTransformOrigin=".5,.5">
-                        <Grid.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Grid.RenderTransform>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Rectangle Grid.RowSpan="2" x:Name="bottomBorder" RadiusX="10" RadiusY="10" Stroke="{x:Null}" StrokeThickness="2">
-                            <Rectangle.Fill>
-                                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                    <GradientStop Color="#FF043F76" Offset="0"/>
-                                    <GradientStop Color="#FF04427C" Offset="1"/>
-                                    <GradientStop Color="#FF5F91C1" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle x:Name="highlight" Margin="2.5" Fill="White" RadiusX="10" RadiusY="10">
-                            <Rectangle.OpacityMask>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="#D0FFFFFF" Offset="0"/>
-                                    <GradientStop Color="#00FFFFFF" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <ContentPresenter Grid.RowSpan="2"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                            Margin="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                            RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5" x:Name="contentPresenter" />
-                    </Grid>
-                    <ControlTemplate.Resources>
-                        <Storyboard x:Key="buttonDown_Animation">
-                            <DoubleAnimation Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-							                 From="0" To="0" Duration="0:0:0" />
-                        </Storyboard>
-                    </ControlTemplate.Resources>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="bottomBorder" Property="Stroke" Value="Black" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="bottomBorder" Property="Stroke" Value="Black" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Visibility" TargetName="highlight" Value="Hidden"/>
-                            <Setter Property="Stroke" TargetName="bottomBorder" Value="Gold"/>
-                            <Setter Property="Fill" TargetName="bottomBorder">
-                                <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
-                                        <GradientStop Color="#FF0C4E8B" Offset="0"/>
-                                        <GradientStop Color="#FF2B4864" Offset="0.42"/>
-                                        <GradientStop Color="Black" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Visibility" TargetName="highlight" Value="Hidden"/>
-                            <Setter Property="Stroke" TargetName="bottomBorder" Value="Black"/>
-                            <Setter Property="Fill" TargetName="bottomBorder">
-                                <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
-                                        <GradientStop Color="#FF0C4E8B" Offset="0"/>
-                                        <GradientStop Color="#FF2B4864" Offset="0.42"/>
-                                        <GradientStop Color="Black" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="bottomBorder" Property="Fill" Value="DarkGray" />
-                            <Setter TargetName="bottomBorder" Property="Stroke" Value="Silver" />
-                            <Setter TargetName="bottomBorder" Property="StrokeThickness" Value="4" />
-                            <Setter TargetName="highlight" Property="Fill" Value="#20FFFFFF" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<Style x:Key="toggleBlueButtonStyle" TargetType="ToggleButton">
+		<Setter Property="Padding" Value="20,0" />
+		<Setter Property="Margin" Value="5" />
+		<Setter Property="MinHeight" Value="25" />
+		<Setter Property="MinWidth" Value="50" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="FocusVisualStyle">
+			<Setter.Value>
+				<Style>
+					<Setter Property="Control.Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Rectangle RadiusX="10" RadiusY="10" Stroke="Gold" StrokeThickness="1" />
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="rootGrid" RenderTransformOrigin=".5,.5">
+						<Grid.RenderTransform>
+							<TranslateTransform X="0" Y="0"/>
+						</Grid.RenderTransform>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Rectangle Grid.RowSpan="2" x:Name="bottomBorder" RadiusX="10" RadiusY="10" Stroke="{x:Null}" StrokeThickness="2">
+							<Rectangle.Fill>
+								<LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+									<GradientStop Color="#FF043F76" Offset="0"/>
+									<GradientStop Color="#FF04427C" Offset="1"/>
+									<GradientStop Color="#FF5F91C1" Offset="1"/>
+								</LinearGradientBrush>
+							</Rectangle.Fill>
+						</Rectangle>
+						<Rectangle x:Name="highlight" Margin="2.5" Fill="White" RadiusX="10" RadiusY="10">
+							<Rectangle.OpacityMask>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+									<GradientStop Color="#D0FFFFFF" Offset="0"/>
+									<GradientStop Color="#00FFFFFF" Offset="1"/>
+								</LinearGradientBrush>
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<ContentPresenter Grid.RowSpan="2"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							Margin="{TemplateBinding Padding}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+							RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5" x:Name="contentPresenter" />
+					</Grid>
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="buttonDown_Animation">
+							<DoubleAnimation Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+											 From="0" To="0" Duration="0:0:0" />
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsFocused" Value="True">
+							<Setter TargetName="bottomBorder" Property="Stroke" Value="Black" />
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="bottomBorder" Property="Stroke" Value="Black" />
+						</Trigger>
+						<Trigger Property="IsChecked" Value="True">
+							<Setter Property="Visibility" TargetName="highlight" Value="Hidden"/>
+							<Setter Property="Stroke" TargetName="bottomBorder" Value="Gold"/>
+							<Setter Property="Fill" TargetName="bottomBorder">
+								<Setter.Value>
+									<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+										<GradientStop Color="#FF0C4E8B" Offset="0"/>
+										<GradientStop Color="#FF2B4864" Offset="0.42"/>
+										<GradientStop Color="Black" Offset="1"/>
+									</LinearGradientBrush>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Visibility" TargetName="highlight" Value="Hidden"/>
+							<Setter Property="Stroke" TargetName="bottomBorder" Value="Black"/>
+							<Setter Property="Fill" TargetName="bottomBorder">
+								<Setter.Value>
+									<LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+										<GradientStop Color="#FF0C4E8B" Offset="0"/>
+										<GradientStop Color="#FF2B4864" Offset="0.42"/>
+										<GradientStop Color="Black" Offset="1"/>
+									</LinearGradientBrush>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="bottomBorder" Property="Fill" Value="DarkGray" />
+							<Setter TargetName="bottomBorder" Property="Stroke" Value="Silver" />
+							<Setter TargetName="bottomBorder" Property="StrokeThickness" Value="4" />
+							<Setter TargetName="highlight" Property="Fill" Value="#20FFFFFF" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <!--<ImageBrush x:Key="WindowBackground" Stretch="Fill" 
-                    ImageSource="images/Wave.jpg" />-->
+	<!--<ImageBrush x:Key="WindowBackground" Stretch="Fill" 
+					ImageSource="images/Wave.jpg" />-->
 
 </ResourceDictionary>

@@ -5,17 +5,21 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using Microsoft.WindowsAzure;
+using System.Text;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
-using System.Diagnostics.Contracts;
+using Microsoft.WindowsAzure;
 
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
 {
+
      public enum EventKind
      {
           Critical,

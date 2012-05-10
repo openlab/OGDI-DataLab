@@ -31,6 +31,8 @@ using System.Data;
 using System.Linq;
 using System.Xml.Linq;
 using Ogdi.InteractiveSdk.Mvc.Models;
+using Ogdi.InteractiveSdk.Mvc;
+using Ogdi.InteractiveSdk.Mvc.Repository;
 
 namespace Ogdi.InteractiveSdk.Mvc.Repository
 {

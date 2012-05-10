@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using Ogdi.Data.DataLoader;
+using Ogdi.Data.DataLoaderUI;
 
 namespace Ogdi.Data.DataLoaderGuiApp
 {
@@ -18,7 +19,7 @@ namespace Ogdi.Data.DataLoaderGuiApp
                 case ConfigurationState.Incomplete:
                     return "Not configured";
                 case ConfigurationState.Ready:
-                    return "Redy to upload";
+                    return "Ready to upload";
             }
             throw new NotSupportedException(value.ToString());
         }

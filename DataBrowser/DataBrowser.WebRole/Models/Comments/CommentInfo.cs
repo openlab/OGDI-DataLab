@@ -57,10 +57,10 @@ namespace Ogdi.InteractiveSdk.Mvc.Models.Comments
 
 		private void PopulateCommentTypes()
 		{
-			CommentTypes.Add("General Comment (no reply required)");
-            CommentTypes.Add("General Comment (reply required)");
-			CommentTypes.Add("Data Request");
-			CommentTypes.Add("Data Error");
+			CommentTypes.Add(CommentInfoResource.CommentInfo.GeneralCommentNoReplyRequired);
+            CommentTypes.Add(CommentInfoResource.CommentInfo.GeneralCommentReplyRequired);
+            CommentTypes.Add(CommentInfoResource.CommentInfo.DataRequest);
+            CommentTypes.Add(CommentInfoResource.CommentInfo.DataError);
 		}
 
         private void LoadComments()

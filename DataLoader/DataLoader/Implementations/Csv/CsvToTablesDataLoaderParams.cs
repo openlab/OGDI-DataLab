@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using LumenWorks.Framework.IO.Csv;
+using System.Xml.Linq;
 
 namespace Ogdi.Data.DataLoader.Csv
 {
@@ -47,19 +48,24 @@ namespace Ogdi.Data.DataLoader.Csv
                 parameters = File.Exists(csvFileName)
                     ? CreateEmptyData(csvFileName)
                     : new CsvToTablesDataLoaderParams
-                          {
-                              TableMetadataEntity = new TableMetadataEntity { IsEmpty = true, ReleasedDate = DateTime.Now, ExpiredDate = DateTime.Now.AddDays(1), LastUpdateDate = DateTime.Now },
-                              ProcessorParams = new TableProcessorParams
-                                                    {
-                                                        PartitionKeyPropertyName = string.Empty,
-                                                        RowKeyPropertyName = string.Empty,
-                                                        TableMetadataPartitionKeyPropertyName = string.Empty,
-                                                        TableMetadataRowKeyPropertyName = string.Empty,
-                                                        EntityMetadataPartitionKeyPropertyName = string.Empty,
-                                                        EntityMetadataRowKeyPropertyName = string.Empty,
-                                                        SourceTimeZoneName = string.Empty
-                                                    }
-                          };
+                    {
+                        TableMetadataEntity = new TableMetadataEntity { IsEmpty = true, ReleasedDate = DateTime.Now, ExpiredDate = DateTime.Now.AddDays(1), LastUpdateDate = DateTime.Now },
+                        ProcessorParams = new TableProcessorParams
+                        {
+                            PartitionKeyPropertyName = string.Empty,
+                            RowKeyPropertyName = string.Empty,
+                            TableMetadataPartitionKeyPropertyName = string.Empty,
+                            TableMetadataRowKeyPropertyName = string.Empty,
+                            EntityMetadataPartitionKeyPropertyName = string.Empty,
+                            EntityMetadataRowKeyPropertyName = string.Empty,
+                            SourceTimeZoneName = string.Empty
+                        },
+                        TableColumnsMetadata = new TableColumnsMetadata
+                        {
+                            TableColumnsMetadataPartitionKeyPropertyName = string.Empty,
+                            TableColumnsMetadataRowKeyPropertyName = string.Empty
+                        }
+                    };
             }
             return parameters;
         }
@@ -68,7 +74,7 @@ namespace Ogdi.Data.DataLoader.Csv
         {
             var name = Path.GetFileNameWithoutExtension(fileName);
 
-            // Create all insctances
+            // Create all instances
             var dataLoaderParams = new CsvToTablesDataLoaderParams();
 
             // Generate TableMetadataEntity properties
@@ -86,22 +92,31 @@ namespace Ogdi.Data.DataLoader.Csv
             dataLoaderParams.ProducerParams = new EntityProducerParams
             {
                 PlacemarkParams = new PlacemarkParams(),
-                PropertyToTypeMap = new PropertyToTypeMapper()
+                PropertyToTypeMap = new PropertyToTypeMapper(),
             };
 
             // Generate ProcessorParams properties
             dataLoaderParams.ProcessorParams = new TableProcessorParams
             {
-                PartitionKeyPropertyName = "New.Guid",
-                RowKeyPropertyName = "New.Guid",
+                PartitionKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
+                RowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
                 TableMetadataPartitionKeyPropertyName = "Name",
-                TableMetadataRowKeyPropertyName = "New.Guid",
-                EntityMetadataPartitionKeyPropertyName = "EntitySet",
-                EntityMetadataRowKeyPropertyName = "EntityKind"
+                TableMetadataRowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
+                TableColumnsMetadataPartitionKeyPropertyName = DataLoaderConstants.PropNameEntitySet,
+                TableColumnsMetadataRowKeyPropertyName = "Column",
+                EntityMetadataPartitionKeyPropertyName = DataLoaderConstants.PropNameEntitySet,
+                EntityMetadataRowKeyPropertyName = DataLoaderConstants.PropNameEntityKind
             };
 
-            using (var reader = new CsvReader(new StreamReader(fileName), true))
+            dataLoaderParams.TableColumnsMetadata = new TableColumnsMetadata
             {
+                PropertyToTypeColumnsMetadata = new PropertyToTypeColumnsMetadataMapper()
+            };
+
+            using (var reader = new CsvReader(new StreamReader(fileName), true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]))
+            {
+                string defaultDescription = DefaultDescription();
+                string defaultDescriptionToAdd = string.Empty;
                 foreach (string header in reader.GetFieldHeaders())
                 {
                     if (header.Trim().ToLower() == "name")
@@ -126,9 +141,23 @@ namespace Ogdi.Data.DataLoader.Csv
                     }
 
                     dataLoaderParams.ProducerParams.PropertyToTypeMap.Add(header.Trim(), "string");
+                    defaultDescriptionToAdd = string.Format(defaultDescription, header, name);
+                    dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(header.Trim(), string.Empty, defaultDescriptionToAdd, "ogdi=\"ogdiUrl\"");
                 }
             }
             return dataLoaderParams;
+        }
+
+        private static string DefaultDescription()
+        {
+            XDocument xmlDoc = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\RdfNamespaces.xml"));
+
+            foreach (XElement desc in xmlDoc.Descendants("metadata"))
+            {
+                return desc.Element("description").Value.ToString();
+            }
+
+            return string.Empty;
         }
 
         public override void Validate(string fileName)
@@ -146,7 +175,7 @@ namespace Ogdi.Data.DataLoader.Csv
             string name = Path.GetFileNameWithoutExtension(fileName);
             string csvFile = Path.Combine(directory, name + ".csv");
 
-            using (var reader = new CsvReader(new StreamReader(csvFile), true))
+            using (var reader = new CsvReader(new StreamReader(csvFile), true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]))
             {
                 string[] headers = reader.GetFieldHeaders();
 
@@ -206,7 +235,7 @@ namespace Ogdi.Data.DataLoader.Csv
 
             if (emptyOptinalFields.Count > 0)
             {
-                sb.AppendFormat("\r\n\r\nWarning - Empty optional fields ({0}):", tabName);
+                sb.AppendFormat("\r\n\r\nWarning - Empty optinal fields ({0}):", tabName);
                 foreach (string field in emptyOptinalFields)
                 {
                     sb.AppendFormat("\r\n   {0}", field);

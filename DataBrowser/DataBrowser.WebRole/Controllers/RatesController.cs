@@ -23,8 +23,8 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 				return this.EmptyHtml();
 			}
 
-            AddDatasetVote(-1, itemKey);
-            return this.GetRefreshedRatesHtml(itemKey);
+			AddDatasetVote(-1, itemKey);
+			return this.GetRefreshedRatesHtml(itemKey);
 		}
 
 		private ActionResult EmptyHtml()
@@ -47,8 +47,8 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 			{
 				return this.EmptyHtml();
 			}
-            AddDatasetVote(1, itemKey);
-            return this.GetRefreshedRatesHtml(itemKey);
+			AddDatasetVote(1, itemKey);
+			return this.GetRefreshedRatesHtml(itemKey);
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -66,8 +66,8 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 
 		private ActionResult GetRefreshedRatesHtml(String itemKey)
 		{
-            VoteResults vr = RatingRepository.GetVoteResults(itemKey);
-			return this.View("RatesPlusMinus", vr);
+			VoteResults vr = RatingRepository.GetVoteResults(itemKey);
+			return this.PartialView("RatesPlusMinus", vr);
 		}
 
 		private void AddDatasetVote(int value, String itemKey)
@@ -75,12 +75,12 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 			var item = new Rate
 			{
 				RateValue = value,
-                ItemKey = itemKey,
+				ItemKey = itemKey,
 				RateDate = DateTime.Now,
 				User = CurrentUser,
 			};
 
-            RatingRepository.AddVote(item);
+			RatingRepository.AddVote(item);
 		}
 
 		private string CurrentUser

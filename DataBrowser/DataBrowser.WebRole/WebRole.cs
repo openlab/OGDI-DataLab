@@ -17,6 +17,11 @@ namespace Ogdi.InteractiveSdk.Mvc
             // (http://go.microsoft.com/fwlink/?LinkId=166357).
             RoleEnvironment.Changing += RoleEnvironmentChanging;
 
+            Microsoft.WindowsAzure.CloudStorageAccount.SetConfigurationSettingPublisher((configName, configSetter) =>
+            {
+                configSetter(RoleEnvironment.GetConfigurationSettingValue(configName));
+            });
+
             return base.OnStart();
         }
 

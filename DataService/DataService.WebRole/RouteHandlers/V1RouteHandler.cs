@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Routing;
 
 namespace Ogdi.DataServices
@@ -44,7 +43,7 @@ namespace Ogdi.DataServices
                     else
                     {
                         //Possile OgdiAlias is acccountName
-                        Config.AvailableEndpoint endPoint = AppSettings.GetAvailableEndpointByAccountName(_ogdiAlias);
+                        Ogdi.Config.AvailableEndpoint endPoint = AppSettings.GetAvailableEndpointByAccountName(_ogdiAlias);
 
                         if (endPoint != null)
                         {
@@ -69,20 +68,23 @@ namespace Ogdi.DataServices
         #endregion
 
         private IHttpHandler GetTableStorageProxyHandler()
-        {
-            _azureTableRequestEntityUrl += _entitySet + "/";
+        {        
+            _azureTableRequestEntityUrl += _entitySet;
+
+            if (!_azureTableRequestEntityUrl.EndsWith("/"))
+                _azureTableRequestEntityUrl += "/";
 
             if (_remainder != null)
             {
                 _azureTableRequestEntityUrl += _remainder;
             }
 
-            var azureTableStorageProxyHttpHandler = new V1OgdiTableStorageProxyHttpHandler
-            {
-                OgdiAlias = _ogdiAlias,
-                EntitySet = _entitySet,
-                IsAvailableEndpointsRequest = _isAvailableEndpointsRequest,
-                AzureTableRequestEntityUrl = _azureTableRequestEntityUrl
+            var azureTableStorageProxyHttpHandler = new V1OgdiTableStorageProxyHttpHandler 
+            { 
+                OgdiAlias = _ogdiAlias, 
+                EntitySet = _entitySet, 
+                IsAvailableEndpointsRequest = _isAvailableEndpointsRequest, 
+                AzureTableRequestEntityUrl = _azureTableRequestEntityUrl 
             };
 
             return azureTableStorageProxyHttpHandler;

@@ -4,13 +4,16 @@
 // </copyright>
 //
 using System;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Microsoft.WindowsAzure;
+using System.Globalization;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Runtime.InteropServices;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.StorageClient;
+using Microsoft.WindowsAzure;
 
 [assembly: CLSCompliant(true)]
 
@@ -242,7 +245,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             return builder.ToString();
         }
 
-        internal  static string GetInitExceptionDescription(CloudBlobClient blob, CloudTableClient table)
+        internal static string GetInitExceptionDescription(CloudBlobClient blob, CloudTableClient table)
         {
             var builder = new StringBuilder();
             builder.Append(GetInitExceptionDescription(table.Credentials as StorageCredentialsAccountAndKey, table.BaseUri, "table storage configuration"));
@@ -287,7 +290,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             string ret = null;
             try
             {
-                ret = ConfigurationManager.AppSettings[configName];
+                ret = System.Configuration.ConfigurationManager.AppSettings[configName];
             }
             // some exception happened when accessing the app settings section
             // most likely this is because there is no app setting file

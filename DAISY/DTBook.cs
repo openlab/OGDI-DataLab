@@ -104,15 +104,18 @@ namespace DTBookTranslation
             error = "";
 
             System.IO.TextReader stringReader = new System.IO.StringReader(inputContent);
-            var xml = new XmlTextReader(stringReader);
-            var xmlSettings = new XmlReaderSettings { ValidationType = ValidationType.DTD };
+            // XmlTextReader xml = new XmlTextReader(stringReader); 2011 05 16
+            //XmlValidatingReader xsd = new XmlValidatingReader(xml); 2011 05 16
 
-            xmlSettings.ValidationEventHandler += MyValidationEventHandler;
-
-            var xsd = XmlReader.Create(xml, xmlSettings);
+            XmlReaderSettings validationSettings = new XmlReaderSettings() { ValidationType = ValidationType.DTD };
+            validationSettings.ValidationEventHandler += MyValidationEventHandler;
+            XmlReader xsd = XmlReader.Create(stringReader, validationSettings);
 
             try
             {
+                //xsd.ValidationType = ValidationType.DTD; 2011 05 16
+                //xsd.ValidationEventHandler += new ValidationEventHandler(MyValidationEventHandler); 2011 05 16
+
                 while (xsd.Read())
                 {
                 }
@@ -129,7 +132,8 @@ namespace DTBookTranslation
                 }
 
                 XmlReader rdr = XmlReader.Create(stream);
-                XPathDocument doc = new XPathDocument(xml);
+                //XPathDocument doc = new XPathDocument(xml); 2011 05 16
+                XPathDocument doc = new XPathDocument(xsd);
 
                 XslCompiledTransform trans = new XslCompiledTransform(true);
                 trans.Load(rdr);

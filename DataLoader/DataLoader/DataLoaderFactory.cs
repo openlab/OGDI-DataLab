@@ -118,7 +118,7 @@ namespace Ogdi.Data.DataLoader
             where Producer : EntityProducer
         {
             var serializer = new XmlSerializer(typeof(DLParams));
-            var p = (KmlToTablesDataLoaderParams)serializer.Deserialize(stream);
+            var p = (DLParams)serializer.Deserialize(stream);
             p.TableMetadataEntity.EntityKind = p.TableMetadataEntity.EntitySet + "Item";
             EntityProducer producer = null;
             if (!p.TableMetadataEntity.IsEmpty)

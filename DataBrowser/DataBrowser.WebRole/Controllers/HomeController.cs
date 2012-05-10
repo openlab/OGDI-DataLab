@@ -26,8 +26,8 @@
  */
 
 using System.Web.Mvc;
-using Ogdi.InteractiveSdk.Mvc.Models;
 using Ogdi.InteractiveSdk.Mvc.Repository;
+using Ogdi.InteractiveSdk.Mvc.Models;
 
 namespace Ogdi.InteractiveSdk.Mvc.Controllers
 {
@@ -39,7 +39,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
         HomeModel viewDataModel = new HomeModel();
 
         #endregion
-
+        
         #region Public Methods
 
         /// <summary>
@@ -49,23 +49,9 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
         [OutputCache(Duration = 60, VaryByParam = "None")]
         public ActionResult About()
         {
-            GetRSS();
-
             ViewData.Model = viewDataModel;
 
             return View();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// This method will set viewDataModel.NewsData to Blogs & Announcements
-        /// </summary>
-        private void GetRSS()
-        {
-            viewDataModel.NewsData = BlogAndAnnouncementRepository.GetBlogsAndAnnouncements;
         }
 
         #endregion
