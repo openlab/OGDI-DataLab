@@ -1,0 +1,50 @@
+﻿@model Ogdi.InteractiveSdk.Mvc.Models.Request.RequestListModel
+
+@section TitleContent {
+
+	<script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/DataBrowser.min.js")"></script>
+	<script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/ogdi/list.js")"></script>
+
+	<script type="text/javascript">
+		var fieldNames = ["Name", "Description", "Category", "Status", "Date", "Rating", "Views"];
+		setListParameters("/Request/List", "/Request/ListDataJSON", fieldNames);
+	</script>
+}
+
+<div class="block">
+	<div class="requests">
+		<div class="bar"> @RequestResources.Index.NewDataRequests </div>
+		<p> @Html.Raw(RequestResources.Index.SeeWhatOthersLookingFor) </p>
+	</div>
+</div>
+@{ var sortImageSrc = Url.Content("~/Images/t.gif"); }
+<div class="dataset-list block">
+	<table cellpadding="0" cellspacing="0" border="0">
+	<thead>
+		<tr>
+			<td id="Name" width="50%"> @RequestResources.Index.Name <img src="@sortImageSrc" alt=""/></td>
+			<td id="Status" width="12.5%"> @RequestResources.Index.Status <img src="@sortImageSrc" alt=""/></td>
+			<td id="Date" width="12.5%"> @RequestResources.Index.Date <img src="@sortImageSrc" alt=""/></td>
+			<td id="Rating" width="12.5%"> @RequestResources.Index.Rating <img src="@sortImageSrc" alt=""/></td>
+			<td id="Views" width="12.5%"> @RequestResources.Index.Views <img src="@sortImageSrc" alt=""/></td>
+		</tr>
+	</thead>
+	<tbody class="rows">
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="3">
+				 @Html.Partial("PageControl") 
+				<div class="clear"></div>
+			</td>
+		</tr>
+	</tfoot>
+	</table>
+</div>
+<div id="BackGroundLoadingIndicator" class="bgLoadingIndicator" style="display: none"></div>
+<div id="LoadingIndicatorPanel" style="display: none; position: ">
+	<img id="imgLoading" class="loader" alt='@UIConstants.GC_LoadingAltText' style="display: none" src='@UIConstants.GC_LoadingImagePath' longdesc='@UIConstants.GC_LoadingLongDesc' />
+</div>
+
+

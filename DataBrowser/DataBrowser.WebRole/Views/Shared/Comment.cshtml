@@ -1,0 +1,40 @@
+﻿@model Ogdi.InteractiveSdk.Mvc.Models.Comments.Comment
+<div class="parameters">
+    <table cellpadding="0" cellspacing="0" width="100%">    
+        <tr>
+            <td width="330px">                        
+            </td>
+            <td width="250px">            
+                <span class="label"> @SharedResources.Comment.PostedOn </span>@Model.PostedOnAsText            
+            </td>
+            <td width="290px">
+                <span class="label"> @SharedResources.Comment.Type </span>@Model.Type
+            </td>
+            <td align="right">
+                <span class="addresed">
+                    @if ((Model.Status == "Addresed")||
+                           (Model.Status == "Replied")||
+                           (Model.Type ==  CommentInfoResource.CommentInfo.GeneralCommentReplyRequired))
+                       { 
+                    @SharedResources.Comment.Addresed 
+                 } 
+                </span>
+            </td>
+            <td align="right">
+                <span class="delete"><a href="javascript:DeleteComment('@Model.RowKey')">
+                    <img src="@Url.Content("~/Content/ico.png")" title="@SharedResources.Comment.DeleteThisComment " class="ico icoRemove"
+                        alt="delete" />
+                </a></span>
+            </td>
+        </tr>
+    </table>
+</div>
+    
+<div>
+    <span class="author">@SharedResources.Comment.From 
+        @Model.Author: </span><span class="subject">
+            @Model.Subject</span>
+</div>
+<div class="comment">
+    @Model.Body</div>
+

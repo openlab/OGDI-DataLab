@@ -2,6 +2,6 @@
 {
     public class DbaseKmlDataLoaderParams : DataLoaderParams
     {
-        public new DbaseKmlEntityProducerParams ProducerParams { get; set; }
+        public DbaseKmlEntityProducerParams ProducerParams { get; set; }
     }
 }

@@ -17,11 +17,12 @@ using System.Linq;
 using System.Net;
 using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.Profile;
 using System.Xml.Serialization;
+using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Microsoft.WindowsAzure.StorageClient;
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
 {
@@ -40,7 +41,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         private string _tableName;
         private string _containerName;
         private BlobProvider _blobProvider;
-        private object _lock = new object();
+        private static object _lock = new object();
         private CloudTableClient _tableStorage;
         private CloudStorageAccount _account;
         private RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
@@ -101,19 +102,18 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName",
                                                            Configuration.DefaultMembershipTableNameConfigurationString,
                                                            Configuration.DefaultMembershipTableName, false);
-
-            _containerName = Configuration.GetStringValueWithGlobalDefault(config, "containerName",
+            
+            _containerName = Configuration.GetStringValueWithGlobalDefault(config, "containerName", 
                                                            Configuration.DefaultProfileContainerNameConfigurationString,
                                                            Configuration.DefaultProfileContainerName, false);
+
             if (!SecUtility.IsValidContainerName(_containerName))
             {
                 throw new ProviderException("The provider configuration for the TableStorageProfileProvider does not contain a valid container name. " +
                                             "Please refer to the documentation for the concrete rules for valid container names." +
                                             "The current container name is" + _containerName);
             }
-            _tableServiceBaseUri = _account.TableEndpoint.AbsoluteUri;
-            _blobServiceBaseUri = _account.BlobEndpoint.AbsoluteUri;
-
+            _blobServiceBaseUri = Configuration.GetStringValue(config, "blobServiceBaseUri", null, true);
 
             // remove required attributes
             config.Remove("allowInsecureRemoteEndpoints");
@@ -122,7 +122,6 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             config.Remove("containerName");
             config.Remove("tableServiceBaseUri");
             config.Remove("blobServiceBaseUri");
-
 
             // Throw an exception if unrecognized attributes remain
             if (config.Count > 0)
@@ -155,10 +154,9 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     ctx.DeleteObject(dummyRow);
                     ctx.SaveChangesWithRetries();
                 }
-                
+
                 SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, blobClient.BaseUri);
                 _blobProvider = new BlobProvider(blobClient, _containerName);
-
             }
             catch (SecurityException)
             {
@@ -227,12 +225,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
             // Get the user name or anonymous user ID
             string username = (string)context["UserName"];
-
+            
             if (string.IsNullOrEmpty(username))
             {
                 return settings;
             }
-
+            
             if (!VerifyUsername(ref username))
             {
                 return settings;
@@ -249,7 +247,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
             Debug.Assert(profile != null);
 
-            // We are ready to go: load the profile
+            // We are ready to go: load the profile            
             // Note that we do not have to deal with write locks here because we use a 
             // different blob name each time we write a new profile
             StreamReader reader = null;
@@ -341,7 +339,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 return;
             }
 
-            // lets create the blob containing the profile without checking whether the user exists
+            // lets create the blob containing the profile without checking whether the user exits
 
             // Format the profile data for saving
             string names = String.Empty;
@@ -391,7 +389,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 CreateOrUpdateUserAndProfile(username, authenticated, DateTime.UtcNow, blobName, (int)stream.Length);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 throw new ProviderException("Error writing property values!", e);
             }
@@ -474,14 +472,14 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         {
             SecUtility.CheckArrayParameter(ref usernames, true, true, true, Constants.MaxTableUsernameLength, "usernames");
 
-            TableServiceContext context = CreateDataServiceContext();
+            TableServiceContext context = CreateDataServiceContext();            
             MembershipRow currentProfile = null;
             int ret = 0;
 
             try
-            {
+            {             
                 foreach (string name in usernames)
-                {
+                {             
                     DataServiceQuery<MembershipRow> queryObj = context.CreateQuery<MembershipRow>(_tableName);
                     var query = (from profile in queryObj
                                  where profile.PartitionKey == SecUtility.CombineToKey(_applicationName, name)
@@ -524,7 +522,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                         ret++;
                         // if we fail after savechanges, the profile will still be deleted
                         // but it will be a stale profile
-                        // deletes all blobs that start with the prefix
+                        // deletes all blobs that start with the prefix                     
                         _blobProvider.DeleteBlobsWithPrefix(GetProfileBlobPrefix(l.First().UserName));
                     }
                     catch (InvalidOperationException)
@@ -579,7 +577,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                                                              string usernameToMatch, DateTime userInactiveSinceDate,
                                                                              int pageIndex, int pageSize, out int totalRecords)
         {
-            return GetProfilesForQuery(usernameToMatch, userInactiveSinceDate.ToUniversalTime(), authenticationOption, pageIndex, pageSize, out totalRecords);
+            return GetProfilesForQuery(usernameToMatch, userInactiveSinceDate.ToUniversalTime(), authenticationOption, pageIndex, pageSize, out totalRecords);                        
         }
 
         public override ProfileInfoCollection FindProfilesByUserName(ProfileAuthenticationOption authenticationOption,
@@ -599,7 +597,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         public override ProfileInfoCollection GetAllProfiles(ProfileAuthenticationOption authenticationOption,
                                                              int pageIndex, int pageSize, out int totalRecords)
         {
-            return GetProfilesForQuery("%", DateTime.Now.ToUniversalTime().AddDays(1), authenticationOption, pageIndex, pageSize, out totalRecords);
+            return GetProfilesForQuery("%", DateTime.Now.ToUniversalTime().AddDays(1), authenticationOption, pageIndex, pageSize, out totalRecords);            
         }
 
         public override int GetNumberOfInactiveProfiles(ProfileAuthenticationOption authenticationOption,
@@ -624,8 +622,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             return _applicationName + username;
         }
 
-        private ProfileInfoCollection GetProfilesForQuery(string usernameToMatch, DateTime inactiveSinceUtc,
-                                                          ProfileAuthenticationOption auth, int pageIndex, int pageSize,
+        private ProfileInfoCollection GetProfilesForQuery(string usernameToMatch, DateTime inactiveSinceUtc, 
+                                                          ProfileAuthenticationOption auth, int pageIndex, int pageSize, 
                                                           out int totalRecords)
         {
             SecUtility.CheckParameter(ref usernameToMatch, true, true, false, Constants.MaxTableUsernameLength, "usernameToMatch");
@@ -665,7 +663,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 List<MembershipRow> users = GetUsersInactive(context, usernameToMatch, startsWith, auth, inactiveSinceUtc);
                 // default order is by user name (not by escaped user name as it appears in the key)
                 users.Sort();
-
+              
                 int startIndex = pageIndex * pageSize;
                 int endIndex = startIndex + pageSize;
                 int i = 0;
@@ -685,7 +683,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     infoColl.Add(new ProfileInfo(user.UserName, user.IsAnonymous, user.LastActivityDateUtc.ToLocalTime(),
                                                  user.ProfileLastUpdatedUtc.ToLocalTime(), user.ProfileSize));
                 }
-                totalRecords = infoColl.Count;
+                totalRecords = infoColl.Count;    
                 return infoColl;
             }
             catch (Exception e)
@@ -778,7 +776,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 if (users == null)
                 {
                     throw new ProviderException(string.Format(CultureInfo.InstalledUICulture, "The user {0} does not exist!", username));
-                }
+                } 
 
                 List<MembershipRow> memberList = new List<MembershipRow>(users);
 
@@ -798,7 +796,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             Debug.Assert(now.Kind == DateTimeKind.Utc);
             SecUtility.CheckParameter(ref username, true, true, true, Constants.MaxTableUsernameLength, "username");
 
-            _providerRetry(() =>
+            _providerRetry(() => 
             {
                 TableServiceContext context = CreateDataServiceContext();
                 DataServiceQuery<MembershipRow> queryObj = context.CreateQuery<MembershipRow>(_tableName);
@@ -844,7 +842,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     context.AddObject(_tableName, member);
                 }
                 context.SaveChanges();
-            });
+            });            
         }
 
         private List<MembershipRow> GetUsersInactive(DataServiceContext context, string usernameToMatch, bool startswith, ProfileAuthenticationOption auth, DateTime userInactiveSinceDateUtc)
@@ -982,13 +980,12 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             string completeContainerName = _containerName;
             if (!string.IsNullOrEmpty(_applicationName))
             {
-                completeContainerName = _containerName;
+                completeContainerName = _containerName; 
             }
             return completeContainerName;
         }
 
-        private static object Deserialize(SettingsPropertyValue p, string s)
-        {
+        private static object Deserialize(SettingsPropertyValue p, string s) {
             if (p == null)
             {
                 throw new ArgumentNullException("p");
@@ -1091,7 +1088,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     p.Property.SerializeAs = SettingsSerializeAs.Xml;
                 }
             }
-
+            
             if (p.Property.SerializeAs == SettingsSerializeAs.String)
             {
                 return p.PropertyValue.ToString();
@@ -1106,16 +1103,13 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     writer.Flush();
                     ret = writer.ToString();
                 }
-                return ret;
+                return ret;                
             }
             else if (p.Property.SerializeAs == SettingsSerializeAs.Binary)
             {
                 throw new ProviderException("Binary serialization is not supported because of security constraints!");
-            }
-            else
-            {
-                throw new ProviderException("Unknown serialization type.");
-            }
+            } 
+            throw new ProviderException("Unknown serialization type.");
         }
 
         private static void EncodeProfileData(ref string allNames, ref string allValues, ref byte[] buf,

@@ -6,11 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <script runat="server">
-    // This sample requires the .NET Framework 3.5 SP1.
+    // This sample requires the .NET Framework 4.0.
     // To get this the sample to work, perform the 
     // following steps:
     //
-    //      1. Create a new Web Site in Visual Studio 2008 SP1
+    //      1. Create a new Web Site in Visual Studio 2010
     //      2. Add a new Web Form (name it what you like)
     //      3. Make sure the "Place code in separate file" is unchecked in the 
     //         Add New Item dialog

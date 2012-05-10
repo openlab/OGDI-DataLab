@@ -1,0 +1,45 @@
+﻿
+
+
+
+    <script type="text/javascript">
+        var ExpanderImage = '<%= ConfigurationSettings.AppSettings["ExpanderImage"].ToString() %>';
+        var ExpanderImageDescription = '<%= ConfigurationSettings.AppSettings["ExpanderImageDescription"].ToString() %>';
+                
+        function ShowHideDiv() 
+        {
+            if (document.getElementById("pDataCatalogIntro2").style.display == "none") {
+                document.getElementById("pDataCatalogIntro2").style.display = "block";
+                document.getElementById("imgExpand").alt = "Hide Details";
+            }
+            else {
+                document.getElementById("pDataCatalogIntro2").style.display = "none";
+                document.getElementById("imgExpand").alt = "Show Details";
+            }
+        }
+    </script>
+    
+    <div>
+        <h1>Data Catalog</h1>        
+            <p class="big">
+                @ConfigurationSettings.AppSettings["DataCatalogIntro1"].ToString()              
+                <a href="javascript:ShowHideDiv();">                    
+                                    
+                    <script type="text/javascript">
+                        document.write('<img id="imgExpand" src="' + ExpanderImage + '" alt="Show Details.." longdesc="' + ExpanderImageDescription + '"/>');
+                    </script>
+                </a>
+            </p>
+            <p class="big" id="pDataCatalogIntro2" style="display:none">                     
+                @ConfigurationSettings.AppSettings["DataCatalogIntro2"].ToString()                                            
+            </p>
+            
+            <!-- TODO: Link on whole text of intro1 -->
+            <!-- TODO: Effects of expanding & showing -->
+            
+            <p class="big" style="margin: 0px; padding-top: 0px;">
+                Select Container:                
+                
+            </p>
+    </div>
+

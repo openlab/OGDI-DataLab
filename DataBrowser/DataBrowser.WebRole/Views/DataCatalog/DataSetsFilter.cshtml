@@ -1,0 +1,212 @@
+﻿@inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<Ogdi.InteractiveSdk.Mvc.Models.DatasetListModel>
+
+@using Ogdi.InteractiveSdk.Mvc
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+    rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+    $(function () {
+        var l = navigator.userLanguage;
+        if (l == "fr") {
+            $.datepicker.regional['fr'] = { clearText: 'Effacer', clearStatus: '',
+                closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+                prevText: '<Préc', prevStatus: 'Voir le mois précédent',
+                nextText: 'Suiv>', nextStatus: 'Voir le mois suivant',
+                currentText: 'Courant', currentStatus: 'Voir le mois courant',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+                monthStatus: 'Voir un autre mois',
+                yearStatus: 'Voir un autre année',
+                weekHeader: 'Sm',
+                weekStatus: '',
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                dayStatus: 'Utiliser DD comme premier jour de la semaine',
+                dateStatus: 'Choisir le DD, MM d',
+                dateFormat: 'dd/mm/yy', altFormat: 'dd/mm/yy', showAnim: '',
+                firstDay: 0,
+                initStatus: 'Choisir la date',
+                isRTL: false
+            };
+            $.datepicker.setDefaults($.datepicker.regional['fr']);
+
+            $("#DateFromFilter").datepicker();
+            $("#DateToFilter").datepicker();
+        }
+
+        else {
+            var options = { altFormat: 'mm/dd/yy', showAnim: '' };
+            $("#DateFromFilter").datepicker(options);
+            $("#DateToFilter").datepicker(options);
+        }
+    });
+
+    function submitFilter() {
+        var result = new Object();
+
+        result.PublishingDates = new Object();
+
+        var fromFormat = $("#DateFromFilter").datepicker("option", "altFormat");
+        var fromValue = $("#DateFromFilter").attr("value");
+        result.PublishingDates.From = $.datepicker.parseDate(fromFormat, fromValue);
+
+        var toFormat = $("#DateToFilter").datepicker("option", "altFormat");
+        var toValue = $("#DateToFilter").attr("value");
+        result.PublishingDates.To = $.datepicker.parseDate(toFormat, toValue);
+
+        result.Categories = new Array();
+        var categorychecks = $("#CategoryGroup input:checkbox[checked]");
+        for (var i = 0; i < categorychecks.length; i++) {
+            result.Categories[i] = $(categorychecks[i]).attr("name");
+        }
+
+        result.DataSources = new Array();
+        var datasetschecks = $("#DataSourceGroup input:checkbox[checked]");
+        for (var i = 0; i < datasetschecks.length; i++) {
+            result.DataSources[i] = $(datasetschecks[i]).attr("name");
+        }
+
+        result.Keywords = $("#KeywordsFilter").val();
+
+        result.Statuses = new Array();
+        var statuschecks = $("#StatusesGroup input:checkbox[checked]");
+        for (var i = 0; i < statuschecks.length; i++) {
+            result.Statuses[i] = $(statuschecks[i]).attr("name");
+        }
+
+        result.FileTypes = new Array();
+        var filetypechecks = $("#FileTypesGroup input:checkbox[checked]");
+        for (var i = 0; i < filetypechecks.length; i++) {
+            result.FileTypes[i] = $(filetypechecks[i]).attr("name");
+        }
+
+        return result;
+    }
+
+    function clearFilter() {
+        $("#DateFromFilter").attr("value", "");
+        $("#DateToFilter").attr("value", "");
+        $("#KeywordsFilter").val("");
+        $("#CategoryGroup input:checkbox").attr("checked", false);
+        $("#DataSourceGroup input:checkbox").attr("checked", false);
+        $("#StatusesGroup input:checkbox").attr("checked", false);
+        $("#FileTypesGroup input:checkbox").attr("checked", false);
+    }
+</script>
+
+<div class="dataset-filter form">
+    <div class="bar">
+        @DataCatalogResources.DataSetsFilter.Datasets </div>
+    <div class="content">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td width="33%" align="left" valign="top">
+                    <div class="category-block">
+                        <div class="label">
+                            @DataCatalogResources.DataSetsFilter.Category </div>
+                        <div id="CategoryGroup" class="items">
+                            @{	var index = 0; foreach (String category in ViewData.Model.Categories)
+                                {
+                                    var id = "cat" + (index++);
+                            
+                            <div class="item">
+                                <input type="checkbox" name="@category" value="@category" id="@id" /><label
+                                    for="@id">@category</label></div>
+                             } }
+                        </div>
+                    </div>
+                </td>
+                <td width="33%" align="left" valign="top">
+                    @if (ViewData.Model.AllContainers.GetEnumerator().MoveNext())
+                    {
+                    <div class="data-source-block">
+                        <div class="label">
+                            @DataCatalogResources.DataSetsFilter.DataSource </div>
+                        <div id="DataSourceGroup" class="items" style="overflow-y:scroll;">
+                            @{index = 0;}
+                            @foreach (Container container in ViewData.Model.AllContainers)
+                            {
+                                var id = "ds" + (index++);
+                            
+                                <div class="item">
+                                    <input type="checkbox" name="@container.Alias" value="@container.Alias" id="@id" />
+                                    <label for="@id">@container.Description</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                     } 
+                </td>
+                <td width="33%" align="left" valign="top">
+                    <div class="rest-block">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr class="field">
+                                <td class="label">
+                                    @DataCatalogResources.DataSetsFilter.Dates
+                                </td>
+                                <td />
+                                <td />
+                            </tr>
+                            <tr>
+                                <td class="value published" >
+                                    @DataCatalogResources.DataSetsFilter.From <input id="DateFromFilter" maxlength="10" size="10" class="calendar"   />
+                                </td>
+                                <td align="center" >
+                                    
+                                </td>
+                                <td class="value published" >
+                                    @DataCatalogResources.DataSetsFilter.To <input id="DateToFilter" maxlength="10" size="10" class="calendar"   />
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td class="label">
+                                    @DataCatalogResources.DataSetsFilter.Keywords
+                                </td>
+                                <td />
+                                <td />
+                            </tr>
+                            <tr>
+                                <td class="value keywords" colspan="3">
+                                    <input id="KeywordsFilter" value=""  style="width:272px;" />
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td class="label">
+                                    @DataCatalogResources.DataSetsFilter.Status
+                                </td>
+                                <td />
+                                <td />
+                            </tr>
+                            <tr id="StatusesGroup">
+                                <td class="value">
+                                    <input type="checkbox" class="checkbox" name="Published" id="stPublished" /><label
+                                        for="stPublished"> @DataCatalogResources.DataSetsFilter.Published </label>
+                                 </td>
+                                <td />
+                                 <td class="value">
+                                    <input type="checkbox" class="checkbox" name="Planned" id="stPlanned" /><label for="stPlanned"> @DataCatalogResources.DataSetsFilter.Planned </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" >
+                                    <div class="buttons" style="text-align: left;">
+                                        @Html.Raw(Html.NiceButton(this, DataCatalogResources.DataSetsFilter.Clear, 0, "ClearFilter"))
+                                        @Html.Raw(Html.NiceButton(this, DataCatalogResources.DataSetsFilter.Filter, 0, "SubmitFilter"))
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+

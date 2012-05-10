@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-  <WebRole name="DataBrowser.WebRole">
+  <WebRole name="DataBrowser.WebRole" vmsize="ExtraSmall">
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -16,22 +16,19 @@
     <ConfigurationSettings>
       <Setting name="serviceUri" />
       <Setting name="pathDTD" />
-      <Setting name="TermsOfUseURL" />
-      <Setting name="TradeMarksURL" />
-      <Setting name="CopyRightsStatement" />
-      <Setting name="PrivacyPage" />
       <Setting name="DataConnectionString" />
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="RecaptchaPrivateKey" />
       <Setting name="RecaptchaPublicKey" />
       <Setting name="RootServiceNamespace" />
+      <Setting name="IsAnalytics" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
       <InputEndpoint name="DataServiceIn" protocol="http" port="8080" />
     </Endpoints>
   </WebRole>
-  <WorkerRole name="DataBrowser.WorkerRole">
+  <WorkerRole name="DataBrowser.WorkerRole" vmsize="ExtraSmall">
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" />
       <Setting name="DataConnectionString" />

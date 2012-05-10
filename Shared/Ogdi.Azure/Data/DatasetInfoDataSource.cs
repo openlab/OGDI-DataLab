@@ -1,113 +1,111 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Ogdi.Azure.Configuration;
+using System.Collections.Generic;
 
 namespace Ogdi.Azure.Data
 {
-    public sealed class DatasetInfoDataSource
-    {
-        private static readonly CloudStorageAccount StorageAccount;
-        private static readonly object Mutex = new object();
+	public sealed class DatasetInfoDataSource
+	{
+		private static readonly CloudStorageAccount StorageAccount;
+		private static readonly object Mutex = new object();
 
-        private readonly DatasetInfoDataContext _context;
+		private readonly DatasetInfoDataContext _context;
 
-        static DatasetInfoDataSource()
-        {
-            string connectionString = OgdiConfiguration.GetValue("DataConnectionString");
-            StorageAccount = CloudStorageAccount.Parse(connectionString);
+		static DatasetInfoDataSource()
+		{
+			StorageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 
-            CloudTableClient.CreateTablesFromModel(
-                typeof(DatasetInfoDataContext),
-                StorageAccount.TableEndpoint.AbsoluteUri,
-                StorageAccount.Credentials);
-        }
+			CloudTableClient.CreateTablesFromModel(
+				typeof(DatasetInfoDataContext),
+				StorageAccount.TableEndpoint.AbsoluteUri,
+				StorageAccount.Credentials);
+		}
 
-        public DatasetInfoDataSource()
-        {
-            _context = new DatasetInfoDataContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials)
-                           {RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1))};
-        }
+		public DatasetInfoDataSource()
+		{
+			_context = new DatasetInfoDataContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials) { RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1)) };
+		}
 
-        public void IncrementView(string itemKey)
-        {
-            lock (Mutex) // NOTE: This synchronization is not enough since there may be several instances of roles.
-            {
-                var result = GetOrCreateAnalyticInfo(itemKey);
+		public void IncrementView(string itemKey)
+		{
+			lock (Mutex) // NOTE: This synchronization is not enough since there may be several instances of roles.
+			{
+				var result = GetOrCreateAnalyticInfo(itemKey);
 
 
-                if (result.last_viewed.Date == DateTime.Today)
-                {
-                    result.last_viewed = DateTime.Now;
-                    result.views_today += 1;
-                    result.views_total += 1;
-                }
-                else
-                {
-                    result.last_viewed = DateTime.Now;
-                    result.views_average = result.views_total * result.views_average / (result.views_total - result.views_today + result.views_average);
-                    result.views_total += 1;
-                    result.views_today = 1;
-                }
-                _context.UpdateObject(result);
+				if (result.last_viewed.Date == DateTime.Today)
+				{
+					result.last_viewed = DateTime.Now;
+					result.views_today += 1;
+					result.views_total += 1;
+				}
+				else
+				{
+					result.last_viewed = DateTime.Now;
+					result.views_average = result.views_total * result.views_average / (result.views_total - result.views_today + result.views_average);
+					result.views_total += 1;
+					result.views_today = 1;
+				}
+				_context.UpdateObject(result);
 
 
-                _context.SaveChanges();
-            }
-        }
+				_context.SaveChanges();
+			}
+		}
 
-        public void IncrementVote(string itemKey, int vote)
-        {
-            lock (Mutex) // NOTE: This synchronization is not enough since there may be several instances of roles.
-            {
-                var result = GetOrCreateAnalyticInfo(itemKey);
+		public void IncrementVote(string itemKey, int vote)
+		{
+			lock (Mutex) // NOTE: This synchronization is not enough since there may be several instances of roles.
+			{
+				var result = GetOrCreateAnalyticInfo(itemKey);
 
-                if (vote < 0)
-                    result.NegativeVotes += -vote;
-                else
-                    result.PositiveVotes += vote;
+				if (vote < 0)
+					result.NegativeVotes += -vote;
+				else
+					result.PositiveVotes += vote;
 
-                _context.UpdateObject(result);
-                _context.SaveChanges();
-            }
-        }
+				_context.UpdateObject(result);
+				_context.SaveChanges();
+			}
+		}
 
-        public IEnumerable<AnalyticInfo> SelectAll()
-        {
-            return from dsi in _context.AnalyticInfo select dsi;
-        }
+		public IEnumerable<AnalyticInfo> SelectAll()
+		{
+			return from dsi in _context.AnalyticInfo select dsi;
+		}
 
-        public AnalyticInfo GetAnalyticSummary(string itemKey)
-        {
-            return GetOrCreateAnalyticInfo(itemKey);
-        }
+		public AnalyticInfo GetAnalyticSummary(string itemKey)
+		{
+			return GetOrCreateAnalyticInfo(itemKey);
+		}
 
-        private AnalyticInfo GetOrCreateAnalyticInfo(string itemKey)
-        {
-            AnalyticInfo dataset = (from info in _context.AnalyticInfo
-                                    where info.RowKey == itemKey
-                                    select info).FirstOrDefault();
+		private AnalyticInfo GetOrCreateAnalyticInfo(string itemKey)
+		{
+			AnalyticInfo dataset = (from info in _context.AnalyticInfo
+									where info.RowKey == itemKey
+									select info).FirstOrDefault();
 
-            if (dataset != null)
-                return dataset;
+			if (dataset != null)
+				return dataset;
 
-            var initialViewCount = new Random().Next(3, 12); // This is to attract users.
-            dataset = new AnalyticInfo(itemKey)
-                        {
-                            last_viewed = DateTime.Now,
-                            views_today = initialViewCount,
-                            views_total = initialViewCount,
-                            views_average = initialViewCount,
-                            NegativeVotes = 0,
-                            PositiveVotes = 0,
-                        };
+			var initialViewCount = new Random().Next(3, 12); // This is to attract users.
+			dataset = new AnalyticInfo(itemKey)
+						{
+							last_viewed = DateTime.Now,
+							views_today = initialViewCount,
+							views_total = initialViewCount,
+							views_average = initialViewCount,
+							NegativeVotes = 0,
+							PositiveVotes = 0,
+						};
 
-            _context.AddObject(DatasetInfoDataContext.AnalyticInfoTableName, dataset);
-            _context.SaveChanges();
+			_context.AddObject(DatasetInfoDataContext.AnalyticInfoTableName, dataset);
+			_context.SaveChanges();
 
-            return dataset;
-        }
-    }
+			return dataset;
+		}
+	}
 }

@@ -1,0 +1,28 @@
+﻿@model EntitySetWrapper
+
+@{ var modelEntitySet = this.Model.EntitySet; }
+<div class="dataset">
+	<div class="name">@modelEntitySet.Name</div>
+	<div class="description">@modelEntitySet.Description</div>		
+	<div class="parameters">
+		<div class="left">
+			<div class="label"> @DataBrowserResources.DataSetView.Category </div>
+			<div>@modelEntitySet.CategoryValue</div>
+		</div>
+		<div class="left">
+			<div class="label"> @DataBrowserResources.DataSetView.Date</div>
+			<div>@modelEntitySet.LastUpdateDate.ToString(Ogdi.InteractiveSdk.Mvc.Globals.ShortDateFormat)</div>
+		</div>
+		<div class="left">
+			<div class="label"> @DataBrowserResources.DataSetView.Rating</div>
+			
+			<div class="rates"> @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(Model.EntitySet.ItemKey, Model.PositiveVotes, Model.NegativeVotes) { ReadOnly = false }) </div>
+		</div>
+		<div class="left">
+			<div class="label"> @DataBrowserResources.DataSetView.Views</div>
+			<div>@this.Model.Views</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+

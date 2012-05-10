@@ -1,0 +1,74 @@
+﻿@model Ogdi.InteractiveSdk.Mvc.Models.DatasetListModel
+@{ 
+    Layout = null;
+    var odd = true;
+}
+@foreach (EntitySetWrapper entity in ViewData.Model.MainList)
+{
+    if (odd == true)
+    {
+        <tr class="co">
+            <td>
+                @{
+                    string link = this.Url.Content("~/DataBrowser/" + entity.EntitySet.ContainerAlias + "/" + entity.EntitySet.EntitySetName + "#param=NOFILTER--DataView--Results");
+                }
+                <a href="@link"><b>@entity.EntitySet.Name</b></a>
+                <div class="description">@entity.EntitySet.Description</div>
+            </td>
+            <td>
+                @entity.EntitySet.CategoryValue
+            </td>
+            <td>
+                @if(entity.EntitySet.IsEmpty){
+                    @DataCatalogResources.DataSets.Planned }
+                else {
+                     @DataCatalogResources.DataSets.Published }  
+            </td>
+            <td>
+                @entity.EntitySet.LastUpdateDate.ToString(DataCatalogResources.DataSets.DateFormat)
+            </td>
+            <td>
+                @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(entity.EntitySet.ItemKey, entity.PositiveVotes, entity.NegativeVotes))
+            </td>
+            <td>
+                @entity.Views.ToString()
+                <input id="total" type="hidden" value="@ViewData.Model.PageCount" />
+            </td>
+        </tr>
+    } 
+    else
+    {
+        <tr class="ce">
+            <td>
+                @{
+                    string link = this.Url.Content("~/DataBrowser/" + entity.EntitySet.ContainerAlias + "/" + entity.EntitySet.EntitySetName + "#param=NOFILTER--DataView--Results");
+                }
+                <a href="@link"><b>@entity.EntitySet.Name</b></a>
+                <div class="description">@entity.EntitySet.Description</div>
+            </td>
+            <td>
+                @entity.EntitySet.CategoryValue
+            </td>
+            <td>
+                @if(entity.EntitySet.IsEmpty){
+                    @DataCatalogResources.DataSets.Planned }
+                else {
+                     @DataCatalogResources.DataSets.Published }  
+            </td>
+            <td>
+                @entity.EntitySet.LastUpdateDate.ToString(DataCatalogResources.DataSets.DateFormat)
+            </td>
+            <td>
+                @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(entity.EntitySet.ItemKey, entity.PositiveVotes, entity.NegativeVotes))
+            </td>
+            <td>
+                @entity.Views.ToString()
+                <input id="total" type="hidden" value="@ViewData.Model.PageCount" />
+            </td>
+        </tr>
+    }
+            
+        
+    odd = !odd;
+}
+

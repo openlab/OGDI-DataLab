@@ -1,0 +1,18 @@
+﻿@model Ogdi.InteractiveSdk.Mvc.Models.AuthorInfo
+
+<div class="value">
+	@if (!string.IsNullOrEmpty(Model.Name))
+    { 
+		    @Model.Name
+		@if (!string.IsNullOrEmpty(Model.Email))
+     { 
+		        <text>(</text> <a href="mailto:@Model.Email">@Model.Email</a> <text>)</text>
+        	}  		    		    
+	}
+    else
+    {     
+    @SharedResources.AuthorInfo.Anonymous    
+ } 
+</div>
+
+

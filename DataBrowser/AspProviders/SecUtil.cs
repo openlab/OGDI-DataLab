@@ -4,14 +4,24 @@
 // </copyright>
 //
 using System;
-using System.Collections;
-using System.Data.Services.Client;
-using System.Diagnostics;
 using System.Globalization;
+using System.Web.Hosting;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Data;
+using System.Data.Services;
+using System.Data.Services.Client;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Configuration.Provider;
+using System.Configuration;
+using System.Text.RegularExpressions;
+using System.Xml;
 using System.Net;
+using System.Diagnostics;
 using System.Security;
 using System.Text;
-using System.Text.RegularExpressions;
+using Microsoft.WindowsAzure.StorageClient;
 using System.Threading;
 using Microsoft.WindowsAzure;
 
@@ -30,7 +40,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             }
 
             param = param.Trim();
-            return (!checkIfEmpty || param.Length >= 1) && (maxSize <= 0 || param.Length <= maxSize) && (!checkForCommas || !param.Contains(","));
+
+            return (!checkIfEmpty || param.Length >= 1) && (maxSize <= 0 || param.Length <= maxSize) && (!checkForCommas || !param.Contains(",")); ;
         }
 
         internal static void CheckParameter(ref string param, bool checkForNull, bool checkIfEmpty, bool checkForCommas, int maxSize, string paramName)
@@ -79,15 +90,13 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 SecUtility.CheckParameter(ref param[i], checkForNull, checkIfEmpty, checkForCommas, maxSize,
                     paramName + "[ " + i.ToString(CultureInfo.InvariantCulture) + " ]");
-                if (!values.Contains(param[i]))
+                if (values.Contains(param[i]))
                 {
-                    values.Add(param[i], param[i]);
+                    throw new ArgumentException(string.Format(CultureInfo.InstalledUICulture, "The array '{0}' should not contain duplicate values.", paramName), paramName);
                 }
                 else
                 {
-                    throw new ArgumentException(
-                        string.Format(CultureInfo.InstalledUICulture,
-                                      "The array '{0}' should not contain duplicate values.", paramName), paramName);
+                    values.Add(param[i], param[i]);
                 }
             }
         }
@@ -122,7 +131,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             if (string.IsNullOrEmpty(name))
             {
                 return false;
-            }
+            }            
             Regex reg = new Regex(ValidContainerNameRegex);
             return reg.IsMatch(name);
         }
@@ -174,8 +183,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 ); 
         }
 
-        internal static string CharToEscapeSequence(char c)
-        {
+        internal static string CharToEscapeSequence(char c) {
             string ret = EscapeCharacterString + string.Format(CultureInfo.InvariantCulture, "{0:X2}", (int)c);
             return ret;
         }

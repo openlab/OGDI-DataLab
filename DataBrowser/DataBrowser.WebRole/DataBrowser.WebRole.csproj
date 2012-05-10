@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CE3A2F55-8154-4478-8251-64D24D15DB79}</ProjectGuid>
-    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{e53f8fea-eae0-44a6-8774-ffd645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ogdi.InteractiveSdk.Mvc</RootNamespace>
@@ -30,8 +30,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
     <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +45,6 @@
     <CodeAnalysisRules>
     </CodeAnalysisRules>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <ExcludeApp_Data>false</ExcludeApp_Data>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,23 +55,33 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRules>
     </CodeAnalysisRules>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSharpFormat, Version=2.5.3325.25047, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Shared\CSharpFormat.dll</HintPath>
+      <HintPath>..\..\packages\OGDI-DataLab-DataBrowser.WebRole-Dependencies.1.0\lib\CSharpFormat.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Shared\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="NuGet.Core, Version=1.0.11220.104, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -80,6 +89,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DataVisualization">
       <Private>True</Private>
@@ -90,16 +102,39 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Administration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
@@ -203,10 +238,478 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository\SampleCodeGenerator.cs" />
+    <Compile Include="Resources\Controllers\ResourceController.fr.Designer.cs">
+      <DependentUpon>ResourceController.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Controllers\ResourceController.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceController.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Comments\CommentInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommentInfo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Comments\CommentInfo.fr.Designer.cs">
+      <DependentUpon>CommentInfo.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Reports\Reports.fr.Designer.cs">
+      <DependentUpon>Reports.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Reports\Reports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reports.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\UpdateUserInfo.fr.Designer.cs">
+      <DependentUpon>UpdateUserInfo.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Account\Register.fr.Designer.cs">
+      <DependentUpon>Register.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Account\ManageRoles.fr.Designer.cs">
+      <DependentUpon>ManageRoles.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Account\LogOn.fr.Designer.cs">
+      <DependentUpon>LogOn.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Account\LogOn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOn.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\ManageRoles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageRoles.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\Register.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\UpdateUserInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateUserInfo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Agency\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Agency\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Comments\AgencyComments.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgencyComments.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Comments\AgencyComments.fr.Designer.cs">
+      <DependentUpon>AgencyComments.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Comments\Unsuscribe.fr.Designer.cs">
+      <DependentUpon>Unsuscribe.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Comments\Unsuscribe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unsuscribe.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataView.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataView.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\SampleCode.fr.Designer.cs">
+      <DependentUpon>SampleCode.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetView.fr.Designer.cs">
+      <DependentUpon>DataSetView.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetDetails.fr.Designer.cs">
+      <DependentUpon>DataSetDetails.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetView.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetView.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataView.fr.Designer.cs">
+      <DependentUpon>DataView.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetData.fr.Designer.cs">
+      <DependentUpon>DataSetData.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\DataSetData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetData.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\Query.fr.Designer.cs">
+      <DependentUpon>Query.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\Query.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Query.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataBrowser\SampleCode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleCode.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\EntitySets.fr.Designer.cs">
+      <DependentUpon>EntitySets.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSets.fr.Designer.cs">
+      <DependentUpon>DataSets.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataCategories.fr.Designer.cs">
+      <DependentUpon>DataCategories.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataCategories.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataCategories.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSetList.fr.Designer.cs">
+      <DependentUpon>DataSetList.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSetList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSets.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSetsFilter.fr.Designer.cs">
+      <DependentUpon>DataSetsFilter.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\DataSetsFilter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetsFilter.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\EntitySets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntitySets.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\TopList.fr.Designer.cs">
+      <DependentUpon>TopList.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\DataCatalog\TopList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TopList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Developers\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Developers\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Home\About.Designer.cs">
+      <DependentUpon>About.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Home\About.fr.Designer.cs">
+      <DependentUpon>About.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Privacy\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Privacy\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Request\RequestsManage.fr.Designer.cs">
+      <DependentUpon>RequestsManage.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Request\New.fr.Designer.cs">
+      <DependentUpon>New.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Request\List.fr.Designer.cs">
+      <DependentUpon>List.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Request\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Request\Details.fr.Designer.cs">
+      <DependentUpon>Details.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Request\Details.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Request\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Request\List.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Request\New.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>New.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Request\RequestsManage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestsManage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\AgencyTabs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgencyTabs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\AuthorInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthorInfo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Comment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comment.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Comments.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comments.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Comments.fr.Designer.cs">
+      <DependentUpon>Comments.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\AgencyTabs.fr.Designer.cs">
+      <DependentUpon>AgencyTabs.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\AuthorInfo.fr.Designer.cs">
+      <DependentUpon>AuthorInfo.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Comment.fr.Designer.cs">
+      <DependentUpon>Comment.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\RatesPlusMinus.fr.Designer.cs">
+      <DependentUpon>RatesPlusMinus.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Rates.fr.Designer.cs">
+      <DependentUpon>Rates.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenIDLogonControl.fr.Designer.cs">
+      <DependentUpon>OpenIDLogonControl.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenIdControl.fr.Designer.cs">
+      <DependentUpon>OpenIdControl.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenId.fr.Designer.cs">
+      <DependentUpon>OpenId.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\LogOnUserControl.fr.Designer.cs">
+      <DependentUpon>LogOnUserControl.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Error.fr.Designer.cs">
+      <DependentUpon>Error.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\LogOnUserControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOnUserControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenId.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenId.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenIdControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenIdControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OpenIDLogonControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenIDLogonControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\PageControl.fr.Designer.cs">
+      <DependentUpon>PageControl.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OGDIMasterPage.fr.Designer.cs">
+      <DependentUpon>OGDIMasterPage.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\OGDIMasterPage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OGDIMasterPage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\PageControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Rates.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rates.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\RatesPlusMinus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RatesPlusMinus.resx</DependentUpon>
+    </Compile>
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\banner-fr.png" />
+    <Content Include="Content\css\banner.png" />
+    <Content Include="Content\css\buttons\cancel-fr.png" />
+    <Content Include="Content\css\buttons\clear-fr.png" />
+    <Content Include="Content\css\buttons\create-fr.png" />
+    <Content Include="Content\css\buttons\delete-fr.png" />
+    <Content Include="Content\css\buttons\filter-fr.png" />
+    <Content Include="Content\css\buttons\login-fr.png" />
+    <Content Include="Content\css\buttons\mark-as-addressed-fr.png" />
+    <Content Include="Content\css\buttons\mark-as-completed-fr.png" />
+    <Content Include="Content\css\buttons\no-action-required-fr.png" />
+    <Content Include="Content\css\buttons\ok-fr.png" />
+    <Content Include="Content\css\buttons\post-comment-fr.png" />
+    <Content Include="Content\css\buttons\refresh-chart-fr.png" />
+    <Content Include="Content\css\buttons\reply-fr.png" />
+    <Content Include="Content\css\buttons\run-fr.png" />
+    <Content Include="Content\css\buttons\update-status-fr.png" />
     <Content Include="Content\css\comments.css" />
+    <Content Include="Content\css\styles-fr.css" />
     <Content Include="Content\css\csharp.css" />
     <Content Include="Content\css\icons.gif" />
     <Content Include="Content\css\pngbehavior.htc" />
@@ -234,6 +737,8 @@
     <Content Include="Content\css\tab-themes.css" />
     <Content Include="Content\css\tabs.css" />
     <Content Include="App_Data\Xml\Languages.xml" />
+    <Content Include="Content\css\vtabs-fr.png" />
+    <Content Include="Content\css\vtabs1-fr.png" />
     <Content Include="Content\images\sort.jpg" />
     <Content Include="Content\images\sorted_desc.jpg" />
     <Content Include="Content\images\sorted_asc.jpg" />
@@ -274,7 +779,7 @@
     <Content Include="Descriptions\T4.txt" />
     <Content Include="Descriptions\DaisyFormat.txt" />
     <Content Include="Descriptions\VE.txt" />
-    <Content Include="Descriptions\VS2008.txt" />
+    <Content Include="Descriptions\VS2010.txt" />
     <Content Include="Descriptions\YahooMaps.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\bg.jpg" />
@@ -306,6 +811,7 @@
     <Content Include="Images\light.gif" />
     <Content Include="Images\loading2.gif" />
     <Content Include="Images\menu.gif" />
+    <Content Include="Images\microsoft[1].png" />
     <Content Include="Images\middleMedia.jpg" />
     <Content Include="Content\images\first.jpg" />
     <Content Include="Content\images\last.jpg" />
@@ -356,47 +862,11 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\ogdi\list.js" />
     <Content Include="Scripts\querybuilder.js" />
-    <Content Include="Views\Account\LogOn.aspx" />
-    <Content Include="Views\Account\ManageRoles.aspx" />
-    <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Account\UpdateUserInfo.aspx" />
-    <Content Include="Views\Comments\Test.aspx" />
-    <Content Include="Views\Comments\Unsubscribe.aspx" />
-    <Content Include="Views\Shared\OpenId.ascx" />
-    <Content Include="Views\DataBrowser\BarChart.ascx" />
-    <Content Include="Views\DataBrowser\DataSetView.ascx" />
-    <Content Include="Views\DataBrowser\Index.aspx" />
-    <Content Include="Views\DataBrowser\DataView.ascx" />
-    <Content Include="Views\DataBrowser\ErrorView.ascx" />
-    <Content Include="Views\DataBrowser\PieChart.ascx" />
-    <Content Include="Views\DataBrowser\SampleCodeBarChartView.ascx" />
-    <Content Include="Views\DataBrowser\SampleCodeDataView.ascx" />
-    <Content Include="Views\DataBrowser\SampleCodeMapView.ascx" />
-    <Content Include="Views\DataBrowser\SampleCodePieChartView.ascx" />
-    <Content Include="Views\DataCatalog\DataSetList.aspx" />
-    <Content Include="Views\DataCatalog\DataSets.ascx" />
-    <Content Include="Views\DataCatalog\DataSetsFilter.ascx" />
-    <Content Include="Views\DataCatalog\Index.aspx" />
-    <Content Include="Views\DataCatalog\DataCategories.ascx" />
-    <Content Include="Views\DataCatalog\EntitySets.ascx" />
-    <Content Include="Views\DataCatalog\TopList.ascx" />
-    <Content Include="Views\Developers\Index.aspx" />
-    <Content Include="Views\HistoryIframeHelper\Index.ascx" />
-    <Content Include="Views\Privacy\Index.aspx" />
-    <Content Include="Views\Request\Details.aspx" />
-    <Content Include="Views\Request\Index.aspx" />
-    <Content Include="Views\Request\List.ascx" />
-    <Content Include="Views\Request\New.aspx" />
-    <Content Include="Views\Shared\Comments.ascx" />
-    <Content Include="Views\Shared\Rates.ascx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
-    <Content Include="Views\Shared\OpenIDLogonControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\OGDIMasterPage.Master" />
+    <Content Include="Scripts\jquery-1.4.1.min-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.min-vsdoc.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\UIConstants.resx">
@@ -414,6 +884,479 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\ResourceController.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceController.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ResourceControllerResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\ResourceController.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceController.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ResourceControllerResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Comments\CommentInfo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentInfo.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentInfoResource</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Comments\CommentInfo.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentInfo.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentInfoResource</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Reports\Reports.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reports.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ReportsResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Reports\Reports.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reports.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ReportsResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\UpdateUserInfo.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateUserInfo.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\Register.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\ManageRoles.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManageRoles.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\LogOn.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogOn.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\LogOn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogOn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\ManageRoles.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManageRoles.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\Register.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\UpdateUserInfo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateUserInfo.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AccountResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Agency\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AgencyResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Agency\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>AgencyResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Comments\AgencyComments.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgencyComments.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentsResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Comments\AgencyComments.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgencyComments.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentsResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Comments\Unsuscribe.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Unsuscribe.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentsResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Comments\Unsuscribe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Unsuscribe.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CommentsResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\SampleCode.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SampleCode.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetView.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetView.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetDetails.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetDetails.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetDetails.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetView.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetView.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataView.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataView.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetData.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetData.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataSetData.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetData.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\DataView.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>DataView.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\Query.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Query.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\Query.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Query.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataBrowser\SampleCode.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SampleCode.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataBrowserResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\EntitySets.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntitySets.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSets.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSets.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataCategories.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataCategories.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataCategories.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataCategories.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetList.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetList.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetList.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSets.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSets.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetsFilter.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetsFilter.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetsFilter.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataSetsFilter.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\EntitySets.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntitySets.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\TopList.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TopList.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\DataCatalog\TopList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TopList.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Developers\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DevelopersResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Developers\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DevelopersResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\About.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>About.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>HomeResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\About.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>About.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>HomeResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Privacy\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Privacy\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\RequestsManage.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequestsManage.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\New.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>New.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\List.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>List.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\Details.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Details.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\Details.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Details.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\List.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>List.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\New.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>New.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Request\RequestsManage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequestsManage.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RequestResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\AgencyTabs.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgencyTabs.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\AuthorInfo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AuthorInfo.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Comment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comment.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Comments.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comments.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Comments.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comments.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\AgencyTabs.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgencyTabs.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\AuthorInfo.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AuthorInfo.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Comment.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comment.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\RatesPlusMinus.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RatesPlusMinus.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Rates.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Rates.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenIDLogonControl.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenIDLogonControl.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenIdControl.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenIdControl.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenId.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenId.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\LogOnUserControl.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogOnUserControl.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Error.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\LogOnUserControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogOnUserControl.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenId.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenId.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenIdControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenIdControl.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OpenIDLogonControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OpenIDLogonControl.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\PageControl.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageControl.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OGDIMasterPage.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OGDIMasterPage.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\OGDIMasterPage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OGDIMasterPage.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\PageControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageControl.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Rates.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Rates.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\RatesPlusMinus.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RatesPlusMinus.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -452,28 +1395,77 @@
     <Content Include="Scripts\jquery.clipboard.swf" />
     <Content Include="Scripts\ogdi\list.min.js" />
     <Content Include="Scripts\querybuilder.min.js" />
-    <Content Include="Views\Agency\Index.aspx" />
-    <Content Include="Views\Comments\AgencyComments.aspx" />
-    <Content Include="Views\DataBrowser\DataSetData.ascx" />
-    <Content Include="Views\DataBrowser\DataSetDetails.ascx" />
-    <Content Include="Views\DataBrowser\Query.ascx" />
-    <Content Include="Views\DataBrowser\SampleCode.ascx" />
-    <Content Include="Views\Request\RequestsManage.aspx" />
-    <Content Include="Views\Shared\AgencyTabs.ascx" />
-    <Content Include="Views\Shared\Bookmark.ascx" />
-    <Content Include="Views\Shared\Comment.ascx" />
-    <Content Include="Views\Shared\OpenIdControl.ascx" />
-    <Content Include="Views\Shared\OpenIdForm.ascx" />
-    <Content Include="Views\Shared\PageControl.ascx" />
-    <Content Include="Views\Shared\RatesPlusMinus.ascx" />
-    <Content Include="Views\Shared\AuthorInfo.ascx" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\ManageRoles.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\UpdateUserInfo.cshtml" />
+    <Content Include="Views\Agency\Index.cshtml" />
+    <Content Include="Views\Comments\AgencyComments.cshtml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Views\Comments\Test.cshtml" />
+    <Content Include="Views\Comments\Unsubscribe.cshtml" />
+    <Content Include="Views\DataCatalog\DataCategories.cshtml" />
+    <Content Include="Views\DataCatalog\DataSetList.cshtml" />
+    <Content Include="Views\DataCatalog\DataSets.cshtml" />
+    <Content Include="Views\DataCatalog\DataSetsFilter.cshtml" />
+    <Content Include="Views\DataCatalog\EntitySets.cshtml" />
+    <Content Include="Views\DataCatalog\Index.cshtml" />
+    <Content Include="Views\DataCatalog\TopList.cshtml" />
+    <Content Include="Views\Developers\Index.cshtml" />
+    <Content Include="Views\HistoryIframeHelper\Index.cshtml" />
+    <Content Include="Views\Privacy\Index.cshtml" />
+    <Content Include="Views\Request\Details.cshtml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Request\List.cshtml" />
+    <Content Include="Views\Request\New.cshtml" />
+    <Content Include="Views\Request\RequestsManage.cshtml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Views\Shared\AgencyTabs.cshtml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Views\Shared\AuthorInfo.cshtml" />
+    <Content Include="Views\Shared\Bookmark.cshtml" />
+    <Content Include="Views\Shared\Comment.cshtml" />
+    <Content Include="Views\Shared\Comments.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\LogOnUserControl.cshtml" />
+    <Content Include="Views\Shared\OGDIMasterPage.cshtml" />
+    <Content Include="Views\Shared\OpenId.cshtml" />
+    <Content Include="Views\Shared\OpenIdControl.cshtml" />
+    <Content Include="Views\Shared\OpenIdForm.cshtml" />
+    <Content Include="Views\Shared\OpenIDLogonControl.cshtml" />
+    <Content Include="Views\Shared\PageControl.cshtml" />
+    <Content Include="Views\Shared\Rates.cshtml" />
+    <Content Include="Views\Shared\RatesPlusMinus.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\DataBrowser\BarChart.cshtml" />
+    <Content Include="Views\DataBrowser\PieChart.cshtml" />
+    <Content Include="Views\DataBrowser\DataView.cshtml" />
+    <Content Include="Views\DataBrowser\Query.cshtml" />
+    <Content Include="Views\DataBrowser\DataSetDetails.cshtml" />
+    <Content Include="Views\DataBrowser\SampleCode.cshtml" />
+    <Content Include="Views\DataBrowser\SampleCodePieChartView.cshtml" />
+    <Content Include="Views\DataBrowser\SampleCodeBarChartView.cshtml" />
+    <Content Include="Views\DataBrowser\SampleCodeDataView.cshtml" />
+    <Content Include="Views\DataBrowser\SampleCodeMapView.cshtml" />
+    <Content Include="Views\DataBrowser\ErrorView.cshtml" />
+    <Content Include="Views\DataBrowser\DataSetData.cshtml" />
+    <Content Include="Views\DataBrowser\DataSetView.cshtml" />
+    <Content Include="Views\DataBrowser\Index.cshtml" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Home\About.cshtml" />
     <None Include="XmlValidation\dtbook-2005-3.dtd" />
   </ItemGroup>
   <ItemGroup>
@@ -485,19 +1477,13 @@
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
-      <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>Ogdi.Config</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AspProviders\AspProviders.csproj">
       <Project>{306D2F9E-D6D0-4D96-94F1-173C60A13875}</Project>
       <Name>AspProviders</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\StorageInterface\StorageInterface.csproj">
       <Project>{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}</Project>
       <Name>StorageInterface</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\WindowsAzureStorage\WindowsAzureStorage.csproj">
       <Project>{281E6351-FA80-49F8-9A3A-80894F71548C}</Project>
@@ -523,7 +1509,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>28454</DevelopmentServerPort>
+          <DevelopmentServerPort>61632</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

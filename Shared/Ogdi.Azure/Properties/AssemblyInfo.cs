@@ -1,15 +1,16 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ogdi.Asure")]
+[assembly: AssemblyTitle("Ogdi.Azure")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MSIT")]
-[assembly: AssemblyProduct("Ogdi.Asure")]
+[assembly: AssemblyProduct("Ogdi.Azure")]
 [assembly: AssemblyCopyright("Copyright © MSIT 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

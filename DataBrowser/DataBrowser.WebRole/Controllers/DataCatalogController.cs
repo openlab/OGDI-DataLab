@@ -184,7 +184,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 
 			var model = new DatasetListModel(pageSize, pageNumber, new OrderByInfo { Direction = direction, Field = field }, containerAliases, filters);
 
-			return View(model);
+			return PartialView(model);
 		}
 
 		public ActionResult GetListDataJSON()

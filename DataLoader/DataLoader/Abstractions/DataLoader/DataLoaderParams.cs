@@ -10,6 +10,8 @@ namespace Ogdi.Data.DataLoader
 
         public TableMetadataEntity TableMetadataEntity { get; set; }
 
+        public TableColumnsMetadata TableColumnsMetadata { get; set; }
+
         public static int ConcurrentSetsCount
         {
             get { return int.Parse(ConfigurationManager.AppSettings["ConcurrentSetsCount"] ?? "40"); }

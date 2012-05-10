@@ -49,7 +49,7 @@ namespace Ogdi.Data.DataLoader.Kml
             get { return _schemaEntity; }
         }
 
-        public override IEnumerable<Entity> GetEntitiesEnumerator(OnContinueExceptionCallback exceptionNotifier)
+        public override IEnumerable<Entity> GetEntitiesEnumerator(OnContinueExceptionCallback exceptionNotifier, DataLoaderParams Params)
         {
             int count = 0;
             string initialTimePrefix = GetSecondsFrom2000Prefix();
@@ -61,10 +61,63 @@ namespace Ogdi.Data.DataLoader.Kml
             List<XElement> placemarks =
                 _kml.Descendants(kmlNamespace + DataLoaderConstants.ElemNamePlacemark).ToList();
 
+            #region RDF
+            string entitySet = SchemaEntity["EntitySet"].ToString();
+
+            // rdf get the columns namespaces
+            List<TableColumnsMetadataEntity> columnMetadata = TableDataLoader.GetRdfMetadataColumnNamespace(entitySet);
+            List<string> namespacesRdf = new List<string>();
+            List<string> validNamespaces = new List<string>();
+
+            string namespaceToAdd = string.Empty;
+            if (columnMetadata != null)
+            {
+                foreach (TableColumnsMetadataEntity columnMeta in columnMetadata)
+                {
+                    if (!string.IsNullOrEmpty(columnMeta.columnnamespace))
+                    {
+                        namespaceToAdd = columnMeta.columnnamespace.Split('=')[0] + '=';
+
+                        if (namespaceToAdd.Split('=')[0] != string.Empty)
+                        {
+                            if (!validNamespaces.Contains(namespaceToAdd))
+                            {
+                                namespacesRdf.Add(columnMeta.columnnamespace);
+                                validNamespaces.Add(namespaceToAdd);
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
             for (var i = 0; i < placemarks.Count; i++)
             {
                 var entity = new Entity();
                 isExceptionOccurred = false;
+
+                #region RDF
+
+                XNamespace rdfNamespace = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+
+                XElement rdfXml = new XElement(rdfNamespace + "RDF",
+                new XAttribute(XNamespace.Xmlns + "rdf", rdfNamespace.ToString()));
+
+                // add new namespaces to the rdf snippet if they exist
+                if (namespacesRdf != null)
+                {
+                    foreach (string ns in namespacesRdf)
+                    {
+                        if (!string.IsNullOrEmpty(ns))
+                        {
+                            rdfXml.Add(new XAttribute(XNamespace.Xmlns + ns.ToString().Split('=')[0], ns.ToString().Split('=')[1]));
+                        }
+                    }
+                }
+
+                XElement rdfXmlDescriptionElement = new XElement(rdfNamespace + "Description");
+                rdfXml.Add(rdfXmlDescriptionElement);
+                #endregion
 
                 try
                 {
@@ -75,20 +128,38 @@ namespace Ogdi.Data.DataLoader.Kml
 
                     foreach (var item in properties)
                     {
+                        #region RDF
+
+                        var header = item.Key;
+                        var stringValue = item.Value;
+                        var rdfValue = String.Empty;
+
+                        if (header == Params.ProcessorParams.PartitionKeyPropertyName)
+                        {
+                            rdfXmlDescriptionElement.Add(new XAttribute(rdfNamespace + "about", stringValue));
+                        }
+
+                        var datatype = GetRdfType(stringValue);
+                        var cleanHeader = CleanStringLower(header);
+
+                        var columnNs = columnMetadata.First(column => column.column == header);
+                        XNamespace customNS = columnNs.columnnamespace.ToString().Split('=')[1];
+
+                        #endregion
+
                         // Name & Description of Placemark
-                        if (item.Key == DataLoaderConstants.ElemNameName)
+                        if (item.Key == DataLoaderConstants.ElemNameName || item.Key == DataLoaderConstants.ElemNameDescription)
                         {
-                            entity.AddProperty(DataLoaderConstants.ElemNameName,
-                                               placemark.Element(kmlNamespace + DataLoaderConstants.ElemNameName).Value);
+                            entity.AddProperty(item.Key,
+                                               placemark.Element(kmlNamespace + item.Key).Value);
+
+                            #region RDF
+                            rdfValue = placemark.Element(kmlNamespace + header).Value;
+                            #endregion
                         }
 
-                        if (item.Key == DataLoaderConstants.ElemNameDescription)
-                        {
-                            entity.AddProperty(DataLoaderConstants.ElemNameDescription,
-                                               placemark.Element(kmlNamespace + DataLoaderConstants.ElemNameDescription).Value);
-                        }
-
-                        if (item.Key == DataLoaderConstants.PropNameKmlCoords)
+                        if (item.Key == DataLoaderConstants.PropNameKmlCoords
+                            || (item.Key == DataLoaderConstants.PropNameLatitude && properties.ContainsKey(DataLoaderConstants.PropNameLongitude)))
                         {
                             if (placemark.Element(kmlNamespace + DataLoaderConstants.ElemNamePoint) != null)
                             {
@@ -96,11 +167,30 @@ namespace Ogdi.Data.DataLoader.Kml
                                 var positionTuple =
                                     point.Element(kmlNamespace + DataLoaderConstants.ElemNameCoordinates).Value.Split(',');
 
-                                entity.AddProperty("latitude", ExtractLatitude(positionTuple));
+                                entity.AddProperty(DataLoaderConstants.PropNameLatitude, ExtractLatitude(positionTuple));
                                 entity.AddProperty("longitude", ExtractLongitude(positionTuple));
                                 entity.AddProperty("altitude", ExtractAltitude(positionTuple));
-                                entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet,
-                                                   string.Concat("<Placemark>", point.ToString(SaveOptions.DisableFormatting), "</Placemark>"));
+                                //entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet,
+                                //                   string.Concat("<Placemark>", point.ToString(SaveOptions.DisableFormatting), "</Placemark>"));
+
+                                #region RDF
+
+                                if (stringValue != string.Empty)
+                                {
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + "latitude", ExtractLatitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + "longitude", ExtractLongitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                    if (!string.IsNullOrEmpty(ExtractAltitude(positionTuple)))
+                                        rdfXmlDescriptionElement.Add(new XElement(customNS + "altitude", ExtractAltitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                }
+                                else
+                                {
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + "latitude"));
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + "longitude"));
+                                    if (!string.IsNullOrEmpty(ExtractAltitude(positionTuple)))
+                                        rdfXmlDescriptionElement.Add(new XElement(customNS + "altitude"));
+                                }
+
+                                #endregion
                             }
                             else if (placemark.Element(kmlNamespace + DataLoaderConstants.ElemNamePolygon) != null)
                             {
@@ -122,11 +212,30 @@ namespace Ogdi.Data.DataLoader.Kml
 
                                 string[] positionTuple = polygonTupleList.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-                                entity.AddProperty("latitude", ExtractLatitude(positionTuple));
-                                entity.AddProperty("longitude", ExtractLongitude(positionTuple));
+                                entity.AddProperty(DataLoaderConstants.PropNameLatitude, ExtractLatitude(positionTuple));
+                                entity.AddProperty(DataLoaderConstants.PropNameLongitude, ExtractLongitude(positionTuple));
                                 entity.AddProperty("altitude", ExtractAltitude(positionTuple));
-                                entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet,
-                                                  string.Concat("<Placemark>", polygon.ToString(SaveOptions.DisableFormatting), "</Placemark>"));
+                               // entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet,
+                               //                   string.Concat("<Placemark>", polygon.ToString(SaveOptions.DisableFormatting), "</Placemark>"));
+
+                                #region RDF
+
+                                if (stringValue != string.Empty)
+                                {
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + DataLoaderConstants.PropNameLatitude, ExtractLatitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + DataLoaderConstants.PropNameLongitude, ExtractLongitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                    if (!string.IsNullOrEmpty(ExtractAltitude(positionTuple)))
+                                        rdfXmlDescriptionElement.Add(new XElement(customNS + "altitude", ExtractAltitude(positionTuple), new XAttribute(rdfNamespace + "datatype", datatype)));
+                                }
+                                else
+                                {
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + DataLoaderConstants.PropNameLatitude));
+                                    rdfXmlDescriptionElement.Add(new XElement(customNS + DataLoaderConstants.PropNameLongitude));
+                                    if (!string.IsNullOrEmpty(ExtractAltitude(positionTuple)))
+                                        rdfXmlDescriptionElement.Add(new XElement(customNS + "altitude"));
+                                }
+                               
+                                #endregion
                             }
                         }
 
@@ -139,8 +248,38 @@ namespace Ogdi.Data.DataLoader.Kml
                             string value = (property != null) ? property.Value : string.Empty;
 
                             entity.AddProperty(item.Key, GetPropertyValue(item.Value, value));
+
+                            #region RDF
+                            rdfValue = GetPropertyValue(item.Value, value).ToString();
+                            #endregion
                         }
+
+                        
+                        #region RDF
+
+                        if (item.Key == DataLoaderConstants.ElemNameName || item.Key == DataLoaderConstants.ElemNameDescription || item.Key.StartsWith("sd0"))
+                        {
+                            if (stringValue != string.Empty)
+                            {
+                                rdfXmlDescriptionElement.Add(new XElement(customNS + cleanHeader, rdfValue.ToString(), new XAttribute(rdfNamespace + "datatype", datatype)));
+                            }
+                            else
+                                rdfXmlDescriptionElement.Add(new XElement(customNS + cleanHeader));
+                        }
+
+                        #endregion
                     }
+
+                    #region RDF
+                    entity.AddProperty(DataLoaderConstants.PropNameRdfSnippet, rdfXml.ToString(SaveOptions.DisableFormatting));
+                    #endregion
+
+                    var ps = placemark.ToString(SaveOptions.DisableFormatting).Replace(
+                                                            DataLoaderConstants.NsKmlOld,
+                                                            DataLoaderConstants.NsKmlNew);
+
+                    entity.AddProperty(DataLoaderConstants.PropNameKmlSnippet, ps);
+
                     if (_sourceOrder)
                     {
                         entity.SetNumber(count, initialTimePrefix);

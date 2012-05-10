@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Ogdi.Azure.Configuration;
@@ -26,8 +27,7 @@ namespace Ogdi.Azure.Views
 
 		public ViewDataSource()
 		{
-		    _context = new ViewDataSourceContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials)
-		                   {RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1))};
+            _context = new ViewDataSourceContext(StorageAccount.TableEndpoint.AbsoluteUri, StorageAccount.Credentials) { RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1)) };
 		}
 
 		public void AddView(ViewEntry item)
