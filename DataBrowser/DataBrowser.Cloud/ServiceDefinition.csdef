@@ -25,6 +25,7 @@
       <Setting name="RecaptchaPrivateKey" />
       <Setting name="RecaptchaPublicKey" />
       <Setting name="RootServiceNamespace" />
+      <Setting name="EnableAnalytics"/>
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />

@@ -93,22 +93,27 @@ namespace Ogdi.DataServices
                 _context = context;
 
                 WebRequest request = (IsAvailableEndpointsRequest)
-                                     ? CreateTableStorageSignedRequest(context,
-                                                                       AppSettings.Account,
-                                                                       AzureTableRequestEntityUrl,
-                                                                       IsAvailableEndpointsRequest)
-                                     : CreateTableStorageSignedRequest(context,
-                                                                       AppSettings.ParseStorageAccount(
-                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
-                                                                               AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
-                                                                       AzureTableRequestEntityUrl,
-                                                                       IsAvailableEndpointsRequest);
+                                         ? CreateTableStorageSignedRequest(context,
+                                                                           AppSettings.Account,
+                                                                           AzureTableRequestEntityUrl,
+                                                                           IsAvailableEndpointsRequest)
+                                         : CreateTableStorageSignedRequest(context,
+                                                                           AppSettings.ParseStorageAccount(
+                                                                               AppSettings.EnabledStorageAccounts[
+                                                                                   OgdiAlias].storageaccountname,
+                                                                               AppSettings.EnabledStorageAccounts[
+                                                                                   OgdiAlias].storageaccountkey),
+                                                                           AzureTableRequestEntityUrl,
+                                                                           IsAvailableEndpointsRequest);
 
-                Action<string, string, string> incView = AnalyticsRepository.RegisterView;
-                incView.BeginInvoke(String.Format("{0}||{1}", OgdiAlias, EntitySet),
-                    context.Request.RawUrl,
-                    context.Request.UserHostName,
-                    null, null);
+                if (AppSettings.TrackAnalytics)
+                {
+                    Action<string, string, string> incView = AnalyticsRepository.RegisterView;
+                    incView.BeginInvoke(String.Format("{0}||{1}", OgdiAlias, EntitySet),
+                                        context.Request.RawUrl,
+                                        context.Request.UserHostName,
+                                        null, null);
+                }
 
                 try
                 {
