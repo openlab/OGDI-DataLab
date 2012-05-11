@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Ogdi.Data.DataLoader;
+using Ogdi.Data.DataLoaderUI;
 using Ogdi.Data.DataLoaderGuiApp.Commands;
 using Ogdi.Data.DataLoaderGuiApp.Views;
-using Ogdi.Data.DataLoaderUI;
 
 namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 {

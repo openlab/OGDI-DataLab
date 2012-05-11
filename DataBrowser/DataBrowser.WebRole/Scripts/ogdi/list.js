@@ -218,8 +218,12 @@ function setPage(number) {
 }
 
 function updatePagingControl() {
-    showIcons(pageNumber);    
-    $(".paginglinks").html("&nbsp;" + pageNumber + "&nbsp;of&nbsp;" + totalPages);
+    showIcons(pageNumber);
+    var l = navigator.userLanguage;
+    if (l == "fr")
+        $(".paginglinks").html("&nbsp;" + pageNumber + "&nbsp;sur&nbsp;" + totalPages);
+    else
+        $(".paginglinks").html("&nbsp;" + pageNumber + "&nbsp;of&nbsp;" + totalPages);
 }
 
 /**

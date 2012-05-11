@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metadata>
+<description>It represents the {0} of a/an {1}.</description>
+<namespaces>
+  <namespace>
+    <property>Namee</property>
+    <prefix>foaf</prefix>
+    <url>http://xmlns.com/foaf/0.1/</url>
+  </namespace>
+  <namespace>
+    <property>Address</property>
+    <prefix>foaf</prefix>
+    <url>http://xmlns.com/foaf/0.1/</url>
+  </namespace>
+</namespaces>
+</metadata>

@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlsoNoteThatIfAPropertyHasANullValue" xml:space="preserve">
+    <value>Also note that if a property has a null value for a particular entity in the data
+			set, it will be omitted entirely from the result set returned by OGDI DataLab. For example,
+			in the Crime Incidents data set, the "method" property is only returned for records
+			that have a "method" value in the underlying data set. Your application design should
+			take this into account and handle potentially missing properties.</value>
+  </data>
+  <data name="AtomPub" xml:space="preserve">
+    <value>AtomPub</value>
+  </data>
+  <data name="ByDefaultOGDIReturnsDataInTheAtomPub" xml:space="preserve">
+    <value>By default, OGDI DataLab returns data in the &lt;a href="http://odata.org/"
+				target="_blank"&gt;Open Data Protocol (OData)&lt;/a&gt;&lt;img
+					src="/Images/ExternalLink.png" 
+					alt="Open Data Protocol (OData)"
+					longdesc="/Descriptions/AtomPBExt.txt" /&gt;
+			format. This format extends the broadly adopted &lt;a href="http://bitworking.org/projects/atom/rfc5023.html"
+				target="_blank"&gt;Atom Publishing Protocol&lt;/a&gt;&lt;img
+				src="/Images/ExternalLink.png"
+					alt="Click to get Atom Publishing Protocol"
+					title="Atom Publishing Protocol"
+					longdesc="/Descriptions/AtomPB.tx" /&gt;
+			and can be easily consumed by a variety of platforms, including
+			Microsoft .NET, Java, Ruby, PHP, and Python. Refer to the code samples on the &lt;a
+				href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;Data Browser&lt;/a&gt;
+			page for examples.</value>
+  </data>
+  <data name="ClientLibraries" xml:space="preserve">
+    <value>Client Libraries</value>
+  </data>
+  <data name="ContainerIsTheNameOfTheContainer" xml:space="preserve">
+    <value>&lt;i&gt;container&lt;/i&gt; is the name of the container (for example, "dc" for the District
+				of Columbia's data sets).</value>
+  </data>
+  <data name="DataFormats" xml:space="preserve">
+    <value>Data Formats</value>
+  </data>
+  <data name="DatasetIsTheNameOfTheDataSet" xml:space="preserve">
+    <value>&lt;i&gt;dataset&lt;/i&gt; is the name of the data set (for example, "CrimeIncidents" for the
+				Crime Incidents data set in the DC container).</value>
+  </data>
+  <data name="DevelopersUsingVisualStudio2010" xml:space="preserve">
+    <value>Developers using &lt;a href="http://www.microsoft.com/vstudio"
+				target="_blank"&gt;Microsoft Visual Studio 2010&lt;/a&gt;&lt;img
+				 src="/Images/ExternalLink.png"
+					alt="Click to get Microsoft Visual Studio 2010" 
+					title="Microsoft Visual Studio 2010" 
+					longdesc="/Descriptions/VS2010.txt" /&gt;
+			(or later) can use &lt;a href="http://msdn.microsoft.com/en-us/data/bb931106.aspx"
+				target="_blank"&gt;WCF Data Services&lt;/a&gt;&lt;img
+				 src="/Images/ExternalLink.png"
+					alt="Click to get WCF Data Services" 
+					title="WCF Data Services"
+					longdesc="/Descriptions/ADOServices.txt" /&gt;
+			to access data from OGDI through easy-to-use .NET classes.
+			Within Visual Studio, this is accomplished by using the &lt;a 
+			href="http://msdn.microsoft.com/en-us/data/cc974504.aspx" 
+			target="_blank"&gt;Add Service Reference&lt;/a&gt;&lt;img
+					src="/Images/ExternalLink.png"
+					alt="A video showing how to consume ADO.NET Data Service in a .NET Application"
+					longdesc="/Descriptions/AddSvcRef.txt" /&gt; 
+				feature (see .NET samples on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
+				Data Browser&lt;/a&gt; page).
+			To make accessing OGDI data easier, Java developers can use &lt;a 
+			href="http://www.interoperabilitybridges.com/projects/restlet-extension-for-adonet-data-services.aspx" 
+			target="_blank"&gt;Restlet Extension for WCF Data Services&lt;/a&gt;&lt;img
+					src="/Images/ExternalLink.png"
+					alt="Restlet Extension for WCF Data Services"
+					longdesc="/Descriptions/JavaLib.txt" /&gt;.
+			PHP developers can take advantage of the Toolkit for &lt;a 
+			href="http://www.interoperabilitybridges.com/projects/toolkit-for-php-with-adonet-data-services-.aspx" 
+			target="_blank"&gt;Toolkit for PHP with WCF Data Services&lt;/a&gt;&lt;img
+					src="/Images/ExternalLink.png"
+					alt="Toolkit for PHP with WCF Data Services"
+					longdesc="/Descriptions/PHPLib.txt" /&gt;.</value>
+  </data>
+  <data name="ForDevelopers" xml:space="preserve">
+    <value>For Developers</value>
+  </data>
+  <data name="GeospatialData" xml:space="preserve">
+    <value>Geospatial Data</value>
+  </data>
+  <data name="JSON" xml:space="preserve">
+    <value>JSON</value>
+  </data>
+  <data name="JSONP" xml:space="preserve">
+    <value>JSONP</value>
+  </data>
+  <data name="ManyOfTheDataSetsInOGDI" xml:space="preserve">
+    <value>Many of the data sets in OGDI DataLab also include geospatial data, which is returned in
+			the &lt;a href="http://en.wikipedia.org/wiki/Keyhole_Markup_Language" target="_blank"&gt;
+				Keyhole Markup Language (KML)&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get Keyhole Markup Language" 
+					title="Keyhole Markup Language (KML)"
+					longdesc="/Descriptions/KML.txt" /&gt;
+			format. This format is compatible with popular desktop and Web-based mapping technologies
+			including Microsoft &lt;a href="http://dev.live.com/virtualearth"
+				target="_blank"&gt;Bing Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get Bing Maps" 
+					title="Bing Maps"
+					longdesc="/Descriptions/VE.txt" /&gt;,
+			&lt;a href="http://maps.google.com" target="_blank"&gt;
+				Google Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get Google Maps" 
+					title="Google Maps" 
+					longdesc="/Descriptions/GoogleMap.txt" /&gt;,
+			&lt;a href="http://maps.yahoo.com" target="_blank"&gt;
+				Yahoo! Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get Yahoo! Maps" 
+					title="Yahoo! Maps" 
+					longdesc="/Descriptions/YahooMaps.txt" /&gt;,
+			and &lt;a href="http://earth.google.com" target="_blank"&gt;
+				Google Earth&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get Google Earth" 
+					title="Google Earth" 
+					longdesc="/Descriptions/GoogleEarth.txt" /&gt;.</value>
+  </data>
+  <data name="NoteThatIfTheDataSet" xml:space="preserve">
+    <value>Note that if the data set that you are using does not include any geospatial data,
+			a KML query to OGDI DataLab will return an empty result set.</value>
+  </data>
+  <data name="NoteThatOGDICurrentlyOnlySupportsThe" xml:space="preserve">
+    <value>Note that OGDI DataLab currently only supports  the $filter and $top query options in the
+			WCF Data Services query syntax.</value>
+  </data>
+  <data name="OGDIAndTheUnderlyingWindowsAzureTableStorageService" xml:space="preserve">
+    <value>OGDI DataLab and the underlying Windows Azure Table Storage service support paging through
+			large sets of query results. The documentation for &lt;a
+			 href="http://msdn.microsoft.com/en-us/library/dd135718.aspx"
+				target="_blank"&gt;Query Timeout and Pagination&lt;/a&gt;&lt;img
+				 src="/Images/ExternalLink.png"
+					alt="Click to get Query Timeout and Pagination" 
+					title="Query Timeout and Pagination" 
+					longdesc="/Descriptions/QueryTimeoutPagination.txt" /&gt;
+			in the Windows Azure Table Storage service provides a complete description of how
+			OGDI and the underlying Azure platform support paging. You can also refer to the
+			"C#/ASP.NET Paging" sample on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
+				Data Browser&lt;/a&gt; page, which demonstrates how to perform paged queries using
+			the WCF Data Services client library.</value>
+  </data>
+  <data name="OGDICanAlsoReturnDataInTheJSON" xml:space="preserve">
+    <value>OGDI Lab can also return data in the &lt;a href="http://en.wikipedia.org/wiki/JSON"
+				target="_blank"&gt;JavaScript Object Notation (JSON)&lt;/a&gt;&lt;img
+				src="/Images/ExternalLink.png"
+					alt="Click to get JavaScript Object Notation" 
+					title="JavaScript Object Notation (JSON)" 
+					longdesc="/Descriptions/Json.txt" /&gt;
+			format, which can be conveniently consumed using JavaScript and other technologies.
+			To return data in JSON format, simply append the format=json parameter to your query.
+			For example, to retrieve crime incidents in Washington, DC that occurred during the
+			police department's evening shift in JSON format:</value>
+  </data>
+  <data name="OGDIDataServicesAlsoProvideDirectSupportForTheJSONP" xml:space="preserve">
+    <value>OGDI DataLab's data services also provide direct support for the &lt;a
+			 href="http://en.wikipedia.org/wiki/JSON#JSONP"
+					target="_blank"&gt;JSONP&lt;/a&gt;&lt;img 
+					src="/Images/ExternalLink.png"
+					alt="Click to get JSONP" 
+					title="JSONP"
+					longdesc="/Descriptions/JSONP.txt" /&gt;
+			technique. Using this technique, OGDI's data services will call a callback function
+			that you specify, passing in the results of your query in JSON format as an input
+			format. To use this technique, issue a query with the following additional parameters:
+			format=json&amp;callback=&lt;i&gt;yourCallback&lt;/i&gt;, where &lt;i&gt;yourCallback&lt;/i&gt; is the name
+			of a JavaScript callback function defined on the Web page issuing the request.</value>
+  </data>
+  <data name="OGDIExposesDataThrough" xml:space="preserve">
+    <value>OGDI DataLab exposes data through &lt;a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank"&gt;
+				REST&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get REST article on the Wikipedia" 
+					title="REST"
+					longdesc="/Descriptions/REST.txt" /&gt; Web services. 
+					The basic format of an OGDI service call is 
+					http://ogdi.cloudapp.net/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
+			where:</value>
+  </data>
+  <data name="Paging" xml:space="preserve">
+    <value>Paging</value>
+  </data>
+  <data name="QueryingOGDI" xml:space="preserve">
+    <value>Querying OGDI DataLab</value>
+  </data>
+  <data name="QueryIsYourSetOfQueryParameters" xml:space="preserve">
+    <value>&lt;i&gt;query&lt;/i&gt; is your set of query parameters, expressed using a subset of the &lt;a
+				href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx" target="_blank"&gt;WCF
+				Data Services query syntax.&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+					alt="Click to get WCF Data Services query syntax" 
+					title="WCF Data Services query syntax" 
+					longdesc="/Descriptions/ADOquerysyntax.txt" /&gt;</value>
+  </data>
+  <data name="ReferToTheJavaScriptSampleOnThe" xml:space="preserve">
+    <value>Refer to the JavaScript sample on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
+				Data Browser&lt;/a&gt; page for an example of using JSONP with OGDI DataLab. In that sample,
+			the AdditionalDataLoaded() function is the JSONP callback function.</value>
+  </data>
+  <data name="TheOpenGovernmentDataInitiativeIsBased" xml:space="preserve">
+    <value>OGDI DataLab is written using C# and the .NET Framework, targeted for Microsoft's
+                &lt;a href="http://www.windowsazure.com/"&gt;Windows Azure Platform&lt;/a&gt; cloud-computing
+                platform. Data Service.&lt;br /&gt;&lt;br /&gt;                The DataService uses RESTful Web service to expose data for programmatic access
+                via a number of formats, including Open Data Protocol (OData)**, an extension to
+                **Atom Publishing Protocol (AtomPub), Keyhole Markup Language (KML), JSON and JSONP.&lt;br /&gt;&lt;br /&gt;
+                The Data Browser is written an ASP.NET MVC 3.0 and uses jQuery and a variety of
+                other open source components and enables users to browse and query published data.&lt;br /&gt;&lt;br /&gt;
+                The Data Loader is desktop client tool that includes both GUI-based and console-based
+                data loader tools.</value>
+  </data>
+  <data name="TheWindowsAzurePlatform" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ToMitigateSecurityVulnerabilities" xml:space="preserve">
+    <value>To mitigate security vulnerabilities associated with cross-site scripting attacks,
+			Web browsers generally prevent client-side JavaScript applications originating in
+			one network domain (for example, yourdomain.com) from making HTTP requests to other
+			network domains (for example, the ogdi.cloudapp.net network domain that hosts the
+			OGDI DataLab data services). This can prevent JavaScript applications hosted in another
+			domain from making straight-forward calls to the OGDI DataLab data services, but there a
+			variety of techniques that can be used, such as this widely-used &lt;a
+				 href="http://softwareas.com/cross-domain-communication-with-iframes"
+					target="_blank"&gt;IFRAMES-based technique&lt;/a&gt;&lt;img 
+					src="/Images/ExternalLink.png"
+					alt="Click to get IFRAMES-based technique" 
+					title="IFRAMES-based technique" 
+					longdesc="/Descriptions/IFRAMES.txt" /&gt;
+			described by Michael Mahemoff.</value>
+  </data>
+  <data name="ToReturnGeospatialDataInKMLFormat" xml:space="preserve">
+    <value>To return geospatial data in KML format, append the format=kml parameter to your
+			query. For example, to retrieve geospatial points in KML format for crime incidents
+			in DC that occurred during the police department's evening shift:</value>
+  </data>
+  <data name="ProjectEstLeNomDuProjet" xml:space="preserve">
+    <value>&lt;project&gt; is the name of the service project for the publication service based on the OGDI DataLab starter kit in Windows Azure ("ogdifrancedataservice" for example)</value>
+  </data>
+  <data name="OGDICanAlsoReturnDataInTheRDF" xml:space="preserve">
+    <value>OGDI DataLab can also return data in the &lt;a href="http://en.wikipedia.org/wiki/Resource_Description_Framework"
+    target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
+                longdesc="/Descriptions/Json.txt" /&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:</value>
+  </data>
+  <data name="RDF" xml:space="preserve">
+    <value>RDF</value>
+  </data>
+  <data name="OGDIDemoURLFormat" xml:space="preserve">
+    <value>&lt;blockquote&gt;
+                http://ogdi.cloudapp.net/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;format={0}&lt;/blockquote&gt;</value>
+  </data>
+</root>

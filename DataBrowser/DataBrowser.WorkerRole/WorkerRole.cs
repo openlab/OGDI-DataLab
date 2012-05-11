@@ -54,13 +54,13 @@ namespace InteractiveSdk.WorkerRole
 			handlers = new Dictionary<string, IMessageHandler>
 			{				
 				{"SendMail", new SendMailHandler()},
-				{"ConvertData", new ConvertDataHandler(container)}
+				{"ConvertData", new ConvertDataHandler(container)}                
 			};
 		}
 
 		public void ProcessMessage(CloudQueueMessage msg)
 		{
-			var msgStr = msg.AsString;
+			var msgStr = msg.AsString;                
 			using (var strReader = new StringReader(msgStr ?? string.Empty))
 			using (var xmlReader = XmlReader.Create(strReader))
 			{
@@ -74,6 +74,7 @@ namespace InteractiveSdk.WorkerRole
 				}
 			}
 		}
+
 		public override bool OnStart()
 		{
 			// Set the maximum number of concurrent connections 

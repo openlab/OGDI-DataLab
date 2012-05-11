@@ -19,9 +19,9 @@ using System.Net;
 using System.Security;
 using System.Web;
 using System.Web.SessionState;
+using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Microsoft.WindowsAzure.StorageClient;
 
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
@@ -55,7 +55,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
 
         // application name + session id is partitionKey
-        public SessionRow(string sessionId, string applicationName)
+        public SessionRow(string sessionId, string applicationName) 
             : base()
         {
             SecUtility.CheckParameter(ref sessionId, true, true, true, Configuration.MaxStringPropertySizeInChars, "sessionId");
@@ -87,7 +87,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     throw new ArgumentException("To ensure string values are always updated, this implementation does not allow null as a string value.");
                 }
                 _id = value;
-                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id);
+                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id); 
             }
             get
             {
@@ -104,7 +104,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     throw new ArgumentException("To ensure string values are always updated, this implementation does not allow null as a string value.");
                 }
                 _applicationName = value;
-                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id);
+                PartitionKey = SecUtility.CombineToKey(ApplicationName, Id); 
             }
             get
             {
@@ -205,6 +205,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
         private readonly RetryPolicy _tableRetry = RetryPolicies.Retry(NumRetries, TimeSpan.FromSeconds(1));
         private readonly ProviderRetryPolicy _providerRetry = ProviderRetryPolicies.RetryN(NumRetries, TimeSpan.FromSeconds(1));
 
+
         #endregion
 
 
@@ -249,7 +250,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "sessionTableName", 
                                                 Configuration.DefaultSessionTableNameConfigurationString,
                                                 Configuration.DefaultSessionTableName, false);
-
+            
             _containerName = Configuration.GetStringValueWithGlobalDefault(config, "containerName", 
                                                 Configuration.DefaultSessionContainerNameConfigurationString,
                                                 Configuration.DefaultSessionContainerName, false);
@@ -259,7 +260,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                             "Please refer to the documentation for the concrete rules for valid container names." +
                                             "The current container name is: " + _containerName);
             }
-
+            
             config.Remove("allowInsecureRemoteEndpoints");
             config.Remove("containerName");
             config.Remove("applicationName");
@@ -274,16 +275,16 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     ("Unrecognized attribute: " + attr);
             }
 
-            if(_account == null)
+            if (_account == null)
                 throw new ConfigurationErrorsException("Account information incomplete!");
-            
+
             _tableStorage = _account.CreateCloudTableClient();
             _tableStorage.RetryPolicy = _tableRetry;
             var _blobStorage = _account.CreateCloudBlobClient();
 
             try
             {
-                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri );
+                SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri);
                 SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _blobStorage.BaseUri);
 
                 if (_tableStorage.CreateTableIfNotExist(_tableName))
@@ -338,7 +339,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 throw new ArgumentException("Parameter timeout must be a non-negative integer!");
             }
-
+         
             try
             {
                 TableServiceContext svc = CreateDataServiceContext();
@@ -383,7 +384,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             Debug.Assert(context != null);
             SecUtility.CheckParameter(ref id, true, true, false, Configuration.MaxStringPropertySizeInChars, "id");
 
-            _providerRetry(() =>
+            _providerRetry(() => 
             {
                 TableServiceContext svc = CreateDataServiceContext();
                 SessionRow session;
@@ -411,7 +412,8 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 // yes, we always create a new blob here
                 session.BlobName = GetBlobNamePrefix(id) + Guid.NewGuid().ToString("N");
-                
+
+
                 // Serialize the session and write the blob
                 byte[] items, statics;
                 SerializeSession(item, out items, out statics);
@@ -454,7 +456,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
 
                 if (newItem)
                 {
-                    svc.AddObject(_tableName, session);
+                    svc.AddObject(_tableName, session);                    
                     svc.SaveChangesWithRetries();
                 }
                 else
@@ -477,11 +479,11 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 SessionRow session = GetSession(id, svc);
                 ReleaseItemExclusive(svc, session, lockId);
             }
-            catch (InvalidOperationException /*e*/)
+            catch (InvalidOperationException e)
             {
                 //throw new ProviderException("Error accessing the data store!", e);
             }
-        }
+        }        
 
         public override void ResetItemTimeout(HttpContext context, string id)
         {
@@ -551,9 +553,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
+            } catch(Exception e) {
                 throw new ProviderException("Error accessing blob storage.", e);
             }
         }
@@ -764,7 +764,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 reader = new StreamReader(stream);
                 if (actions == SessionStateActions.InitializeItem)
                 {
-                    // Return an empty SessionStateStoreData
+                    // Return an empty SessionStateStoreData                    
                     result = new SessionStateStoreData(new SessionStateItemCollection(),
                                                        SessionStateUtility.GetSessionStaticObjects(context), session.Timeout);
                 }
@@ -788,7 +788,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 {
                     reader.Close();
                 }
-            }
+            }           
             return result;
         }
 

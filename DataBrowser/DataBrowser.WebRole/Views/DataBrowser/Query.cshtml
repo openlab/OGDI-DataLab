@@ -1,0 +1,60 @@
+﻿@inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<DataBrowserModel>
+
+@using Ogdi.InteractiveSdk.Mvc
+
+<div class="query">
+	<div class="label"> @DataBrowserResources.Query.BaseQuery </div>
+	<div>
+		@ViewData.Model.BaseQueryName
+		<label id="labelBaseQuery" title="@ViewData.Model.BaseQueryName" visible="false"></label>
+	</div>
+	
+		<div class="label"> @DataBrowserResources.Query.FilterExpression </div>
+		<div class="switch">
+		  <span id="eidQbVisual" class="active"> @DataBrowserResources.Query.QueryBuilder </span>
+			<span id="eidQbTextual"> @DataBrowserResources.Query.TextQuery </span>
+		</div>
+		<div>
+			<div class="expression left" id="eidQueryBoxContainer" style="display:none;">
+				<div class="left"><textarea id="queryBox" rows="3" cols="20" >@ViewData.Model.FilterText</textarea></div>
+				<div class="left"><a onclick="javascript:ShowFilterHintsDialog()"><img src="@Url.Content("~/Content/ico.png")" class="ico icoQuestion" title="Show Filter Hints" alt=""/></a></div>
+				<div class="clear"></div>
+			</div>
+			<div id="eidBuilder" class="query-builder left" ></div>
+			<div class="left">
+			<a href="javascript:runClicked()">@Html.Raw(Html.NiceButton(this, DataBrowserResources.Query.Run, 0, null))</a>
+			<a href="javascript:clearClicked()">@Html.Raw(Html.NiceButton(this, DataBrowserResources.Query.Clear, 0, null))</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+</div>
+
+<script type="text/javascript">
+
+	var meta = new Array();
+</script>
+	
+@foreach(System.Data.DataColumn column in Model.EntitySetDetails.DetailsTable.Columns) {
+	<script type="text/javascript">
+		meta.push({ name: "@column.ColumnName", type: "@column.DataType" });
+	</script>
+}
+
+<script type="text/javascript">
+	var builder = new Ogdi.QueryBuilder($("#eidBuilder"), meta, $("#queryBox"), $("#eidQueryBoxContainer"));
+	$(function() {
+		
+		builder.addFilter();
+		builder.dump();
+	});
+	
+	function clearClicked()
+	{
+		builder.clearFilter();
+		builder.addFilter();
+		builder.dump();	    
+	}
+	
+</script>
+
+

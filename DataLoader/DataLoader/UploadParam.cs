@@ -36,8 +36,8 @@ namespace Ogdi.Data.DataLoader
         {
             Type = type;
             IsPlanned = true;
-
-            switch (type)
+            
+            switch(type)
             {
                 case SourceDataType.Csv:
                     _dataLoaderParams = CsvToTablesDataLoaderParams.FromFile(this);
@@ -118,8 +118,6 @@ namespace Ogdi.Data.DataLoader
                     _dataLoaderParams = CsvToTablesDataLoaderParams.FromFile(this);
                     break;
             }
-
-
         }
 
         public string Name
@@ -198,7 +196,7 @@ namespace Ogdi.Data.DataLoader
 
         public string PlannedAsString
         {
-            get { return IsPlanned ? "Yes" : string.Empty; }
+            get { return IsPlanned ? "yes" : string.Empty; }
         }
 
         public ConfigurationState ConfigurationState

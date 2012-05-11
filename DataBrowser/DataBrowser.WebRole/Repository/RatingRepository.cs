@@ -50,6 +50,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Repository
             return results.FirstOrDefault() == null ? false : true;
         }
 
+        //CETTE METHODE NE SERT A RIEN
         static public void IncrementView(String itemKey)
         {
             DatasetInfoDataSource datasetInfoDS = new DatasetInfoDataSource();

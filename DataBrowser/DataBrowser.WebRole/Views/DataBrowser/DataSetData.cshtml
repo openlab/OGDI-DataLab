@@ -1,0 +1,420 @@
+﻿@inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<DataBrowserModel>
+			  
+@using Ogdi.InteractiveSdk.Mvc
+
+<div class="dataset-data">
+	<div class="content">
+	
+	<div id="BackGroundLoadingIndicator" class="bgLoadingIndicator" style="display: none;"></div>
+	<div id="LoadingIndicatorPanel" style="display: none; position:  ">
+		<img id="imgLoading" class="loader" 
+			alt='@UIConstants.GC_LoadingAltText'
+			style="display: none"
+			src='@UIConstants.GC_LoadingImagePath'
+			longdesc='@UIConstants.GC_LoadingLongDesc'
+			onload="showLoadingIndicator();" />
+	</div>
+
+	 @Html.Partial("Query", Model) 
+	
+	 <div id="tabs" style="visibility: hidden;">
+		<ul>
+			<li id="liDataView"><a href="#tabs-1"> @DataBrowserResources.DataSetData.DataView </a></li>
+			<li id="liMapView"><a href="#tabs-2"> @DataBrowserResources.DataSetData.MapView </a></li>
+			<li id="liBarChart"><a href="#tabs-3"> @DataBrowserResources.DataSetData.BarChart </a></li>
+			<li id="liPieChart"><a href="#tabs-4"> @DataBrowserResources.DataSetData.PieChart </a></li>
+		</ul>
+		<div id="tabs-1">
+				<div id="divDataViewResults">
+					 @Html.Partial("DataView", ViewData) 
+				</div>
+		</div>
+		<div id="tabs-2">
+				<div id="divMapViewResults">
+					<div id="mapFullQueryPanel" style="display: none;">
+						<span> @DataBrowserResources.DataSetData.FullQueryURL </span> &nbsp;<a 
+							id="mapFullQueryUrlHyperlink" target="_blank"></a>
+						<br />
+						<div>
+							@DataBrowserResources.DataSetData.ClickToViewResultsAsXMLKML 
+						</div>
+					</div>
+					<div id="mapNoResultsDiv" style="display: none;">
+						<span> @DataBrowserResources.DataSetData.SelectedDataDoesNotHaveLocationInformation </span>
+					</div>
+					<div id="mapManyPlacemarksDiv" style="display: none;">
+						<span> @DataBrowserResources.DataSetData.NumberOfPlacemarksInAResultSetExceedsThePinDisplayCountLimit</span>
+					</div>                    
+					<br />
+					<div id='myMap' class="veMapStyle">
+					</div>
+					<br />
+				</div>
+		</div>
+		<div id="tabs-3">
+				<div id="divOuterBarChartResults" style="height: 630px;">
+					<div>
+						<table style="width: 100%;">
+							<tr style="height: 100%;">
+								<td>
+									<fieldset style="height: 130px; padding: 0px; 
+										border-style: solid; border-color: #eeeeee;">
+										<legend style="text-align: left;"><b>@DataBrowserResources.DataSetData.HorizontalAxis</b>
+										</legend>
+										<br />
+										<table>
+											<tr style="padding: 10px">
+												<td style="text-align: left;">
+													<label id="labelBarHorizontalComboBox">
+														@Html.Raw(DataBrowserResources.DataSetData.EntitysetColumn)
+													</label>
+												</td>
+												<td>
+													@Html.DropDownList("ddlBarHorizontal", 
+														ViewData.Model.BarHorizontal, 
+														new { style = "width:175px;", 
+															onchange = "horizontalBarComboBoxSelected(this.value)" })
+												</td>
+											</tr>
+											<tr style="padding: 10px">
+												<td style="text-align: left;">
+													<label id="labelBarDateRange" 
+													style="display: none;">
+														@DataBrowserResources.DataSetData.Date
+														<br />
+														@DataBrowserResources.DataSetData.Range</label>
+												</td>
+												<td>
+													@Html.DropDownList("ddlBarDateRange",
+														ViewData.Model.BarDateRange,
+														new { style = "display:none;" })
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td>
+									<fieldset style="height: 130px; text-align: center; padding:
+										 0px; border-style: solid;
+										border-color: #eeeeee;">
+										<legend style="text-align: left;"><b> @DataBrowserResources.DataSetData.VerticalAxis </b>
+										</legend>
+										<table>
+											<tr>
+												<td style="width: 150px;">
+													<fieldset style="height: 100px; width: 150px; 
+														padding: 0px; border-style: solid;
+														border-color: #eeeeee;">
+														<legend style="text-align: left;">
+															@Html.RadioButton("BarVerticalOptions", 
+																"Option1", true,
+																new { name = "BarVerticalOptions", 
+																	onclick = "barOption1Selected();" })
+																	@DataBrowserResources.DataSetData.Option1 </legend>
+														<table>
+															<tr>
+																<td>
+																	<label id="labelBarCount">
+																		@DataBrowserResources.DataSetData.NoOfOccurrencesOf
+																	</label>
+																</td>
+															</tr>
+														</table>
+													</fieldset>
+												</td>
+												<td>
+													<fieldset style="height: 100px; padding: 0px; 
+														border-style: solid; border-color: #eeeeee;">
+														<legend style="text-align: left;">
+															@if (ViewData.Model.BarYOption != null && 
+																   ViewData.Model.BarYOption == "Option2")
+															   { 
+															@Html.RadioButton("BarVerticalOptions", 
+																			"Option2", true,
+																			new { name = "BarVerticalOptions", 
+																				onclick = "barOption2Selected();" })
+																				@DataBrowserResources.DataSetData.Option2
+															 }
+															   else
+															   { 
+															@Html.RadioButton("BarVerticalOptions", 
+																			"Option2", false,
+																			new { name = "BarVerticalOptions",
+																				onclick = "barOption2Selected();" })
+																				@DataBrowserResources.DataSetData.Option2
+															 } 
+														</legend>
+														<div>
+															<table>
+																<tr style="padding: 10px;">
+																	<td style="text-align: left;">
+																		<label id="VerticalComboBoxLabel" 
+																		style="color: Gray;">
+																			@Html.Raw(DataBrowserResources.DataSetData.EntitysetColumn)
+																		</label>
+																	</td>
+																	<td>
+																		@Html.DropDownList("ddlBarVertical",
+																			ViewData.Model.BarVertical, 
+																			new { style = "width:175px;", 
+																				disabled = "disabled" })
+																	</td>
+																</tr>
+																</table>
+														</div>
+														<div>
+															@Html.RadioButton("BarVerticalColumnOptions", 
+																"Aggregate", true, new { disabled = "disabled" })
+															<label id="labelBarAggregate" style="color: Gray;">
+																@DataBrowserResources.DataSetData.Aggregate </label>
+															@if (ViewData.Model.BarYColOption != null &&
+																   ViewData.Model.BarYColOption == "Average")
+															   { 
+															@Html.RadioButton("BarVerticalColumnOptions", 
+																"Average", true, new { disabled = "disabled" })
+															 }
+															   else
+															   { 
+															@Html.RadioButton("BarVerticalColumnOptions", 
+																"Average", false, new { disabled = "disabled" })
+															 } 
+															<label id="labelBarAverage" style="color: Gray;">
+																@DataBrowserResources.DataSetData.Average </label>
+														</div>
+													</fieldset>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td valign="top" style="padding-top: 5px;">
+									<a href="javascript:getBarChart()" title='Refresh Chart' >
+										 @Html.Raw(Html.NiceButton(this, DataBrowserResources.DataSetData.RefreshChart, 0, "RefreshChart"))
+									</a>                                    
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="divBarChartError" style="display: none; 
+						background-color: Red; color: White;
+						text-align: center; font-weight: bold; font-size: 17px;">
+						@DataBrowserResources.DataSetData.PleaseSelectValidColumnFromList
+					</div>
+					<div id="divBarChartResults">
+						@if (ViewData.Model.Chart != null)
+						   {
+							   @Html.Partial("BarChart", ViewData)
+						   } 
+					</div>
+				</div>
+		</div>
+		<div id="tabs-4">
+				<div id="divPieResultHeight">
+					<div>
+						<table style="width: 100%;">
+							<tr style="height: 100%;">
+								<td>
+									<fieldset style="height: 130px; padding: 0px;
+										 border-style: solid; border-color: #eeeeee;">
+										<legend style="text-align: left;"><b> @DataBrowserResources.DataSetData.HorizontalAxis </b>
+										</legend>
+										<br />
+										<table>
+											<tr style="padding: 10px">
+												<td style="text-align: left;">
+													<label id="labelPieHorizontalComboBox">
+														@Html.Raw(DataBrowserResources.DataSetData.EntitysetColumn)
+													</label>
+												</td>
+												<td>
+													@Html.DropDownList("ddlPieHorizontal", 
+														ViewData.Model.PieHorizontal,
+														new { style = "width:175px;",
+															onchange = "horizontalPieComboBoxSelected(this.value)" })
+												</td>
+											</tr>
+											<tr style="padding: 10px">
+												<td style="text-align: left;">
+													<label id="labelPieDateRange" style="display: none;">
+														@DataBrowserResources.DataSetData.Date  <br />
+														@DataBrowserResources.DataSetData.Range </label>
+												</td>
+												<td>
+													@Html.DropDownList("ddlPieDateRange", 
+														ViewData.Model.PieDateRange, 
+														new { style = "display:none;" })
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td>
+									<fieldset style="height: 130px; text-align: center; 
+										padding: 0px; border-style: solid;
+										border-color: #eeeeee;">
+										<legend style="text-align: left;"><b> @DataBrowserResources.DataSetData.VerticalAxis </b>
+										</legend>
+										<table>
+											<tr>
+												<td style="width: 150px;">
+													<fieldset style="height: 100px; width: 150px; 
+														padding: 0px; border-style: solid;
+														border-color: #eeeeee;">
+														<legend style="text-align: left;">
+															@Html.RadioButton("PieVerticalOptions", 
+																"Option1", true, 
+																	new { name="PieVerticalOptions", 
+																		onclick = "pieOption1Selected();" })
+																		@DataBrowserResources.DataSetData.Option2 </legend>
+														<table>
+															<tr>
+																<td>
+																	<label id="labelPieCount">
+																		@DataBrowserResources.DataSetData.NoOfOccurrencesOf
+																	</label>
+																</td>
+															</tr>
+														</table>
+													</fieldset>
+												</td>
+												<td>
+													<fieldset style="height: 100px; padding: 0px; 
+														border-style: solid; border-color: #eeeeee;">
+														<legend style="text-align: left;">
+															@if (ViewData.Model.PieYOption != null && 
+																   ViewData.Model.PieYOption == "Option2")
+															   { 
+															@Html.RadioButton("PieVerticalOptions",
+																		"Option2", true, 
+																		 new { name = "PieVerticalOptions", 
+																			 onclick = "pieOption2Selected();" })
+																			 @DataBrowserResources.DataSetData.Option2 
+															 }
+															   else
+															   { 
+															@(Html.RadioButton("PieVerticalOptions", 
+																		"Option2", false, 
+																		new { name = "PieVerticalOptions", 
+																			onclick = "pieOption2Selected();" }))
+																			@DataBrowserResources.DataSetData.Option2 
+															 } 
+														</legend>
+														<div>
+															<table>
+																<tr style="padding: 10px;">
+																	<td style="text-align: left;">
+																		<label id="labelPieVerticalComboBox" 
+																		style="color: Gray">
+																			@Html.Raw(DataBrowserResources.DataSetData.EntitysetColumn )
+																		</label>
+																	</td>
+																	<td>
+																		@Html.DropDownList("ddlPieVertical", 
+																			ViewData.Model.PieVertical, 
+																			new { style = "width:175px;", disabled = "disabled" })
+																	</td>
+																</tr>
+																</table>
+														</div>
+														<div>
+															@Html.RadioButton("PieVerticalColumnOptions",
+																"Aggregate", true, new { disabled = "disabled" })
+															<label id="labelPieAggregate" style="color: Gray">
+																@DataBrowserResources.DataSetData.Aggregate </label>
+															@if (ViewData.Model.PieYColOption != null && 
+																   ViewData.Model.PieYColOption == "Average")
+															   { 
+															@Html.RadioButton("PieVerticalColumnOptions", 
+																"Average", true, new { disabled = "disabled" })
+															 }
+															   else
+															   { 
+															@Html.RadioButton("PieVerticalColumnOptions", 
+																"Average", false, new { disabled = "disabled" })
+															 } 
+															<label id="labelPieAverage" style="color: Gray">
+																@DataBrowserResources.DataSetData.Average </label>
+														</div>
+													</fieldset>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td valign="top" style="padding-top: 5px;">
+									<a href="javascript:getPieChart()" title='Refresh Chart' >
+										 @Html.Raw(Html.NiceButton(this, DataBrowserResources.DataSetData.RefreshChart, 0, "RefreshChart"))
+									</a>                                      
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="divPieChartError" style="display: none; 
+						background-color: Red; color: White;
+						text-align: center; font-weight: bold; font-size: 17px;">
+						@DataBrowserResources.DataSetData.PleaseSelectValidColumnFromList 
+					</div>
+					<div id="divPieChartResults" style="height:849px;">
+						@if (ViewData.Model.Chart != null)
+						   {
+							   @Html.Partial("PieChart", ViewData)
+						   } 
+					</div>
+				</div>
+		</div>
+	</div>
+	
+	<div id="filterDialog" title="$filter hints" class="filterdialog" style="display: none;">
+		<p>
+		   @Html.Raw(DataBrowserResources.DataSetData.OGDIUsesASubsetOf )
+		</p>
+		<p>
+			@Html.Raw(DataBrowserResources.DataSetData.SomeExamplesOfFilterExpressions )
+		</p>
+		<table width="100%">
+			<tr>
+				<td style="vertical-align: top">
+					method eq 2
+				</td>
+				<td style="vertical-align: top">
+					<p>
+						@Html.Raw(DataBrowserResources.DataSetData.CrimeIncidentsWhereTheMethodCode )
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					shift eq &#39;EVN&#39;
+				</td>
+				<td style="vertical-align: top">
+					<p>
+						@Html.Raw(DataBrowserResources.DataSetData.CrimeIncidentsWhereTheShiftProperty )
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					reportdatetime ge datetime&#39;2008-06-01T00:00:00Z&#39;
+				</td>
+				<td style="vertical-align: top">
+					<p>
+						@Html.Raw(DataBrowserResources.DataSetData.CrimeIncidentsWhereTheReportDatetime )
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					(shift eq &#39;EVN&#39;) or (shift eq &#39;MID&#39;)
+				</td>
+				<td style="vertical-align: top">
+					<p>
+						@Html.Raw(DataBrowserResources.DataSetData.CrimeIncidentsWhereTheShiftIsEqualTo )
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	</div>
+</div>
+

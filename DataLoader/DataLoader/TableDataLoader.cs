@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -14,13 +13,16 @@ namespace Ogdi.Data.DataLoader
     public class TableDataLoader : DataLoader
     {
         private static readonly CloudStorageAccount s_account =
-            CloudStorageAccount.Parse(ConfigurationManager.AppSettings["DataConnectionString"]);
+            CloudStorageAccount.Parse(System.Configuration.ConfigurationManager.AppSettings["DataConnectionString"]);
 
         private static readonly TimeSpan s_retryTimeout = new TimeSpan(0, 3, 0);
         private static readonly TimeSpan s_retryWaitTime = new TimeSpan(0, 0, 15);
 
         private static readonly string s_metadataEntityQueryTemplate =
             "{0}?$filter=entityset eq '{1}' and entitykind eq '{2}'";
+
+        private static readonly string s_metadataRdfQueryTemplate =
+            "{0}?$filter=entityset eq '{1}'";
 
         private readonly TableOverwriteMode overwriteMode;
 
@@ -59,7 +61,7 @@ namespace Ogdi.Data.DataLoader
             else
             {
                 //We don't need to check table metadata when updating data. 
-                //                CheckMetadataChanges(DataLoaderConstants.EntitySetTableMetadata, Params.TableMetadataEntity.EntitySet, Params.TableMetadataEntity.EntityKind, Params.TableMetadataEntity, Params, MetadataKind.Table);
+                //CheckMetadataChanges(DataLoaderConstants.EntitySetTableMetadata, Params.TableMetadataEntity.EntitySet, Params.TableMetadataEntity.EntityKind, Params.TableMetadataEntity, Params, MetadataKind.Table);
                 //check and update LastUpdateDate for metadata
                 DateTime newDate = Params.TableMetadataEntity.LastUpdateDate;
                 CheckAndUpdateMetadataLastUpdateDate(DataLoaderConstants.EntitySetTableMetadata,
@@ -101,6 +103,21 @@ namespace Ogdi.Data.DataLoader
                                          Params.TableMetadataEntity.EntitySet, Params.TableMetadataEntity.EntityKind,
                                          pars.ProcessorParams, pars, MetadataKind.ProcessorParams);
             }
+
+            #region RDF TableColumnsMetadata
+            if (overwriteMode == TableOverwriteMode.Create)
+            {
+                if (!CreateTable(DataLoaderConstants.TableColumnsMetadataTableName))
+                    DeleteRdfMetadata(DataLoaderConstants.TableColumnsMetadataTableName, Params.TableMetadataEntity.EntitySet, Params);
+            }
+            else
+            {
+                //check if table exists
+                if (!DoesTableExists(DataLoaderConstants.TableColumnsMetadataTableName))
+                    throw new ApplicationException("TableColumnsMetadata '" + Params.TableMetadataEntity.EntitySet +
+                                                   "' does not exists. Use /mode=create to wipe and reload all data and metadata.");
+            }
+            #endregion
         }
 
         private static void DeleteTable(string tableName)
@@ -113,7 +130,7 @@ namespace Ogdi.Data.DataLoader
         private static void DeleteContainer(string containerName)
         {
             CloudBlobClient bc = s_account.CreateCloudBlobClient();
-
+            
             CloudBlobContainer c = bc.GetContainerReference(containerName);
 
             try
@@ -157,7 +174,6 @@ namespace Ogdi.Data.DataLoader
                     }
                     else
                     {
-                        Debug.WriteLine(e.ToString());
                         throw;
                     }
                 }
@@ -188,6 +204,52 @@ namespace Ogdi.Data.DataLoader
                 throw new DuplicateEntityException(query);
             }
         }
+
+        #region RDF
+
+        private static void DeleteRdfMetadata(string metadataSet, string entitySet,
+                                   DataLoaderParams parameters)
+        {
+            var context = new TableContext(s_account.TableEndpoint.ToString(), s_account.Credentials, parameters)
+            {
+                RetryPolicy =
+                    RetryPolicies.RetryExponential(RetryPolicies.DefaultClientRetryCount,
+                                                   RetryPolicies.DefaultClientBackoff)
+            };
+
+            string query = string.Format(s_metadataRdfQueryTemplate, metadataSet, entitySet);
+            List<TableEntity> results = context.Execute<TableEntity>(new Uri(query, UriKind.Relative)).ToList();
+            if (results.Count > 0)
+            {
+                foreach (TableEntity i in results)
+                {
+                    context.DeleteObject(i);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public static List<TableColumnsMetadataEntity> GetRdfMetadataColumnNamespace(string entitySet)
+        {
+            CloudTableClient tableClient = new CloudTableClient(s_account.TableEndpoint.ToString(), s_account.Credentials);
+
+            TableServiceContext tableServiceContext = tableClient.GetDataServiceContext();
+
+            string queryTemplate = "{0}?$filter=entityset eq '{1}'";
+
+            string query = string.Format(queryTemplate, DataLoaderConstants.TableColumnsMetadataTableName, entitySet);
+            List<TableColumnsMetadataEntity> resultsQuery = tableServiceContext.Execute<TableColumnsMetadataEntity>(new Uri(query, UriKind.Relative)).ToList();
+            if (resultsQuery.Count > 0)
+            {
+                return resultsQuery;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        #endregion
 
         private static void CheckMetadataChanges(string metadataSet, string entitySet, string entityKind, Entity entity,
                                                  DataLoaderParams Params, MetadataKind metadataKind)

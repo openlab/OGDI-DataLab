@@ -14,6 +14,11 @@
             ProcessEntity(entitySetName, entity);
         }
 
+        public virtual void ProcessRdfMetadataEntity(string entitySetName, Entity entity)
+        {
+            ProcessEntity(entitySetName, entity);
+        }
+
         public virtual void ValidateParams(Entity schemaEntity)
         {
         }

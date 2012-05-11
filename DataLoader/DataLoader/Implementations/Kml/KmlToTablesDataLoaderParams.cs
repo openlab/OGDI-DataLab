@@ -62,6 +62,11 @@ namespace Ogdi.Data.DataLoader.Kml
                                                         EntityMetadataPartitionKeyPropertyName = string.Empty,
                                                         EntityMetadataRowKeyPropertyName = string.Empty,
                                                         SourceTimeZoneName = string.Empty
+                                                    },
+                                                    TableColumnsMetadata = new TableColumnsMetadata
+                                                    {
+                                                        TableColumnsMetadataPartitionKeyPropertyName = string.Empty,
+                                                        TableColumnsMetadataRowKeyPropertyName = string.Empty
                                                     }
                                        };
             }
@@ -70,7 +75,7 @@ namespace Ogdi.Data.DataLoader.Kml
 
         private static KmlToTablesDataLoaderParams CreateEmptyData(string fileName)
         {
-            string name = Path.GetFileNameWithoutExtension(fileName);
+            var name = Path.GetFileNameWithoutExtension(fileName);
 
             var dataLoaderParams = new KmlToTablesDataLoaderParams();
 
@@ -92,22 +97,27 @@ namespace Ogdi.Data.DataLoader.Kml
                                                   };
 
             dataLoaderParams.ProcessorParams = new TableProcessorParams
-                                                   {
-                                                       PartitionKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
-                                                       RowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
-                                                       TableMetadataPartitionKeyPropertyName = "Name",
-                                                       TableMetadataRowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
-                                                       EntityMetadataPartitionKeyPropertyName = DataLoaderConstants.PropNameEntitySet,
-                                                       EntityMetadataRowKeyPropertyName = DataLoaderConstants.PropNameEntityKind
-                                                   };
+                                                    {
+                                                        PartitionKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
+                                                        RowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
+                                                        TableMetadataPartitionKeyPropertyName = "Name",
+                                                        TableMetadataRowKeyPropertyName = DataLoaderConstants.ValueUniqueAutoGenInitCaps,
+                                                        TableColumnsMetadataPartitionKeyPropertyName = DataLoaderConstants.PropNameEntitySet,
+                                                        TableColumnsMetadataRowKeyPropertyName = "Column",
+                                                        EntityMetadataPartitionKeyPropertyName = DataLoaderConstants.PropNameEntitySet,
+                                                        EntityMetadataRowKeyPropertyName = DataLoaderConstants.PropNameEntityKind
+                                                    };
 
+
+            dataLoaderParams.TableColumnsMetadata = new TableColumnsMetadata
+            {
+                PropertyToTypeColumnsMetadata = new PropertyToTypeColumnsMetadataMapper()
+            };
 
             using (var kmlFile = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
                 const string mapToString = "string";
                 const string mapToDouble = "double";
-                const string longitudeProperty = "longitude";
-                const string latitudeProperty = "latitude";
                 const string nameAttribute = "name";
 
                 var kmlDocument = XDocument.Load(kmlFile);
@@ -125,28 +135,75 @@ namespace Ogdi.Data.DataLoader.Kml
                         propertyTypeMapper.Add(DataLoaderConstants.ElemNameName, mapToString);
                         propertyTypeMapper.Add(DataLoaderConstants.ElemNameDescription, mapToString);
 
+                        #region RDF
+
+                        string defaultDescription = DefaultDescription();
+                        string rdfNamespace = "ogdi=\"ogdiUrl\"";
+
+                        dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(DataLoaderConstants.ElemNameName.Trim(), string.Empty, FormattedDescription(defaultDescription, DataLoaderConstants.ElemNameName), rdfNamespace);
+                        dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(DataLoaderConstants.ElemNameDescription.Trim(), string.Empty, FormattedDescription(defaultDescription, DataLoaderConstants.ElemNameDescription), rdfNamespace);
+                        
+                        #endregion
+
                         if (firstPlacemarkInKmlFile.Element(kmlNamespace + DataLoaderConstants.ElemNamePoint) != null)
                         {
-                            propertyTypeMapper.Add(latitudeProperty, mapToDouble);
-                            propertyTypeMapper.Add(longitudeProperty, mapToDouble);
-                            dataLoaderParams.ProducerParams.PlacemarkParams.LongitudeProperty = longitudeProperty;
-                            dataLoaderParams.ProducerParams.PlacemarkParams.LatitudeProperty = latitudeProperty;
+                            propertyTypeMapper.Add(DataLoaderConstants.PropNameLongitude, mapToDouble);
+                            propertyTypeMapper.Add(DataLoaderConstants.PropNameLatitude, mapToDouble);
+                            dataLoaderParams.ProducerParams.PlacemarkParams.LongitudeProperty = DataLoaderConstants.PropNameLongitude;
+                            dataLoaderParams.ProducerParams.PlacemarkParams.LatitudeProperty = DataLoaderConstants.PropNameLatitude;
+
+                            #region RDF
+
+                            dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(DataLoaderConstants.PropNameLongitude.Trim(), string.Empty, FormattedDescription(defaultDescription, DataLoaderConstants.PropNameLongitude), rdfNamespace);
+                            dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(DataLoaderConstants.PropNameLatitude.Trim(), string.Empty, FormattedDescription(defaultDescription, DataLoaderConstants.PropNameLatitude), rdfNamespace);
+
+                            #endregion
                         }
                         else if (firstPlacemarkInKmlFile.Element(kmlNamespace + DataLoaderConstants.ElemNamePolygon) != null)
                         {
                             propertyTypeMapper.Add(DataLoaderConstants.PropNameKmlCoords, mapToString);
+
+                            #region RDF
+
+                            dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(DataLoaderConstants.PropNameKmlCoords.Trim(), string.Empty, FormattedDescription(defaultDescription, DataLoaderConstants.PropNameKmlCoords), rdfNamespace);
+
+                            #endregion
                         }
 
                         foreach (var simpleData in firstPlacemarkInKmlFile.Descendants(kmlNamespace + DataLoaderConstants.ElemNameSimpleData))
                         {
                             if (simpleData.Attribute(nameAttribute) == null) continue;
-                            propertyTypeMapper.Add(string.Concat("sd0", simpleData.Attribute(nameAttribute).Value), mapToString);
+                            string val = string.Concat("sd0", simpleData.Attribute(nameAttribute).Value);
+                            propertyTypeMapper.Add(val, mapToString);
+
+                            #region RDF
+
+                            dataLoaderParams.TableColumnsMetadata.PropertyToTypeColumnsMetadata.Add(val.Trim(), string.Empty, FormattedDescription(defaultDescription, val), rdfNamespace);
+
+                            #endregion
                         }
                     }
                 }
             }
 
             return dataLoaderParams;
+        }
+
+        private static string DefaultDescription()
+        {
+            XDocument xmlDoc = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\RdfNamespaces.xml"));
+
+            foreach (XElement desc in xmlDoc.Descendants("metadata"))
+            {
+                return desc.Element("description").Value.ToString();
+            }
+
+            return string.Empty;
+        }
+
+        private static string FormattedDescription(string defaultDescription, string parameter)
+        {
+            return string.Format(defaultDescription, parameter, DataLoaderConstants.ElemNamePlacemark);
         }
 
         public override void Save(string fileName)

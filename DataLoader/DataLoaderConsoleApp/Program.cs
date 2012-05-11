@@ -1,11 +1,21 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.Odbc;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+
 using Ogdi.Data.DataLoader;
+using System.Diagnostics;
 
 namespace Ogdi.Data.DataLoaderConsoleApp
 {
@@ -40,6 +50,8 @@ namespace Ogdi.Data.DataLoaderConsoleApp
             long elapsedTicks = DateTime.Now.Ticks - start.Ticks;
             TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
             Console.WriteLine("\tProcessing time: {0:N2} seconds", elapsedSpan.TotalSeconds);
+            Console.WriteLine("\nHit enter to exit...");
+            Console.ReadLine();
         }
 
         private static void LoadDataset(string[] args)
@@ -87,7 +99,7 @@ namespace Ogdi.Data.DataLoaderConsoleApp
             }
 
             Console.ForegroundColor = (isOnContinue) ? ConsoleColor.Yellow : ConsoleColor.Red;
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(sb.ToString());            
             Console.ResetColor();
             Trace.WriteLine(sb.ToString());
         }

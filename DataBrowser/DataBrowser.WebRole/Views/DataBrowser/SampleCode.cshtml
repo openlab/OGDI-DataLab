@@ -1,0 +1,94 @@
+﻿@model DataBrowserModel
+
+<div class="dataset-data">
+
+	<div class="content">
+@*	<% Html.RenderPartial("Query", this.Model); %>*@
+	
+	 <div id="sampleCodeTabs" style="visibility: hidden;">
+		<ul>
+			<li id="liCodeDataView"><a href="#code-tabs-1"> @DataBrowserResources.SampleCode.DataView </a></li>
+			<li id="liCodeMapView"><a href="#code-tabs-2"> @DataBrowserResources.SampleCode.MapView </a></li>
+			<li id="liCodeBarChart"><a href="#code-tabs-3"> @DataBrowserResources.SampleCode.BarChart </a></li>
+			<li id="liCodePieChart"><a href="#code-tabs-4"> @DataBrowserResources.SampleCode.PieChart </a></li>
+		</ul>
+		<div id="code-tabs-1">
+			  <div id="divOuterDataViewSampleCode" >
+				  <div style="vertical-align: bottom;
+					   margin-top: 5px; float: left;">
+					  @Html.Raw(DataBrowserResources.SampleCode.LanguageEnvironment )
+					  @Html.DropDownList("languagesDataView", ViewData.Model.DataViewLanguages)
+				  </div>
+				  &nbsp;&nbsp;<img id="copyDataCodeButton" 
+						title ='@DataBrowserResources.SampleCode.ClickForCopyToClipboard'
+					  src='@UIConstants.DBPC_CopyDataImagePath'
+					  class="copyicon"
+					  alt='@DataBrowserResources.SampleCode.ClickForCopyToClipboard'
+					  longdesc="@UIConstants.DBPC_CopyDataLongDesc" />
+				  <br />
+				  <div id="divDataViewSampleCode" class="codesamplescroll">
+					  <div> @Html.Partial("SampleCodeDataView", ViewData) </div>
+				  </div>
+			  </div>
+		</div>
+		<div id="code-tabs-2">
+			  <div id="divOuterMapViewSampleCode">
+				  <p>
+					  @Html.Raw(DataBrowserResources.SampleCode.NoteThisIsAWorkingSample )
+				  </p>
+				  <div style="vertical-align: bottom; margin-top: 5px; float: left;">
+					  @Html.Raw(DataBrowserResources.SampleCode.LanguageEnvironment )
+					  @Html.DropDownList("languagesMapView", 
+						  ViewData.Model.MapViewLanguages)
+				  </div>
+				  &nbsp;<img id="copyMapCodeButton" 
+					  src='@UIConstants.DBPC_CopyDataImagePath'
+					  class="copyicon" title="Copy to Clipboard" 
+					  alt='@UIConstants.DBPC_CopyDataAltText'
+					  longdesc='@UIConstants.DBPC_CopyDataLongDesc' />
+				  <br />
+				  <div id="divMapViewSampleCode" class="codesamplescroll">
+					   @Html.Partial("SampleCodeMapView", ViewData) 
+				  </div>
+			  </div>
+		</div>
+		<div id="code-tabs-3">
+			  <div id="divOuterBarChartViewSampleCode">
+				  <div style="vertical-align: bottom; margin-top: 5px; float: left;">
+					  @Html.Raw(DataBrowserResources.SampleCode.LanguageEnvironment )
+					  @Html.DropDownList("languagesBarChartView",
+						  ViewData.Model.BarChartViewLanguages)
+				  </div>
+				  &nbsp;<img id="copyBarChartCodeButton" 
+					  src='@UIConstants.DBPC_CopyDataImagePath'
+					  class="copyicon" title="Copy to Clipboard" 
+					  alt='@UIConstants.DBPC_CopyDataAltText'
+					  longdesc='@UIConstants.DBPC_CopyDataLongDesc' />
+				  <br />
+				  <div id="divBarChartViewSampleCode" class="codesamplescroll">
+					   @Html.Partial("SampleCodeBarChartView", ViewData) 
+				  </div>
+			  </div>
+		</div>
+		<div id="code-tabs-4">
+			  <div id="divOuterPieChartViewSampleCode">
+				  <div style="vertical-align: bottom; margin-top: 5px; float: left;">
+					  @Html.Raw(DataBrowserResources.SampleCode.LanguageEnvironment )
+					  @Html.DropDownList("languagesPieChartView", 
+						  ViewData.Model.PieChartViewLanguages)
+				  </div>
+				  &nbsp;<img id="copyPieChartCodeButton" 
+					  src='@UIConstants.DBPC_CopyDataImagePath'
+					  class="copyicon" title="Copy to Clipboard" 
+					  alt='@UIConstants.DBPC_CopyDataAltText'
+					  longdesc='@UIConstants.DBPC_CopyDataLongDesc' />
+				  <br />
+				  <div id="divPieChartViewSampleCode" class="codesamplescroll">
+					   @Html.Partial("SampleCodePieChartView", ViewData) 
+				  </div>
+			  </div>
+		</div>
+	</div>
+	</div>
+</div>
+

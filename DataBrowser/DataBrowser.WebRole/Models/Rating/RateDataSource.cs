@@ -6,39 +6,39 @@ using Ogdi.Azure.Configuration;
 
 namespace Ogdi.InteractiveSdk.Mvc.Models.Rating
 {
-    public class RateDataSource
-    {
-        private static CloudStorageAccount storageAccount;
-        private RateDataContext context;
+	public class RateDataSource
+	{
+		private static CloudStorageAccount storageAccount;
+		private RateDataContext context;
 
-        static RateDataSource()
-        {
+		static RateDataSource()
+		{
 			storageAccount = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 
-            CloudTableClient.CreateTablesFromModel(
-                typeof(RateDataContext),
+			CloudTableClient.CreateTablesFromModel(
+				typeof(RateDataContext),
 				storageAccount.TableEndpoint.AbsoluteUri,
-                storageAccount.Credentials);
-        }
+				storageAccount.Credentials);
+		}
 
-        public RateDataSource()
-        {
+		public RateDataSource()
+		{
 			this.context = new RateDataContext(storageAccount.TableEndpoint.AbsoluteUri, storageAccount.Credentials);
-            this.context.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1));
-        }
+			this.context.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1));
+		}
 
-        public void AddVote(RateEntry item)
-        {
-            this.context.AddObject("RateEntry", item);
-            this.context.SaveChanges();
-        }
+		public void AddVote(RateEntry item)
+		{
+			this.context.AddObject("RateEntry", item);
+			this.context.SaveChanges();
+		}
 
-        public IQueryable<RateEntry> SelectAll()
-        {
-            return this.context.RateEntry;
-        }
-              
+		public IQueryable<RateEntry> SelectAll()
+		{
+			return this.context.RateEntry;
+		}
+			  
 
-        
-    }
+		
+	}
 }

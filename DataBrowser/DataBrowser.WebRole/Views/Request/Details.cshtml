@@ -1,0 +1,57 @@
+﻿@inherits Ogdi.InteractiveSdk.Mvc.OgdiViewPage<Ogdi.InteractiveSdk.Mvc.Models.Request.Request>
+
+@section HeadContent {
+
+
+}
+
+	<div class="request-details dataset">
+		<div class="name">@Model.Subject</div>
+		<div class="description">@Model.Description</div>
+		<div class="parameters">
+			<div class="left">
+				<div class="label"> @RequestResources.Details.Status </div>
+				<div>@Model.Status</div>
+			</div>
+			<div class="left">
+				<div class="label"> @RequestResources.Details.PostedDate </div>
+				<div>@String.Format("{0:" + Ogdi.InteractiveSdk.Mvc.Globals.ShortDateFormat + "}", Model.PostedDate)</div>
+			</div>
+			<div class="left">
+				<div class="label"> @RequestResources.Details.Rating </div>
+				<div class="rates"> @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(Model.ItemKey, Model.PositiveVotes, Model.NegativeVotes) { ReadOnly = false }) </div>
+			</div>
+			<div class="left">
+				<div class="label"> @RequestResources.Details.Views </div>
+				<div class="rates">@this.Model.Views</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		@if (! String.IsNullOrEmpty(Model.Links)) { 
+			<div class="param">
+				<div class="label"> @RequestResources.Details.Links </div>
+				<div class="value">@Model.Links</div>
+				<div class="clear"></div>
+			</div>
+		 } 
+		@if (! String.IsNullOrEmpty(Model.DatasetLink)) { 
+			<div class="param">
+				<div class="label"> @RequestResources.Details.DatasetLink </div>
+				<div class="value">@Model.DatasetLink</div>
+				<div class="clear"></div>
+			</div>
+		 } 
+		
+	</div>
+	
+	
+		    
+    <div id="dataSetViewComments" class="block">
+		 @Html.Partial("Comments", Ogdi.InteractiveSdk.Mvc.Models.Comments.CommentInfo.CreateRequestCommentInfo(Model.RequestID)) 
+     </div>
+     
+
+
+
+

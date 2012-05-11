@@ -1,11 +1,13 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
-    public partial class Default : Page
+    public partial class _Default : Page
     {
         public void Page_Load(object sender, System.EventArgs e)
         {

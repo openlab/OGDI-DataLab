@@ -20,7 +20,7 @@ namespace Ogdi.InteractiveSdk.Reports
                 this.To.SelectedDate = DateTime.Now.Date.AddDays(+1);
             }
 
-            this.ReportViewer1.Reset();
+            //this.ReportViewer1.Reset();
 
             ReportEntry re = list[DropDownList1.SelectedIndex];
 
@@ -30,8 +30,8 @@ namespace Ogdi.InteractiveSdk.Reports
             this.ObjectDataSource1.TypeName = re.Type;
             this.ObjectDataSource1.DataBind();
 
-            this.ReportViewer1.LocalReport.DataSources.Add(
-                new Microsoft.Reporting.WebForms.ReportDataSource("Data", "ObjectDataSource1"));
+            //this.ReportViewer1.LocalReport.DataSources.Add(
+            //    new Microsoft.Reporting.WebForms.ReportDataSource("Data", "ObjectDataSource1"));
 
             this.ReportViewer1.LocalReport.Refresh();
         }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Threading;
+using System.Linq;
 using Ogdi.Data.DataLoader;
 using Ogdi.Data.DataLoaderUI;
 
@@ -34,7 +34,7 @@ namespace Ogdi.Data.DataLoaderGuiApp
             foreach (var fileName in files)
             {
                 var file = new FileInfo(fileName);
-                string name = Path.GetFileNameWithoutExtension(file.Name);
+                var name = Path.GetFileNameWithoutExtension(file.Name);
 
                 // Remove duplicates.
                 foreach (var item in DataSetInfos.Where(x => x.Name == name).ToArray())

@@ -8,8 +8,8 @@
     <ProjectGuid>{4a1a1a18-a220-4724-8276-e8924a3a2d2e}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataService</RootNamespace>
-    <AssemblyName>DataService</AssemblyName>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>Services</AssemblyName>
     <Name>DataService.Cloud</Name>
     <SccProjectName>
     </SccProjectName>
@@ -19,7 +19,6 @@
     </SccAuxPath>
     <SccLocalPath>
     </SccLocalPath>
-    <StartDevelopmentStorage>False</StartDevelopmentStorage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +39,9 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
-    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataService.WebRole\DataService.WebRole.csproj">
@@ -51,7 +50,6 @@
       <Private>True</Private>
       <RoleType>Web</RoleType>
       <RoleName>DataService.WebRole</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->

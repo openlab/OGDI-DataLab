@@ -1,0 +1,8 @@
+﻿@inherits Ogdi.InteractiveSdk.Mvc.OgdiViewUserControl<Ogdi.InteractiveSdk.Mvc.Models.ViewData.AgencyTabsViewModel>
+
+
+<div class="tabs">
+	<div class="tab tc2 t2" title="@SharedResources.AgencyTabs.Comments"><div @this.Model.Active == AgencyTab.Comments ? " class=\"active\"" : "" onclick='q.Tabs.switchTabs(this, null, "@this.Url.Content("~/Comments/AgencyComments")")'></div></div>
+	<div class="tab tc6 t6" title="@SharedResources.AgencyTabs.Requests"><div @this.Model.Active == AgencyTab.Requests ? " class=\"active\"" : "" onclick='q.Tabs.switchTabs(this, null, "@this.Url.Content("~/Request/RequestsManage")")'></div></div>
+	<div class="tab tc5 t5" title="@SharedResources.AgencyTabs.Reports"><div @this.Model.Active == AgencyTab.Reports ? " class=\"active\"" : "" onclick='q.Tabs.switchTabs(this, null, "@this.Url.Content("~/Reports/Reports.aspx")")'></div></div>
+</div>

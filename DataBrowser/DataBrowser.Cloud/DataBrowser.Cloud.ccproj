@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataBrowser.Cloud</RootNamespace>
     <AssemblyName>DataBrowser.Cloud</AssemblyName>
-    <StartDevelopmentStorage>True</StartDevelopmentStorage>
+    <StartDevelopmentStorage>False</StartDevelopmentStorage>
     <Name>DataBrowser.Cloud</Name>
     <SccProjectName>
     </SccProjectName>
@@ -40,9 +40,9 @@
   </PropertyGroup>
   <!-- Items for the project -->
   <ItemGroup>
-    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <ServiceDefinition Include="ServiceDefinition.csdef" />
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataBrowser.WebRole\DataBrowser.WebRole.csproj">
@@ -59,7 +59,6 @@
       <Private>True</Private>
       <RoleType>Worker</RoleType>
       <RoleName>DataBrowser.WorkerRole</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->

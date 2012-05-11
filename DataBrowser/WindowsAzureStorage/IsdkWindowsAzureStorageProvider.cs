@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using Ogdi.InteractiveSdk.Mvc;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
@@ -14,14 +20,14 @@ namespace Ogdi.InteractiveSdk.Mvc
     {
         #region Properties
 
-        public string ServiceUri { get; set; }
+        public string ServiceUri {get; set;}
         public string PathDTD { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public IsdkWindowsAzureStorageProvider(string serviceUri, string pathDTD)
+        public IsdkWindowsAzureStorageProvider(string serviceUri,string pathDTD)
         {
             ServiceUri = serviceUri;
             PathDTD = pathDTD;
@@ -47,6 +53,8 @@ namespace Ogdi.InteractiveSdk.Mvc
         {
             var serviceUriBuilder = new StringBuilder();
 
+            //serviceUriBuilder.Append(ConfigurationManager.AppSettings["serviceUri"]);
+            //serviceUriBuilder.Append(RoleEnvironment.GetConfigurationSettingValue("serviceUri"));
             serviceUriBuilder.Append(ServiceUri);
             serviceUriBuilder.Append(container);
             serviceUriBuilder.Append("/");
@@ -151,7 +159,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                 throw new ArgumentNullException(AzureResources.TableNameCannotBeNull);
             }
 
-            if (pageSize < 0)
+            if(pageSize < 0)
             {
                 throw new ArgumentException(AzureResources.PagesizeNotZEROOrNegative);
             }
@@ -197,7 +205,7 @@ namespace Ogdi.InteractiveSdk.Mvc
             // XmlDataSource doesn't support namespaces well
             // http://www.hanselman.com/blog/PermaLink,guid,8147b263-24fc-498d-83d1-546f4dde3fc3.aspx
             // Therefore, we will return XML that doesn't have any
-            var root = new XElement("Root", propertiesElements);
+            XElement root = new XElement("Root", propertiesElements);
             root.Add(new XAttribute("tableName", tableName));
             root.Add(new XAttribute("currentPartitionKey", currentPartitionKeyStr));
             root.Add(new XAttribute("currentRowKey", currentRowKeyStr));
@@ -225,7 +233,7 @@ namespace Ogdi.InteractiveSdk.Mvc
             XElement tempGetData = null;
             string tempNextPartitionKey = string.Empty;
             string tempNextRowKey = string.Empty;
-
+                        
             if (string.IsNullOrEmpty(container))
             {
                 throw new ArgumentNullException(AzureResources.ContainerCannotBeNull);
@@ -329,8 +337,8 @@ namespace Ogdi.InteractiveSdk.Mvc
 
             TextReader validatedDTBookXml;
             //Xml got from azure environment is given as input for DTBook translation method
-            string mappedPath = (HttpContext.Current != null) ? HttpContext.Current.Server.MapPath(PathDTD)
-                                    : Path.Combine(Environment.CurrentDirectory, PathDTD);
+            string mappedPath = (HttpContext.Current!=null) ? HttpContext.Current.Server.MapPath(PathDTD) 
+                : Path.Combine(Environment.CurrentDirectory,PathDTD);
             validatedDTBookXml = objBook.TranslationOfAzureXml(xmlReader, mappedPath);
             daisyDataXml = XDocument.Load(validatedDTBookXml);
             return daisyDataXml;
@@ -374,7 +382,7 @@ namespace Ogdi.InteractiveSdk.Mvc
         /// <returns>Xml containing the results of the query.</returns>
         private XElement GetDataAsXElement(string container, string tableName, string filter)
         {
-            string root = string.Format("<Root tableName=\"{0}\" currentPartitionKey=\"\" currentRowKey=\"\" nextPartitionKey=\"\" nextRowKey=\"\" />", tableName);
+            string root = string.Format("<Root tableName=\"{0}\" currentPartitionKey=\"\" currentRowKey=\"\" nextPartitionKey=\"\" nextRowKey=\"\" />",tableName);
 
             XElement tempGetData = XElement.Parse(root);
             string tempNextPartitionKey = string.Empty;
@@ -399,7 +407,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                 tempNextRowKey = tp.Attribute("nextRowKey").Value;
 
             }
-            while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));
+            while (!string.IsNullOrEmpty(tempNextPartitionKey) && !string.IsNullOrEmpty(tempNextRowKey));            
 
             return tempGetData;
         }
@@ -418,39 +426,50 @@ namespace Ogdi.InteractiveSdk.Mvc
         /// <returns>An string in csv format containing the results of the query.</returns>
         public override string GetdDataAsCsv(string container, string tableName, string filter)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("{0} - {1}", DateTime.Now.ToString(), "1"));
+            System.Diagnostics.Trace.WriteLine(string.Format("{0} - {1}", DateTime.Now.ToString(), "1"));            
 
             List<string> columns = GetColumns(container, tableName);
             XElement xml = GetDataAsXElement(container, tableName, filter);
 
             try
             {
+                //DEBUG
+                var currentUICulture = Thread.CurrentThread.CurrentUICulture;
+                string listSeparator = currentUICulture.TextInfo.ListSeparator;
                 StringBuilder sbAllEntities = new StringBuilder();
 
                 foreach (string column in columns)
                 {
                     sbAllEntities.Append(column);
-                    sbAllEntities.Append(",");
+                    sbAllEntities.Append(listSeparator);
                 }
                 sbAllEntities.Remove(sbAllEntities.Length - 1, 1);
                 sbAllEntities.Append(Environment.NewLine);
-
+                                
                 foreach (var element in xml.Elements("properties"))
                 {
                     foreach (string column in columns)
                     {
+                        Decimal parseTest = 0;
                         string value = GetElement(element, column);
                         if (!string.IsNullOrEmpty(value))
                         {
-                            value = value.Replace(',', ' ');
-                            value = value.Replace('\n', ' ');
+                            if (Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture ,out parseTest))
+                            {
+                                value = parseTest.ToString(CultureInfo.CreateSpecificCulture(currentUICulture.Name));
+                            }
+                            else
+                            {
+                                value = value.Replace(listSeparator, " ");
+                                value = value.Replace('\n', ' ');
+                            }                      
                             sbAllEntities.Append(value);
                         }
                         else
                         {
                             sbAllEntities.Append(string.Empty);
                         }
-                        sbAllEntities.Append(",");
+                        sbAllEntities.Append(listSeparator);
                     }
                     sbAllEntities.Remove(sbAllEntities.Length - 1, 1);
                     sbAllEntities.Append(Environment.NewLine);
