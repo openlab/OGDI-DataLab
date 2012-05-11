@@ -15,8 +15,12 @@ namespace Ogdi.Data.DataLoader
                     SourceTimeZoneName = prop.Value.ToString();
                 if (prop.Name.ToLower() == "partitionkeypropertyname")
                     PartitionKeyPropertyName = prop.Value.ToString();
-                if (prop.Name.ToLower() == "rowkeypropertyname")
+                if (prop.Name.ToLower() == "RowKeyPropertyName")
                     RowKeyPropertyName = prop.Value.ToString();
+                if (prop.Name.ToLower() == "tablecolumnsmetadatapartitionkeypropertyname")
+                    TableColumnsMetadataPartitionKeyPropertyName = prop.Value.ToString();
+                if (prop.Name.ToLower() == "tablecolumnsmetadatarowkeypropertyname")
+                    TableColumnsMetadataRowKeyPropertyName = prop.Value.ToString();
                 if (prop.Name.ToLower() == "tablemetadatapartitionkeypropertyname")
                     TableMetadataPartitionKeyPropertyName = prop.Value.ToString();
                 if (prop.Name.ToLower() == "tablemetadatarowkeypropertyname")
@@ -76,6 +80,12 @@ namespace Ogdi.Data.DataLoader
 
         [ValidateField("Table Metadata Row Key Property Name")]
         public string TableMetadataRowKeyPropertyName { get; set; }
+
+        [ValidateField("Table Columns Metadata Partition Key Property Name")]
+        public string TableColumnsMetadataPartitionKeyPropertyName { get; set; }
+
+        [ValidateField("Table Columns Metadata Row Key Property Name")]
+        public string TableColumnsMetadataRowKeyPropertyName { get; set; }
 
         [ValidateField("Entity Metadata Partition Key Property Name")]
         public string EntityMetadataPartitionKeyPropertyName { get; set; }

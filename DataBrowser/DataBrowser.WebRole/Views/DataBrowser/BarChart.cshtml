@@ -1,0 +1,14 @@
+﻿@using System.Web.UI.DataVisualization.Charting
+
+@inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<Ogdi.InteractiveSdk.Mvc.Models.DataBrowserModel>
+
+@{  
+    Layout = null;
+    
+    //  Set Page for chart control
+    //OgdiBarChart.Page = this.Parent.Page as System.Web.UI.Page;
+    
+    //  Set the render control with an object that receives
+    // the control content
+    Model.BarChart.RenderControl(new HtmlTextWriter(this.Response.Output));		
+}

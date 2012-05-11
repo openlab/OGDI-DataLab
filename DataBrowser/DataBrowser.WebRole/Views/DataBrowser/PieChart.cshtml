@@ -1,0 +1,18 @@
+﻿@using System.Web.UI.DataVisualization.Charting
+
+@inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<Ogdi.InteractiveSdk.Mvc.Models.DataBrowserModel>
+
+
+<script type="text/javascript">
+    var h = '@Model.PieChartHeight';
+    document.getElementById("divPieResultHeight").style.height = parseInt(h) + "px";  
+</script>
+
+@{
+    //  Set Page for chart control
+    //OgdiPieChart.Page = this.Parent.Page as System.Web.UI.Page;
+
+    //  Set the render control with an object that receives
+    //  the control content
+    Model.PieChart.RenderControl(new HtmlTextWriter(this.Response.Output));					
+}

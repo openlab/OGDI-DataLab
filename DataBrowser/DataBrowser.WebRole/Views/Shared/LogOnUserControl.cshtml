@@ -1,0 +1,21 @@
+﻿
+@{
+    if (Request.IsAuthenticated) 
+    {
+        if("Administrator".Equals(Session["UserRole"]))
+        {
+
+        <text>[</text> @Html.ActionLink(SharedResources.LogOnUserControl.ManageRoles, "ManageRoles", "Account") <text>]</text>
+            
+        }
+}
+        <text>[</text> @Html.ActionLink(SharedResources.LogOnUserControl.RegistrationInfo, "UpdateUserInfo", "Account") <text>]</text>
+        <text>[</text> @Html.ActionLink(SharedResources.LogOnUserControl.LogOff, "LogOff", "Account") <text>]</text>
+
+    }
+    else {
+ 
+        <text>[</text> @Html.ActionLink(SharedResources.LogOnUserControl.LogOn, "LogOn", "Account") <text>]</text>
+
+    }
+

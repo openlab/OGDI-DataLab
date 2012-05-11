@@ -32,68 +32,68 @@ using Ogdi.InteractiveSdk.Mvc.Models;
 
 namespace Ogdi.InteractiveSdk.Mvc.Repository
 {
-    /// <summary>
-    /// This Repository will have the methods to manage the EntitySet.cs model 
-    /// for the list of datasets.
-    /// </summary>
-    internal class EntitySetRepository
-    {
-        #region Public Methods
+	/// <summary>
+	/// This Repository will have the methods to manage the EntitySet.cs model 
+	/// for the list of datasets.
+	/// </summary>
+	internal class EntitySetRepository
+	{
+		#region Public Methods
 
-        /// <summary>
-        /// This method fetches the EntitySets for the given parameters
-        /// </summary>
-        /// <param name="containerAlias">alias of the container</param>
-        /// <param name="categoryName">name of the category</param>
-        /// <returns>returns list of EntitySet</returns>
-        internal static IEnumerable<EntitySet> GetEntitySets(string containerAlias, string categoryName)
-        {
-            if ((String.IsNullOrEmpty(containerAlias)))
-                return null;
+		/// <summary>
+		/// This method fetches the EntitySets for the given parameters
+		/// </summary>
+		/// <param name="containerAlias">alias of the container</param>
+		/// <param name="categoryName">name of the category</param>
+		/// <returns>returns list of EntitySet</returns>
+		internal static IEnumerable<EntitySet> GetEntitySets(string containerAlias, string categoryName)
+		{
+			if ((String.IsNullOrEmpty(containerAlias)))
+				return null;
 
-            if (categoryName == null)
-                return Cache.EntitySets(containerAlias);
-            else
-                return Cache.EntitySets(containerAlias).Where(t => t.CategoryValue == categoryName);
-        }
+			if (categoryName == null)
+				return Cache.EntitySets(containerAlias);
+			else
+				return Cache.EntitySets(containerAlias).Where(t => t.CategoryValue == categoryName);
+		}
 
-        internal static EntitySet GetEntitySet(string containerAlias, string entName)
-        {
-            // 1000 is the max results Azure Table Storage allows per query
-            if (String.IsNullOrEmpty(containerAlias))
-                return null;
+		internal static EntitySet GetEntitySet(string containerAlias, string entName)
+		{
+			// 1000 is the max results Azure Table Storage allows per query
+			if (String.IsNullOrEmpty(containerAlias))
+				return null;
 
-            var lstEntitySets = Cache.EntitySets(containerAlias).Where(t => t.EntitySetName == entName);
-            return lstEntitySets.FirstOrDefault();
-        }
+			var lstEntitySets = Cache.EntitySets(containerAlias).Where(t => t.EntitySetName == entName);                    
+			return lstEntitySets.FirstOrDefault();
+		}
 
-        internal static IQueryable<EntitySet> GetEntitySets()
-        {
-            IQueryable<EntitySet> _entities = new List<EntitySet>().AsQueryable();
+		internal static IQueryable<EntitySet> GetEntitySets()
+		{
+			IQueryable<EntitySet> _entities = new List<EntitySet>().AsQueryable();
 
-            foreach (Container container in ContainerRepository.GetAllContainers())
-            {
-                _entities = Queryable.Concat(_entities, Cache.EntitySets(container.Alias));
-            }
+			foreach(Container container in ContainerRepository.GetAllContainers())
+			{
+				_entities = Queryable.Concat(_entities, Cache.EntitySets(container.Alias));
+			}
 
-            return _entities;
-        }
+			return _entities;
+		} 
 
-        ///// <summary>
-        ///// This method fetches the distinct categories from the
-        ///// list of EntitySets
-        ///// </summary>
-        ///// <param name="lstEntitySets">List of EntitySets</param>
-        ///// <returns>List of categories</returns>
-        //private static List<string> FetchCategories()
-        //{
-        //    // Get unique categories
-        //    return ((from category in Cache.EntitySets(containerAlias)
-        //             orderby category.CategoryValue
-        //             select category.CategoryValue).Distinct())
-        //                         .ToList<string>();
-        //}
+		///// <summary>
+		///// This method fetches the distinct categories from the
+		///// list of EntitySets
+		///// </summary>
+		///// <param name="lstEntitySets">List of EntitySets</param>
+		///// <returns>List of categories</returns>
+		//private static List<string> FetchCategories()
+		//{
+		//    // Get unique categories
+		//    return ((from category in Cache.EntitySets(containerAlias)
+		//             orderby category.CategoryValue
+		//             select category.CategoryValue).Distinct())
+		//                         .ToList<string>();
+		//}
 
-        #endregion
-    }
+		#endregion
+	}
 }

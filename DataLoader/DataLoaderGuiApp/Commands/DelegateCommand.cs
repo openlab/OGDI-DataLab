@@ -123,7 +123,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.Commands
         {
             add
             {
-                if (!_isAutomaticRequeryDisabled)
+                if (!_isAutomaticRequeryDisabled && value != null)
                 {
                     CommandManager.RequerySuggested += value;
                 }
@@ -281,7 +281,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.Commands
         {
             add
             {
-                if (!_isAutomaticRequeryDisabled)
+                if (!_isAutomaticRequeryDisabled && value != null)
                 {
                     CommandManager.RequerySuggested += value;
                 }

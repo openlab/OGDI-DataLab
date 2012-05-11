@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Microsoft.WindowsAzure;
@@ -28,18 +27,10 @@ namespace Ogdi.DataServices
 
             return availableEndpoints;
         }
-
+                
         public static string RootServiceNamespace
         {
             get { return RoleEnvironment.GetConfigurationSettingValue("RootServiceNamespace"); }
-        }
-
-        public static bool TrackAnalytics
-        {
-            get
-            {
-                return bool.Parse(RoleEnvironment.GetConfigurationSettingValue("EnableAnalytics"));
-            }
         }
 
         public static string OgdiConfigTableStorageAccountName
@@ -51,7 +42,7 @@ namespace Ogdi.DataServices
         {
             get { return ParseFromConnectionString(ConnectionStringElement.AccountKey); }
         }
-
+        
         private enum ConnectionStringElement { AccountName, AccountKey }
         private static string ParseFromConnectionString(ConnectionStringElement element)
         {
@@ -71,6 +62,8 @@ namespace Ogdi.DataServices
                 if (string.IsNullOrWhiteSpace(_tableStorageBaseUrl))
                 {
                     _tableStorageBaseUrl = "https://{0}.table.core.windows.net/";
+                    // TODO
+                    //_tableStorageBaseUrl = "http://127.0.0.1:10002/{0}/";
                 }
                 return _tableStorageBaseUrl;
             }

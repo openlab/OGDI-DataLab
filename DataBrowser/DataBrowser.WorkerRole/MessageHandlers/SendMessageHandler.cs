@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Xml.Serialization;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Ogdi.Azure.QueueEntities;
+using Ogdi.Azure.QueueEntities; 
 
 namespace InteractiveSdk.WorkerRole.MessageHandlers
 {

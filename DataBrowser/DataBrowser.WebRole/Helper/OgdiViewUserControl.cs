@@ -5,10 +5,12 @@ namespace Ogdi.InteractiveSdk.Mvc
 	{
 		SpecialUrls SpecialUrls { get; }
 	}
+
 	public interface IUrlResolver
 	{
 		string ResolveUrl(string relative);
 	}
+
 	public class SpecialUrls
 	{
 		private IUrlResolver control;
@@ -22,6 +24,7 @@ namespace Ogdi.InteractiveSdk.Mvc
 			return this.control.ResolveUrl("~/Content/css/buttons/" + name + ".png");
 		}
 	}
+
 	public class OgdiViewUserControl<TModel> : System.Web.Mvc.ViewUserControl<TModel>, IUrlResolver, IOgdiUI
 		where TModel : class
 	{
@@ -32,7 +35,7 @@ namespace Ogdi.InteractiveSdk.Mvc
 		public SpecialUrls SpecialUrls { get; private set; }
 	}
 
-	public class OgdiViewPage<TModel> : System.Web.Mvc.ViewPage<TModel>, IUrlResolver, IOgdiUI
+	public abstract class OgdiViewPage<TModel> : System.Web.Mvc.ViewUserControl<TModel>, IUrlResolver, IOgdiUI
 		where TModel : class
 	{
 		public OgdiViewPage()
@@ -40,5 +43,27 @@ namespace Ogdi.InteractiveSdk.Mvc
 			this.SpecialUrls = new SpecialUrls(this);
 		}
 		public SpecialUrls SpecialUrls { get; private set; }
+
+		public string ResolveUrl(string relative)
+		{
+			return Url.Content(relative);
+		}
+	}
+
+
+	public abstract class OgdiWebViewPage<TModel> : System.Web.Mvc.WebViewPage<TModel>, IUrlResolver, IOgdiUI
+		where TModel : class
+	{
+		public OgdiWebViewPage()
+		{
+			this.SpecialUrls = new SpecialUrls(this);
+			Layout = null;
+		}
+		public SpecialUrls SpecialUrls { get; private set; }
+
+		public string ResolveUrl(string relative)
+		{
+			return Url.Content(relative);
+		}
 	}
 }

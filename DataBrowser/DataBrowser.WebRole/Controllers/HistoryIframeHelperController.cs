@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Ajax;
 
 namespace Ogdi.InteractiveSdk.Mvc.Controllers
 {
@@ -9,7 +14,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
 
     }

@@ -7,73 +7,73 @@ using Ogdi.Azure.Configuration;
 
 namespace Ogdi.InteractiveSdk.Mvc.Models.Request
 {
-    public class RequestDataSource
-    {
+	public class RequestDataSource
+	{
 
-        private static CloudStorageAccount account;
-        private RequestDataContext context;
+		private static CloudStorageAccount account;
+		private RequestDataContext context;
 
-        static RequestDataSource()
+		static RequestDataSource()
 		{
 			account = CloudStorageAccount.Parse(OgdiConfiguration.GetValue("DataConnectionString"));
 			CloudTableClient.CreateTablesFromModel(typeof(RequestDataContext), account.TableEndpoint.AbsoluteUri, account.Credentials);
 		}
 
-        public RequestDataSource()
+		public RequestDataSource()
 		{
 			this.context = new RequestDataContext(account.TableEndpoint.AbsoluteUri, account.Credentials);
 			this.context.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(1));
 		}
 
-        public void AddRequest(RequestEntry item)
-        {
-            this.context.AddObject("Requests", item);
-            this.context.SaveChanges();
-        }
+		public void AddRequest(RequestEntry item)
+		{
+			this.context.AddObject("Requests", item);
+			this.context.SaveChanges();
+		}
 
-        public void UpdateRequest(RequestEntry item)
-        {
-            this.context.UpdateObject(item);
-            this.context.SaveChanges();
-        }
+		public void UpdateRequest(RequestEntry item)
+		{
+			this.context.UpdateObject(item);
+			this.context.SaveChanges();
+		}
 
-        public void DeleteRequest(string requestId)
-        {
-            var item = GetById(requestId);
-            this.context.DeleteObject(item);
-            this.context.SaveChanges();
-        }
+		public void DeleteRequest(string requestId)
+		{
+			var item = GetById(requestId);
+			this.context.DeleteObject(item);
+			this.context.SaveChanges();
+		}
 
-        public IEnumerable<RequestEntry> Select()
-        {
-            return this.context.Requests.AsEnumerable();
-        }
+		public IEnumerable<RequestEntry> Select()
+		{
+			return this.context.Requests.AsEnumerable();
+		}
 
-        public RequestEntry GetById(string requestId)
-        {
-            var result = (from g in this.context.Requests
-                         where g.RowKey == requestId
-                         select g).FirstOrDefault();
+		public RequestEntry GetById(string requestId)
+		{
+			var result = (from g in this.context.Requests
+						 where g.RowKey == requestId
+						 select g).FirstOrDefault();
 
 			if(result == null)
 				return null;
 
-            return result;
-        }
+			return result;
+		}
 
-        public IQueryable<RequestEntry> SelectAll()
-        {
-            return from r in this.context.Requests
-                   where r.Status != "Hidden"
-                   select r;
-        }
+		public IQueryable<RequestEntry> SelectAll()
+		{
+			return from r in this.context.Requests
+				   where r.Status != "Hidden"
+				   select r;
+		}
 
-        public IQueryable<RequestEntry> SelectAllWithHidden()
-        {
-            return from r in this.context.Requests                   
-                   select r;
-        }
+		public IQueryable<RequestEntry> SelectAllWithHidden()
+		{
+			return from r in this.context.Requests                   
+				   select r;
+		}
 
 
-    }
+	}
 }

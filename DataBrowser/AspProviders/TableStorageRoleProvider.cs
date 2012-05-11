@@ -15,9 +15,9 @@ using System.Linq;
 using System.Net;
 using System.Security;
 using System.Web.Security;
+using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Microsoft.WindowsAzure.StorageClient;
 
 
 namespace Microsoft.Samples.ServiceHosting.AspProviders
@@ -200,16 +200,18 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             _tableName = Configuration.GetStringValueWithGlobalDefault(config, "roleTableName", 
                                                 Configuration.DefaultRoleTableNameConfigurationString,
                                                 Configuration.DefaultRoleTableName, false);
-            Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName", 
+
+            Configuration.GetStringValueWithGlobalDefault(config, "membershipTableName",
                                                           Configuration.DefaultMembershipTableNameConfigurationString,
                                                           Configuration.DefaultMembershipTableName, false);
-            Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);
+            Configuration.GetStringValue(config, "tableServiceBaseUri", null, true);        
 
             // remove required attributes
             config.Remove("allowInsecureRemoteEndpoints");
             config.Remove("applicationName");
             config.Remove("roleTableName");
             config.Remove("membershipTableName");
+
 
             // Throw an exception if unrecognized attributes remain
             if (config.Count > 0)
@@ -221,7 +223,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 }
             }
 
-            if(_account == null)
+            if (_account == null)
                 throw new ConfigurationErrorsException("Account information incomplete!");
 
             _tableStorage = _account.CreateCloudTableClient();
@@ -229,7 +231,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
             {
                 _tableStorage.RetryPolicy = _tableRetry;
                 SecUtility.CheckAllowInsecureEndpoints(allowInsecureRemoteEndpoints, _tableStorage.BaseUri);
-                
+
                 if (_tableStorage.CreateTableIfNotExist(_tableName))
                 {
                     var ctx = _tableStorage.GetDataServiceContext();
@@ -308,7 +310,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 return true;
             }
             catch (InvalidOperationException e)
-            {
+            {              
                 throw new ProviderException("Error while accessing the data store.", e);
             }
         }
@@ -783,7 +785,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     return false;
                 }
             }
-            return true;
+            return true;            
         }
 
 

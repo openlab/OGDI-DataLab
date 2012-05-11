@@ -1,14 +1,15 @@
-using System.Linq;
-using System.Net;
+using System;
+using System.Web.Routing;
 using System.Web;
-using System.Xml;
+using System.Net;
 using System.Xml.Linq;
+using System.Xml;
 
-namespace Ogdi.DataServices
+namespace Ogdi.DataServices 
 {
     public class ServiceDocumentHttpHandler : TableStorageHttpHandlerBase, IHttpHandler
     {
-        public string OgdiAlias { get; set; }
+        public string OgdiAlias { get; set; }        
 
         private const string START_SERVICEDOCUMENT_TEMPLATE =
 @"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
@@ -49,13 +50,12 @@ namespace Ogdi.DataServices
                 var xmlBase = "http://" + context.Request.Url.Host + context.Request.Url.AbsolutePath;
 
                 var requestUrl = AppSettings.TableStorageBaseUrl + "TableMetadata";
-
-                WebRequest request = 
-                    CreateTableStorageSignedRequest(context, 
-                        AppSettings.ParseStorageAccount(
-                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
-                                            AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
-                                            requestUrl, false);
+                WebRequest request =
+                   CreateTableStorageSignedRequest(context,
+                       AppSettings.ParseStorageAccount(
+                                           AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
+                                           AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey),
+                                           requestUrl, false);
 
                 try
                 {
@@ -70,9 +70,7 @@ namespace Ogdi.DataServices
 
                             context.Response.Write(string.Format(START_SERVICEDOCUMENT_TEMPLATE, xmlBase));
 
-                            var propertiesElements =
-                                feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");
-
+                            var propertiesElements = feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");
 
                             foreach (var e in propertiesElements)
                             {

@@ -1,0 +1,122 @@
+﻿@model EntitySetWrapper
+           
+@{Layout = null;}
+
+<div class="dataset-details">
+	@{var modelEntitySet = this.Model.EntitySet; }
+	<div class="bar">
+		@*onclick="$(this).toggleClass('expanded');$('#eidDatasetDetails').toggle();" title="Click to see details">*@
+		@DataBrowserResources.DataSetDetails.DatasetDetails 
+		@*<div class="toggler">
+			<img src="<%= this.ResolveUrl("~/Content/ico.png") %>" title="Expand" class="ico icoPlus" />
+			<img src="<%= this.ResolveUrl("~/Content/ico.png") %>" title="Collapse" class="ico icoMinus" />
+		</div>*@
+	</div>
+	<div class="content" id="eidDatasetDetails">
+		<table class="record" cellpadding="0" cellspacing="0" border="0">
+		
+		<tr class="field">
+			<td class="label"> @DataBrowserResources.DataSetDetails.DatasetName </td>
+			<td class="value">@modelEntitySet.Name</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Additionalnformation </td>
+			<td class="value">@modelEntitySet.Source</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Category </td>
+			<td class="value">@modelEntitySet.CategoryValue</td>
+		</tr>		
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.ReleasedDate </td>
+			<td class="value">@EntitySet.GetEntityDateAsString(modelEntitySet.ReleasedDate)</td>
+		</tr>
+
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.LastUpdatedDate </td>
+			<td class="value">@EntitySet.GetEntityDateAsString(modelEntitySet.LastUpdateDate)</td>
+		</tr>
+
+		<tr>
+			<td class="label">  @DataBrowserResources.DataSetDetails.ExpiredDate </td>
+			<td class="value">@EntitySet.GetEntityDateAsString(modelEntitySet.ExpiredDate)</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.UpdateFrequency </td>
+			<td class="value">@modelEntitySet.UpdateFrequency</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Description </td>
+			<td class="value">@modelEntitySet.Description</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Status </td>
+			<td class="value">
+			    @if (modelEntitySet.IsEmpty){ 
+			        @DataBrowserResources.DataSetDetails.Planned
+			     } else { 
+			        @DataBrowserResources.DataSetDetails.Published
+			     } 			
+			</td>
+		</tr>				
+
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.TimePeriodCovered </td>
+			<td class="value">@modelEntitySet.PeriodCovered</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.GeographicAreaCovered </td>
+			<td class="value">@modelEntitySet.GeographicCoverage</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.CollectionMode </td>
+			<td class="value">@modelEntitySet.CollectionMode</td>
+		</tr>		
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.MetadataUrl </td>
+			<td class="value">@modelEntitySet.MetadataUrl</td>
+		</tr>		
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Keywords </td>
+			<td class="value">@modelEntitySet.Keywords</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.LinksAndReferences </td>
+			<td class="value"><a href="@modelEntitySet.Links">@modelEntitySet.Links</a></td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.CollectionInstruments </td>
+			<td class="value">@modelEntitySet.CollectionInstruments</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.TechnicalDocumentation </td>
+			<td class="value">@modelEntitySet.TechnicalInfo</td>
+		</tr>				
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.DataDictionaryVariables </td>
+			<td class="value">@modelEntitySet.DataDictionaryVariables</td>
+		</tr>
+		
+		<tr>
+			<td class="label"> @DataBrowserResources.DataSetDetails.Additionalnformation </td>
+			<td class="value">@modelEntitySet.AdditionalInformation</td>
+		</tr>		
+		
+		</table>
+	</div>
+</div>
+

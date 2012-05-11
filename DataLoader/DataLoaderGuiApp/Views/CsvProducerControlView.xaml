@@ -1,9 +1,8 @@
 ﻿<UserControl x:Class="Ogdi.Data.DataLoaderGuiApp.Views.CsvProducerControlView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:WpfToolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
-	xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls" 
-	xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels">
+    xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls"
+    xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style x:Key="BaseLabelCellStyle" TargetType="{x:Type Label}">

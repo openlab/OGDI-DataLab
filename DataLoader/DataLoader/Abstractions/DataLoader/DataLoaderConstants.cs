@@ -16,8 +16,9 @@ namespace Ogdi.Data.DataLoader
         public static readonly string FileExtCsv = ".csv";
         public static readonly string FileExtDbase = ".dbf";
         public static readonly string FileExtKml = ".kml";
-        public static readonly string FileExtConfig = ".cfg";
         public static readonly string FileExtKmz = ".kmz";
+        public static readonly string FileExtRdf = ".rdf";
+        public static readonly string FileExtConfig = ".cfg";
 
         public static readonly string TimestampColumnName = "Timestamp";
         public static readonly string RowKeyColumnName = "RowKey";
@@ -28,6 +29,8 @@ namespace Ogdi.Data.DataLoader
         public static readonly string PropNameEntitySet = "EntitySet";
         public static readonly string PropNameEntityKind = "EntityKind";
         public static readonly string PropNameKmlCoords = "kmlcoords";
+        public static readonly string PropNameLatitude = "latitude";
+        public static readonly string PropNameLongitude = "longitude";
         public static readonly string PropNameLastUpdateDate = "lastupdatedate";
 
         public static readonly string ElemNamePlacemark = "Placemark";
@@ -46,6 +49,19 @@ namespace Ogdi.Data.DataLoader
 
         public static readonly string KmlSnippetReference =
             "<KmlSnippetReference><Container>{0}</Container><Blob>{1}</Blob></KmlSnippetReference>";
+
+        #region RDF constants
+        public const string RdfSnippetReference =
+         "<RdfSnippetReference><Container>{0}</Container><Blob>{1}</Blob></RdfSnippetReference>";
+        public const string PropNameRdfSnippet = "RdfSnippet";
+        public const string ContentTypeRdfSnippet = "text/plain; charset=UTF-8";
+        public const string TableColumnsMetadataTableName = "TableColumnsMetadata";
+        public const string TableColumnsMetadataEntitySet = "EntitySet";
+        public const string TableColumnsMetadataColumn = "Column";
+        public const string TableColumnsMetadataColumnSemantic = "ColumnSemantic";
+        public const string TableColumnsMetadataColumnNamespace = "ColumnNamespace";
+        public const string TableColumnsMetadataColumnDescription = "ColumnDescription";
+        #endregion
 
         public static readonly string QueryRowCount = "select count(*) from {0}";
         public static readonly string QuerySelectAll = "select * from {0}";

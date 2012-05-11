@@ -1,0 +1,72 @@
+﻿@model DatasetListModel
+
+@{
+	var topOfField = (Field) ViewData["TopOf"];
+    string title;
+	switch (topOfField)
+    {
+        case Field.Date:
+            title = DataCatalogResources.TopList.RecentlyPublished;
+            break;
+        case Field.Rating:
+            title = DataCatalogResources.TopList.MostRated;
+            break;
+        case Field.Views:
+            title = DataCatalogResources.TopList.MostViewed;
+            break;
+        default:
+            title = DataCatalogResources.TopList.By + Model.OrderBy.Field;
+            break;
+    }
+}
+<div class="bar">@title</div>
+<table class="items" cellpadding="0" cellspacing="0" border="0">
+@{ foreach (var item in Model.GetTopList(topOfField))
+   {
+       if (topOfField == Field.Rating && item.PositiveVotes == 0 && item.NegativeVotes == 0)
+       {continue;}
+
+       if (topOfField == Field.Views && item.Views == 0)
+       {continue;}
+       
+	   string link = Url.Content("~/DataBrowser/" + item.EntitySet.ContainerAlias + "/" + item.EntitySet.EntitySetName + "#param=NOFILTER--DataView--Results");
+
+    <tr class="item">
+		<td class="name"><a href="@link">@item.EntitySet.Name</a></td>
+       @switch (topOfField)
+           {
+			   case Field.Date: {
+				
+					<td class="value" title="@item.EntitySet.LastUpdateDate.ToString("D")">
+						@item.EntitySet.LastUpdateDate.ToString(DataCatalogResources.TopList.DateFormat)
+					</td>
+				
+		   break;
+				   }
+			   case Field.Rating:
+				   {
+				
+					<td class="value">
+						 @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(item.EntitySet.ItemKey, item.PositiveVotes, item.NegativeVotes)) 
+                       
+					</td>
+				
+					break;
+				   }
+			   case Field.Views:
+				   {
+				
+					<td class="value">
+						@item.Views.ToString()
+					</td>
+				
+					break;
+				   }
+               default:
+                   break;
+           }
+       
+	</tr>
+} }
+</table>
+

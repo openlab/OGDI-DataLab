@@ -2,10 +2,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.ServiceRuntime;
 using Ogdi.Config;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
-namespace Ogdi.DataServices
+namespace Ogdi.DataServices 
 {
     public class NestedServiceDocumentHttpHandler : TableStorageHttpHandlerBase, IHttpHandler
     {
@@ -63,7 +63,7 @@ namespace Ogdi.DataServices
                         context.Response.Write(string.Format(COLLECTION_TEMPLATE,
                                                              item.alias, item.description));
                     }
-
+                    
                     context.Response.Write(END_SERVICEDOCUMENT_TEMPLATE);
                 }
                 catch (WebException ex)

@@ -23,6 +23,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
         private readonly UserControl _producerParams;
         private readonly UserControl _processorParams;
         private readonly UserControl _metadata;
+        private readonly UserControl _columnsMetadata;
         private DelegateCommand _saveCommand;
         private DelegateCommand _closeCommand;
 
@@ -64,6 +65,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
             _processorParams = new ProcessorParamsControlView { DataContext = new ProcessorParamsControlViewModel(_dataLoaderParams) };
             _metadata = new MetadataControlView { DataContext = new MatadataControlViewModel(_dataLoaderParams) };
+            _columnsMetadata = new ColumnsMetadataControlView { DataContext = new ColumnsMetadataWindowViewModel(_dataLoaderParams) };
             _dataLoaderParams.TableMetadataEntity.IsEmpty = uploadParam.IsPlanned;
         }
 
@@ -174,6 +176,11 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
         public UserControl ProducerParams
         {
             get { return _producerParams; }
+        }
+
+        public UserControl TableColumnsMetadata
+        {
+            get { return _columnsMetadata; }
         }
 
         #endregion

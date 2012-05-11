@@ -39,10 +39,10 @@ namespace Ogdi.Data.DataLoader
 
         private void TableContext_ReadingEntity(object sender, ReadingWritingEntityEventArgs e)
         {
-            var xnProps = XName.Get("properties", e.Data.GetNamespaceOfPrefix("m").NamespaceName);
+            XName xnProps = XName.Get("properties", e.Data.GetNamespaceOfPrefix("m").NamespaceName);
             XElement xeProps = e.Data.Descendants().Where(xe => xe.Name == xnProps).First();
             var props = new List<Property>();
-            var ID = Guid.Empty;
+            Guid ID = Guid.Empty;
             foreach (XElement prop in xeProps.Nodes())
             {
                 if (prop.Name.LocalName == DataLoaderConstants.PartitionKeyColumnName)

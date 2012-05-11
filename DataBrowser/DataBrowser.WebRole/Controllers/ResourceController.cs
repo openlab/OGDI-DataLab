@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Ajax;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Ogdi.InteractiveSdk.Mvc.Controllers
 {
@@ -10,7 +13,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 	{
 		public ActionResult Css()
 		{
-			string text = System.IO.File.ReadAllText(this.Server.MapPath("~/Content/css/styles.css"));
+			string text = System.IO.File.ReadAllText(this.Server.MapPath(ResourceControllerResources.ResourceController.LocalizedCssPath));
 
 			Dictionary<String, String> map = new Dictionary<String, String>();
 			Regex declarations = new Regex(@"\/\*\{([^\}]+)\}\*\/");

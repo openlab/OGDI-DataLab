@@ -1,0 +1,57 @@
+﻿@model Ogdi.InteractiveSdk.Mvc.Models.DataCatalogModel
+
+@if (ViewData.Model.EntitySet.Count != 0)
+   {
+   
+<h3 id="CategoryNamepanel">
+@ViewData.Model.CategoryName
+</h3>
+<div class="sets">
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tr id="trError" style="display: none">
+		<td>
+			<table>
+			<tr><td style="color: Red">@ViewData.Model.ErrorLine1</td></tr>
+			<tr><td>@ViewData.Model.ErrorLine2</td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th> @DataCatalogResources.EntitySets.Name </th>
+		<th> @DataCatalogResources.EntitySets.Source </th>
+		<th> @DataCatalogResources.EntitySets.Description </th>
+	</tr>
+	@try
+	{
+		var odd = true;
+		@foreach (Ogdi.InteractiveSdk.Mvc.Models.EntitySet item in ViewData.Model.EntitySet)
+		{
+            if (odd == true)
+            {
+                <text><tr class="co"></text>
+            }
+            else 
+            {
+                <text><tr class="ce"></text>
+            }
+            <td>
+                @{ string link = "../DataBrowser/" + item.ContainerAlias + "/" + item.EntitySetName + "#param=NOFILTER--DataView--Results"; }
+                <a href="@link">@item.Name</a>
+            </td>
+            <td>@item.Source
+            </td>
+            <td>
+                @item.Description
+                <br />
+                <a href="@item.MetadataUrl" target="_blank">@DataCatalogResources.EntitySets.MoreInformation
+                </a>
+                <img src="@UIConstants.GC_ExternalLinkImagePath" title='@item.Name' alt="@UIConstants.GC_ExternalLinkAltText" longdesc="@UIConstants.GC_ExternalLinkLongDesc" />
+            </td>
+        </tr>
+        odd = !odd;
+        }
+    }
+ catch (Exception) { }
+    </table>
+</div>
+ } 

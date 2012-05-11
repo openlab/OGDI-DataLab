@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.Services.Client;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.WindowsAzure;
 using Ogdi.Config;
@@ -40,9 +41,10 @@ namespace ConfigTool
             }
             catch (DataServiceRequestException ex)
             {
-                statusMessage = "Unable to connect to the table storage server. Please check that the service is running.<br>"
+                statusMessage = "Unable to connect to the table storage server. Please check that the service is running.<br />"
                                 + ex.Message;
             }
+            catch (Exception) { }
             status.Text = statusMessage;
         }
 

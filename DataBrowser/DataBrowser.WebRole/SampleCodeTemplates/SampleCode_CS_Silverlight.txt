@@ -3,7 +3,7 @@
 // To get this the sample to work, perform the 
 // following steps:
 //
-//      1. Create a new Silverlight Application in Visual Studio 2008
+//      1. Create a new Silverlight Application in Visual Studio 2010
 //      2. Right click on the project node in Solution Explorer
 //      3. Select Add Service Reference
 //      4. Enter service endpoint URL into the Address field

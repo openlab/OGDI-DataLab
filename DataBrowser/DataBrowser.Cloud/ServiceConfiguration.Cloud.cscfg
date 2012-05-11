@@ -1,29 +1,28 @@
 <?xml version="1.0"?>
 <ServiceConfiguration serviceName="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
   <Role name="DataBrowser.WebRole">
-    <Instances count="1"/>
+    <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net:8080/v1/"/>
-      <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd"/>
-      <Setting name="TermsOfUseURL" value="http://go.microsoft.com/?linkid=4412892"/>
-      <Setting name="TradeMarksURL" value="http://www.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx"/>
-      <Setting name="CopyRightsStatement" value=" 2010 Microsoft Corporation. All rights reserved."/>
-      <Setting name="PrivacyPage" value="&lt;H1&gt;Privacy Statement &lt;/H1&gt;&lt;DIV class=welcomecontent&gt;&lt;P class=big&gt;At Microsoft, we are committed to protecting your privacy. This Web site does not request or collect any personal information from you. This site may collect certain anonymous information about your visit, such as the name of the Internet service provider and the Internet Protocol (IP) address through which you access the Internet; the date and time you access the site; the pages that you access while at the site and the Internet address of the Web site from which you linked directly to our site. This information is used to help improve the site, analyze trends, and administer the site. &lt;/P&gt;&lt;P class=big&gt;Please note that this privacy statement applies only to the Open Government Data Initiative website. It does not apply to other online or offline Microsoft sites, products or services. &lt;/P&gt;&lt;P class=big&gt;This site may contain links to other sites and services. We encourage you to review the privacy statements of those sites and services that you choose to visit, so that you can understand how they may collect, use and share your personal information. Microsoft is not responsible for the privacy statements or practices of sites and services controlled by other companies or organizations. &lt;/P&gt;&lt;P class=big&gt;Click &lt;A href=&quot;http://privacy.microsoft.com/en-us/default.mspx&quot; target=_blank&gt;here&lt;/A&gt;&lt;IMG alt=&quot;External Link&quot; src=&quot;../../images/ExternalLink.png&quot;&gt; for more information on Microsoft's commitment to privacy. &lt;/P&gt;&lt;P&gt;&lt;/P&gt;&lt;/DIV&gt;"/>
-      <Setting name="RecaptchaPrivateKey" value=""/>
-      <Setting name="RecaptchaPublicKey" value=""/>
-      <Setting name="RootServiceNamespace" value="OGDI"/>
-      <Setting name="EnableAnalytics" value="true"/>
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]"/>
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]"/>
+      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net:8080/v1/" />
+      <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <!--
+         Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html.
+     -->
+      <Setting name="RecaptchaPrivateKey" value="6LcacwwAAAAAACeXCKee5vx5i47Kb9Lcq6Alnp0Q" />
+      <Setting name="RecaptchaPublicKey" value="6LcacwwAAAAAAI6ra57Nb-OUA1eLc8_sUlePZpD2" />
+      <Setting name="RootServiceNamespace" value="OGDI" />
+      <Setting name="IsAnalytics" value="0" />
     </ConfigurationSettings>
   </Role>
   <Role name="DataBrowser.WorkerRole">
-    <Instances count="1"/>
+    <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net/v1/" />
+      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>

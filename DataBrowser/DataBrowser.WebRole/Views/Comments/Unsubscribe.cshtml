@@ -1,0 +1,42 @@
+﻿@section TitleContent {
+
+
+}
+
+
+<script type="text/javascript">
+    function Unsubscribe() {
+        var globVPath = '@Url.Content("~/")';
+        var parentId = '@Model.ParentName';
+        var user = '@Model.Email';
+        var parentType = '@Model.ParentType';
+        var container = '@Model.ParentContainer';
+        var result;
+        $.ajax(
+            {
+                type: "POST",
+                async: false,
+                url: globVPath + "Comments/Unsubscribe/?id=" + parentId + "&type=" + parentType + "&user=" + user + "&container=" + container + "&accept=true",
+                data: result,
+                dataType: "json",
+                success: function(data) {
+                    $("div#unsubscribeInfo").hide();
+                    $("div#success").show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                    alert(errorThrown);
+                }
+            });
+    }
+</script>
+<div style="padding:20px;">
+    <div id="unsubscribeInfo">
+       @CommentsResources.Unsuscribe.ToUnsubscribeFromPostsAbout @Model.ParentDisplay @Html.Raw(CommentsResources.Unsuscribe.PleaseClick)
+    </div>
+    <div id="success" style="display:none">
+        @CommentsResources.Unsuscribe.YouAreSuccesfullyUnsubscribed @Html.ActionLink("here", "Index", "Home") @CommentsResources.Unsuscribe.ToLeaveThisPage
+    </div>
+</div>
+
+

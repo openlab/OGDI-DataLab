@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.ComponentModel.DataAnnotations;
 
 
+
+
 namespace Tomers.WPF.MVVM
 {
     /// <summary>
@@ -17,12 +19,16 @@ namespace Tomers.WPF.MVVM
     {
         #region Fields
 
+
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
         public readonly Dictionary<string, string[]> Errors = new Dictionary<string, string[]>();
 
+
         #endregion
 
+
         #region Protected
+
 
         /// <summary>
         /// Sets the value of a property.
@@ -34,8 +40,10 @@ namespace Tomers.WPF.MVVM
         {
             string propertyName = GetPropertyName(propertySelector);
 
+
             SetValue<T>(propertyName, value);
         }
+
 
         /// <summary>
         /// Sets the value of a property.
@@ -50,9 +58,11 @@ namespace Tomers.WPF.MVVM
                 throw new ArgumentException("Invalid property name", propertyName);
             }
 
+
             _values[propertyName] = value;
             NotifyPropertyChanged(propertyName);
         }
+
 
         /// <summary>
         /// Gets the value of a property.
@@ -64,8 +74,10 @@ namespace Tomers.WPF.MVVM
         {
             string propertyName = GetPropertyName(propertySelector);
 
+
             return GetValue<T>(propertyName);
         }
+
 
         /// <summary>
         /// Gets the value of a property.
@@ -80,6 +92,7 @@ namespace Tomers.WPF.MVVM
                 throw new ArgumentException("Invalid property name", propertyName);
             }
 
+
             object value;
             if (!_values.TryGetValue(propertyName, out value))
             {
@@ -87,8 +100,10 @@ namespace Tomers.WPF.MVVM
                 _values.Add(propertyName, value);
             }
 
+
             return (T)value;
         }
+
 
         /// <summary>
         /// Validates current instance properties using Data Annotations.
@@ -102,6 +117,7 @@ namespace Tomers.WPF.MVVM
                 throw new ArgumentException("Invalid property name", propertyName);
             }
 
+
             string error = string.Empty;
             var value = GetValue(propertyName);
             var results = new List<ValidationResult>(1);
@@ -112,6 +128,7 @@ namespace Tomers.WPF.MVVM
                     MemberName = propertyName
                 },
                 results);
+
 
             if (!result)
             {
@@ -132,17 +149,22 @@ namespace Tomers.WPF.MVVM
                     Errors.Remove(propertyName);
             }
 
+
             return error;
         }
 
+
         #endregion
 
+
         #region Change Notification
+
 
         /// <summary>
         /// Raised when a property on this object has a new value.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         /// <summary>
         /// Raises this object's PropertyChanged event.
@@ -152,6 +174,7 @@ namespace Tomers.WPF.MVVM
         {
             this.VerifyPropertyName(propertyName);
 
+
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
             {
@@ -159,6 +182,7 @@ namespace Tomers.WPF.MVVM
                 handler(this, e);
             }
         }
+
 
         protected void NotifyPropertyChanged<T>(Expression<Func<T>> propertySelector)
         {
@@ -170,9 +194,12 @@ namespace Tomers.WPF.MVVM
             }
         }
 
+
         #endregion // INotifyPropertyChanged Members
 
+
         #region Data Validation
+
 
         string IDataErrorInfo.Error
         {
@@ -182,6 +209,7 @@ namespace Tomers.WPF.MVVM
             }
         }
 
+
         string IDataErrorInfo.this[string propertyName]
         {
             get
@@ -190,9 +218,12 @@ namespace Tomers.WPF.MVVM
             }
         }
 
+
         #endregion
 
+
         #region Privates
+
 
         private string GetPropertyName(LambdaExpression expression)
         {
@@ -202,8 +233,10 @@ namespace Tomers.WPF.MVVM
                 throw new InvalidOperationException();
             }
 
+
             return memberExpression.Member.Name;
         }
+
 
         private object GetValue(string propertyName)
         {
@@ -216,16 +249,21 @@ namespace Tomers.WPF.MVVM
                     throw new ArgumentException("Invalid property name", propertyName);
                 }
 
+
                 value = propertyDescriptor.GetValue(this);
                 _values.Add(propertyName, value);
             }
 
+
             return value;
         }
 
+
         #endregion
 
+
         #region Debugging
+
 
         /// <summary>
         /// Warns the developer if this object does not have
@@ -242,12 +280,14 @@ namespace Tomers.WPF.MVVM
             {
                 string msg = "Invalid property name: " + propertyName;
 
+
                 if (this.ThrowOnInvalidPropertyName)
                     throw new Exception(msg);
                 else
                     Debug.Fail(msg);
             }
         }
+
 
         /// <summary>
         /// Returns whether an exception is thrown, or if a Debug.Fail() is used
@@ -256,6 +296,7 @@ namespace Tomers.WPF.MVVM
         /// override this property's getter to return true.
         /// </summary>
         protected virtual bool ThrowOnInvalidPropertyName { get; private set; }
+
 
         #endregion // Debugging Aides
     }

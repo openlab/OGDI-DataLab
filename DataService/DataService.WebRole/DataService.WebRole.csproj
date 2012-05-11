@@ -27,7 +27,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRules>
     </CodeAnalysisRules>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
@@ -56,9 +56,7 @@
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Shared\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\OGDI-DataLab-DataService.WebRole-Dependencies.1.0\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -101,6 +99,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HttpHandlers\ColumnsMetadataHttpHandler.cs" />
     <Compile Include="HttpHandlers\CommentsHttpHandler.cs" />
     <Compile Include="HttpHandlers\NestedServiceDocumentHttpHandler.cs" />
     <Compile Include="HttpHandlers\ServiceDocumentHttpHandler.cs" />
@@ -113,6 +112,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RouteHandlers\ColumnsMetadataRouteHandler.cs" />
     <Compile Include="RouteHandlers\CommentsRouteHandler.cs" />
     <Compile Include="RouteHandlers\NestedServiceDocumentRouteHandler.cs" />
     <Compile Include="RouteHandlers\MetaDataRouteHandler.cs" />
@@ -122,26 +122,21 @@
     <Compile Include="RouteHandlers\ServiceDocumentRouteHandler.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Ogdi.Azure\Ogdi.Azure.csproj">
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
+    <ProjectReference Include="..\..\Shared\Ogdi.Config\OgdiConfig.csproj">
       <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>Ogdi.Config</Name>
+      <Name>OgdiConfig</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -162,12 +157,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>81</DevelopmentServerPort>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1114</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:1114/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

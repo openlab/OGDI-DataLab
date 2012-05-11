@@ -191,10 +191,6 @@ namespace Ogdi.Data.DataLoader
                     throw new DuplicateEntityException(tableEntity.ToString(), e);
                 }
             }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.Message);
-            }
         }
 
         private TableEntity LoadEntity(TableContext context, string entitySetName,
@@ -204,6 +200,9 @@ namespace Ogdi.Data.DataLoader
             // For string values add ''
             string rk = GetValueForQuery(rowKeyValue, origianlRowKeyValue);
             string pk = GetValueForQuery(parKeyValue, origianlParKeyValue);
+
+            if (rowKeyColumn == "New.Guid") rowKeyColumn = "RowKey";
+            if (parKeyColumn == "New.Guid") parKeyColumn = "PartitionKey";
 
             // columns should be in lower case
             string query = string.Format(S_ENTITY_QUERY_TEMPLATE, entitySetName, rowKeyColumn.ToLower(), rk, parKeyColumn.ToLower(), pk);
@@ -227,7 +226,7 @@ namespace Ogdi.Data.DataLoader
             // New value (Guid)
             if (originalValue == null)
             {
-                return string.Format("'{0}'", stringValue.Replace("'", "''"));
+                return string.Format("'{0}'", stringValue.Replace("'","''"));
             }
             // String
             if (originalValue is string)

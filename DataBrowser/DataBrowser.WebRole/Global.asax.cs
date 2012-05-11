@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Globalization;
+using System.Threading;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
@@ -11,9 +13,14 @@ namespace Ogdi.InteractiveSdk.Mvc
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Mvc")]
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{controller}/{action}/{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 "LoadLegalDisclaimerMapRoute",
@@ -24,7 +31,7 @@ namespace Ogdi.InteractiveSdk.Mvc
             routes.MapRoute(
                 "LoadDataCatalogMapRoute",
                 "DataCatalog/LoadDataCatalogMapRoute/{containerAlias}/{entitySetName}",
-                new { controller = "DataCatalog", action = "LoadDataCatalogByContainerAlias", containerAlias = "", entitySetName = "" }
+                new { controller = "DataCatalog", action = "LoadDataCatalogByContainerAlias", containerAlias = "", entitySetName = ""}
                 );
 
             routes.MapRoute(
@@ -32,37 +39,37 @@ namespace Ogdi.InteractiveSdk.Mvc
                 "DataCatalog/LoadDataCatalogEntitySets/{containerAlias}/{categoryName}",
                 new { controller = "DataCatalog", action = "LoadEntitySetsByCategory", containerAlias = "", categoryName = "" }
                 );
-
+            
             routes.MapRoute(
                 "LoadSampleCodeDataView",
                 "DataBrowser/LoadSampleCodeDataView/",
-                new { controller = "DataBrowser", action = "LoadDataViewSampleCode" }
+                new { controller = "DataBrowser", action = "LoadDataViewSampleCode"}
                 );
 
             routes.MapRoute(
                 "LoadSampleCodeMapView",
                 "DataBrowser/LoadSampleCodeMapView/",
-                new { controller = "DataBrowser", action = "LoadMapViewSampleCode" }
+                new { controller = "DataBrowser", action = "LoadMapViewSampleCode"}
                 );
 
             routes.MapRoute(
                 "LoadSampleCodeBarChartView",
                 "DataBrowser/LoadSampleCodeBarChartView/",
-                new { controller = "DataBrowser", action = "LoadBarChartSampleCode" }
+                new { controller = "DataBrowser", action = "LoadBarChartSampleCode"}
                 );
 
 
             routes.MapRoute(
                 "LoadSampleCodePieChartView",
                 "DataBrowser/LoadSampleCodePieChartView/",
-                new { controller = "DataBrowser", action = "LoadPieChartSampleCode" }
+                new { controller = "DataBrowser", action = "LoadPieChartSampleCode"}
                 );
 
 
             routes.MapRoute(
                 "DataBrowserPaging",
                 "DataBrowser/DataBrowserPaging/",
-                new { controller = "DataBrowser", action = "PagingClicked" }
+                new { controller = "DataBrowser", action = "PagingClicked"}
                 );
 
             routes.MapRoute(
@@ -74,20 +81,20 @@ namespace Ogdi.InteractiveSdk.Mvc
             routes.MapRoute(
                 "DataBrowserRunBarChart",
                 "DataBrowser/DataBrowserRunBarChart/",
-                new { controller = "DataBrowser", action = "RunBarChartButtonClicked" }
+                new { controller = "DataBrowser", action = "RunBarChartButtonClicked"}
                 );
 
-
+            
             routes.MapRoute(
                 "DataBrowserRunPieChart",
                 "DataBrowser/DataBrowserRunPieChart/",
-                new { controller = "DataBrowser", action = "RunPieChartButtonClicked" }
+                new { controller = "DataBrowser", action = "RunPieChartButtonClicked"}
                 );
 
             routes.MapRoute(
                 "DataBrowserError",
                 "DataBrowser/DataBrowserError/",
-                new { controller = "DataBrowser", action = "ShowClientsideError" }
+                new { controller = "DataBrowser", action = "ShowClientsideError"}
                 );
 
             routes.MapRoute(
@@ -118,10 +125,23 @@ namespace Ogdi.InteractiveSdk.Mvc
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         protected void Application_Start()
         {
+            RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
 
-            CloudStorageAccount.SetConfigurationSettingPublisher(
-                (configName, configSetter) => configSetter(RoleEnvironment.GetConfigurationSettingValue(configName)));
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Request.UserLanguages != null)
+            {
+                var culture = HttpContext.Current.Request.UserLanguages[0];
+                if (!string.IsNullOrEmpty(culture))
+                {
+                    //CultureInfo ci = new CultureInfo(culture);
+                    CultureInfo ci = new CultureInfo(culture);
+                    Thread.CurrentThread.CurrentCulture = ci;
+                    Thread.CurrentThread.CurrentUICulture = ci;
+                }
+            }
         }
     }
 }

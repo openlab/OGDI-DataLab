@@ -37,7 +37,7 @@ object.appendNew = function(container) {
 	q.icon("plus", "Add a new filter", function() { me.addFilter(); }).appendTo(toolbar);
 }
 
-object.dump = function() {    
+object.dump = function () {
     var container = this.target;
     if (this.meta.length <= 0) { alert("There are no columns in the dataset."); return false; }
 
@@ -60,7 +60,7 @@ object.dump = function() {
         var info = this.meta[filter.selectedFieldIndex];
         text += info.name + " " + filter.operator.val() + " ";
         if (info.type == "System.String") {
-            text += "'" + filter.constant.val() + "'";
+            text += "'" + filter.constant.val().replace("'","''") + "'";
         } else {
             text += "" + filter.constant.val() + "";
         }

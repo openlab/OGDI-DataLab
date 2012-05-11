@@ -1,0 +1,24 @@
+﻿
+
+
+@model Ogdi.InteractiveSdk.Mvc.Models.Request.RequestListModel
+@{ var odd = true;
+	foreach (Ogdi.InteractiveSdk.Mvc.Models.Request.Request request in ViewData.Model.List)
+   {
+<tr class="@odd ? "co" : "ce"">
+	<td>
+		@{
+	string link = "/Request/Details/?id=" + request.RequestID;
+		}
+		<a href="@link"><b>@request.Subject</b></a>
+		<div class="description">@request.Description</div>
+	</td>
+	<td>@request.Status</td>
+	<td>@request.PostedDate.HasValue ? request.PostedDate.Value.ToString(RequestResources.List.DateFormat) : ""</td>
+	<td>
+		 @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(request.ItemKey, request.PositiveVotes, request.NegativeVotes)) 
+	</td>
+	<td>@request.Views.ToString()</td>
+</tr>
+ odd = !odd; } }
+<input id="total" type="hidden" value="@ViewData.Model.TotalPages" /> 

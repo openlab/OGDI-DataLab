@@ -57,7 +57,24 @@ namespace Ogdi.InteractiveSdk.Mvc.Models.Rating
             return RatingRepository.HasUserVoted(this.ItemKey, GetCurrentUser(req));
         }
 
+        public bool HasUserVoted(HttpRequestBase req)
+        {
+            return RatingRepository.HasUserVoted(this.ItemKey, GetCurrentUser(req));
+        }
+
         private string GetCurrentUser(HttpRequest req)
+        {
+            if (!req.IsAuthenticated)
+            {
+                return req.UserHostAddress;
+            }
+            else
+            {
+                return req.LogonUserIdentity.Name;
+            }
+        }
+
+        private string GetCurrentUser(HttpRequestBase req)
         {
             if (!req.IsAuthenticated)
             {
