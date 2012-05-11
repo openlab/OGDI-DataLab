@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Ogdi.Data.DataLoader;
 
 namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 {
-    public class MatadataControlViewModel
+    public class MatadataControlViewModel : Tomers.WPF.MVVM.NotifyingObject
     {
         private readonly TableMetadataEntity _instance;
 
@@ -12,10 +13,12 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             _instance = parameters.TableMetadataEntity;
         }
 
+        [RegularExpression("^[A-Za-z][A-Za-z0-9]{2,62}$", ErrorMessage = "Invalid table name.")]
+        [StringLength(62, MinimumLength = 3, ErrorMessage = "Entity Set must be at least 3 characters")]
         public string EntitySet
         {
-            get { return _instance.EntitySet; }
-            set { _instance.EntitySet = value; }
+            get { return GetValue(() => EntitySet); }
+            set { SetValue(() => EntitySet, value); }
         }
 
         public string Name

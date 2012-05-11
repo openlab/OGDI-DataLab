@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
@@ -8,6 +9,10 @@ using Microsoft.Win32;
 using Ogdi.Data.DataLoader;
 using Ogdi.Data.DataLoaderGuiApp.Commands;
 using Ogdi.Data.DataLoaderGuiApp.Views;
+using System.ComponentModel.DataAnnotations;
+using Tomers.WPF.MVVM;
+using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
+using System.Text;
 
 namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 {
@@ -108,6 +113,23 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             try
             {
                 _dataLoaderParams.Validate(fileName);
+                var viewModel = (MatadataControlViewModel)_metadata.DataContext;
+                if (viewModel.Errors.Count > 0)
+                {
+                    StringBuilder errorBuilder = new StringBuilder();
+                    errorBuilder.AppendLine("Error with the following fields\n");
+                    foreach (var error in viewModel.Errors)
+                    {
+                        errorBuilder.AppendLine(error.Key);
+
+                        foreach (var message in error.Value)
+                        {
+                            errorBuilder.AppendLine(string.Format("\t- {0}", message));
+                        }
+                    }
+                    MessageBox.Show(errorBuilder.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
             }
             catch (WarningException ex)
             {

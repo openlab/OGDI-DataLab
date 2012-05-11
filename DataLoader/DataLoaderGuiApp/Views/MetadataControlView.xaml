@@ -59,7 +59,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label  Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label15" Content="Dataset Name (internal):"/>
-            <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntitySet}" />
+            <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntitySet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=true}">
+
+            </TextBox>
 
             <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label1" Content="Dataset Name (external):"/>
             <TextBox Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Name}" />
