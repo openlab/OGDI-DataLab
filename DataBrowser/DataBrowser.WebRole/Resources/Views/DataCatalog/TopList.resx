@@ -121,7 +121,7 @@
     <value>by</value>
   </data>
   <data name="DateFormat" xml:space="preserve">
-    <value>mm/dd/yyyy</value>
+    <value>MM/dd/yyyy</value>
   </data>
   <data name="LastUpdateDateFormat" xml:space="preserve">
     <value>MM/dd/yyyy</value>
