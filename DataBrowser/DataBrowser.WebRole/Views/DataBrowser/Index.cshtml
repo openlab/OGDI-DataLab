@@ -8,16 +8,23 @@
  	
   	@if (!Model.IsPlanned)
    { 
-  	  <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/DataBrowser.js")"></script>
-      <script type="text/javascript" language="javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>
+  	    <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/DataBrowser.js")"></script>
+        
+        @*fix firefox bug with bing maps attachevent *@
+        if (HttpContext.Current.Request.Browser.Browser.ToLower().Contains("firefox"))
+        {
+            <script type="text/javascript" language="javascript" src="http://js.shared.live.com/xugouxKQdlbopFQsKLF0!Q/B/AtlasCompat.js"></script>
+        }
+           
+       <script type="text/javascript" language="javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>
       <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/querybuilder.js")"></script>
    } 
+    <script src="http://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js" type="text/javascript"></script>  
 
     <!-- If you are using IE8, then COMMENT / UNCOMMENT this meta tag
          to demonstrate working in IE7 -->
     @*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />*@
     
-    <script src="http://ajax.microsoft.com/ajax/beta/0909/MicrosoftAjax.js" type="text/javascript"></script>  
 
     <script type="text/javascript">
         Sys.Application.set_enableHistory(true);      
