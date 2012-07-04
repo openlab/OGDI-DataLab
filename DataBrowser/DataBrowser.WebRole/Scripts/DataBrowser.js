@@ -532,11 +532,11 @@ function page_init() {
     //  Create a new instance of the VEMap object.
     map = new VEMap('myMap');
 
-    //  Attach event to map which will be triggered on map control error
-    map.AttachEvent("onerror", showMapControlError);
-
     //  Load the specified map.
     map.LoadMap();
+
+    //  Attach event to map which will be triggered on map control error
+    map.AttachEvent("onerror", showMapControlError);
 
     //  Resize the map based on the specified width and height.
     map.Resize(862, 450);
