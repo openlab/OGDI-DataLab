@@ -356,30 +356,6 @@ namespace Ogdi.DataServices
             _context.Response.End();
         }
 
-        private string SerializeAnObject(object obj)
-        {
-            System.Xml.XmlDocument doc = new XmlDocument();
-            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(obj.GetType());
-            System.IO.MemoryStream stream = new System.IO.MemoryStream();
-
-            try
-            {
-                serializer.Serialize(stream, obj);
-                stream.Position = 0;
-                doc.Load(stream);
-                return doc.InnerXml;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                stream.Close();
-                stream.Dispose();
-            }
-        }
-
         private void RenderJson(XElement feed)
         {
             _context.Response.ContentType = "application/json";
