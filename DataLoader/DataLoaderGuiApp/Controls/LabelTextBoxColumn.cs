@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Controls;
 
 namespace Ogdi.Data.DataLoaderGuiApp.Controls
 {

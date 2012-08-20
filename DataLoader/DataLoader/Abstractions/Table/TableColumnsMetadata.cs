@@ -15,7 +15,10 @@ namespace Ogdi.Data.DataLoader
 {
     public class TableColumnsMetadata
     {
-        public TableColumnsMetadata() { }
+        public TableColumnsMetadata()
+        {
+            PropertyToTypeColumnsMetadata = new PropertyToTypeColumnsMetadataMapper();
+        }
 
         public string TableColumnsMetadataPartitionKeyPropertyName { get; set; }
         public string TableColumnsMetadataRowKeyPropertyName { get; set; }

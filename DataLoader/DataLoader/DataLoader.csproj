@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LumenWorks.Framework.IO">
-      <HintPath>..\..\packages\OGDI-DataLab-DataLoader-Dependencies.1.0\lib\LumenWorks.Framework.IO.dll</HintPath>
+      <HintPath>..\..\..\..\Consulting\Microsoft\OGDI\Shared\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
