@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataBrowser.Cloud</RootNamespace>
     <AssemblyName>DataBrowser.Cloud</AssemblyName>
-    <StartDevelopmentStorage>False</StartDevelopmentStorage>
+    <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>DataBrowser.Cloud</Name>
     <SccProjectName>
     </SccProjectName>

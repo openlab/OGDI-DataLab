@@ -5,44 +5,49 @@
 	xmlns:Commands="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Commands"
 	xmlns:r="clr-namespace:Fluent;assembly=Fluent"
 	Title="OGDI Data Loader" Height="400" Width="800" MinHeight="360">
-	
-	<Window.Resources>
-		<!-- Allows a KeyBinding to be associated with a command defined in the View Model  -->
-		<Commands:CommandReference x:Key="ExitCommandReference" Command="{Binding ExitCommand}" />
-	</Window.Resources>
-   
-	<Window.InputBindings>
-		<KeyBinding Key="X" Modifiers="Control" Command="{StaticResource ExitCommandReference}" /> 
-	</Window.InputBindings>
 
-	<DockPanel>
-	<r:Ribbon DockPanel.Dock="Top" Title="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=Title}" >
-			<r:Ribbon.Resources>
-			</r:Ribbon.Resources>
+    <Window.Resources>
+        <!-- Allows a KeyBinding to be associated with a command defined in the View Model  -->
+        <Commands:CommandReference x:Key="ExitCommandReference" Command="{Binding ExitCommand}" />
+    </Window.Resources>
 
-			<r:RibbonTabItem Header="Processing" ReduceOrder="(P),(P),(P),(P),(P)">             
-				<r:RibbonGroupBox Header="Processing">
-					<r:Button Command="{Binding UploadCommand}" LargeIcon="images/Start1.png" Text="Start"/>
-					<r:Button Command="{Binding DeleteProcessCommand}" LargeIcon="images/delete.png" Text="Delete"/>
-					<r:Button Command="{Binding CleanListCommand}" LargeIcon="images/CleanList.png" Text="Clear All"/>
-					<r:Button Command="{Binding RemoveCompletedCommand}" LargeIcon="images/CleanCompleted.png" Text="Clear Completed"/>
-				</r:RibbonGroupBox>
-			</r:RibbonTabItem>
+    <Window.InputBindings>
+        <KeyBinding Key="X" Modifiers="Control" Command="{StaticResource ExitCommandReference}" />
+    </Window.InputBindings>
 
-			<r:RibbonTabItem Header="Settings" ReduceOrder="(P),(P),(P),(P),(P)">                       
-				<r:RibbonGroupBox Header="Settings" >
-					<r:Button Command="{Binding ConnectionSettingsCommand}" LargeIcon="images/ConnectionSettings.png" Text="Connection"/>
-				</r:RibbonGroupBox>
-			</r:RibbonTabItem>
-			
-			<r:Ribbon.BackstageItems>
-				<r:Button Command="{Binding SelectFilesCommand}" Icon="images/OpenDataset.png" LargeIcon="images/OpenDataset.png" Text="Open"/>
-				<r:Button Command="{Binding NewPlannedDatasetCommand}" Icon="images/NewPlaned.png" Text="New Planned" />
-				<r:Button Text="Exit" Command="{Binding ExitCommand}" />
-			</r:Ribbon.BackstageItems>
-		</r:Ribbon>
-		<Grid>
-			<ContentControl Content="{Binding UploaderView}" Margin="1 1 1 7" />
-		</Grid>
-	</DockPanel>
+    <DockPanel>
+        <r:Ribbon DockPanel.Dock="Top" Title="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=Title}" >
+            <r:Ribbon.Resources>
+            </r:Ribbon.Resources>
+
+            <r:Ribbon.Menu>
+                <r:Backstage>
+                    <r:BackstageTabControl>
+                        <r:Button Command="{Binding SelectFilesCommand}" Icon="images/OpenDataset.png" LargeIcon="images/OpenDataset.png" Header="Open"/>
+                        <r:Button Command="{Binding NewPlannedDatasetCommand}" Icon="images/NewPlaned.png" Header="New Planned" />
+                        <r:Button Header="Exit" Command="{Binding ExitCommand}" />
+                    </r:BackstageTabControl>
+                </r:Backstage>
+            </r:Ribbon.Menu>
+
+            <r:RibbonTabItem Header="Processing" ReduceOrder="(P),(P),(P),(P),(P)">
+                <r:RibbonGroupBox Header="Processing">
+                    <r:Button Command="{Binding UploadCommand}" LargeIcon="images/Start1.png" Header="Start" />
+                    <r:Button Command="{Binding DeleteProcessCommand}" LargeIcon="images/delete.png" Header="Delete"/>
+                    <r:Button Command="{Binding CleanListCommand}" LargeIcon="images/CleanList.png" Header="Clear All"/>
+                    <r:Button Command="{Binding RemoveCompletedCommand}" LargeIcon="images/CleanCompleted.png" Header="Clear Completed"/>
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+
+            <r:RibbonTabItem Header="Settings" ReduceOrder="(P),(P),(P),(P),(P)">
+                <r:RibbonGroupBox Header="Settings" >
+                    <r:Button Command="{Binding ConnectionSettingsCommand}" LargeIcon="images/ConnectionSettings.png" Header="Connection"/>
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+
+        </r:Ribbon>
+        <Grid>
+            <ContentControl Content="{Binding UploaderView}" Margin="1 1 1 7" />
+        </Grid>
+    </DockPanel>
 </r:RibbonWindow>

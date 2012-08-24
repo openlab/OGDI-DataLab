@@ -78,7 +78,7 @@ namespace Ogdi.DataServices
             request.Headers["DataServiceVersion"] = "2.0";
             request.Headers["MaxDataServiceVersion"] = "2.0";
 
-            account.Credentials.SignRequestLite((HttpWebRequest)request);   
+            account.Credentials.SignRequestLite((HttpWebRequest)request);
             return request;
         }
 
