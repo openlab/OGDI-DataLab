@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -6,11 +8,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
-using Ogdi.Azure.Data;
-using Ogdi.Config;
-using System;
 using Ogdi.Azure;
-using System.Collections.Specialized;
 
 namespace Ogdi.DataServices
 {
@@ -126,7 +124,7 @@ namespace Ogdi.DataServices
                         _context.Response.AddHeader("x-ms-continuation-NextPartitionKey", continuationNextPartitionKey);
                         _context.Response.AddHeader("x-ms-continuation-NextRowKey", continuationNextRowKey);
 
-                        formatContinuationLink = GenerateSkipTokenContinuationUrl(_context, continuationNextPartitionKey, continuationNextRowKey);              
+                        formatContinuationLink = GenerateSkipTokenContinuationUrl(_context, continuationNextPartitionKey, continuationNextRowKey);
                     }
 
                     string format = !string.IsNullOrEmpty(_context.Request.QueryString["$format"]) ? _context.Request.QueryString["$format"] : _context.Request.QueryString["format"];
@@ -152,7 +150,7 @@ namespace Ogdi.DataServices
                 }
                 catch (WebException ex)
                 {
-                    throw ex;
+                    //throw ex;
                     var response = ex.Response as HttpWebResponse;
                     _context.Response.StatusCode = (int)response.StatusCode;
                     _context.Response.End();
@@ -482,9 +480,9 @@ namespace Ogdi.DataServices
             if (OgdiAlias == null) return;
             if (_entityKind == null)
             {
-                var termValue = term.Value;
-                var dotLocation = termValue.ToString().IndexOf(".");
-                var entitySet = termValue.Substring(dotLocation + 1);
+                string termValue = term.Value;
+                int dotLocation = termValue.IndexOf(".");
+                string entitySet = termValue.Substring(dotLocation + 1);
                 _entityKind = LoadEntityKind(_context, entitySet);
             }
             term.Value = string.Format(_termNamespaceString, OgdiAlias.ToLower(), _entityKind);

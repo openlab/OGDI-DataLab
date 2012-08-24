@@ -3,10 +3,10 @@
   <Role name="DataBrowser.WebRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="serviceUri" value="http://data.govdata.eu/v1/" />
+      <Setting name="serviceUri" value="http://localhost:1114/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
-      <Setting name="DataConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
       <!--
          Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html.
      -->
@@ -19,10 +19,10 @@
   <Role name="DataBrowser.WorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DataConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="DiagnosticsConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://data.govdata.eu/v1/" />
+      <Setting name="serviceUri" value="http://localhost:1114/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>
