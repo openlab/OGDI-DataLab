@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Xml.Serialization;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using Microsoft.WindowsAzure.StorageClient;
-using System.ComponentModel;
-using System.IO;
+using System.Xml.Serialization;
 
 namespace Ogdi.Data.DataLoader
 {
     public class TableColumnsMetadata
     {
-        public TableColumnsMetadata() { }
+        public TableColumnsMetadata()
+        {
+            PropertyToTypeColumnsMetadata = new PropertyToTypeColumnsMetadataMapper();
+        }
 
         public string TableColumnsMetadataPartitionKeyPropertyName { get; set; }
         public string TableColumnsMetadataRowKeyPropertyName { get; set; }

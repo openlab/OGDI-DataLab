@@ -12,7 +12,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         public ColumnsMetadataWindowViewModel(DataLoaderParams parameters)
         {
-            _columnsMetadata = parameters.TableColumnsMetadata;
+            _columnsMetadata = parameters.TableColumnsMetadata ?? new TableColumnsMetadata();
             _entityColumnsMetadata = new PropertyToTypeColumnsMetadataMap();
         }
 
