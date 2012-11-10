@@ -10,7 +10,7 @@ DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations that seek 
 * Ensure reliability and scalability (grow compute requirements as catalogue grows) via cloud
 * Full access to the code to modify & customize the catalogue as you see fit.
 
-OGDI is being used by a number of organizations such as the [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat, AB, Canada] (http://data.medicinehat.ca/), most recently [City of Regina, SK, Canada] (http://www.regina.ca/residents/open-government/data/) and others. 
+OGDI is being used by a number of organizations such as the [Government of Columba] (http://datos.gov.co/), [Estonia & the European Union] (http://dev.govdata.eu/DataCatalog/DataSetList), [City of Medicine Hat, AB, Canada] (http://data.medicinehat.ca/), [City of Regina, SK, Canada] (http://www.regina.ca/residents/open-government/data/), most recently [Niagara Region] (http://www.niagararegion.ca/government/opendata/data-catalogue.aspx) and others. 
 
 
 The older versions of [OGDI v1/v2] (http://ogdi.codeplex.com) are available on CodePlex, those been forked by [City of Nanaimo] (http://www.nanaimo.ca/EN/main/departments/106/DataCatalogue/About.html) 
