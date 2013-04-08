@@ -1,11 +1,9 @@
-OGDI DataLab: Open Government Data Initiative v5
+OGDI DataLab: Open Government Data Initiative v6
 ==================================================
 
 ###Updates:  
 
 * *Feb 6, 2013 -- two more updates for an HTML5/jQuery DataLab front-end as an alternative to the .NET Data Browser with RSS-based management capability provided by SharePoint - coming soon.*
-
-* *Jan 23, 2013 -- an update (v6) of OGDI is coming shortly with many new features, including $top=all (to get all records) and $orderby and also new filter expressions.* 
 
 
 About:
