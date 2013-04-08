@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLoader", "DataLoader", "{D737017F-CD05-4510-86DA-13F88BA42F78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{703C99A1-7A69-48B0-AF82-1AF2328C534A}"
@@ -12,6 +12,27 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAISY", "DAISY", "{387CBF88-24B4-49FE-8168-444CA8EA80C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBrowser", "DataBrowser", "{59B68A1B-E0FE-4A5E-840D-DAF69B57E5B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{94F96217-4608-4278-9057-C91001EDE97E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Samples", "Microsoft.Samples", "{D5DE4F05-1047-41BD-8D45-470BF236EBAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Getting Started", ".Getting Started", "{3326343D-3E29-4E94-B8D5-5F3C5AD59B66}"
+	ProjectSection(SolutionItems) = preProject
+		Build.cmd = Build.cmd
+		FullBuild.msbuild = FullBuild.msbuild
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Data Sets", "Sample Data Sets", "{DCE3F362-E142-4838-B456-1C51BF464CBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{FEC1C710-9848-47D3-AD5D-6638CE2FF169}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2FF3B1C-9471-4392-ACE5-EDEA802CDD23}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Local.testsettings = Tests\Local.testsettings
+		Ogdi.vsmdi = Ogdi.vsmdi
+		Tests\TraceAndTestImpact.testsettings = Tests\TraceAndTestImpact.testsettings
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogdi.Azure", "Shared\Ogdi.Azure\Ogdi.Azure.csproj", "{61B96500-74D1-46B6-A536-88C984FF46A9}"
 EndProject
@@ -45,27 +66,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAzureStorage", "DataBrowser\WindowsAzureStorage\WindowsAzureStorage.csproj", "{281E6351-FA80-49F8-9A3A-80894F71548C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateColumnMetadata", "DataLoader\GenerateColumnMetadata\GenerateColumnMetadata.csproj", "{D9CC08C7-72AE-408D-9D03-33A58129399B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{94F96217-4608-4278-9057-C91001EDE97E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Samples", "Microsoft.Samples", "{D5DE4F05-1047-41BD-8D45-470BF236EBAF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Getting Started", ".Getting Started", "{3326343D-3E29-4E94-B8D5-5F3C5AD59B66}"
-	ProjectSection(SolutionItems) = preProject
-		Build.cmd = Build.cmd
-		FullBuild.msbuild = FullBuild.msbuild
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Data Sets", "Sample Data Sets", "{DCE3F362-E142-4838-B456-1C51BF464CBD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{FEC1C710-9848-47D3-AD5D-6638CE2FF169}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2FF3B1C-9471-4392-ACE5-EDEA802CDD23}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\Local.testsettings = Tests\Local.testsettings
-		Ogdi.vsmdi = Ogdi.vsmdi
-		Tests\TraceAndTestImpact.testsettings = Tests\TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdPartyComponents", "Tests\ThirdPartyComponents\ThirdPartyComponents.csproj", "{C44C271D-CBBB-4516-9680-05B6C0E75958}"
 EndProject
@@ -260,11 +260,11 @@ Global
 		{CE3A2F55-8154-4478-8251-64D24D15DB79} = {59B68A1B-E0FE-4A5E-840D-DAF69B57E5B2}
 		{085EB9E2-4108-4721-9A06-3CF7DA63044D} = {59B68A1B-E0FE-4A5E-840D-DAF69B57E5B2}
 		{E2426D10-5335-4996-8B5C-8A1459F76270} = {59B68A1B-E0FE-4A5E-840D-DAF69B57E5B2}
-		{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
-		{281E6351-FA80-49F8-9A3A-80894F71548C} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
-		{306D2F9E-D6D0-4D96-94F1-173C60A13875} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
 		{FEC1C710-9848-47D3-AD5D-6638CE2FF169} = {94F96217-4608-4278-9057-C91001EDE97E}
 		{A2FF3B1C-9471-4392-ACE5-EDEA802CDD23} = {94F96217-4608-4278-9057-C91001EDE97E}
+		{306D2F9E-D6D0-4D96-94F1-173C60A13875} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
+		{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
+		{281E6351-FA80-49F8-9A3A-80894F71548C} = {D5DE4F05-1047-41BD-8D45-470BF236EBAF}
 		{DCE3F362-E142-4838-B456-1C51BF464CBD} = {3326343D-3E29-4E94-B8D5-5F3C5AD59B66}
 		{C44C271D-CBBB-4516-9680-05B6C0E75958} = {FEC1C710-9848-47D3-AD5D-6638CE2FF169}
 	EndGlobalSection

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+<ServiceDefinition name="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2012-10.1.8">
   <WebRole name="DataBrowser.WebRole" vmsize="ExtraSmall">
     <Sites>
       <Site name="Web">
@@ -7,7 +7,7 @@
           <Binding name="DataBrowserIn" endpointName="DataBrowserIn" />
         </Bindings>
       </Site>
-      <Site name="Data" physicalDirectory="..\..\DataService\DataService.WebRole">
+      <Site name="Data" physicalDirectory="..\..\..\..\DataService\DataService.WebRole">
         <Bindings>
           <Binding name="DataServiceIn" endpointName="DataServiceIn" />
         </Bindings>
