@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ogdi.Azure.Data;
 using Ogdi.Azure.Views;
-using System.Diagnostics;
-using Microsoft.WindowsAzure.ServiceRuntime;
 using Ogdi.Azure.Configuration;
 
 namespace Ogdi.Azure

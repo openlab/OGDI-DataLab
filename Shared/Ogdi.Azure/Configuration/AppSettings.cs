@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Configuration;
 using System.Reflection;
-using Microsoft.WindowsAzure;
 using System.Linq;
 
 namespace Ogdi.Azure
 {
-
     public class DataLoaderSettings : AppSettings
     {
         public string DataConnectionString {get;protected set;}
@@ -21,6 +19,7 @@ namespace Ogdi.Azure
         {
             return GetValueFromConnectionString("AccountKey");
         }
+
         public string GetAccessName() 
         {
             return GetValueFromConnectionString("AccountName");
@@ -35,6 +34,7 @@ namespace Ogdi.Azure
             {
                 value = value.Replace(keyName, "").Trim();
             }
+
             return value;
         }
     }

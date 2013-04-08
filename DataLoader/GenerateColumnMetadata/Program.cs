@@ -214,7 +214,7 @@ namespace GenerateColumnMetadata
                 {
                     datasetLine[DataLoaderConstants.PropNameRdfSnippet.ToLower()] = rdfXml.ToString(SaveOptions.DisableFormatting);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     datasetLine.AddProperty(DataLoaderConstants.PropNameRdfSnippet.ToLower(), rdfXml.ToString(SaveOptions.DisableFormatting));
                 }
@@ -224,7 +224,7 @@ namespace GenerateColumnMetadata
                 return datasetLine;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -1091,7 +1091,7 @@ namespace GenerateColumnMetadata
                 return filter;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

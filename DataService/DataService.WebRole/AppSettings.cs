@@ -62,8 +62,6 @@ namespace Ogdi.DataServices
                 if (string.IsNullOrWhiteSpace(_tableStorageBaseUrl))
                 {
                     _tableStorageBaseUrl = "https://{0}.table.core.windows.net/";
-                    // TODO
-                    //_tableStorageBaseUrl = "http://127.0.0.1:10002/{0}/";
                 }
                 return _tableStorageBaseUrl;
             }

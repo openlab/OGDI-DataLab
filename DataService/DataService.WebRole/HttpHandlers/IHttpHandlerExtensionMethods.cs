@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Web;
+using System.Xml.Linq;
 
 namespace Ogdi.DataServices
 {
@@ -7,7 +8,13 @@ namespace Ogdi.DataServices
     {
         public static bool IsHttpGet(this IHttpHandler handler, HttpContext context)
         {
-            return context.Request.HttpMethod == "GET";
+            return context.Request.HttpMethod.Equals("GET");
+        }
+
+        public static void RespondBadRequest(this IHttpHandler handler, HttpContext context)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.End();
         }
 
         public static void RespondMethodNotAllowed(this IHttpHandler handler, HttpContext context)

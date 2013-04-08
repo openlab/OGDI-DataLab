@@ -35,7 +35,6 @@ namespace Ogdi.Azure.Data
 			{
 				var result = GetOrCreateAnalyticInfo(itemKey);
 
-
 				if (result.last_viewed.Date == DateTime.Today)
 				{
 					result.last_viewed = DateTime.Now;
@@ -49,9 +48,8 @@ namespace Ogdi.Azure.Data
 					result.views_total += 1;
 					result.views_today = 1;
 				}
+
 				_context.UpdateObject(result);
-
-
 				_context.SaveChanges();
 			}
 		}
@@ -62,10 +60,14 @@ namespace Ogdi.Azure.Data
 			{
 				var result = GetOrCreateAnalyticInfo(itemKey);
 
-				if (vote < 0)
-					result.NegativeVotes += -vote;
-				else
-					result.PositiveVotes += vote;
+                if (vote < 0)
+                {
+                    result.NegativeVotes += -vote;
+                }
+                else
+                {
+                    result.PositiveVotes += vote;
+                }
 
 				_context.UpdateObject(result);
 				_context.SaveChanges();
@@ -88,16 +90,17 @@ namespace Ogdi.Azure.Data
 									where info.RowKey == itemKey
 									select info).FirstOrDefault();
 
-			if (dataset != null)
-				return dataset;
+            if (dataset != null)
+            {
+                return dataset;
+            }
 
-			var initialViewCount = new Random().Next(3, 12); // This is to attract users.
 			dataset = new AnalyticInfo(itemKey)
 						{
 							last_viewed = DateTime.Now,
-							views_today = initialViewCount,
-							views_total = initialViewCount,
-							views_average = initialViewCount,
+							views_today = 1,
+							views_total = 1,
+							views_average = 1,
 							NegativeVotes = 0,
 							PositiveVotes = 0,
 						};

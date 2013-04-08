@@ -27,7 +27,7 @@
       <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://ogdifrance.cloudapp.net:8080/v1/" />
+      <Setting name="serviceUri" value="http://[ServiceDNS].cloudapp.net:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>

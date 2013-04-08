@@ -1,19 +1,14 @@
-using System;
+﻿using System.Web;
 using System.Web.Routing;
-using System.Web;
 
-namespace Ogdi.DataServices
+namespace Ogdi.DataServices.v1
 {
     public class NestedServiceDocumentRouteHandler : IRouteHandler
     {
-        #region IRouteHandler Members
-
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-
-            return new NestedServiceDocumentHttpHandler();
+            IHttpHandler HttpHandler = new NestedServiceDocumentHttpHandler();
+            return HttpHandler;
         }
-
-        #endregion
     }
 }
