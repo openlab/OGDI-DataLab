@@ -15,7 +15,5 @@ namespace Ogdi.Data.DataLoaderGuiApp
             Types = new List<string> { "string", "int32", "int64", "double", "bool", "bool-0or1", "datetime", "datetime-yyyymmdd" };
             IndexInNames = new List<string> { "", "{0}", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}" };
         }
-    }
-
-    
+    }   
 }

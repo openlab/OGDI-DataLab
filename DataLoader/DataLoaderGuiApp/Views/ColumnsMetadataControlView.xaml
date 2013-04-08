@@ -1,26 +1,28 @@
 ﻿<UserControl x:Class="Ogdi.Data.DataLoaderGuiApp.Views.ColumnsMetadataControlView"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls" xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="420" d:DesignWidth="876"
-	xmlns:ogdiConverter="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls"
+             xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels"
+             xmlns:ogdiConverter="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels"
+             mc:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style x:Key="BaseLabelCellStyle" TargetType="{x:Type Label}">
 				<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
 				<Setter Property="Margin" Value="0,-3,0,0"/>
 			</Style>
+            
 			<Style x:Key="BaseComboBoxBoxCellStyle" TargetType="{x:Type ComboBox}">
 				<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
 			</Style>
+            
 			<Style x:Key="BaseTextBoxCellStyle" TargetType="{x:Type TextBox}">
 				<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
 			</Style>
-
-			<Style x:Key="RightAlignedLabel" TargetType="Label" >
-				<Setter Property="Margin" Value="0,0,4,0" />
-				<Setter Property="HorizontalAlignment" Value="Left" />
-				<Setter Property="VerticalAlignment" Value="Center" />
-			</Style>
+            
 			<Style x:Key="RightAlignedTextBlock" TargetType="TextBlock" >
 				<Setter Property="Margin" Value="0,0,4,0" />
 				<Setter Property="HorizontalAlignment" Value="Left" />
@@ -36,6 +38,7 @@
 					</DataTrigger>
 				</DataTemplate.Triggers>
 			</DataTemplate>
+            
 			<DataTemplate x:Key="ComboBoxCellEditingTemplate">
 				<ComboBox x:Name="comboBox" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ColumnSemantic}" SelectedItem="{Binding ColumnSemantic}" SelectionChanged="comboBox_SelectionChanged"/>
 				<DataTemplate.Triggers>
@@ -47,16 +50,18 @@
 					</DataTrigger>
 				</DataTemplate.Triggers>
 			</DataTemplate>
+            
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid VerticalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="15" />
 			<ColumnDefinition Width="auto" />
 		</Grid.ColumnDefinitions>
-		<Grid Margin="0,0,76,0">
+
+        <Grid Grid.Column="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
@@ -66,46 +71,61 @@
 				<ColumnDefinition MaxWidth="75" />
 				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
-
-
-				<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding PropertyToTypeColumnsMetadataItems }" Grid.ColumnSpan="4" Margin="0,0,-76,27" CanUserAddRows="False" Name="DataGrid2" SelectionUnit="FullRow" LoadingRow="DataGrid2_LoadingRow">
-				<DataGrid.Columns>
-					<Controls:LabelTextBoxColumn
-					Header="Column Name" Width="150"
-					HorizontalAlignment="Left" VerticalAlignment="Center"
-					ElementStyle="{StaticResource BaseLabelCellStyle}"
-					EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
-					Binding="{Binding Path=Column}"
-					IsReadOnly = "True" />
-					
-					<DataGridTemplateColumn
-					Header="What it represent?" Width="150"
-					CellTemplate="{StaticResource ComboBoxCellDataTemplate}"
-					CellEditingTemplate="{StaticResource ComboBoxCellEditingTemplate}"/>
-
-					<Controls:LabelTextBoxColumn
-					Header="Description" Width="200"
-					HorizontalAlignment="Left" VerticalAlignment="Center"
-					ElementStyle="{StaticResource BaseLabelCellStyle}"
-					EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
-					Binding="{Binding Path=ColumnDescription}"/>
-
-					<Controls:LabelTextBoxColumn
-					Header="Namespace" Width="150"
-					HorizontalAlignment="Left" VerticalAlignment="Center"
-					ElementStyle="{StaticResource BaseLabelCellStyle}"
-					EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
-					Binding="{Binding Path=ColumnNamespace}" x:Name="NamespaceColumn" />
+            
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding PropertyToTypeColumnsMetadataItems }" Grid.ColumnSpan="4" CanUserAddRows="False" Name="DataGrid2" SelectionUnit="FullRow" LoadingRow="DataGrid2_LoadingRow">
+                <DataGrid.Columns>
+                    <Controls:LabelTextBoxColumn
+                        Header="Column Name"
+                        Width="150"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        ElementStyle="{StaticResource BaseLabelCellStyle}"
+                        EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
+                        Binding="{Binding Path=Column}"
+                        IsReadOnly="True" />
+                    
+                    <DataGridTemplateColumn
+                        Header="What it represent?"
+                        Width="150"
+                        CellTemplate="{StaticResource ComboBoxCellDataTemplate}"
+                        CellEditingTemplate="{StaticResource ComboBoxCellEditingTemplate}"/>
+                        
+                    <Controls:LabelTextBoxColumn
+                        Header="Description"
+                        Width="200"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        ElementStyle="{StaticResource BaseLabelCellStyle}"
+                        EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
+                        Binding="{Binding Path=ColumnDescription}"/>
+                        
+                    <Controls:LabelTextBoxColumn
+                        Header="Namespace"
+                        Width="150"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        ElementStyle="{StaticResource BaseLabelCellStyle}"
+                        EditingElementStyle="{StaticResource BaseTextBoxCellStyle}"
+                        Binding="{Binding Path=ColumnNamespace}" x:Name="NamespaceColumn" />
 					
 				</DataGrid.Columns>
 			</DataGrid>
 		</Grid>
-		<TextBlock TextWrapping="Wrap" Foreground="Black" Style="{StaticResource RightAlignedTextBlock}" Margin="5,3,0,0" Height="390" Width="200" Grid.Column="2" VerticalAlignment="Top">
-			Instructions:<LineBreak/> 
+
+        <Grid Grid.Column="2" Margin="4" Width="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0,2,0,6">
+                Instructions
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top">
 			Please fill these columns to get proper columns metadata for the dataset. <LineBreak/><LineBreak/>
 			"What it represent?" - choose what best describes the column. If you leave blank you can fill the Description and the Namespace.<LineBreak/><LineBreak/>
 			"Description" (only if you left "What it represents?" blank) - enter the description of the column.<LineBreak/><LineBreak/>
 			"Namespace" (only if you left "What it represents?" blank) - choose the namespace where your column metadata is defined. Use the format: prefix="namespace url" (ex: foaf="http://xmlns.com/foaf/0.1/"). To choose the dataset url as the namespace use ogdi="ogdiUrl".</TextBlock>
+        </Grid>
 	</Grid>
+    
 </UserControl>
 

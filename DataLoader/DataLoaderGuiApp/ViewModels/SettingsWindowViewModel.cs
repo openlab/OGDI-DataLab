@@ -1,12 +1,11 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Ogdi.Azure;
 using Ogdi.Data.DataLoaderGuiApp.Commands;
 
 namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 {
-    public class SettingsWindowViewModel :  WorkspaceViewModel
+    public class SettingsWindowViewModel : WorkspaceViewModel
     {
         public string AccountName { get; set; }
 
@@ -23,43 +22,44 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             AccountKey = _settings.GetAccessKey();
         }
 
-        #region SaveCommand
+        #region OKCommand
 
-        private DelegateCommand _saveCommand;
+        private DelegateCommand _okCommand;
 
-        public ICommand SaveCommand
+        public ICommand OkCommand
         {
-            get { return _saveCommand ?? (_saveCommand = new DelegateCommand(SaveSettings)); }
+            get { return _okCommand ?? (_okCommand = new DelegateCommand(SaveSettings)); }
         }
 
         private void SaveSettings()
         {
             if (string.IsNullOrEmpty(AccountName))
             {
-                MessageBox.Show("Please enter Account Name", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter your account name", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (string.IsNullOrEmpty(AccountKey))
             {
-                MessageBox.Show("Please enter Account Key", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter your account key", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             _settings.UpdateDataConnectionString(AccountName, AccountKey);
             _settings.Save();
+
             Close();
         }
 
         #endregion
 
-        #region CloseCommand
+        #region CancelCommand
 
-        private DelegateCommand _closeCommand;
+        private DelegateCommand _cancelCommand;
 
-        public ICommand CloseWindowCommand
+        public ICommand CancelCommand
         {
-            get { return _closeCommand ?? (_closeCommand = new DelegateCommand(Close)); }
+            get { return _cancelCommand ?? (_cancelCommand = new DelegateCommand(Close)); }
         }
 
         #endregion

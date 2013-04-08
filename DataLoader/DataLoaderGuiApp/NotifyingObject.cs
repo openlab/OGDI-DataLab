@@ -6,9 +6,6 @@ using System.Linq.Expressions;
 using System.Diagnostics;
 using System.ComponentModel.DataAnnotations;
 
-
-
-
 namespace Tomers.WPF.MVVM
 {
     /// <summary>
@@ -25,7 +22,6 @@ namespace Tomers.WPF.MVVM
 
 
         #endregion
-
 
         #region Protected
 
@@ -156,7 +152,6 @@ namespace Tomers.WPF.MVVM
 
         #endregion
 
-
         #region Change Notification
 
 
@@ -197,7 +192,6 @@ namespace Tomers.WPF.MVVM
 
         #endregion // INotifyPropertyChanged Members
 
-
         #region Data Validation
 
 
@@ -220,7 +214,6 @@ namespace Tomers.WPF.MVVM
 
 
         #endregion
-
 
         #region Privates
 
@@ -260,7 +253,6 @@ namespace Tomers.WPF.MVVM
 
 
         #endregion
-
 
         #region Debugging
 

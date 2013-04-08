@@ -38,27 +38,35 @@ namespace Ogdi.Data.DataLoaderGuiApp
 
                 // Remove duplicates.
                 foreach (var item in DataSetInfos.Where(x => x.Name == name).ToArray())
+                {
                     DataSetInfos.Remove(item);
+                }
 
-                var uploadParam = new UploadParam(fileName);
+                UploadParam uploadParam = new UploadParam(fileName);
 
                 uploadParam.VerifyConfiguration();
                 DataSetInfos.Add(uploadParam);
             }
+
             DataSetInfos.OrderBy(x => x.Name);
         }
 
         public void Run()
         {
             if (DataSetInfos.Count == 0)
+            {
                 return;
+            }
 
             OnStart();
+
             foreach (var uploadParam in DataSetInfos)
             {
                 uploadParam.Reset();
             }
+
             _synchronizationContext = new DispatcherSynchronizationContext();
+
             RunNext();
         }
 
@@ -67,30 +75,38 @@ namespace Ogdi.Data.DataLoaderGuiApp
             foreach (var uploadParam in DataSetInfos)
             {
                 if (_processingCount >= _maxNumberOfThreads)
+                {
                     break;
+                }
 
                 if (uploadParam.ProcessingStatus == ProcessingStatus.Processed ||
                     uploadParam.ProcessingStatus == ProcessingStatus.Processing)
+                {
                     continue;
+                }
 
                 uploadParam.VerifyConfiguration();
 
                 if (uploadParam.ConfigurationState == ConfigurationState.Incomplete)
+                {
                     continue;
+                }
 
                 _processingCount++;
 
                 uploadParam.ProcessingStatus = ProcessingStatus.Processing;
 
                 // Start new worker.
-                var biDelegate = new StartWorkDelegate(StartWork);
+                StartWorkDelegate biDelegate = new StartWorkDelegate(StartWork);
                 biDelegate.BeginInvoke(uploadParam, null, null);
             }
 
             var isComplete = _processingCount == 0;
 
             if (isComplete)
+            {
                 OnComplete();
+            }
         }
 
         private void OnStart()
@@ -137,7 +153,9 @@ namespace Ogdi.Data.DataLoaderGuiApp
                         });
 
                 if (!wasError)
+                {
                     uploadParam.State = UploaderState.Complete;
+                }
             }
             catch (Exception ex)
             {

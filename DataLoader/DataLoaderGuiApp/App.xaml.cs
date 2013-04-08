@@ -12,7 +12,7 @@ namespace Ogdi.Data.DataLoaderGuiApp
         private void OnStartup(object sender, StartupEventArgs e)
         {
             // Create the ViewModel and expose it using the View's DataContext
-            var view = new MainView {DataContext = new MainViewModel()};
+            var view = new MainView { DataContext = new MainViewModel() };
             view.Show();
         }
     }

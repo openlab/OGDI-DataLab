@@ -25,9 +25,7 @@ namespace Ogdi.Data.DataLoaderGuiApp
             ColumnSemantic = new ObservableCollection<string>();
             ColumnSemantic.Add("");
 
-            XDocument xmlDoc = XDocument.Load(Path.Combine(
-        AppDomain.CurrentDomain.BaseDirectory,
-        @".\RdfNamespaces.xml"));
+            XDocument xmlDoc = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\RdfNamespaces.xml"));
 
             foreach (XElement nspace in xmlDoc.Descendants("namespace"))
             {

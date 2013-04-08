@@ -49,14 +49,16 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         #region Bindings
 
+        private bool _PlacemarksEnabled = false;
         public bool PlacemarksEnabled
         {
             get
             {
-                return _datasetColumns.PlacemarkParams != null;
+                return _PlacemarksEnabled && _datasetColumns.PlacemarkParams != null;
             }
             set
             {
+                _PlacemarksEnabled = value;
                 _datasetColumns.PlacemarkParams = _datasetColumns.PlacemarkParams == null ? new PlacemarkParams() : null;
             }
         }

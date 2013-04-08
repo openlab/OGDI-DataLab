@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Ogdi.Data.DataLoader;
-using Ogdi.Data.DataLoaderUI;
 using Ogdi.Data.DataLoaderGuiApp.Commands;
 using Ogdi.Data.DataLoaderGuiApp.Views;
 
@@ -77,68 +76,72 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         #region UploaderView Commands
 
-        #region SelectFilesCommand
+        #region OpenCommand
 
-        private DelegateCommand _selectFilesCommand;
+        private DelegateCommand _openCommand;
 
-        public ICommand SelectFilesCommand
+        public ICommand OpenCommand
         {
-            get { return _selectFilesCommand ?? (_selectFilesCommand = new DelegateCommand(SelectFiles, CanSelectFiles)); }
+            get { return _openCommand ?? (_openCommand = new DelegateCommand(Open, CanOpen)); }
         }
 
-        private void SelectFiles()
+        private void Open()
         {
             DataSetInfos.Clear();
             ShowSelectFilesDialog();
         }
 
-        private bool CanSelectFiles()
+        private bool CanOpen()
         {
             return !_uploader.IsWorking;
         }
 
         #endregion
 
-        #region UploadCommand
+        #region StartCommand
 
-        private DelegateCommand _uploadCommand;
+        private DelegateCommand _startCommand;
 
-        public ICommand UploadCommand
+        public ICommand StartCommand
         {
-            get { return _uploadCommand ?? (_uploadCommand = new DelegateCommand(OnUpload, CanUpload)); }
+            get { return _startCommand ?? (_startCommand = new DelegateCommand(OnStart, CanStart)); }
         }
 
-        private bool CanUpload()
+        private bool CanStart()
         {
             return !_uploader.IsWorking && DataSetInfos.Count > 0;
         }
 
-        private void OnUpload()
+        private void OnStart()
         {
             var notConfigured = DataSetInfos.Where(x => x.ConfigurationState == ConfigurationState.Incomplete).Select(x => x.Name);
 
             if (notConfigured.Count() > 0)
+            {
                 MessageBox.Show("One or more items cannot be processed since they haven't been properly configured:\n - " + notConfigured.Aggregate((x, y) => y += "\n - " + x));
+            }
 
             _uploader.Run();
         }
 
         #endregion
 
-        #region ConnectionSettingsCommand
+        #region SettingsCommand
 
-        private DelegateCommand _connectionSettingsCommand;
+        private DelegateCommand _settingsCommand;
 
-        public ICommand ConnectionSettingsCommand
+        public ICommand SettingsCommand
         {
-            get { return _connectionSettingsCommand ?? (_connectionSettingsCommand = new DelegateCommand(ConnectionSettings)); }
+            get { return _settingsCommand ?? (_settingsCommand = new DelegateCommand(Settings)); }
         }
 
-        private static void ConnectionSettings()
+        private static void Settings()
         {
-            var settingsViewModel = new SettingsWindowViewModel();
-            var settingsWindow = new SettingsWindowView { DataContext = settingsViewModel };
+            SettingsWindowViewModel settingsViewModel = new SettingsWindowViewModel();
+            SettingsWindowView settingsWindow = new SettingsWindowView { DataContext = settingsViewModel };
+
             settingsViewModel.RequestClose += settingsWindow.Close;
+
             settingsWindow.ShowDialog();
         }
 
@@ -165,21 +168,21 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         #endregion
 
-        #region CleanListCommand
+        #region ClearAllCommand
 
-        private DelegateCommand _cleanListCommand;
+        private DelegateCommand _clearAllCommand;
 
-        public ICommand CleanListCommand
+        public ICommand ClearAllCommand
         {
-            get { return _cleanListCommand ?? (_cleanListCommand = new DelegateCommand(CleanList, CanClearList)); }
+            get { return _clearAllCommand ?? (_clearAllCommand = new DelegateCommand(ClearAll, CanClearAll)); }
         }
 
-        private void CleanList()
+        private void ClearAll()
         {
             DataSetInfos.Clear();
         }
 
-        private bool CanClearList()
+        private bool CanClearAll()
         {
             return IsIdle && DataSetInfos.Count > 0;
         }
@@ -224,9 +227,6 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         private void DeleteProcess()
         {
-            //foreach (object item in new ArrayList(DataSetListView.SelectedItems))
-            //    DataSetInfos.Remove((UploadParam)item);
-
             DataSetInfos.Remove(SelectedItem);
         }
 
@@ -237,40 +237,22 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         #endregion
 
-        #region RemoveCompletedCommand
-
-        private DelegateCommand _removeCompletedCommand;
-
-        public ICommand RemoveCompletedCommand
-        {
-            get { return _removeCompletedCommand ?? (_removeCompletedCommand = new DelegateCommand(RemoveCompleted, CanRemoveCompleted)); }
-        }
-
-        private void RemoveCompleted()
-        {
-            foreach (UploadParam info in DataSetInfos.Where(i => i.State == UploaderState.Complete))
-                DataSetInfos.Remove(info);
-        }
-
-        private bool CanRemoveCompleted()
-        {
-            return IsIdle && DataSetInfos.Any(x => x.State == UploaderState.Complete);
-        }
-
-        #endregion
-
         #endregion
 
         public void OnActivateItem()
         {
             if (SelectedItem == null)
+            {
                 return;
+            }
 
             try
             {
-                var viewModel = new MetadataWindowViewModel(SelectedItem);
-                var window = new MetadataWindowView { DataContext = viewModel };
+                MetadataWindowViewModel viewModel = new MetadataWindowViewModel(SelectedItem);
+                MetadataWindowView window = new MetadataWindowView { DataContext = viewModel };
+
                 viewModel.RequestClose += window.Close;
+
                 window.ShowDialog();
             }
             catch (Exception e)
@@ -281,7 +263,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         private void ShowSelectFilesDialog()
         {
-            var dlg = new OpenFileDialog
+            OpenFileDialog dlg = new OpenFileDialog
             {
                 Multiselect = true,
                 CheckFileExists = true,
@@ -293,8 +275,11 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
                 //, "|",
                 //"KMZ (*.kmz)|*.kmz")
             };
+
             if (!dlg.ShowDialog(Window.GetWindow(Application.Current.MainWindow)).Value)
+            {
                 return;
+            }
 
             try
             {
@@ -311,7 +296,9 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
                 Window window = Window.GetWindow(Application.Current.MainWindow);
 
                 if (window == null)
+                {
                     throw;
+                }
 
                 MessageBox.Show(window, ex.Message, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
             }

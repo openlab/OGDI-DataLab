@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using Ogdi.Data.DataLoaderGuiApp.ViewModels;
+using Ogdi.Data.DataLoader;
 
 namespace Ogdi.Data.DataLoaderGuiApp.Views
 {
@@ -18,7 +19,9 @@ namespace Ogdi.Data.DataLoaderGuiApp.Views
         private void DataSetListView_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
                 ((MainViewModel)DataContext).OnActivateItem();
+            }
         }
     }
 }

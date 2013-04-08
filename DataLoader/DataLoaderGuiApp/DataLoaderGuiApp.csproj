@@ -64,10 +64,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\ApplicationIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fluent">
-      <HintPath>..\..\Shared\Fluent.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Shared\Ogdi.Azure\bin\Debug\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
@@ -107,72 +107,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AppCommands.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ColorsStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Brushes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\BureauBlack.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\BureauBlue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\DataGrid.Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ExpressionDark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ExpressionLight.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ShinyBlue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ShinyRed.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\WhistlerBlue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\ColumnsMetadataControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,11 +157,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ApplicationCommand.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\CommandReference.cs" />
-    <Compile Include="ConfigurationStateConverter.cs" />
-    <Compile Include="Controls\AutoCommitCheckBoxColumn.cs" />
     <Compile Include="Controls\ExtendedTextBoxColumn.cs" />
     <Compile Include="Controls\LabelTextBoxColumn.cs" />
     <Compile Include="NotifyingObject.cs" />
@@ -262,11 +193,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Views\MetadataControlView.xaml.cs">
       <DependentUpon>MetadataControlView.xaml</DependentUpon>
     </Compile>
@@ -289,10 +215,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -305,68 +227,11 @@
       <Name>DataLoader %28DataLoader\DataLoader%29</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Acceptable.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\AddNew.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\ApplicationMenuIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\CleanCompleted.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\CleanList.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\ConnectionSettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\DataLoader.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\EditDataset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Incomplete.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\NewDataset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\NewPlaned.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\OpenDataset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Ready.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\SelectFiles.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Start.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Start1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Wave.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Themes\Ribbon\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -381,6 +246,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\ApplicationIcon.ico" />
+    <Resource Include="Images\start.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\clear.png" />
     <Content Include="RDFNamespaces.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

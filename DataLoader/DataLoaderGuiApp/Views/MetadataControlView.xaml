@@ -1,49 +1,39 @@
-﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl x:Class="Ogdi.Data.DataLoaderGuiApp.Views.MetadataControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Specialized="clr-namespace:System.Collections.Specialized;assembly=System"
              xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="Ogdi.Data.DataLoaderGuiApp.Views.MetadataControlView"
-    d:DesignHeight="712.529" >
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    
     <UserControl.Resources>
-        <Style x:Key="RightAlignedLabel" TargetType="{x:Type Label}" >
-            <Setter Property="HorizontalAlignment" Value="Left" />
+        <Style x:Key="Label" TargetType="{x:Type Label}">
+            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,4,0" />
-            <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style x:Key="TopLeftAlignedLabel" TargetType="{x:Type Label}" >
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Margin" Value="0,0,4,0" />
-        </Style>
-        <Style x:Key="ExpanderHeaderLabel" TargetType="{x:Type Label}">
-            <Setter Property="Foreground" Value="#FFEFEAEA" />
-            <Setter Property="FontSize" Value="22" />
-            <Setter Property="FontWeight" Value="Bold" />
 
+        <Style x:Key="RightAlignedLabel" BasedOn="{StaticResource Label}" TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="4,4,4,4" />
+            <Setter Property="Margin" Value="0,2,4,0" />
         </Style>
 
+        <Style x:Key="{x:Type DatePicker}" TargetType="{x:Type DatePicker}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
     </UserControl.Resources>
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <Grid VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Height="184" MinHeight="184" >
+        <Grid Grid.Column="0" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition  />
                 <RowDefinition  />
@@ -58,29 +48,30 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label  Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label15" Content="Dataset Name (internal):"/>
-            <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntitySet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=true}" />
 
-            <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label1" Content="Dataset Name (external):"/>
+            <Label  Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label15" Content="Dataset Name (internal)"/>
+            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntitySet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=true}" />
+
+            <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label1" Content="Dataset Name (external)"/>
             <TextBox Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label  Grid.Row="1" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label2" Content="Dataset Source:"/>
-            <TextBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Source}"  />
+            <Label  Grid.Row="1" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label3" Content="Category"/>
+            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Category}" />
 
-            <Label  Grid.Row="1" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label3" Content="Category:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Category}"  />
+            <Label  Grid.Row="1" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label2" Content="Dataset Source"/>
+            <TextBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Source}" />
 
-            <Label  Grid.Row="2" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label4" Content="Date Released:"/>
-            <DatePicker Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDate="{Binding ReleasedDate}"  Margin="4,4,4,4" />
+            <Label  Grid.Row="2" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label4" Content="Date Released"/>
+            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding ReleasedDate}" />
 
-            <Label  Grid.Row="2" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label5" Content="Date Updated:"/>
-            <DatePicker Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDate="{Binding LastUpdateDate}"  Margin="4,4,4,4"  />
+            <Label  Grid.Row="2" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label5" Content="Date Updated"/>
+            <DatePicker Grid.Row="2" Grid.Column="3" SelectedDate="{Binding LastUpdateDate}" />
 
-            <Label  Grid.Row="3" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label6" Content="Expiration Date:"/>
-            <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDate="{Binding ExpiredDate}"  Margin="4,4,4,4"  />
+            <Label  Grid.Row="3" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label6" Content="Expiration Date"/>
+            <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding ExpiredDate}" />
 
-            <Label  Grid.Row="3" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label7" Content="Update Frequency:"/>
-            <ComboBox Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Text="{Binding UpdateFrequency}" Margin="4,4,4,4" >
+            <Label  Grid.Row="3" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label7" Content="Update Frequency"/>
+            <ComboBox Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Text="{Binding UpdateFrequency}" Margin="0,2,4,0">
                 <ComboBox.ItemsSource>
                     <Specialized:StringCollection>
                         <System:String>never</System:String>
@@ -99,66 +90,72 @@
                     </Specialized:StringCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
-            <Label  Grid.Row="4" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label11" Content="Time Period Covered:"/>
+            
+            <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label11" Content="Time Period Covered"/>
             <TextBox x:Name="periodCtr" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding PeriodCovered}" />
-            <Label  Grid.Row="4" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label12" Content="Geographic Coverage:"/>
-            <TextBox Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Text="{Binding GeographicCoverage}"  />
-            <Label  Grid.Row="5" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label13" Content="Collection Mode:"/>
-            <TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CollectionMode}"  />
+            
+            <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label12" Content="Geographic Coverage"/>
+            <TextBox Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Text="{Binding GeographicCoverage}" />
+            
+            <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label13" Content="Collection Mode"/>
+            <TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CollectionMode}" />
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Height="275" MinHeight="223" >
+
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0, 10"> 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Label Style="{DynamicResource RightAlignedLabel}" Content="Description:"/>
-                <TextBox  AcceptsReturn="True" Text="{Binding Description}" MinLines="4" />
+                <Label Style="{DynamicResource Label}" Content="Description"/>
+                <TextBox AcceptsReturn="True" Text="{Binding Description}" />
             </StackPanel>
+            
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <Label   Style="{DynamicResource RightAlignedLabel}" Content="Metadata Url:"/>
+                <Label Style="{DynamicResource Label}" Content="Metadata Url"/>
                 <TextBox x:Name="urlCtr" Text="{Binding MetadataUrl}" />
             </StackPanel>
+            
             <StackPanel Grid.Row="2" Grid.Column="0">
-                <Label  Style="{DynamicResource RightAlignedLabel}" Content="Keywords:"/>
+                <Label Style="{DynamicResource Label}" Content="Keywords"/>
                 <TextBox AcceptsReturn="True" Text="{Binding Keywords}" />
             </StackPanel>
+            
             <StackPanel Grid.Row="3" Grid.Column="0">
-                <Label Style="{DynamicResource RightAlignedLabel}" Content="Links/References:"/>
+                <Label Style="{DynamicResource Label}" Content="Links/References"/>
                 <TextBox AcceptsReturn="True" Text="{Binding Links}" />
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" Content="Collection Instruments:" />
-                <TextBox Grid.Row="1" Grid.Column="0" AcceptsReturn="True" Text="{Binding CollectionInstruments}"  Margin="4,4,4,4" MinLines="5" />
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-                <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" Content="Data Dictionary/Variables:" />
-                <TextBox  Grid.Row="1" Grid.Column="3" AcceptsReturn="True" Text="{Binding DataDictionaryVariables}"  Margin="4,4,4,4" MinLines="5" />
+            <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource Label}" Content="Collection Instruments" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding CollectionInstruments}" />
 
-                <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" Content="Technical Documentation:"/>
-                <TextBox Grid.Row="3" Grid.Column="0" AcceptsReturn="True" Text="{Binding TechnicalInfo}" Margin="4,4,4,4" MinLines="5"  />
+            <Label Grid.Row="0" Grid.Column="2" Style="{DynamicResource Label}" Content="Data Dictionary/Variables" />
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding DataDictionaryVariables}" />
 
-                <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" Content="Additional information:"/>
-                <TextBox Grid.Row="3" Grid.Column="3" AcceptsReturn="True" Text="{Binding AdditionalInfo}" Margin="4,4,4,4" MinLines="5" />
+            <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource Label}" Content="Technical Documentation"/>
+            <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding TechnicalInfo}" />
 
-            </Grid>
+            <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource Label}" Content="Additional information"/>
+            <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding AdditionalInfo}" />
         </Grid>
     </Grid>
 

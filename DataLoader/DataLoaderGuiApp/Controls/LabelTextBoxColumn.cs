@@ -12,14 +12,19 @@ namespace Ogdi.Data.DataLoaderGuiApp.Controls
         {
             Style style = PickStyle(isEditing, defaultToElementStyle);
             if (style != null)
+            {
                 element.Style = style;
+            }
         }
 
         private Style PickStyle(bool isEditing, bool defaultToElementStyle)
         {
             Style style = isEditing ? EditingElementStyle : ElementStyle;
             if (isEditing && defaultToElementStyle && (style == null))
+            {
                 style = ElementStyle;
+            }
+            
             return style;
         }
 
@@ -27,9 +32,13 @@ namespace Ogdi.Data.DataLoaderGuiApp.Controls
         {
             BindingBase binding = Binding;
             if (binding != null)
+            {
                 BindingOperations.SetBinding(target, property, binding);
+            }
             else
+            {
                 BindingOperations.ClearBinding(target, property);
+            }
         }
 
         #endregion

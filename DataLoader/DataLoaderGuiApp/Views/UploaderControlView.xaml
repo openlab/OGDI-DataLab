@@ -4,66 +4,37 @@
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:DataLoader="clr-namespace:Ogdi.Data.DataLoader;assembly=DataLoader"
     xmlns:DataLoaderUIMvvm1="clr-namespace:Ogdi.Data.DataLoaderGuiApp"
-    xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             >
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
 	
 	<Grid>
 		<Grid.Resources>
-            <!-- Brushes -->
-            <LinearGradientBrush x:Key="dgHeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="#FF6B8E95" Offset="0"/>
-                <GradientStop Color="#FF14A7C1" Offset="1"/>
-                <GradientStop Color="#FF1E424E" Offset="0.509"/>
-                <GradientStop Color="#FF1D4855" Offset="0.542"/>
-                <GradientStop Color="#FF1D4855" Offset="0.542"/>
-                <GradientStop Color="#FF193A44" Offset="0.526"/>
-            </LinearGradientBrush>
-
-            <LinearGradientBrush x:Key="dgHeaderBorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="#FF1D1D1D" Offset="0.614"/>
-                <GradientStop Color="#FF007F96" Offset="0.853"/>
-                <GradientStop Color="#FF0AEAFA" Offset="1"/>
-            </LinearGradientBrush>
-            
-			<DataLoaderUIMvvm1:ConfigurationStateConverter x:Key="ConfigurationStateConverter"/>
-
-			<DataTemplate x:Key="StatusImage">
-				<StackPanel Width="16">
-					<Image Source="{Binding Image}" ToolTip="{Binding Path=ConfigurationState, Converter={StaticResource ConfigurationStateConverter}}"/>
-				</StackPanel>
-			</DataTemplate>
-
 			<DataTemplate x:Key="Progress">
-				<ProgressBar Value="{Binding Progress}"/>
-			</DataTemplate>
+                <ProgressBar Value="{Binding Progress}" Width="180" Height="26"/>
+            </DataTemplate>
 
-			<ObjectDataProvider MethodName="GetValues"
-		        ObjectType="{x:Type System:Enum}"
-				x:Key="TableOverwriteModeValues">
+            <ObjectDataProvider x:Key="TableOverwriteModeValues" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
 				<ObjectDataProvider.MethodParameters>
 					<x:Type TypeName="DataLoader:TableOverwriteMode" />
 				</ObjectDataProvider.MethodParameters>
 			</ObjectDataProvider>           
             
 			<DataTemplate x:Key="OverwriteSelector">
-				<ComboBox SelectedItem="{Binding Path=OverwriteMode, Mode=TwoWay}" Width="90"
+				<ComboBox SelectedItem="{Binding Path=OverwriteMode, Mode=TwoWay}" Width="80"
 						  ItemsSource="{Binding Source={StaticResource TableOverwriteModeValues}}" ToolTip="Overwrite Mode"
-                          IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Fluent:RibbonWindow}}, Path=DataContext.IsIdle}" />
+                          IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.IsIdle}" />
 			</DataTemplate>
 
 			<DataTemplate x:Key="SourceOrderSelector">
-				<CheckBox HorizontalAlignment="Center" IsChecked="{Binding SourceOrder}" ToolTip="Preserve the source order" />
+                <CheckBox IsChecked="{Binding SourceOrder}" ToolTip="Preserve the source order" />
 			</DataTemplate>
 			
 			<GridView x:Key="GridView">
-				<GridViewColumn CellTemplate="{StaticResource StatusImage}" />
-				<GridViewColumn Header="Dataset Name" DisplayMemberBinding="{Binding Name}"/>
-				<GridViewColumn Header="Is Planned?" DisplayMemberBinding="{Binding PlannedAsString}"/>
-				<GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" Width="100"/>
-				<GridViewColumn Header="Progress" CellTemplate="{StaticResource Progress}" Width="200"/>
-                <GridViewColumn Header="Upload Mode" CellTemplate="{StaticResource OverwriteSelector}" Width="110"/>
-                <GridViewColumn Header="Preserve Original Dataset Order" CellTemplate="{StaticResource SourceOrderSelector}" Width="140"/>
+				<GridViewColumn Header="Dataset" DisplayMemberBinding="{Binding Name}" Width="100"/>
+				<GridViewColumn Header="Is Planned?" DisplayMemberBinding="{Binding PlannedAsString}" Width="100"/>
+				<GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" Width="80"/>
+                <GridViewColumn Header="Progress" CellTemplate="{StaticResource Progress}" Width="200"/>
+                <GridViewColumn Header="Upload Mode" CellTemplate="{StaticResource OverwriteSelector}" Width="100"/>
+                <GridViewColumn Header="Preserve Original Dataset Order" CellTemplate="{StaticResource SourceOrderSelector}" Width="190"/>
 			</GridView>
 
 		</Grid.Resources>
@@ -74,12 +45,18 @@
             <RowDefinition Height="150"/>
 		</Grid.RowDefinitions>
 		
-		<ListView Name="DataSetListView" View="{StaticResource GridView}" ItemsSource="{Binding DataSetInfos}"  SelectedItem="{Binding SelectedItem}"
-				  MouseDoubleClick="DataSetListView_MouseDoubleClick" KeyUp="DataSetListView_KeyUp" ContextMenuService.ShowOnDisabled="True" Grid.RowSpan="2">
+		<ListView Name="DataSetListView"
+                  View="{StaticResource GridView}"
+                  ItemsSource="{Binding DataSetInfos}"
+                  SelectedItem="{Binding SelectedItem}"
+				  MouseDoubleClick="DataSetListView_MouseDoubleClick"
+                  KeyUp="DataSetListView_KeyUp"
+                  ContextMenuService.ShowOnDisabled="True"
+                  Grid.RowSpan="2">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="{x:Type ListViewItem}">
-					<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-					<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+					<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					<Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ToolTip" Value="Double click to open Metadata Editor" />
 				</Style>
 			</ListView.ItemContainerStyle>
@@ -92,14 +69,14 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			
-			<Border BorderThickness="0 1 1 1" BorderBrush="DarkGray" Background="#e8eeef">
+
+            <Border BorderThickness="0,1,0,1" BorderBrush="DarkGray" Background="#EEE">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
-					<Border BorderThickness="0 0 1 0" BorderBrush="DarkGray" CornerRadius="0 4 4 0" Background="#c0cccf">
+					<Border Background="LightSkyBlue" Padding="4,0">
                         <TextBlock Margin="2" Text="{Binding Path=SelectedItem.Name}" />
 					</Border>
 
@@ -107,8 +84,16 @@
 				</Grid>
 			</Border>
 			
-			<TextBox Name="MessageTextBox" Grid.Row="1" IsReadOnly="True" MinLines="3" BorderThickness="0" Text="{Binding Path=SelectedItem.Message, Mode=OneWay}"
-					 TextWrapping="NoWrap" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0,0,0,0">
+			<TextBox Name="MessageTextBox"
+                     Grid.Row="1"
+                     IsReadOnly="True"
+                     MinLines="3"
+                     BorderThickness="0"
+                     Text="{Binding Path=SelectedItem.Message, Mode=OneWay}"
+					 TextWrapping="NoWrap"
+                     VerticalScrollBarVisibility="Visible"
+                     HorizontalScrollBarVisibility="Visible"
+                     Margin="0,0,0,0">
 			</TextBox>
 		</Grid>
 	</Grid>
