@@ -52,27 +52,29 @@ namespace InteractiveSdk.WorkerRole
 		private void InitializeHandlers()
 		{
 			handlers = new Dictionary<string, IMessageHandler>
-			{				
+			{
 				{"SendMail", new SendMailHandler()},
-				{"ConvertData", new ConvertDataHandler(container)}                
+				{"ConvertData", new ConvertDataHandler(container)}
 			};
 		}
 
 		public void ProcessMessage(CloudQueueMessage msg)
 		{
-			var msgStr = msg.AsString;                
-			using (var strReader = new StringReader(msgStr ?? string.Empty))
-			using (var xmlReader = XmlReader.Create(strReader))
-			{
-				xmlReader.ReadToDescendant("command");
-				var commandName = xmlReader.GetAttribute("commandname") ?? string.Empty;
-				IMessageHandler handler;
-				if (handlers.TryGetValue(commandName, out handler))
-				{
-					var body = xmlReader.ReadInnerXml();
-					handler.ProcessMessage(body);
-				}
-			}
+			var msgStr = msg.AsString;
+            using (var strReader = new StringReader(msgStr ?? string.Empty))
+            {
+                using (var xmlReader = XmlReader.Create(strReader))
+                {
+                    xmlReader.ReadToDescendant("command");
+                    var commandName = xmlReader.GetAttribute("commandname") ?? string.Empty;
+                    IMessageHandler handler;
+                    if (handlers.TryGetValue(commandName, out handler))
+                    {
+                        var body = xmlReader.ReadInnerXml();
+                        handler.ProcessMessage(body);
+                    }
+                }
+            }
 		}
 
 		public override bool OnStart()

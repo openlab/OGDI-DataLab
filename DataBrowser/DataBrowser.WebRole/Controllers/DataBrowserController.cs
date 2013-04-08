@@ -46,7 +46,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 
 	/// <summary>
 	/// Class used to store paging related keys
-	/// </summary>    
+	/// </summary>
 	[Serializable]
 	public class ContinuationToken
 	{
@@ -122,7 +122,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 	[HandleError]
 	public class DataBrowserController : Controller
 	{
-
 		private readonly DataBrowserModel viewDataModel = new DataBrowserModel();
 
 		#region Common Public Methods
@@ -151,19 +150,16 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 			queryString.ContainerAlias = container;
 			queryString.EntitySetName = entitySetName;
 
-			viewDataModel.Container = container;
-			viewDataModel.EntitySetName = entitySetName;
-
 			try
 			{
 				// Reset ViewData
 				ResetViewData();
 				ResetMapViewData();
 
-				//Set the ViewData for controls according to queryString
+				// Set the ViewData for controls according to queryString
 				LoadControls(container, entitySetName);
 
-				ViewData.Model = viewDataModel;
+				this.ViewData.Model = viewDataModel;
 
 				return View();
 			}
@@ -754,9 +750,8 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 		/// <param name="entitySetName">EnitySet Name in string format</param>
 		private void LoadControls(string container, string entitySetName)
 		{
-			viewDataModel.EntitySetName = entitySetName;
+            viewDataModel.EntitySetName = entitySetName;
 			viewDataModel.Container = container;
-			
 
 			SetURLs(container, entitySetName, "");
 
@@ -860,19 +855,16 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 		/// <param name="filter">Filter name in string format</param>
 		private void SetURLs(string containerAlias, string entitySetName, string filter)
 		{
-			string baseQuery = OgdiConfiguration.GetValue("serviceUri") + containerAlias + "/"
-				+ entitySetName + "/";
+			string baseQuery = OgdiConfiguration.GetValue("serviceUri") + containerAlias + "/" + entitySetName + "/";
 
 			// Append filter to viewDataModel.BaseQueryName if it exists
 			viewDataModel.BaseQueryName = baseQuery;
-
 			viewDataModel.FilteredQueryName = baseQuery;
 
 			if (!string.IsNullOrEmpty(filter))
 			{
 				viewDataModel.FilteredQueryName += "?$filter=" + filter;
 			}
-
 		}
 
 		/// <summary>
@@ -1015,7 +1007,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 		/// <param name="buttonClicked">value of the type ButtonClicked</param>
 		/// <param name="stack">Stack used for storing ContinuationTokens</param>
 		private void SetPagingAndBind(EntitySetDetails entitySetDetails,
-			ButtonClicked buttonClicked, Stack<ContinuationToken> stack)
+            ButtonClicked buttonClicked, Stack<ContinuationToken> stack)
 		{
 			// Initially disable both ViewData 
 			viewDataModel.NextEnable = false;
@@ -1136,12 +1128,11 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 		private void LoadDataView()
 		{
 			// Load DataView Languages                
-			List<SampleCodeLanguage> dataViewLanguageList =
-				(List<SampleCodeLanguage>)Helper.AllDVLanguages;
+			List<SampleCodeLanguage> dataViewLanguageList = 
+                (List<SampleCodeLanguage>)Helper.AllDVLanguages;
 
 			LoadDataViewSampleCode(dataViewLanguageList[0].FilePath, viewDataModel.Container, viewDataModel.EntitySetName);
-			viewDataModel.DataViewLanguages = new SelectList(dataViewLanguageList,
-				"FilePath", "LanguageName");
+			viewDataModel.DataViewLanguages = new SelectList(dataViewLanguageList, "FilePath", "LanguageName");
 		}
 
 		/// <summary>
@@ -1238,15 +1229,16 @@ namespace Ogdi.InteractiveSdk.Mvc.Controllers
 		{
 			// Load MapView Languages                
 			List<SampleCodeLanguage> mapViewLanguageList =
-				(List<SampleCodeLanguage>)Helper.AllMVLanguages;
+                (List<SampleCodeLanguage>)Helper.AllMVLanguages;
 
 			SampleCodeLanguage currentLanguage =
-			new SampleCodeLanguage(UIConstants.DBPC_DefaultMapViewLanguage,
-				Helper.GetMVLanguagePath(
-				UIConstants.DBPC_DefaultMapViewLanguage));
+                new SampleCodeLanguage(UIConstants.DBPC_DefaultMapViewLanguage,
+                    Helper.GetMVLanguagePath(UIConstants.DBPC_DefaultMapViewLanguage));
+
 			LoadMapViewSampleCode(currentLanguage.FilePath, viewDataModel.Container, viewDataModel.EntitySetName);
+
 			viewDataModel.MapViewLanguages = new SelectList(mapViewLanguageList,
-			   "FilePath", "LanguageName", currentLanguage.FilePath);
+                "FilePath", "LanguageName", currentLanguage.FilePath);
 		}
 
 		#endregion

@@ -58,13 +58,11 @@ namespace Ogdi.InteractiveSdk.Mvc
                 new { controller = "DataBrowser", action = "LoadBarChartSampleCode"}
                 );
 
-
             routes.MapRoute(
                 "LoadSampleCodePieChartView",
                 "DataBrowser/LoadSampleCodePieChartView/",
                 new { controller = "DataBrowser", action = "LoadPieChartSampleCode"}
                 );
-
 
             routes.MapRoute(
                 "DataBrowserPaging",
@@ -83,7 +81,6 @@ namespace Ogdi.InteractiveSdk.Mvc
                 "DataBrowser/DataBrowserRunBarChart/",
                 new { controller = "DataBrowser", action = "RunBarChartButtonClicked"}
                 );
-
             
             routes.MapRoute(
                 "DataBrowserRunPieChart",
@@ -116,9 +113,9 @@ namespace Ogdi.InteractiveSdk.Mvc
                 );
 
             routes.MapRoute(
-                "Default",                                              // Route name
-                "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "DataCatalog", action = "DataSetList", id = "" }  // Parameter defaults
+                "Default",                                                              // Route name
+                "{controller}/{action}/{id}",                                           // URL with parameters
+                new { controller = "DataCatalog", action = "DataSetList", id = "" }     // Parameter defaults
             );
         }
 
@@ -136,7 +133,6 @@ namespace Ogdi.InteractiveSdk.Mvc
                 var culture = HttpContext.Current.Request.UserLanguages[0];
                 if (!string.IsNullOrEmpty(culture))
                 {
-                    //CultureInfo ci = new CultureInfo(culture);
                     CultureInfo ci = new CultureInfo(culture);
                     Thread.CurrentThread.CurrentCulture = ci;
                     Thread.CurrentThread.CurrentUICulture = ci;

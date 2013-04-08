@@ -3,10 +3,10 @@
   <Role name="DataBrowser.WebRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="serviceUri" value="http://localhost:1114/v1/" />
+      <Setting name="serviceUri" value="http://127.0.0.1:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <!--
          Please replace the keys below with your private ones obtained from http://recaptcha.net/whyrecaptcha.html.
      -->
@@ -14,15 +14,20 @@
       <Setting name="RecaptchaPublicKey" value="6LcacwwAAAAAAI6ra57Nb-OUA1eLc8_sUlePZpD2" />
       <Setting name="RootServiceNamespace" value="OGDI" />
       <Setting name="IsAnalytics" value="0" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.NamedCaches" value="{&quot;caches&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;policy&quot;:{&quot;eviction&quot;:{&quot;type&quot;:0},&quot;expiration&quot;:{&quot;defaultTTL&quot;:180,&quot;isExpirable&quot;:true,&quot;type&quot;:1},&quot;serverNotification&quot;:{&quot;isEnabled&quot;:false}},&quot;secondaries&quot;:0}]}" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.DiagnosticLevel" value="1" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" value="30" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ConfigStoreConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="UseCache" value="1" />
     </ConfigurationSettings>
   </Role>
   <Role name="DataBrowser.WorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
-      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ogditestconfig;AccountKey=qH6qC8kN+F5Qcn2VU+8uRBMKCpRl/xaaguaQJX1H0tAyj92d8i6BOLN0ndqDA3rV7bNzzWj4OKc0zwRUZJFJLg==" />
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
+      <Setting name="DiagnosticsConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[StorageName];AccountKey=[StorageKey]" />
       <Setting name="SmtpSettings" value="" />
-      <Setting name="serviceUri" value="http://localhost:1114/v1/" />
+      <Setting name="serviceUri" value="http://127.0.0.1:8080/v1/" />
       <Setting name="pathDTD" value="XMLValidation\dtbook-2005-3.dtd" />
     </ConfigurationSettings>
   </Role>

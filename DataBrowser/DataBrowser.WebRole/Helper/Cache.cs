@@ -1,40 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml.Linq;
+﻿using Microsoft.ApplicationServer.Caching;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Ogdi.InteractiveSdk.Mvc.Models;
 using Ogdi.InteractiveSdk.Mvc.Repository;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
-	/// <summary>
-	/// Cache need to be implemented
-	/// </summary>
-	public class Cache 
+	public class Cache
 	{
-		static public IEnumerable<EntitySet> EntitySets(String container)
+        private static DataCacheFactory _DataCacheFactory = null;
+
+        private static DataCache _DataCache = null;
+        private static DataCache DataCache
+        {
+            get
+            {
+                if (_DataCacheFactory == null)
+                {
+                    _DataCacheFactory = new DataCacheFactory();
+                }
+
+                if (_DataCache == null)
+                {
+                    _DataCache = _DataCacheFactory.GetDefaultCache();
+                }
+
+                return _DataCache;
+            }
+        }
+
+        private static bool IsEnabled()
+        {
+            try
+            {
+                string useCache = RoleEnvironment.GetConfigurationSettingValue("UseCache");
+                if (!string.IsNullOrEmpty(useCache) && useCache.Equals("1"))
+                {
+                    return true;
+                }
+            }
+            catch (RoleEnvironmentException)
+            { }
+
+            return false;
+        }
+
+        public static object Get(string key)
+        {
+            if (!IsEnabled())
+            {
+                return null;
+            }
+
+            return DataCache.Get(key);
+        }
+
+        public static void Put(string key, object val)
+        {
+            if (IsEnabled())
+            {
+                DataCache.Put(key, val);
+            }
+        }
+
+		public static IEnumerable<EntitySet> EntitySets(string container)
 		{
-			if (HttpContext.Current == null)
-				return GetEntitySets(container);
+            IEnumerable<EntitySet> cachedData = Cache.Get("EntitySetCache_" + container) as List<EntitySet>;
+            if (cachedData == null)
+            {
+                cachedData = GetEntitySets(container);
+                Cache.Put("EntitySetCache_" + container, cachedData.ToList());
+            }
 
-			IDictionary<string, IEnumerable<EntitySet>> entitySets;
-
-			if (HttpContext.Current.Session["EntitySetCache"] == null)
-			{
-				HttpContext.Current.Session["EntitySetCache"] =
-				entitySets = new Dictionary<string, IEnumerable<EntitySet>>();
-			}
-			else
-			{
-				entitySets = (IDictionary<string, IEnumerable<EntitySet>>) HttpContext.Current.Session["EntitySetCache"];
-			}
-			if (!entitySets.ContainsKey(container))
-			{
-				return entitySets[container] = GetEntitySets(container);
-			}
-			return entitySets[container];
+            return cachedData;
 		}
 
 		private static EntitySet CreateEntitySet(XElement element, string containerAlias)

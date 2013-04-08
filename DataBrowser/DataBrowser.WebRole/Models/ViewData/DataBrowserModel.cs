@@ -10,7 +10,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 	public class DataBrowserModel
 	{
 		private char isBookmarked;
-
 		public char IsBookmarked
 		{
 			get { return isBookmarked; }
@@ -18,7 +17,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private short visibleView;
-
 		public short VisibleView
 		{
 			get { return visibleView; }
@@ -26,7 +24,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string sampleCodeDataView;
-
 		public string SampleCodeDataView
 		{
 			get { return sampleCodeDataView; }
@@ -34,7 +31,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string filterText;
-
 		public string FilterText
 		{
 			get { return filterText; }
@@ -42,7 +38,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string sampleCodeMapView;
-
 		public string SampleCodeMapView
 		{
 			get { return sampleCodeMapView; }
@@ -50,7 +45,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string sampleCodeBarChartView;
-
 		public string SampleCodeBarChartView
 		{
 			get { return sampleCodeBarChartView; }
@@ -58,7 +52,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string sampleCodePieChartView;
-
 		public string SampleCodePieChartView
 		{
 			get { return sampleCodePieChartView; }
@@ -66,7 +59,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private short visibleTag;
-
 		public short VisibleTag
 		{
 			get { return visibleTag; }
@@ -74,7 +66,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private int zoomLevel;
-
 		public int ZoomLevel
 		{
 			get { return zoomLevel; }
@@ -82,7 +73,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string container;
-
 		public string Container
 		{
 			get { return container; }
@@ -90,7 +80,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string entitySetName;
-
 		public string EntitySetName
 		{
 			get { return entitySetName; }
@@ -102,7 +91,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		public EntitySetWrapper EntitySetWrapper { get; set; }
 
 		private string dBErrorLine1;
-
 		public string DBErrorLine1
 		{
 			get { return dBErrorLine1; }
@@ -110,7 +98,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string dBErrorLine2;
-
 		public string DBErrorLine2
 		{
 			get { return dBErrorLine2; }
@@ -118,15 +105,13 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string baseQueryName;
-
 		public string BaseQueryName
 		{
 			get { return baseQueryName; }
 			set { baseQueryName = value; }
 		}
-		
-		private string filteredQueryName;
 
+		private string filteredQueryName;
 		public string FilteredQueryName
 		{
 			get { return filteredQueryName; }
@@ -134,7 +119,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private bool nextEnable;
-
 		public bool NextEnable
 		{
 			get { return nextEnable; }
@@ -142,7 +126,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private bool prevEnable;
-
 		public bool PrevEnable
 		{
 			get { return prevEnable; }
@@ -150,7 +133,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 			
 		private DataTable tableBrowserData;
-
 		public DataTable TableBrowserData
 		{
 			get { return tableBrowserData; }
@@ -158,7 +140,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private SelectList dataViewLanguages;
-
 		public SelectList DataViewLanguages
 		{
 			get { return dataViewLanguages; }
@@ -166,7 +147,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private double longitude;
-
 		public double Longitude
 		{
 			get { return longitude; }
@@ -174,7 +154,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private double latitude;
-
 		public double Latitude
 		{
 			get { return latitude; }
@@ -182,7 +161,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string mapStyle;
-
 		public string MapStyle
 		{
 			get { return mapStyle; }
@@ -190,7 +168,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private int mapMode;
-
 		public int MapMode
 		{
 			get { return mapMode; }
@@ -198,7 +175,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private long sceneId;
-
 		public long SceneId
 		{
 			get { return sceneId; }
@@ -206,7 +182,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string birdseyeSceneOrientation;
-
 		public string BirdseyeSceneOrientation
 		{
 			get { return birdseyeSceneOrientation; }
@@ -214,7 +189,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private SelectList mapViewLanguages;
-
 		public SelectList MapViewLanguages
 		{
 			get { return mapViewLanguages; }
@@ -222,7 +196,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private Dictionary<string, double> chart;
-
 		public Dictionary<string, double> Chart
 		{
 			get { return chart; }
@@ -230,7 +203,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private SelectList barHorizontal;
-
 		public SelectList BarHorizontal
 		{
 			get { return barHorizontal; }
@@ -238,7 +210,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private SelectList barVertical;
-
 		public SelectList BarVertical
 		{
 			get { return barVertical; }
@@ -246,7 +217,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private SelectList barDateRange;
-
 		public SelectList BarDateRange
 		{
 			get { return barDateRange; }
@@ -254,7 +224,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string barYOption;
-
 		public string BarYOption
 		{
 			get { return barYOption; }
@@ -262,7 +231,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string barYColOption;
-
 		public string BarYColOption
 		{
 			get { return barYColOption; }
@@ -270,7 +238,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private bool isSelectOne;
-
 		public bool IsSelectOne
 		{
 			get { return isSelectOne; }
@@ -278,7 +245,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private SelectList barChartViewLanguages;
-
 		public SelectList BarChartViewLanguages
 		{
 			get { return barChartViewLanguages; }
@@ -286,7 +252,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private SelectList pieHorizontal;
-
 		public SelectList PieHorizontal
 		{
 			get { return pieHorizontal; }
@@ -294,7 +259,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 				
 		private SelectList pieVertical;
-
 		public SelectList PieVertical
 		{
 			get { return pieVertical; }
@@ -302,7 +266,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private SelectList pieDateRange;
-
 		public SelectList PieDateRange
 		{
 			get { return pieDateRange; }
@@ -310,7 +273,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private string pieYOption;
-
 		public string PieYOption
 		{
 			get { return pieYOption; }
@@ -318,7 +280,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string pieYColOption;
-
 		public string PieYColOption
 		{
 			get { return pieYColOption; }
@@ -326,7 +287,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private SelectList pieChartViewLanguages;
-
 		public SelectList PieChartViewLanguages
 		{
 			get { return pieChartViewLanguages; }
@@ -334,7 +294,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 
 		private string xColName;
-
 		public string XColName
 		{
 			get { return xColName; }
@@ -342,7 +301,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private string yColName;
-
 		public string YColName
 		{
 			get { return yColName; }
@@ -350,7 +308,6 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		}
 		
 		private int xCount;
-
 		public int XCount
 		{
 			get { return xCount; }

@@ -92,7 +92,7 @@ namespace DevelopersResources {
         ///				target=&quot;_blank&quot;&gt;Atom Publishing Protocol&lt;/a&gt;&lt;img
         ///				src=&quot;/Images/ExternalLink.png&quot;
         ///					alt=&quot;Click to get Atom Publishing Protocol&quot;
-        ///					t [le reste de la chaîne a été tronqué]&quot;;.
+        ///					title=&quot;Ato [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ByDefaultOGDIReturnsDataInTheAtomPub {
             get {
@@ -149,7 +149,7 @@ namespace DevelopersResources {
         ///				target=&quot;_blank&quot;&gt;WCF Data Services&lt;/a&gt;&lt;img
         ///				 src=&quot;/Images/ExternalLink.png&quot;
         ///					alt=&quot;Click to get WCF Data Services&quot; 
-        /// [le reste de la chaîne a été tronqué]&quot;;.
+        ///					title [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string DevelopersUsingVisualStudio2010 {
             get {
@@ -201,7 +201,7 @@ namespace DevelopersResources {
         ///					title=&quot;Keyhole Markup Language (KML)&quot;
         ///					longdesc=&quot;/Descriptions/KML.txt&quot; /&gt;
         ///			format. This format is compatible with popular desktop and Web-based mapping technologies
-        ///			including Microsoft &lt;a href [le reste de la chaîne a été tronqué]&quot;;.
+        ///			including Microsoft &lt;a href=&quot;http: [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ManyOfTheDataSetsInOGDI {
             get {
@@ -238,7 +238,7 @@ namespace DevelopersResources {
         ///					alt=&quot;Click to get Query Timeout and Pagination&quot; 
         ///					title=&quot;Query Timeout and Pagination&quot; 
         ///					longdesc=&quot;/Descriptions/QueryTimeoutPagination.txt&quot; /&gt;
-        ///			in the Windows Azure Table Storage ser [le reste de la chaîne a été tronqué]&quot;;.
+        ///			in the Windows Azure Table Storage service pro [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDIAndTheUnderlyingWindowsAzureTableStorageService {
             get {
@@ -255,7 +255,7 @@ namespace DevelopersResources {
         ///					longdesc=&quot;/Descriptions/Json.txt&quot; /&gt;
         ///			format, which can be conveniently consumed using JavaScript and other technologies.
         ///			To return data in JSON format, simply append the format=json parameter to your query.
-        ///			For e [le reste de la chaîne a été tronqué]&quot;;.
+        ///			For example,  [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDICanAlsoReturnDataInTheJSON {
             get {
@@ -284,7 +284,7 @@ namespace DevelopersResources {
         ///					longdesc=&quot;/Descriptions/JSONP.txt&quot; /&gt;
         ///			technique. Using this technique, OGDI&apos;s data services will call a callback function
         ///			that you specify, passing in the results of your query in JSON format as an input
-        ///			format. To use this technique, issue a query [le reste de la chaîne a été tronqué]&quot;;.
+        ///			format. To use this technique, issue a query with the [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDIDataServicesAlsoProvideDirectSupportForTheJSONP {
             get {
@@ -384,7 +384,7 @@ namespace DevelopersResources {
         ///                &lt;a href=&quot;http://www.windowsazure.com/&quot;&gt;Windows Azure Platform&lt;/a&gt; cloud-computing
         ///                platform. Data Service.&lt;br /&gt;&lt;br /&gt;                The DataService uses RESTful Web service to expose data for programmatic access
         ///                via a number of formats, including Open Data Protocol (OData)**, an extension to
-        ///                **Atom Publishing Protocol (AtomPub), Keyhole Markup Language (KML), [le reste de la chaîne a été tronqué]&quot;;.
+        ///                **Atom Publishing Protocol (AtomPub), Keyhole Markup Language (KML), JSO [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string TheOpenGovernmentDataInitiativeIsBased {
             get {
@@ -407,7 +407,7 @@ namespace DevelopersResources {
         ///			one network domain (for example, yourdomain.com) from making HTTP requests to other
         ///			network domains (for example, the ogdi.cloudapp.net network domain that hosts the
         ///			OGDI DataLab data services). This can prevent JavaScript applications hosted in another
-        ///			domain from making straight-forward calls to the OGDI DataLab data servic [le reste de la chaîne a été tronqué]&quot;;.
+        ///			domain from making straight-forward calls to the OGDI DataLab data services, b [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ToMitigateSecurityVulnerabilities {
             get {

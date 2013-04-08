@@ -124,7 +124,7 @@ namespace DataBrowserResources {
         ///                        alt=&quot;DBPC_ISO8601AltText&quot; 
         ///                        title=&quot;ISO 8601&quot;
         ///                        longdesc=&quot;/Descriptions/Iso.txt&quot; /&gt;
-        ///                        format, &lt;i&gt;yyyy&lt;/i&gt;- [le reste de la chaîne a été tronqué]&quot;;.
+        ///                        format, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/ [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string CrimeIncidentsWhereTheReportDatetime {
             get {
@@ -235,7 +235,7 @@ namespace DataBrowserResources {
         ///                alt=&apos;Click to get WCF Data Services query syntax&apos;
         ///                title=&apos;WCF Data Services query syntax&apos;
         ///                longdesc=&apos;/Descriptions/ADOquerysyntax.txt&apos; /&gt;. The basic format
-        ///            of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expr [le reste de la chaîne a été tronqué]&quot;;.
+        ///            of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt; [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDIUsesASubsetOf {
             get {

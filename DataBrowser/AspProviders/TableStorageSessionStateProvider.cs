@@ -479,7 +479,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                 SessionRow session = GetSession(id, svc);
                 ReleaseItemExclusive(svc, session, lockId);
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
                 //throw new ProviderException("Error accessing the data store!", e);
             }

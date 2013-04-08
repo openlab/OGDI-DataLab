@@ -48,23 +48,32 @@ namespace Ogdi.InteractiveSdk.Mvc.Repository
 		/// <returns>returns list of EntitySet</returns>
 		internal static IEnumerable<EntitySet> GetEntitySets(string containerAlias, string categoryName)
 		{
-			if ((String.IsNullOrEmpty(containerAlias)))
-				return null;
+            if ((string.IsNullOrEmpty(containerAlias)))
+            {
+                return null;
+            }
 
-			if (categoryName == null)
-				return Cache.EntitySets(containerAlias);
-			else
-				return Cache.EntitySets(containerAlias).Where(t => t.CategoryValue == categoryName);
+            if (categoryName == null)
+            {
+                return Cache.EntitySets(containerAlias);
+            }
+            else
+            {
+                return Cache.EntitySets(containerAlias).Where(t => t.CategoryValue == categoryName);
+            }
 		}
 
 		internal static EntitySet GetEntitySet(string containerAlias, string entName)
 		{
 			// 1000 is the max results Azure Table Storage allows per query
-			if (String.IsNullOrEmpty(containerAlias))
-				return null;
+            if (String.IsNullOrEmpty(containerAlias))
+            {
+                return null;
+            }
 
-			var lstEntitySets = Cache.EntitySets(containerAlias).Where(t => t.EntitySetName == entName);                    
-			return lstEntitySets.FirstOrDefault();
+			var lstEntitySets = Cache.EntitySets(containerAlias).Where(t => t.EntitySetName == entName);
+
+            return lstEntitySets.FirstOrDefault();
 		}
 
 		internal static IQueryable<EntitySet> GetEntitySets()
