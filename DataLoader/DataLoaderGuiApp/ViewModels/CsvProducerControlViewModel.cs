@@ -19,7 +19,10 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             _entityProperties = new PropertyToTypeMap();
 
             if (_datasetColumns.PlacemarkParams == null || _datasetColumns.PlacemarkParams.NameProperties == null)
+            {
+                _datasetColumns.PlacemarkParams = null;
                 return;
+            }
 
             foreach (var property in _datasetColumns.PropertyToTypeMap.Mappings)
             {
@@ -49,16 +52,14 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
         #region Bindings
 
-        private bool _PlacemarksEnabled = false;
         public bool PlacemarksEnabled
         {
             get
             {
-                return _PlacemarksEnabled && _datasetColumns.PlacemarkParams != null;
+                return _datasetColumns.PlacemarkParams != null;
             }
             set
             {
-                _PlacemarksEnabled = value;
                 _datasetColumns.PlacemarkParams = _datasetColumns.PlacemarkParams == null ? new PlacemarkParams() : null;
             }
         }

@@ -25,58 +25,11 @@ namespace Ogdi.DataServices.v1
                 AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountname,
                 AppSettings.EnabledStorageAccounts[OgdiAlias].storageaccountkey);
 
-            #region <tconte>
-            // Modifications pour sécuriser les accès aux flux DPMA
-            // On laisse passer les requêtes vers les tables de métadonnées
-            // Le reste est intercepté et on implémente une authentification HTTP Basic
-
-            if (this.OgdiAlias == "DPMA"
-                && this.EntitySet != "TableMetadata"
-                && this.EntitySet != "EntityMetadata"
-                && this.EntitySet != "ProcessorParams"
-                && this.EntitySet != "TableColumnsMetadata")
-            {
-                if (_HttpContext.Request.Headers["Authorization"] == null)
-                {
-                    _HttpContext.Response.StatusCode = 401;
-                    _HttpContext.Response.StatusDescription = "Access Denied";
-                    _HttpContext.Response.Headers["WWW-Authenticate"] = "Basic realm=\"Secure DPMA feeds\"";
-                    _HttpContext.Response.End();
-                    return;
-                }
-                else
-                {
-                    string credsHeader = _HttpContext.Request.Headers["Authorization"];
-                    string creds = null;
-
-                    int credsPosition = credsHeader.IndexOf("Basic", StringComparison.OrdinalIgnoreCase);
-                    if (credsPosition != -1)
-                    {
-                        credsPosition += "Basic".Length + 1;
-                        creds = credsHeader.Substring(credsPosition, credsHeader.Length - credsPosition);
-                    }
-
-                    string user = ASCIIEncoding.ASCII.GetString(Convert.FromBase64String(creds)).Split(':')[0];
-                    if (user != "dpmauser")
-                    {
-                        _HttpContext.Response.StatusCode = 401;
-                        _HttpContext.Response.StatusDescription = "Access Denied";
-                        _HttpContext.Response.Headers["WWW-Authenticate"] = "Basic realm=\"Secure DPMA feeds\"";
-                        _HttpContext.Response.End();
-                        return;
-                    }
-                }
-            }
-
-#endregion
-
-            /*
             Action<string, string, string> incView = AnalyticsRepository.RegisterView;
             incView.BeginInvoke(String.Format("{0}||{1}", OgdiAlias, EntitySet),
                 _HttpContext.Request.RawUrl,
                 _HttpContext.Request.UserHostName,
                 null, null);
-            */
 
             XElement feed = this.GetFeed(EntitySet);
 
@@ -181,6 +134,8 @@ namespace Ogdi.DataServices.v1
             {
                 jsonWriter.WriteStartObject();
                 jsonWriter.WritePropertyName("d");
+                jsonWriter.WriteStartObject();
+                jsonWriter.WritePropertyName("results");
                 jsonWriter.WriteStartArray();
 
                 var propertiesElements = this.GetPropertiesElements(feed);
@@ -201,6 +156,7 @@ namespace Ogdi.DataServices.v1
                 }
 
                 jsonWriter.WriteEndArray();
+                jsonWriter.WriteEndObject();
                 jsonWriter.WriteEndObject();
             }
 
