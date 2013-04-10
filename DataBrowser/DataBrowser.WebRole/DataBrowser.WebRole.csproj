@@ -67,9 +67,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSharpFormat, Version=2.5.3325.25047, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\OGDI-DataLab-DataBrowser.WebRole-Dependencies.1.0\lib\CSharpFormat.dll</HintPath>
+    <Reference Include="CSharpFormat">
+      <HintPath>..\..\Shared\CSharpFormat.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationServer.Caching.AzureClientHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -1487,7 +1486,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="packages.config" />
     <None Include="XmlValidation\dtbook-2005-3.dtd" />
   </ItemGroup>
   <ItemGroup>
