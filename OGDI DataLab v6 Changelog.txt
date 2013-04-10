@@ -1,0 +1,54 @@
+=========================
+OGDI DataLab v6 changelog
+=========================
+
+/*
+** General
+*/
+
++ Software versions updated:
+	. .NET Framework 4.5
+	. Windows Azure SDK 1.8
+	. Visual Studio 2012
+
+
+/*
+** DataBrowser.Cloud
+*/
+
++ Added UseCache parameter to enable/disable Windows Azure caching
+
+
+/*
+** DataBrowser.WebRole
+*/
+
++ Cache object refactored
+
+
+/*
+** DataLoaderGuiApp
+*/
+
++ UI updated: custom styles removed, simpler interface
++ Proxy configuration added in the configuration
++ "Bind To Map" option disabled by default
+
+
+/*
+** DataService.WebRole
+*/
+
++ Complete redesign, new architecture
++ New query strings available:
+	. $top=all
+	. $orderby
+	. $skip
+	. $filter -> all OData functions are now supported: startswith, endswith, tolower, toupper, substring etc.
+
+
+/*
+** Documents
+*/
+
++ French documentation updated (screenshots + software versions)
