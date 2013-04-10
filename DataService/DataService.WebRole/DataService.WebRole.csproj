@@ -65,7 +65,10 @@
     <Reference Include="Microsoft.ApplicationServer.Caching.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Shared\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -153,9 +156,9 @@
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Ogdi.Config\OgdiConfig.csproj">
+    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
       <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>OgdiConfig</Name>
+      <Name>Ogdi.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
