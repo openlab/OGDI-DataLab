@@ -199,7 +199,7 @@ namespace Ogdi.DataServices.v1
             // Query string validation
             foreach (string key in _HttpContext.Request.QueryString.AllKeys)
             {
-                if (key.StartsWith("$") && !SupportedCommandList.Contains(key))
+                if (!string.IsNullOrEmpty(key) && key.StartsWith("$") && !SupportedCommandList.Contains(key))
                 {
                     this.RespondBadRequest(_HttpContext);
                 }
