@@ -6,14 +6,16 @@ OGDI DataLab: Open Government Data Initiative v6
 * *Feb 6, 2013 -- two more updates for an HTML5/jQuery DataLab front-end as an alternative to the .NET Data Browser with RSS-based management capability provided by SharePoint - coming soon.*
 
 
-Important:
-----------
+Important
+---------
+
 Since we use the version 4.5 of the .NET Framework, two parameters must be added manually in the ServiceConfiguration.Cloud.cscfg before deploying OGDI DataLab v6 in Windows Azure.
 You just have to add osFamily="3" and osVersion="*" as attributes of the ServiceConfiguration element.
 
 
-About:
-------
+About
+-----
+
 DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations that seek to:
 
 * Give citizens access to government data, including browse, visualize, analyze & download in multiple formats
@@ -32,6 +34,7 @@ To see OGDI in action please watch this [short video](http://blip.tv/file/get/Og
 
 DataLab / OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
 
+
 DataLab Components
 ---------------
 
@@ -47,6 +50,7 @@ Many of the data sets in OGDI also include geospatial data, which is returned in
 The Data Browser is an ASP.NET MVC 1.0 web application. It uses jQuery and a variety of other open source components and enables users to browse and query published data. The data can be conveniently visualized in widely used and recognizable formats such as tables, maps, bar graphs or pie charts. Thus, instead of downloading a file and poring over rows upon rows of data, end-users can interact with user-friendly visual tools that present complex data in a more meaningful manner.
 
 In addition to browsing the data, developers can quickly learn how to use published data exposed by OGDI in their own applications from ready-to-run samples available on the site. These samples are available in a variety of languages and frameworks widely used on the Web, including JavaScript, PHP, Python, Flex, Silverlight, C#, among others. 
+
 
 ###Data Loader
 The data loader is a tool that helps implementers quickly start enjoying the benefits of OGDI. OGDI includes both GUI-based and console-based data loader tools. The console tool takes CSV formatted data and publishes it into OGDI. In the process of loading the data, the utility can create a new dataset, add data, or update data in an already published dataset. Console tool is controlled through command line parameters and can be automated using shell scripts.
@@ -84,5 +88,4 @@ A "contributor" is any person that distributes its contribution under this licen
 
 (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
 
-(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.  
- 
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
