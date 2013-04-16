@@ -175,7 +175,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Controls\ExtendedTextBoxColumn.cs" />
     <Compile Include="Controls\LabelTextBoxColumn.cs" />
     <Compile Include="NotifyingObject.cs" />
