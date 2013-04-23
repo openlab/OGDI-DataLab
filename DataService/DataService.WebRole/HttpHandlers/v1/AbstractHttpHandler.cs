@@ -23,7 +23,7 @@ namespace Ogdi.DataServices.v1
         protected static readonly XNamespace _nsAtom = XNamespace.Get("http://www.w3.org/2005/Atom");
         protected static readonly XNamespace _nsm = XNamespace.Get("http://schemas.microsoft.com/ado/2007/08/dataservices/metadata");
         protected static readonly XNamespace _nsd = XNamespace.Get("http://schemas.microsoft.com/ado/2007/08/dataservices");
-        
+
         // Setup namespace specific names
         protected readonly XName _entryXName = _nsAtom + "entry";
         protected readonly XName _contentXName = _nsAtom + "content";
@@ -135,17 +135,10 @@ namespace Ogdi.DataServices.v1
             // Get feed from Azure Table Storage
             XElement feed = this.GetFeedFromAzure(uri, handleQueryString);
 
-            // Handle next requests
-            if (!string.IsNullOrEmpty(_Pagination.NextPartitionKey) && !string.IsNullOrEmpty(_Pagination.NextRowKey))
-            {
-                this.GetNextFeed(uri, feed, handleQueryString);
-            }
-
             // Order feed if $orderby parameter has been specified
             if (!string.IsNullOrEmpty(_OrderbyQuery.Value))
             {
                 this.OrderFeed(feed);
-                // Apply $top value
                 feed.Elements(_entryXName).Skip(_TopQuery.Value + _SkipQuery.Value).Remove();
             }
 
@@ -153,12 +146,6 @@ namespace Ogdi.DataServices.v1
             if (_FilterQuery.Values.Count > 0)
             {
                 this.FilterFeed(feed);
-            }
-
-            // Apply $skip value
-            if (_SkipQuery.Value > 0)
-            {
-                feed.Elements(_entryXName).Take(_SkipQuery.Value).Remove();
             }
 
             // Insert next page link
@@ -235,8 +222,8 @@ namespace Ogdi.DataServices.v1
             }
 
             this.HandleOrderby();
-            this.HandleSkip();
             this.HandleTop();
+            this.HandleSkip();
             this.HandleSkiptoken();
             this.HandleFilter();
         }
@@ -247,23 +234,6 @@ namespace Ogdi.DataServices.v1
             if (!string.IsNullOrEmpty(orderby))
             {
                 _OrderbyQuery.Value = orderby;
-            }
-        }
-
-        private void HandleSkip()
-        {
-            string skip = _HttpContext.Request.QueryString["$skip"];
-            if (!string.IsNullOrEmpty(skip))
-            {
-                try
-                {
-                    int skipValue = int.Parse(skip);
-                    if (skipValue > 0)
-                    {
-                        _SkipQuery.Value = skipValue;
-                    }
-                }
-                catch (Exception) { }
             }
         }
 
@@ -289,10 +259,22 @@ namespace Ogdi.DataServices.v1
                     catch (Exception) { }
                 }
             }
+        }
 
-            if (string.IsNullOrEmpty(_OrderbyQuery.Value) && _TopQuery.Value + _SkipQuery.Value < MaxAzureTableResult)
+        private void HandleSkip()
+        {
+            string skip = _HttpContext.Request.QueryString["$skip"];
+            if (!string.IsNullOrEmpty(skip))
             {
-                _QueryString.Add("$top", (_TopQuery.Value + _SkipQuery.Value).ToString());
+                try
+                {
+                    int skipValue = int.Parse(skip);
+                    if (skipValue > 0)
+                    {
+                        _SkipQuery.Value = skipValue;
+                    }
+                }
+                catch (Exception) { }
             }
         }
 
@@ -353,114 +335,103 @@ namespace Ogdi.DataServices.v1
 
         private XElement GetFeedFromAzure(UriBuilder uri, bool handleQueryString)
         {
-            if (handleQueryString)
+            XElement feed = null;
+            int currentRow = 0;
+
+            while (_TopQuery.All || !string.IsNullOrEmpty(_OrderbyQuery.Value) || currentRow < _TopQuery.Value + _SkipQuery.Value)
             {
-                uri.Query = _QueryString.ToString();
-            }
-
-            WebRequest request = HttpWebRequest.Create(uri.ToString());
-
-            request.Headers["x-ms-version"] = "2011-08-18";
-            request.Headers["DataServiceVersion"] = "2.0";
-            request.Headers["MaxDataServiceVersion"] = "2.0";
-
-            // Sign request for Azure authentication
-            _Account.Credentials.SignRequestLite((HttpWebRequest)request);
-
-            try
-            {
-                WebResponse response = request.GetResponse();
-                XElement feed = XElement.Load(response.GetResponseStream());
-
-                _HttpContext.Response.Headers["x-ms-request-id"] = response.Headers["x-ms-request-id"];
-
-                if (!string.IsNullOrEmpty(response.Headers["x-ms-continuation-NextPartitionKey"]) && !string.IsNullOrEmpty(response.Headers["x-ms-continuation-NextRowKey"]))
+                try
                 {
-                    _Pagination.NextPartitionKey = response.Headers["x-ms-continuation-NextPartitionKey"];
-                    _Pagination.NextRowKey = response.Headers["x-ms-continuation-NextRowKey"];
-                }
-                else
-                {
-                    _Pagination.NextPartitionKey = null;
-                    _Pagination.NextRowKey = null;
-                }
-
-                return feed;
-            }
-            catch (WebException ex)
-            {
-                HttpWebResponse response = ex.Response as HttpWebResponse;
-                _HttpContext.Response.StatusCode = (int)response.StatusCode;
-                _HttpContext.Response.End();
-            }
-
-            return null;
-        }
-
-        private void GetNextFeed(UriBuilder uri, XElement feed, bool handleQueryString)
-        {
-            int currentRow = MaxAzureTableResult;
-
-            while (_TopQuery.All || currentRow < _TopQuery.Value + _SkipQuery.Value || !string.IsNullOrEmpty(_OrderbyQuery.Value))
-            {
-                _QueryString["NextPartitionKey"] = _Pagination.NextPartitionKey;
-                _QueryString["NextRowKey"] = _Pagination.NextRowKey;
-
-                if (!_TopQuery.All && _TopQuery.Value + _SkipQuery.Value > MaxAzureTableResult && string.IsNullOrEmpty(_OrderbyQuery.Value))
-                {
-                    int top = MaxAzureTableResult;
-                    if ((_TopQuery.Value + _SkipQuery.Value) - currentRow < MaxAzureTableResult)
+                    // Set URI query string
+                    if (handleQueryString)
                     {
-                        top = (_TopQuery.Value + _SkipQuery.Value) - currentRow;
+                        if (!string.IsNullOrEmpty(_Pagination.NextPartitionKey) && !string.IsNullOrEmpty(_Pagination.NextRowKey))
+                        {
+                            _QueryString["NextPartitionKey"] = _Pagination.NextPartitionKey;
+                            _QueryString["NextRowKey"] = _Pagination.NextRowKey;
+                        }
+
+                        if (!_TopQuery.All && string.IsNullOrEmpty(_OrderbyQuery.Value)
+                            && _TopQuery.Value + _SkipQuery.Value - currentRow > 0
+                            && _TopQuery.Value + _SkipQuery.Value - currentRow < MaxAzureTableResult)
+                        {
+                            _QueryString["$top"] = ((_TopQuery.Value + _SkipQuery.Value) - currentRow).ToString();
+                        }
+
+                        uri.Query = _QueryString.ToString();
                     }
-                    _QueryString["$top"] = top.ToString();
+
+                    // Create web request
+                    WebRequest request = HttpWebRequest.Create(uri.ToString());
+                    request.Headers["x-ms-version"] = "2011-08-18";
+                    request.Headers["DataServiceVersion"] = DataServiceVersion;
+                    request.Headers["MaxDataServiceVersion"] = DataServiceVersion;
+
+                    // Sign request for Azure authentication
+                    _Account.Credentials.SignRequestLite((HttpWebRequest)request);
+
+                    // Get web response
+                    using (WebResponse response = request.GetResponse())
+                    {
+                        _HttpContext.Response.Headers["x-ms-request-id"] = response.Headers["x-ms-request-id"];
+
+                        // Set pagination information
+                        if (!string.IsNullOrEmpty(response.Headers["x-ms-continuation-NextPartitionKey"]) && !string.IsNullOrEmpty(response.Headers["x-ms-continuation-NextRowKey"]))
+                        {
+                            _Pagination.NextPartitionKey = response.Headers["x-ms-continuation-NextPartitionKey"];
+                            _Pagination.NextRowKey = response.Headers["x-ms-continuation-NextRowKey"];
+                        }
+                        else
+                        {
+                            _Pagination.NextPartitionKey = null;
+                            _Pagination.NextRowKey = null;
+                        }
+
+                        // Increment current row
+                        currentRow += !string.IsNullOrEmpty(_QueryString["$top"]) ? int.Parse(_QueryString["$top"]) : MaxAzureTableResult;
+
+                        // Load feed
+                        if (currentRow > _SkipQuery.Value)
+                        {
+                            XElement tmpFeed = XElement.Load(response.GetResponseStream());
+                            
+                            int entriesToRemove = tmpFeed.Descendants(_entryXName).Count() - (currentRow - _SkipQuery.Value);
+                            if (entriesToRemove > 0)
+                            {
+                                tmpFeed.Descendants(_entryXName).Take(entriesToRemove).Remove();
+                            }
+                            
+                            if (feed == null)
+                            {
+                                feed = tmpFeed;
+                            }
+                            else
+                            {
+                                feed.Add(tmpFeed.Descendants(_entryXName).ToList());
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(_Pagination.NextPartitionKey) || string.IsNullOrEmpty(_Pagination.NextRowKey))
+                        {
+                            if (feed == null)
+                            {
+                                feed = XElement.Load(response.GetResponseStream());
+                                feed.Descendants(_entryXName).Remove();
+                            }
+                            break;
+                        }
+                    }
                 }
-
-                XElement tmpFeed = this.GetFeedFromAzure(uri, handleQueryString);
-
-                feed.Add(tmpFeed.Descendants(_entryXName).ToList());
-
-                if (string.IsNullOrEmpty(_Pagination.NextPartitionKey) || string.IsNullOrEmpty(_Pagination.NextRowKey))
+                catch (WebException ex)
                 {
-                    break;
+                    HttpWebResponse response = ex.Response as HttpWebResponse;
+                    _HttpContext.Response.StatusCode = (int)response.StatusCode;
+                    _HttpContext.Response.End();
                 }
-
-                currentRow += MaxAzureTableResult;
             }
+
+            return feed;
         }
-
-        /*
-         * Old sort function
-        private void SortFeed(XElement feed)
-        {
-            try
-            {
-                List<XElement> sortedEntries;
-                if (_OrderbyQuery.Asc)
-                {
-                    sortedEntries = (from x in feed.Descendants(_entryXName)
-                                     orderby (string)x.Element(_contentXName).Element(_propertiesXName).Element(_nsd + _OrderbyQuery.Value) ascending
-                                     select x).ToList();
-                }
-                else
-                {
-                    sortedEntries = (from x in feed.Descendants(_entryXName)
-                                     orderby (string)x.Element(_contentXName).Element(_propertiesXName).Element(_nsd + _OrderbyQuery.Value) descending
-                                     select x).ToList();
-                }
-
-                // Update entries in feed
-                XElement[] newEntries = new XElement[sortedEntries.Count];
-                sortedEntries.CopyTo(newEntries);
-
-                List<XElement> entries = newEntries.ToList();
-
-                feed.Descendants(_entryXName).Remove();
-                feed.Add(entries);
-            }
-            catch (Exception) { }
-        }
-        */
 
         private void OrderFeed(XElement feed)
         {
