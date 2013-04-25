@@ -20,17 +20,17 @@
             <MenuItem Header="_Action">
                 <MenuItem Header="_Start Transfer" Command="{Binding StartCommand}">
                     <MenuItem.Icon>
-                        <Image Source="/Images/start.png"/>
+                        <Image Source="/Images/start.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Delete Selection" Command="{Binding DeleteProcessCommand}">
                     <MenuItem.Icon>
-                        <Image Source="/Images/delete.png"/>
+                        <Image Source="/Images/delete.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Clear All" Command="{Binding ClearAllCommand}">
                     <MenuItem.Icon>
-                        <Image Source="/Images/clear.png"/>
+                        <Image Source="/Images/clear.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
