@@ -134,8 +134,11 @@ namespace Ogdi.DataServices.v1
             {
                 jsonWriter.WriteStartObject();
                 jsonWriter.WritePropertyName("d");
+                //TODO: Uncomment to match OData specification
+                /*
                 jsonWriter.WriteStartObject();
                 jsonWriter.WritePropertyName("results");
+                 */
                 jsonWriter.WriteStartArray();
 
                 var propertiesElements = this.GetPropertiesElements(feed);
@@ -156,7 +159,9 @@ namespace Ogdi.DataServices.v1
                 }
 
                 jsonWriter.WriteEndArray();
+                /*
                 jsonWriter.WriteEndObject();
+                 */
                 jsonWriter.WriteEndObject();
             }
 
