@@ -64,7 +64,7 @@ namespace Ogdi.DataServices.v1
             base.ProcessRequest(httpContext);
 
             // Check if metadata is already cached
-            string cachedMetadata = Cache.Get("Metadata") as string;
+            string cachedMetadata = Cache.Get(string.Format("metadata[{0}]", OgdiAlias)) as string;
             if (!string.IsNullOrEmpty(cachedMetadata))
             {
                 _HttpContext.Response.ContentType = _xmlContentType;
