@@ -7,7 +7,11 @@ namespace Ogdi.DataServices.v1
     {
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            IHttpHandler HttpHandler = new AvailableEndpointsHttpHandler();
+            IHttpHandler HttpHandler = new AvailableEndpointsHttpHandler()
+            {
+                EntitySet = "AvailableEndpoints"
+            };
+
             return HttpHandler;
         }
     }

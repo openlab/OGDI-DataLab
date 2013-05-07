@@ -596,6 +596,9 @@ namespace Ogdi.DataServices.v1
                 {
                     switch (this.EntitySet)
                     {
+                        case "AvailableEndpoints":
+                            _ColumnsInformation = ColumnsInformation_AvailableEndpoints();
+                            break;
                         case "TableMetadata":
                             _ColumnsInformation = ColumnsInformation_TableMetadata();
                             break;
@@ -616,6 +619,18 @@ namespace Ogdi.DataServices.v1
 
                 return _ColumnsInformation;
             }
+        }
+
+        // Manual metadata for AvailableEndpoints
+        private List<DynamicQueryable.DynamicProperty> ColumnsInformation_AvailableEndpoints()
+        {
+            List<DynamicQueryable.DynamicProperty> ColumnsInformation = new List<DynamicQueryable.DynamicProperty>();
+
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("alias", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("description", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("disclaimer", typeof(string)));
+
+            return ColumnsInformation;
         }
 
         // Manual metadata for TableMetadata
