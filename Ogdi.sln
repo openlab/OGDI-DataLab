@@ -60,6 +60,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBrowser.WorkerRole", "DataBrowser\DataBrowser.WorkerRole\DataBrowser.WorkerRole.csproj", "{085EB9E2-4108-4721-9A06-3CF7DA63044D}"
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "DataBrowser.Cloud", "DataBrowser\DataBrowser.Cloud\DataBrowser.Cloud.ccproj", "{E2426D10-5335-4996-8B5C-8A1459F76270}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEB151B4-69CA-4870-90E7-86FCFDBAD718} = {AEB151B4-69CA-4870-90E7-86FCFDBAD718}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageInterface", "DataBrowser\StorageInterface\StorageInterface.csproj", "{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}"
 EndProject
