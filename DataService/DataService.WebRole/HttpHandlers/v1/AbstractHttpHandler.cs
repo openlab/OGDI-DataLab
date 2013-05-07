@@ -576,6 +576,85 @@ namespace Ogdi.DataServices.v1
             return false;
         }
 
+        protected string ReplaceAzureUrlInString(string xmlString)
+        {
+            // The xml payload returned from Table Storage data service has urls
+            // that point back to Table Storage.  We need to replace the urls with the
+            // proper urls for our public service.
+            return xmlString.Replace(_AzureTableUrlToReplace, _AzureTableUrlReplacement);
+        }
+
+        #endregion
+
+        #region ColumnsMetadata
+
+        private List<DynamicQueryable.DynamicProperty> ColumnsInformation
+        {
+            get
+            {
+                if (_ColumnsInformation == null)
+                {
+                    switch (this.EntitySet)
+                    {
+                        case "TableMetadata":
+                            _ColumnsInformation = ColumnsInformation_TableMetadata();
+                            break;
+                        case "TableColumnsMetadata":
+                            _ColumnsInformation = ColumnsInformation_TableColumnsMetadata();
+                            break;
+                        default:
+                            List<TableColumnsMetadataEntity> queryResults = this.GetColumnsMetadata();
+                            List<string> columnsNames = new List<string>();
+                            foreach (TableColumnsMetadataEntity currentColumn in queryResults)
+                            {
+                                columnsNames.Add(currentColumn.column.ToLower());
+                            }
+                            _ColumnsInformation = this.GetColumnsProperties(columnsNames);
+                            break;
+                    }
+                }
+
+                return _ColumnsInformation;
+            }
+        }
+
+        // Manual metadata for TableMetadata
+        private List<DynamicQueryable.DynamicProperty> ColumnsInformation_TableMetadata()
+        {
+            List<DynamicQueryable.DynamicProperty> ColumnsInformation = new List<DynamicQueryable.DynamicProperty>();
+
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("entityset", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("name", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("source", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("category", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("additionalinfo", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("description", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("keywords", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("geographiccoverage", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("updatefrequency", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("lastupdatedate", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("releaseddate", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("expireddate", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("entitykind", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("isempty", typeof(string)));
+
+            return ColumnsInformation;
+        }
+
+        // Manual metadata for TableColumnsMetadata
+        private List<DynamicQueryable.DynamicProperty> ColumnsInformation_TableColumnsMetadata()
+        {
+            List<DynamicQueryable.DynamicProperty> ColumnsInformation = new List<DynamicQueryable.DynamicProperty>();
+
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("entityset", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("column", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columnsemantic", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columnnamespace", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columndescription", typeof(string)));
+
+            return ColumnsInformation;
+        }
+
         private List<TableColumnsMetadataEntity> GetColumnsMetadata()
         {
             CloudTableClient clientTable = new CloudTableClient(_Account.TableEndpoint.ToString(), _Account.Credentials);
@@ -627,35 +706,6 @@ namespace Ogdi.DataServices.v1
             return columnsList;
         }
 
-        protected List<DynamicQueryable.DynamicProperty> ColumnsInformation
-        {
-            get
-            {
-                if (_ColumnsInformation == null)
-                {
-                    List<TableColumnsMetadataEntity> queryResults = this.GetColumnsMetadata();
-
-                    List<string> columnsNames = new List<string>();
-                    foreach (TableColumnsMetadataEntity currentColumn in queryResults)
-                    {
-                        columnsNames.Add(currentColumn.column.ToLower());
-                    }
-
-                    _ColumnsInformation = this.GetColumnsProperties(columnsNames);
-                }
-
-                return _ColumnsInformation;
-            }
-        }
-
-        protected string ReplaceAzureUrlInString(string xmlString)
-        {
-            // The xml payload returned from Table Storage data service has urls
-            // that point back to Table Storage.  We need to replace the urls with the
-            // proper urls for our public service.
-            return xmlString.Replace(_AzureTableUrlToReplace, _AzureTableUrlReplacement);
-        }
-
         #endregion
     }
 
@@ -681,7 +731,6 @@ namespace Ogdi.DataServices.v1
 
     public class TableColumnsMetadataEntity : TableServiceEntity
     {
-
         public TableColumnsMetadataEntity()
             : base()
         {
