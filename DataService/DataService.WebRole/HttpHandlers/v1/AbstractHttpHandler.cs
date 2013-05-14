@@ -139,11 +139,10 @@ namespace Ogdi.DataServices.v1
             if (!string.IsNullOrEmpty(_OrderbyQuery.Value))
             {
                 this.OrderFeed(feed);
-                feed.Elements(_entryXName).Skip(_TopQuery.Value + _SkipQuery.Value).Remove();
             }
 
             // Filter feed if $filter parameter has been specified
-            if (_FilterQuery.Values.Count > 0)
+            if (!string.IsNullOrEmpty(_FilterQuery.Value))
             {
                 this.FilterFeed(feed);
             }
@@ -221,20 +220,11 @@ namespace Ogdi.DataServices.v1
                 }
             }
 
-            this.HandleOrderby();
             this.HandleTop();
             this.HandleSkip();
-            this.HandleSkiptoken();
+            this.HandleOrderby();
             this.HandleFilter();
-        }
-
-        private void HandleOrderby()
-        {
-            string orderby = _HttpContext.Request.QueryString["$orderby"];
-            if (!string.IsNullOrEmpty(orderby))
-            {
-                _OrderbyQuery.Value = orderby;
-            }
+            this.HandleSkiptoken();
         }
 
         private void HandleTop()
@@ -278,6 +268,58 @@ namespace Ogdi.DataServices.v1
             }
         }
 
+        private void HandleOrderby()
+        {
+            if (!string.IsNullOrEmpty(_HttpContext.Request.QueryString["$orderby"]))
+            {
+                foreach (string orderby in _HttpContext.Request.QueryString.GetValues("$orderby"))
+                {
+                    if (!string.IsNullOrEmpty(orderby))
+                    {
+                        if (string.IsNullOrEmpty(_OrderbyQuery.Value))
+                        {
+                            _OrderbyQuery.Value = orderby;
+                        }
+                        else
+                        {
+                            _OrderbyQuery.Value += string.Format(",{0}", orderby);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void HandleFilter()
+        {
+            if (!string.IsNullOrEmpty(_HttpContext.Request.QueryString["$filter"]))
+            {
+                string filterQuery = null;
+                foreach (string filter in _HttpContext.Request.QueryString.GetValues("$filter"))
+                {
+                    if (!string.IsNullOrEmpty(filter))
+                    {
+                        if (string.IsNullOrEmpty(filterQuery))
+                        {
+                            filterQuery = filter;
+                        }
+                        else
+                        {
+                            filterQuery += string.Format(" and {0}", filter);
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(EntitySet) && this.IsCustomFilterQueryString(filterQuery))
+                {
+                    _FilterQuery.Value = filterQuery.Replace('\'', '"');
+                }
+                else
+                {
+                    _QueryString.Add("$filter", filterQuery);
+                }
+            }
+        }
+
         private void HandleSkiptoken()
         {
             string nextPartitionKey = null;
@@ -308,27 +350,6 @@ namespace Ogdi.DataServices.v1
             }
         }
 
-        private void HandleFilter()
-        {
-            if (!string.IsNullOrEmpty(_HttpContext.Request.QueryString["$filter"]))
-            {
-                foreach (string filter in _HttpContext.Request.QueryString.GetValues("$filter"))
-                {
-                    if (!string.IsNullOrEmpty(filter))
-                    {
-                        if (!string.IsNullOrEmpty(EntitySet) && this.IsCustomFilterQueryString(filter))
-                        {
-                            _FilterQuery.Values.Add(filter.Replace('\'', '"'));
-                        }
-                        else
-                        {
-                            _QueryString.Add("$filter", filter);
-                        }
-                    }
-                }
-            }
-        }
-
         #endregion
 
         #region Perform query
@@ -336,11 +357,11 @@ namespace Ogdi.DataServices.v1
         private XElement GetFeedFromAzure(UriBuilder uri, bool handleQueryString)
         {
             XElement feed = null;
-            int currentRow = 0;
 
-            while (_TopQuery.All || !string.IsNullOrEmpty(_OrderbyQuery.Value) || currentRow < _TopQuery.Value + _SkipQuery.Value)
+            try
             {
-                try
+                int nbRows = MaxAzureTableResult;
+                while (_TopQuery.Left + _SkipQuery.Left > 0 || _TopQuery.All)
                 {
                     // Set URI query string
                     if (handleQueryString)
@@ -351,12 +372,12 @@ namespace Ogdi.DataServices.v1
                             _QueryString["NextRowKey"] = _Pagination.NextRowKey;
                         }
 
-                        if (!_TopQuery.All && string.IsNullOrEmpty(_OrderbyQuery.Value)
-                            && _TopQuery.Value + _SkipQuery.Value - currentRow > 0
-                            && _TopQuery.Value + _SkipQuery.Value - currentRow < MaxAzureTableResult)
+                        nbRows = MaxAzureTableResult;
+                        if (!_TopQuery.All && _TopQuery.Left + _SkipQuery.Left < MaxAzureTableResult)
                         {
-                            _QueryString["$top"] = ((_TopQuery.Value + _SkipQuery.Value) - currentRow).ToString();
+                            nbRows = _TopQuery.Left + _SkipQuery.Left;
                         }
+                        _QueryString["$top"] = nbRows.ToString();
 
                         uri.Query = _QueryString.ToString();
                     }
@@ -387,20 +408,25 @@ namespace Ogdi.DataServices.v1
                             _Pagination.NextRowKey = null;
                         }
 
-                        // Increment current row
-                        currentRow += !string.IsNullOrEmpty(_QueryString["$top"]) ? int.Parse(_QueryString["$top"]) : MaxAzureTableResult;
-
-                        // Load feed
-                        if (currentRow > _SkipQuery.Value)
+                        if (_SkipQuery.Left >= nbRows)
+                        {
+                            _SkipQuery.Left -= nbRows;
+                        }
+                        else
                         {
                             XElement tmpFeed = XElement.Load(response.GetResponseStream());
-                            
-                            int entriesToRemove = tmpFeed.Descendants(_entryXName).Count() - (currentRow - _SkipQuery.Value);
-                            if (entriesToRemove > 0)
+
+                            // Handle $skip
+                            if (_SkipQuery.Left > 0)
                             {
-                                tmpFeed.Descendants(_entryXName).Take(entriesToRemove).Remove();
+                                tmpFeed.Descendants(_entryXName).Take(_SkipQuery.Left).Remove();
+                                _SkipQuery.Left = 0;
                             }
-                            
+
+                            // Handle $top
+                            _TopQuery.Left -= tmpFeed.Descendants(_entryXName).Count();
+
+                            // Add entities to feed
                             if (feed == null)
                             {
                                 feed = tmpFeed;
@@ -422,12 +448,12 @@ namespace Ogdi.DataServices.v1
                         }
                     }
                 }
-                catch (WebException ex)
-                {
-                    HttpWebResponse response = ex.Response as HttpWebResponse;
-                    _HttpContext.Response.StatusCode = (int)response.StatusCode;
-                    _HttpContext.Response.End();
-                }
+            }
+            catch (WebException ex)
+            {
+                HttpWebResponse response = ex.Response as HttpWebResponse;
+                _HttpContext.Response.StatusCode = (int)response.StatusCode;
+                _HttpContext.Response.End();
             }
 
             return feed;
@@ -482,12 +508,9 @@ namespace Ogdi.DataServices.v1
         {
             IQueryable<XElement> entries = feed.Descendants(_entryXName).AsQueryable();
 
-            if (_FilterQuery.Values != null)
+            if (!string.IsNullOrEmpty(_FilterQuery.Value))
             {
-                foreach (string filter in _FilterQuery.Values)
-                {
-                    entries = this.ProcessFilter(filter, entries);
-                }
+                entries = this.ProcessFilter(_FilterQuery.Value, entries);
             }
 
             // Update entries in feed

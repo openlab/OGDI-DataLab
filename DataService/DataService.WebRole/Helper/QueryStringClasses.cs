@@ -5,17 +5,47 @@ namespace Ogdi.DataServices.Helper
     public class TopQuery
     {
         public bool All = false;
-        public int Value;
 
-        public TopQuery(int value)
+        private int _Value;
+        public int Value
         {
-            this.Value = value;
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                _Value = value;
+                this.Left = value;
+            }
+        }
+
+        public int Left;
+
+        public TopQuery(int defaultValue)
+        {
+            this.Value = defaultValue;
+            this.Left = defaultValue;
         }
     }
 
     public class SkipQuery
     {
-        public int Value = 0;
+        private int _Value = 0;
+        public int Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                _Value = value;
+                this.Left = value;
+            }
+        }
+
+        public int Left = 0;
     }
 
     public class OrderbyQuery
@@ -25,12 +55,7 @@ namespace Ogdi.DataServices.Helper
 
     public class FilterQuery
     {
-        public List<string> Values;
-
-        public FilterQuery()
-        {
-            this.Values = new List<string>();
-        }
+        public string Value;
     }
 
     public class Pagination
