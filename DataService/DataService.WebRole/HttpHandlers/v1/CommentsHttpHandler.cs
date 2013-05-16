@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Web;
 using System.Xml.Linq;
 
@@ -52,6 +55,84 @@ namespace Ogdi.DataServices.v1
 
         protected override void Render(XElement feed)
         {
+            string format = null;
+            if (!string.IsNullOrEmpty(_HttpContext.Request.QueryString["$format"]))
+            {
+                format = _HttpContext.Request.QueryString["$format"];
+            }
+            else if (!string.IsNullOrEmpty(_HttpContext.Request.QueryString["format"]))
+            {
+                format = _HttpContext.Request.QueryString["format"];
+            }
+
+            switch (format)
+            {
+                case "json":
+                    this.RenderJson(feed);
+                    break;
+                default:
+                    this.RenderXml(feed);
+                    break;
+            }
+        }
+
+        protected void RenderJson(XElement feed)
+        {
+            _HttpContext.Response.ContentType = "application/json";
+
+            XName kmlSnippetElementString = _nsd + "kmlsnippet";
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+
+            using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+            {
+                jsonWriter.WriteStartObject();
+                jsonWriter.WritePropertyName("d");
+                //TODO: Uncomment to match OData specification
+                /*
+                jsonWriter.WriteStartObject();
+                jsonWriter.WritePropertyName("results");
+                 */
+                jsonWriter.WriteStartArray();
+
+                var propertiesElements = this.GetPropertiesElements(feed);
+                foreach (var propertiesElement in propertiesElements)
+                {
+                    jsonWriter.WriteStartObject();
+
+                    propertiesElement.Elements(kmlSnippetElementString).Remove();
+                    propertiesElement.Elements(_rdfSnippetXName).Remove();
+
+                    foreach (var element in propertiesElement.Elements())
+                    {
+                        jsonWriter.WritePropertyName(element.Name.LocalName);
+                        jsonWriter.WriteValue(element.Value);
+                    }
+
+                    jsonWriter.WriteEndObject();
+                }
+
+                jsonWriter.WriteEndArray();
+                /*
+                jsonWriter.WriteEndObject();
+                 */
+                jsonWriter.WriteEndObject();
+            }
+
+            var callbackFunctionName = _HttpContext.Request["callback"];
+            if (callbackFunctionName != null)
+            {
+                _HttpContext.Response.Write(string.Format("{0}({1})", callbackFunctionName, sb.ToString()));
+            }
+            else
+            {
+                _HttpContext.Response.Write(sb.ToString());
+            }
+        }
+
+        protected void RenderXml(XElement feed)
+        {
             _HttpContext.Response.ContentType = _xmlContentType;
 
             string xmlBase = string.Format("http://{0}{1}", _HttpContext.Request.Url.Host, _HttpContext.Request.Url.AbsolutePath);
@@ -74,5 +155,14 @@ namespace Ogdi.DataServices.v1
 
             _HttpContext.Response.Write(END_SERVICEDOCUMENT_TEMPLATE);
         }
+
+        #region Utils
+
+        private IEnumerable<XElement> GetPropertiesElements(XElement feed)
+        {
+            return feed.Elements(_entryXName).Elements(_contentXName).Elements(_propertiesXName);
+        }
+
+        #endregion
     }
 }
