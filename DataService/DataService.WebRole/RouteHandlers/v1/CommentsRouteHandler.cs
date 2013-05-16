@@ -7,7 +7,11 @@ namespace Ogdi.DataServices.v1
     {
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            IHttpHandler HttpHandler = new CommentsHttpHandler();
+            IHttpHandler HttpHandler = new CommentsHttpHandler()
+            {
+                EntitySet = "Comments"
+            };
+
             return HttpHandler;
         }
     }

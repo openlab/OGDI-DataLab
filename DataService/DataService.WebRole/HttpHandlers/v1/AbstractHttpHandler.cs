@@ -628,6 +628,9 @@ namespace Ogdi.DataServices.v1
                         case "TableColumnsMetadata":
                             _ColumnsInformation = ColumnsInformation_TableColumnsMetadata();
                             break;
+                        case "Comments":
+                            _ColumnsInformation = ColumnsInformation_Comments();
+                            break;
                         default:
                             List<TableColumnsMetadataEntity> queryResults = this.GetColumnsMetadata();
                             List<string> columnsNames = new List<string>();
@@ -689,6 +692,25 @@ namespace Ogdi.DataServices.v1
             ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columnsemantic", typeof(string)));
             ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columnnamespace", typeof(string)));
             ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("columndescription", typeof(string)));
+
+            return ColumnsInformation;
+        }
+
+        // Manual metadata for Comments
+        private List<DynamicQueryable.DynamicProperty> ColumnsInformation_Comments()
+        {
+            List<DynamicQueryable.DynamicProperty> ColumnsInformation = new List<DynamicQueryable.DynamicProperty>();
+
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Comment", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("DatasetId", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Email", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Notify", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("ParentType", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("PostedOn", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Status", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Subject", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Type", typeof(string)));
+            ColumnsInformation.Add(new DynamicQueryable.DynamicProperty("Username", typeof(string)));
 
             return ColumnsInformation;
         }
