@@ -6,13 +6,6 @@ OGDI DataLab: Open Government Data Initiative v6
 * *Feb 6, 2013 -- two more updates for an HTML5/jQuery DataLab front-end as an alternative to the .NET Data Browser with RSS-based management capability provided by SharePoint - coming soon.*
 
 
-Important
----------
-
-Since we use the version 4.5 of the .NET Framework, two parameters must be added manually in the **ServiceConfiguration.Cloud.cscfg** before deploying OGDI DataLab v6 in Windows Azure.
-You just have to add **osFamily="3"** and **osVersion="*"** as attributes of the *ServiceConfiguration* element.
-
-
 About
 -----
 
