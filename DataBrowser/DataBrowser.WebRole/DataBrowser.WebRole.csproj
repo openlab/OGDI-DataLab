@@ -1491,7 +1491,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="packages.config" />
     <None Include="XmlValidation\dtbook-2005-3.dtd" />
   </ItemGroup>
   <ItemGroup>
