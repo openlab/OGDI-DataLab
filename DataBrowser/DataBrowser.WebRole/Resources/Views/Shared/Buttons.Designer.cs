@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AccountResources {
+namespace SharedResources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace AccountResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UpdateUserInfo {
+    public class Buttons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UpdateUserInfo() {
+        internal Buttons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace AccountResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ogdi.InteractiveSdk.Mvc.Resources.Views.Account.UpdateUserInfo", typeof(UpdateUserInfo).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ogdi.InteractiveSdk.Mvc.Resources.Views.Shared.Buttons", typeof(Buttons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,101 @@ namespace AccountResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Confirm new password:.
+        ///   Recherche une chaîne localisée semblable à Clear.
         /// </summary>
-        public static string ConfirmNewPassword {
+        public static string Clear {
             get {
-                return ResourceManager.GetString("ConfirmNewPassword", resourceCulture);
+                return ResourceManager.GetString("Clear", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Current Password:.
+        ///   Recherche une chaîne localisée semblable à Create.
         /// </summary>
-        public static string CurrentPassword {
+        public static string Create {
             get {
-                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+                return ResourceManager.GetString("Create", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Email:.
+        ///   Recherche une chaîne localisée semblable à Delete.
         /// </summary>
-        public static string Email {
+        public static string Delete {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à First Name:.
+        ///   Recherche une chaîne localisée semblable à Execute.
         /// </summary>
-        public static string FirstName {
+        public static string Execute {
             get {
-                return ResourceManager.GetString("FirstName", resourceCulture);
+                return ResourceManager.GetString("Execute", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Name:.
+        ///   Recherche une chaîne localisée semblable à Filter.
         /// </summary>
-        public static string LastName {
+        public static string Filter {
             get {
-                return ResourceManager.GetString("LastName", resourceCulture);
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Login.
+        ///   Recherche une chaîne localisée semblable à Mark as addressed.
         /// </summary>
-        public static string Login {
+        public static string MarkAsAddressed {
             get {
-                return ResourceManager.GetString("Login", resourceCulture);
+                return ResourceManager.GetString("MarkAsAddressed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à New Password:.
+        ///   Recherche une chaîne localisée semblable à Mark as completed.
         /// </summary>
-        public static string NewPassword {
+        public static string MarkAsCompleted {
             get {
-                return ResourceManager.GetString("NewPassword", resourceCulture);
+                return ResourceManager.GetString("MarkAsCompleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Update.
+        ///   Recherche une chaîne localisée semblable à No action required.
         /// </summary>
-        public static string Update {
+        public static string NoActionRequired {
             get {
-                return ResourceManager.GetString("Update", resourceCulture);
+                return ResourceManager.GetString("NoActionRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Update registration information.
+        ///   Recherche une chaîne localisée semblable à Post comment.
         /// </summary>
-        public static string UpdateRegistrationInformation {
+        public static string PostComment {
             get {
-                return ResourceManager.GetString("UpdateRegistrationInformation", resourceCulture);
+                return ResourceManager.GetString("PostComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Refresh chart.
+        /// </summary>
+        public static string RefreshChart {
+            get {
+                return ResourceManager.GetString("RefreshChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reply.
+        /// </summary>
+        public static string Reply {
+            get {
+                return ResourceManager.GetString("Reply", resourceCulture);
             }
         }
     }

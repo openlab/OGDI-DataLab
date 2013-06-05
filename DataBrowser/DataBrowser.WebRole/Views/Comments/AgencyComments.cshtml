@@ -147,7 +147,7 @@
 			<input id="From" maxlength="10" size="10" class="calendar" />
 			@CommentsResources.AgencyComments.To
 			<input id="To" maxlength="10" size="10" class="calendar" />
-			@Html.Raw(Html.NiceInputButton(this, CommentsResources.AgencyComments.Filter, "javascript:filter()"))
+			@Html.Raw(Html.NiceInputButton(this, SharedResources.Buttons.Filter, "javascript:filter()"))
 			@Html.Hidden("FromHidden")
 			@Html.Hidden("ToHidden")
 			} 
@@ -199,10 +199,10 @@
 			</div>        
 		
 			<div class="controls middle admin-console">
-				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'Hidden', this)" class="delete"> @CommentsResources.AgencyComments.HideFromPublic @*<%= Html.NiceButton(this, "delete", 0, null) %>*@</a>]</span>
-				<span>[<a href="javascript:showDiv('Reply_' +'@item.RowKey')" class="reply"> @CommentsResources.AgencyComments.Reply @*<%= Html.NiceButton(this, "reply", 0, null) %>*@</a>]</span>
-				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'Addresed', this)" class="mark-as-addressed"> @CommentsResources.AgencyComments.MarkAsAddressed @*<%= Html.NiceButton(this, "mark-as-addressed", 0, null) %>*@</a>]</span>
-				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'NoActionRequired', this)" class="no-action-required"> @CommentsResources.AgencyComments.Archive @*<%= Html.NiceButton(this, "no-action-required", 0, null) %>*@</a>]</span>
+				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'Hidden', this)" class="delete"> @CommentsResources.AgencyComments.HideFromPublic @*<%= Html.NiceButton(this, SharedResources.Buttons.Delete, 0, null) %>*@</a>]</span>
+				<span>[<a href="javascript:showDiv('Reply_' +'@item.RowKey')" class="reply"> @CommentsResources.AgencyComments.Reply @*<%= Html.NiceButton(this, SharedResources.Buttons.Reply, 0, null) %>*@</a>]</span>
+				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'Addresed', this)" class="mark-as-addressed"> @CommentsResources.AgencyComments.MarkAsAddressed @*<%= Html.NiceButton(this, SharedResources.Buttons.MarkAsAddressed, 0, null) %>*@</a>]</span>
+				<span>[<a href="javascript:UpdateCommentStatus('@item.RowKey', 'NoActionRequired', this)" class="no-action-required"> @CommentsResources.AgencyComments.Archive @*<%= Html.NiceButton(this, SharedResources.Buttons.NoActionRequired, 0, null) %>*@</a>]</span>
 			</div>
 
 			<div id="Reply_@item.RowKey" style="display: none; float:left;" class="form">
@@ -223,7 +223,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="buttons">
-					@Html.Raw(Html.NiceInputButton(this, CommentsResources.AgencyComments.PostComment, "javascript:PostNewComment('" + item.RowKey + "', '" + item.ParentContainer + "', '" + item.ParentName + "', '" + item.ParentType + "')"))
+					@Html.Raw(Html.NiceInputButton(this, SharedResources.Buttons.PostComment, "javascript:PostNewComment('" + item.RowKey + "', '" + item.ParentContainer + "', '" + item.ParentName + "', '" + item.ParentType + "')"))
 				</div>
 			</div>
 			<div class="clear"></div>

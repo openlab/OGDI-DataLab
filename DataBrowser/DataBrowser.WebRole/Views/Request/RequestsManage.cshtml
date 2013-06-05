@@ -38,7 +38,7 @@
             <td align="left"> @RequestResources.RequestsManage.From <input id="From" maxlength="10" size="10" class="calendar" /></td>
             <td align="left"> @RequestResources.RequestsManage.To <input id="To" maxlength="10" size="10" class="calendar" /></td>
             <td align="left">
-				@Html.Raw(Html.NiceInputButton(this, RequestResources.RequestsManage.Filter, "javascript:filter()"))
+				@Html.Raw(Html.NiceInputButton(this, SharedResources.Buttons.Filter, "javascript:filter()"))
 			</td>
         </tr>
         </table>
@@ -100,8 +100,8 @@
             </tr>
             <tr>
                 <td colspan="6" class="admin-console">
-					<span>[<a href="javascript:deleteRequest('@request.RequestID')" title="Hide from Public" class="delete">@*<%= Html.NiceButton(this, "delete", 0, "") %>*@ @RequestResources.RequestsManage.HideFromPublic </a>]</span>
-                    <span>[<a href="javascript:showDiv('Complete_' +'@request.RequestID')" title="Mark as completed" class="mark-as-completed">@*<%= Html.NiceButton(this, "mark-as-completed", 0, "") %>*@ @RequestResources.RequestsManage.MarkAsCompleted </a>]</span>
+					<span>[<a href="javascript:deleteRequest('@request.RequestID')" title="Hide from Public" class="delete">@*<%= Html.NiceButton(this, SharedResources.Buttons.Delete, 0, "") %>*@ @RequestResources.RequestsManage.HideFromPublic </a>]</span>
+                    <span>[<a href="javascript:showDiv('Complete_' +'@request.RequestID')" title="Mark as completed" class="mark-as-completed">@*<%= Html.NiceButton(this, SharedResources.Buttons.MarkAsCompleted, 0, "") %>*@ @RequestResources.RequestsManage.MarkAsCompleted </a>]</span>
                 </td>
             </tr>
         </table>
@@ -129,7 +129,7 @@
 				<div class="clear"></div>
 			</div>
 			<div class="buttons">
-				@Html.NiceInputButton(this, RequestResources.RequestsManage.Ok, "javascript:completeRequest('" + request.RequestID + "')")			
+				@Html.NiceInputButton(this, "Ok", "javascript:completeRequest('" + request.RequestID + "')")			
 			</div>
 		</div>
 		<div class="clear"></div>

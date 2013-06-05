@@ -61,7 +61,7 @@ namespace AccountResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Login:.
+        ///   Recherche une chaîne localisée semblable à Login.
         /// </summary>
         public static string Login {
             get {

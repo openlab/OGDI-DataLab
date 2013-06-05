@@ -119,12 +119,10 @@ namespace DataBrowserResources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Crime incidents where the report date/time is on or after midnight, June 1, 2008,
         ///                        UTC. Date/time literals are expressed in &lt;a 
-        ///                        href=&quot;http://en.wikipedia.org/wiki/ISO_8601&quot; target=&quot;_blank&quot;&gt;ISO 8601&lt;/a&gt;&lt;img 
-        ///                        src=&quot;/Images/ExternalLink.png&quot;
-        ///                        alt=&quot;DBPC_ISO8601AltText&quot; 
-        ///                        title=&quot;ISO 8601&quot;
-        ///                        longdesc=&quot;/Descriptions/Iso.txt&quot; /&gt;
-        ///                        format, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/ [le reste de la chaîne a été tronqué]&quot;;.
+        ///                        href=&quot;http://en.wikipedia.org/wiki/ISO_8601&quot; target=&quot;_blank&quot;&gt;ISO 8601&lt;/a&gt;
+        ///                        format, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;, where &lt;i&gt;yyyy&lt;/i&gt;
+        ///                        is the four-digit year, &lt;i&gt;mm&lt;/i&gt; is the two-digit month number, &lt;i&gt;dd&lt;/i&gt; is the
+        ///                        two-digit day o [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string CrimeIncidentsWhereTheReportDatetime {
             get {
@@ -230,12 +228,11 @@ namespace DataBrowserResources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à OGDI uses a subset of the &lt;a 
         ///            href=&quot;http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx&quot;&gt;
-        ///                WCF Data Services query syntax&lt;/a&gt;&lt;img
-        ///                src=&apos;/Images/ExternalLink.png&apos;
-        ///                alt=&apos;Click to get WCF Data Services query syntax&apos;
-        ///                title=&apos;WCF Data Services query syntax&apos;
-        ///                longdesc=&apos;/Descriptions/ADOquerysyntax.txt&apos; /&gt;. The basic format
-        ///            of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt; [le reste de la chaîne a été tronqué]&quot;;.
+        ///                WCF Data Services query syntax&lt;/a&gt;. The basic format
+        ///            of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
+        ///            where &lt;i&gt;property&lt;/i&gt; is the name of a property, &lt;i&gt;comparison&lt;/i&gt; is a comparison
+        ///            operator, and &lt;i&gt;expression&lt;/i&gt; is the expression with which the property&amp;#39;s
+        ///            value should be compared..
         /// </summary>
         public static string OGDIUsesASubsetOf {
             get {

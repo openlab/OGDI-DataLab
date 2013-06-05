@@ -129,16 +129,9 @@
   </data>
   <data name="ByDefaultOGDIReturnsDataInTheAtomPub" xml:space="preserve">
     <value>By default, OGDI DataLab returns data in the &lt;a href="http://odata.org/"
-				target="_blank"&gt;Open Data Protocol (OData)&lt;/a&gt;&lt;img
-					src="/Images/ExternalLink.png" 
-					alt="Open Data Protocol (OData)"
-					longdesc="/Descriptions/AtomPBExt.txt" /&gt;
+				target="_blank"&gt;Open Data Protocol (OData)&lt;/a&gt;
 			format. This format extends the broadly adopted &lt;a href="http://bitworking.org/projects/atom/rfc5023.html"
-				target="_blank"&gt;Atom Publishing Protocol&lt;/a&gt;&lt;img
-				src="/Images/ExternalLink.png"
-					alt="Click to get Atom Publishing Protocol"
-					title="Atom Publishing Protocol"
-					longdesc="/Descriptions/AtomPB.tx" /&gt;
+				target="_blank"&gt;Atom Publishing Protocol&lt;/a&gt;
 			and can be easily consumed by a variety of platforms, including
 			Microsoft .NET, Java, Ruby, PHP, and Python. Refer to the code samples on the &lt;a
 				href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;Data Browser&lt;/a&gt;
@@ -160,38 +153,21 @@
   </data>
   <data name="DevelopersUsingVisualStudio2010" xml:space="preserve">
     <value>Developers using &lt;a href="http://www.microsoft.com/vstudio"
-				target="_blank"&gt;Microsoft Visual Studio 2010&lt;/a&gt;&lt;img
-				 src="/Images/ExternalLink.png"
-					alt="Click to get Microsoft Visual Studio 2010" 
-					title="Microsoft Visual Studio 2010" 
-					longdesc="/Descriptions/VS2010.txt" /&gt;
+				target="_blank"&gt;Microsoft Visual Studio 2010&lt;/a&gt;
 			(or later) can use &lt;a href="http://msdn.microsoft.com/en-us/data/bb931106.aspx"
-				target="_blank"&gt;WCF Data Services&lt;/a&gt;&lt;img
-				 src="/Images/ExternalLink.png"
-					alt="Click to get WCF Data Services" 
-					title="WCF Data Services"
-					longdesc="/Descriptions/ADOServices.txt" /&gt;
+				target="_blank"&gt;WCF Data Services&lt;/a&gt;
 			to access data from OGDI through easy-to-use .NET classes.
 			Within Visual Studio, this is accomplished by using the &lt;a 
 			href="http://msdn.microsoft.com/en-us/data/cc974504.aspx" 
-			target="_blank"&gt;Add Service Reference&lt;/a&gt;&lt;img
-					src="/Images/ExternalLink.png"
-					alt="A video showing how to consume ADO.NET Data Service in a .NET Application"
-					longdesc="/Descriptions/AddSvcRef.txt" /&gt; 
+			target="_blank"&gt;Add Service Reference&lt;/a&gt;
 				feature (see .NET samples on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
 				Data Browser&lt;/a&gt; page).
 			To make accessing OGDI data easier, Java developers can use &lt;a 
 			href="http://www.interoperabilitybridges.com/projects/restlet-extension-for-adonet-data-services.aspx" 
-			target="_blank"&gt;Restlet Extension for WCF Data Services&lt;/a&gt;&lt;img
-					src="/Images/ExternalLink.png"
-					alt="Restlet Extension for WCF Data Services"
-					longdesc="/Descriptions/JavaLib.txt" /&gt;.
+			target="_blank"&gt;Restlet Extension for WCF Data Services&lt;/a&gt;.
 			PHP developers can take advantage of the Toolkit for &lt;a 
 			href="http://www.interoperabilitybridges.com/projects/toolkit-for-php-with-adonet-data-services-.aspx" 
-			target="_blank"&gt;Toolkit for PHP with WCF Data Services&lt;/a&gt;&lt;img
-					src="/Images/ExternalLink.png"
-					alt="Toolkit for PHP with WCF Data Services"
-					longdesc="/Descriptions/PHPLib.txt" /&gt;.</value>
+			target="_blank"&gt;Toolkit for PHP with WCF Data Services&lt;/a&gt;</value>
   </data>
   <data name="ForDevelopers" xml:space="preserve">
     <value>For Developers</value>
@@ -206,33 +182,15 @@
     <value>JSONP</value>
   </data>
   <data name="ManyOfTheDataSetsInOGDI" xml:space="preserve">
-    <value>Many of the data sets in OGDI DataLab also include geospatial data, which is returned in
-			the &lt;a href="http://en.wikipedia.org/wiki/Keyhole_Markup_Language" target="_blank"&gt;
-				Keyhole Markup Language (KML)&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get Keyhole Markup Language" 
-					title="Keyhole Markup Language (KML)"
-					longdesc="/Descriptions/KML.txt" /&gt;
-			format. This format is compatible with popular desktop and Web-based mapping technologies
+    <value>Many of the data sets in OGDI DataLab also include geospatial data, which is returned in the &lt;a href="http://en.wikipedia.org/wiki/Keyhole_Markup_Language" target="_blank"&gt; Keyhole Markup Language (KML)&lt;/a&gt; format. This format is compatible with popular desktop and Web-based mapping technologies
 			including Microsoft &lt;a href="http://dev.live.com/virtualearth"
-				target="_blank"&gt;Bing Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get Bing Maps" 
-					title="Bing Maps"
-					longdesc="/Descriptions/VE.txt" /&gt;,
+				target="_blank"&gt;Bing Maps&lt;/a&gt;,
 			&lt;a href="http://maps.google.com" target="_blank"&gt;
-				Google Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get Google Maps" 
-					title="Google Maps" 
-					longdesc="/Descriptions/GoogleMap.txt" /&gt;,
+				Google Maps&lt;/a&gt;,
 			&lt;a href="http://maps.yahoo.com" target="_blank"&gt;
-				Yahoo! Maps&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get Yahoo! Maps" 
-					title="Yahoo! Maps" 
-					longdesc="/Descriptions/YahooMaps.txt" /&gt;,
+				Yahoo! Maps&lt;/a&gt;,
 			and &lt;a href="http://earth.google.com" target="_blank"&gt;
-				Google Earth&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get Google Earth" 
-					title="Google Earth" 
-					longdesc="/Descriptions/GoogleEarth.txt" /&gt;.</value>
+				Google Earth&lt;/a&gt;.</value>
   </data>
   <data name="NoteThatIfTheDataSet" xml:space="preserve">
     <value>Note that if the data set that you are using does not include any geospatial data,
@@ -246,11 +204,7 @@
     <value>OGDI DataLab and the underlying Windows Azure Table Storage service support paging through
 			large sets of query results. The documentation for &lt;a
 			 href="http://msdn.microsoft.com/en-us/library/dd135718.aspx"
-				target="_blank"&gt;Query Timeout and Pagination&lt;/a&gt;&lt;img
-				 src="/Images/ExternalLink.png"
-					alt="Click to get Query Timeout and Pagination" 
-					title="Query Timeout and Pagination" 
-					longdesc="/Descriptions/QueryTimeoutPagination.txt" /&gt;
+				target="_blank"&gt;Query Timeout and Pagination&lt;/a&gt;
 			in the Windows Azure Table Storage service provides a complete description of how
 			OGDI and the underlying Azure platform support paging. You can also refer to the
 			"C#/ASP.NET Paging" sample on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
@@ -259,11 +213,7 @@
   </data>
   <data name="OGDICanAlsoReturnDataInTheJSON" xml:space="preserve">
     <value>OGDI Lab can also return data in the &lt;a href="http://en.wikipedia.org/wiki/JSON"
-				target="_blank"&gt;JavaScript Object Notation (JSON)&lt;/a&gt;&lt;img
-				src="/Images/ExternalLink.png"
-					alt="Click to get JavaScript Object Notation" 
-					title="JavaScript Object Notation (JSON)" 
-					longdesc="/Descriptions/Json.txt" /&gt;
+				target="_blank"&gt;JavaScript Object Notation (JSON)&lt;/a&gt;
 			format, which can be conveniently consumed using JavaScript and other technologies.
 			To return data in JSON format, simply append the format=json parameter to your query.
 			For example, to retrieve crime incidents in Washington, DC that occurred during the
@@ -272,11 +222,7 @@
   <data name="OGDIDataServicesAlsoProvideDirectSupportForTheJSONP" xml:space="preserve">
     <value>OGDI DataLab's data services also provide direct support for the &lt;a
 			 href="http://en.wikipedia.org/wiki/JSON#JSONP"
-					target="_blank"&gt;JSONP&lt;/a&gt;&lt;img 
-					src="/Images/ExternalLink.png"
-					alt="Click to get JSONP" 
-					title="JSONP"
-					longdesc="/Descriptions/JSONP.txt" /&gt;
+					target="_blank"&gt;JSONP&lt;/a&gt;
 			technique. Using this technique, OGDI's data services will call a callback function
 			that you specify, passing in the results of your query in JSON format as an input
 			format. To use this technique, issue a query with the following additional parameters:
@@ -285,10 +231,7 @@
   </data>
   <data name="OGDIExposesDataThrough" xml:space="preserve">
     <value>OGDI DataLab exposes data through &lt;a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank"&gt;
-				REST&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get REST article on the Wikipedia" 
-					title="REST"
-					longdesc="/Descriptions/REST.txt" /&gt; Web services. 
+				REST&lt;/a&gt; Web services. 
 					The basic format of an OGDI service call is 
 					http://ogdi.cloudapp.net/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
 			where:</value>
@@ -302,10 +245,7 @@
   <data name="QueryIsYourSetOfQueryParameters" xml:space="preserve">
     <value>&lt;i&gt;query&lt;/i&gt; is your set of query parameters, expressed using a subset of the &lt;a
 				href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx" target="_blank"&gt;WCF
-				Data Services query syntax.&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-					alt="Click to get WCF Data Services query syntax" 
-					title="WCF Data Services query syntax" 
-					longdesc="/Descriptions/ADOquerysyntax.txt" /&gt;</value>
+				Data Services query syntax.&lt;/a&gt;</value>
   </data>
   <data name="ReferToTheJavaScriptSampleOnThe" xml:space="preserve">
     <value>Refer to the JavaScript sample on the &lt;a href="/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Results"&gt;
@@ -335,11 +275,7 @@
 			domain from making straight-forward calls to the OGDI DataLab data services, but there a
 			variety of techniques that can be used, such as this widely-used &lt;a
 				 href="http://softwareas.com/cross-domain-communication-with-iframes"
-					target="_blank"&gt;IFRAMES-based technique&lt;/a&gt;&lt;img 
-					src="/Images/ExternalLink.png"
-					alt="Click to get IFRAMES-based technique" 
-					title="IFRAMES-based technique" 
-					longdesc="/Descriptions/IFRAMES.txt" /&gt;
+					target="_blank"&gt;IFRAMES-based technique&lt;/a&gt;
 			described by Michael Mahemoff.</value>
   </data>
   <data name="ToReturnGeospatialDataInKMLFormat" xml:space="preserve">
@@ -352,8 +288,7 @@
   </data>
   <data name="OGDICanAlsoReturnDataInTheRDF" xml:space="preserve">
     <value>OGDI DataLab can also return data in the &lt;a href="http://en.wikipedia.org/wiki/Resource_Description_Framework"
-    target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt;&lt;img src="/Images/ExternalLink.png"
-                longdesc="/Descriptions/Json.txt" /&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:</value>
+    target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:</value>
   </data>
   <data name="RDF" xml:space="preserve">
     <value>RDF</value>

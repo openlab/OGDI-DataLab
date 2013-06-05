@@ -117,16 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
   </data>
-  <data name="LogOnString" xml:space="preserve">
-    <value>Ouvrir une session</value>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe:</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Se souvenir de moi?</value>
+  <data name="Execute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="MarkAsAddressed" xml:space="preserve">
+    <value>Mark as addressed</value>
+  </data>
+  <data name="MarkAsCompleted" xml:space="preserve">
+    <value>Mark as completed</value>
+  </data>
+  <data name="NoActionRequired" xml:space="preserve">
+    <value>No action required</value>
+  </data>
+  <data name="PostComment" xml:space="preserve">
+    <value>Post comment</value>
+  </data>
+  <data name="RefreshChart" xml:space="preserve">
+    <value>Refresh chart</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Reply</value>
   </data>
 </root>

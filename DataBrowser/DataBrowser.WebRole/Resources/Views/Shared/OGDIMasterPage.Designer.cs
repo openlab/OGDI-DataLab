@@ -70,7 +70,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à About WebSite.
+        ///   Recherche une chaîne localisée semblable à about Microsoft.
         /// </summary>
         public static string AboutWebSite {
             get {
@@ -88,7 +88,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Contact Microsoft.
+        ///   Recherche une chaîne localisée semblable à contact Microsoft.
         /// </summary>
         public static string ContactMicrosoft {
             get {
@@ -142,6 +142,15 @@ namespace SharedResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à opendata_en.png.
+        /// </summary>
+        public static string Logo {
+            get {
+                return ResourceManager.GetString("Logo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Log Off.
         /// </summary>
         public static string LogOff {
@@ -151,7 +160,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Manage Your Profile.
+        ///   Recherche une chaîne localisée semblable à manage your profile.
         /// </summary>
         public static string ManageYourProfile {
             get {
@@ -178,7 +187,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Privacy Statement.
+        ///   Recherche une chaîne localisée semblable à privacy statement.
         /// </summary>
         public static string PrivacyStatement {
             get {
@@ -196,7 +205,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Terms of use.
+        ///   Recherche une chaîne localisée semblable à terms of use.
         /// </summary>
         public static string TermsOfUse {
             get {
@@ -214,7 +223,7 @@ namespace SharedResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Trademarks.
+        ///   Recherche une chaîne localisée semblable à trademarks.
         /// </summary>
         public static string Trademarks {
             get {

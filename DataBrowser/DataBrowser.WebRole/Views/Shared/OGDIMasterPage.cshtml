@@ -2,8 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">    
 	<head id="Head1" runat="server">
 		<title>Open Government Data Initiative</title>
+
 		<link href="../../Resource/Css" rel="stylesheet" type="text/css" />
 		<link href="../../Content/css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" type="text/css" />
+
 		<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>
 		<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
@@ -12,6 +14,7 @@
 		<style type="text/css">
 			Containers #MSVE_obliqueNotification { visibility: hidden; }
 		</style>
+
 		<script type="text/javascript">
 			var RecaptchaOptions = {
 				theme: 'white'
@@ -20,31 +23,42 @@
 
 		@RenderSection("TitleContent", false)
 		@RenderSection("HeadContent", false)
+
 		<script type="text/javascript">
 			vpath = '@Url.Content("~/")';
 		</script>
 	</head>
 
 	<body>
+        <div id="container">
 		<div class="top">
 			<div class="header">
-				<div class="title">OGDI DataLab</div>
-			    <div class="subtitle">Open Government Data Initiative <small>version 5.0</small></div>
+                <div class="logo">
+                    <a href="/">
+                       <img src="../../Content/images/@SharedResources.OGDIMasterPage.Logo" alt="Open Data" />
+                    </a>
+                </div>
+                <div class="banner">
+                    <img src="../../Content/images/banner.png" alt="Open Data" />
+                </div>
+                <div class="clear"></div>
 			</div>
-			<div class="navigation">
-				<ul>
-					<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Data, "DataSetList", "DataCatalog")</li>
-					<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Developers, "Index", "Developers")</li>
-					<li>@Html.ActionLink(SharedResources.OGDIMasterPage.About, "About", "Home")</li>
-				</ul>
-				<div id="logindisplay">
-					@if (Request.IsAuthenticated){
-						<p>[ @Html.ActionLink(SharedResources.OGDIMasterPage.LogOff, "LogOff", "Account") ]</p>
-					}
-				</div>
-				<div class="clear"></div>
+        </div>
+        
+		<div class="navigation">
+			<ul>
+				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Data, "DataSetList", "DataCatalog")</li>
+				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Developers, "Index", "Developers")</li>
+				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.About, "About", "Home")</li>
+			</ul>
+
+			<div id="logindisplay">
+				@if (Request.IsAuthenticated){
+					<p>[ @Html.ActionLink(SharedResources.OGDIMasterPage.LogOff, "LogOff", "Account") ]</p>
+				}
 			</div>
-	  </div>
+			<div class="clear"></div>
+		</div>
 
 		<div id="bg">
 			<div id="wrapper" class="canvas">
@@ -71,18 +85,26 @@
 			</div>
 		</div>
 		
-		<div id="footer">
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.ContactMicrosoftURL">@SharedResources.OGDIMasterPage.ContactMicrosoft</a>&nbsp;|
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.ManageYourProfileURL">@SharedResources.OGDIMasterPage.ManageYourProfile</a>&nbsp;|
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.TermsOfUseURL">@SharedResources.OGDIMasterPage.TermsOfUse</a>&nbsp;|
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.TrademarksURL">@SharedResources.OGDIMasterPage.Trademarks</a>&nbsp;|
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.PrivacyStatementURL">@SharedResources.OGDIMasterPage.PrivacyStatement</a>&nbsp;|
-				<a target="_blank" href="@SharedResources.OGDIMasterPage.AboutWebSiteURL">@SharedResources.OGDIMasterPage.AboutWebSite</a>&nbsp;|
-				<img src="../../Images/microsoft[1].png" alt="Microsoft" />
+		<div class="bottom">
+            <div class="footer">
+                <div class="microsoft">
+                    <a href="http://www.microsoft.com/en-us/default.aspx">
+                        <img src="../../Content/images/Microsoft.png" alt="Microsoft" />
+                    </a>
+                </div>
+
+                <ul>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.ManageYourProfileURL">@SharedResources.OGDIMasterPage.ManageYourProfile</a></li>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.ContactMicrosoftURL">@SharedResources.OGDIMasterPage.ContactMicrosoft</a></li>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.TermsOfUseURL">@SharedResources.OGDIMasterPage.TermsOfUse</a></li>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.PrivacyStatementURL">@SharedResources.OGDIMasterPage.PrivacyStatement</a></li>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.AboutWebSiteURL">@SharedResources.OGDIMasterPage.AboutWebSite</a></li>
+                    <li><a target="_blank" href="@SharedResources.OGDIMasterPage.TrademarksURL">@SharedResources.OGDIMasterPage.Trademarks</a></li>
+                </ul>
+
+                <div class="clear"></div>
+            </div>
 		</div>
-        <a href="http://github.com/openlab/datalab">
-            <img style="position: absolute; top: 0; right: 0; border: 0;" src="@Url.Content("/Content/css/banner" + ((Culture.ToLower() == "fr-fr") ? "-fr" : "") + ".png")"
-            alt="Fork me on GitHub">
-        </a>
+        </div>
 	</body>
 </html>

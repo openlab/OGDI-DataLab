@@ -133,7 +133,7 @@
     <value>Last Name:</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login:</value>
+    <value>Login</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New Password:</value>

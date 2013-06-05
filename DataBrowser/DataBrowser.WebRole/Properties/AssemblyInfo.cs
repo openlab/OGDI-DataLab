@@ -8,9 +8,9 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("InteractiveSdk.Mvc")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("OGDI DataLab")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Microsoft France")]
 [assembly: AssemblyProduct("InteractiveSdk.Mvc")]
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]

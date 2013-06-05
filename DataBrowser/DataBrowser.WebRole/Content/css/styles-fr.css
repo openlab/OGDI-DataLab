@@ -3,7 +3,7 @@ html, body {width:100%; height: 100%;}
 
 html { margin-top: 0pt; }
 .disabled { text-decoration: none; }
-body { margin: 0; padding: 0; border: 0px; background-color: #bebebe;color:Black;font-family: helvetica, arial, sans-serif; /*[f0]*/}
+body { margin: 0; padding: 0; border: 0px; color:Black;font-family: 'Segoe UI', arial, sans-serif; }
 
 /* Fix for PNG alpha channel display in IE6 */
 img { behavior: url('../../Content/css/pngbehavior.htc'); border: none; }
@@ -107,18 +107,23 @@ h4 { font-size: 12pt; /*[c3]*/}
 a { color: #007fff; }
 a:hover { color: #732A2A; text-decoration: underline; }
 
-.header { background: #6890B5; }
-.title { font-family: Arial; font-size: 3.5em; font-weight: bold; color: #000; }
-.subtitle { font-family: Arial; font-size: 1.3em; color: #FFFFFF; font-weight: bold; }
+button { font-weight: bold; font-size: 10px; padding: 4px 10px; background-color: #e8e8e8; color: #1d1d1d; border: 1px solid #c3c3c3; transition: 0.4s; }
+button:hover { cursor: pointer; background-color: #cfcfcf; transition: 0.4s; }
 
-.top { width: 100%; }
-.top .header { height: 90px; padding-left: 10px; }
+#container { position: relative; min-height: 100%; }
 
-.top .navigation { /*[shd1,bg4,cw]*/ padding: 6px; padding-left: 10px; border-width: 1px 0px 1px 0px; font-family: verdana; font-size: .9em; text-align: left; border-top: solid #0F0F0F 1px; }
-.top .navigation ul { margin: 0; padding: 0; float: left; }
-.top .navigation li { display: inline; margin: 0px; margin-right: 10px; line-height: 25px; }
-.top .navigation li a { /*[cw]*/ text-decoration: none; font-weight: bold; }
-.top .navigation li a:hover { }
+.top { width: 100%; background: #00a6de; border-bottom: 2px solid #e6e6e6; }
+.top .header { width: 910px; margin: 0 auto; }
+.top .header .logo { float: left; }
+.top .header .banner { float: right; }
+
+.navigation { width: 910px; margin: 0 auto; background-color: #4d4d4d; }
+.navigation ul { margin: 16px 0; height: 40px; background: #4d4d4d; padding: 0; font-size: 14px; line-height: 1.6; list-style-position: outside; }
+.navigation ul li { float: left; display: block; position: relative; padding: 0; margin: 0; border: 1px solid #333; border-right: none; line-height: 38px; -webkit-box-shadow: 1px 0 0 rgba(255,255,255,.2) inset; -moz-box-shadow: 1px 0 0 rgba(255,255,255,.2) inset; box-shadow: 1px 0 0 rgba(255,255,255,.2) inset; }
+.navigation ul li:first-child { -webkit-box-shadow: 0 0 0; -moz-box-shadow: 0 0 0; box-shadow: 0 0 0; }
+.navigation ul li:last-child { border-right: solid 1px #333; -webkit-box-shadow: 1px 0 0 rgba(255,255,255,.2) inset,1px 0 0 rgba(255,255,255,.2); -moz-box-shadow: 1px 0 0 rgba(255,255,255,.2) inset,1px 0 0 rgba(255,255,255,.2); box-shadow: 1px 0 0 rgba(255,255,255,.2) inset,1px 0 0 rgba(255,255,255,.2); }
+.navigation ul li:hover { background: #333; }
+.navigation ul li a { position: relative; padding: 0 20px; display: block; text-decoration: none; font-size: 14px; color: #e6e6e6; }
 
 #logindisplay {color:White; float:right;}
 #logindisplay a {color: white; text-decoration:none;}
@@ -126,14 +131,20 @@ a:hover { color: #732A2A; text-decoration: underline; }
 
 #dvErr { background-color: #fcbc9c; }
 
-#bg { }
+#bg { padding-bottom: 100px; }
 #wrapper { }
-#footer { text-align: right; padding: 5px; color: #FFF; background-color: #133657; border: 1px solid #000; height: 20px; border-width: 1px 0px 1px 0px; }
-#footer a { color: #FFF; text-decoration: none; }
-#footer a:hover { text-decoration: underline; }
+
+.bottom { position: absolute; bottom: 0; width: 100%; background-color: #4d4d4d; }
+.bottom .footer { width: 910px; margin: 0 auto; padding: 10px 0; }
+.bottom .footer ul { float: right; margin: 0; padding: 4px 0 0 0; }
+.bottom .footer ul li { list-style: none; font-size: 12px; margin-left: 14px; height: 25px; display: inline-block; }
+.bottom .footer ul li a { color: #e6e6e6; text-decoration: none; }
+.bottom .footer ul li a:hover { color: #0093c5; }
+.bottom .footer .microsoft { float: right; margin-left: 20px; }
+.bottom .footer .microsoft img { width: 100px; }
 
 .canvas { text-align: center; }
-.canvas .sheet {position:relative; width: 955px; margin: 0px auto;min-height: 475px; text-align: left; background-color: White; padding-bottom:30px;/*[brc1]*/ border-width:0px;border-style:solid;}
+.canvas .sheet {position:relative; width: 910px; margin: 0px auto;min-height: 475px; text-align: left; background-color: White; padding-bottom:30px;/*[brc1]*/ border-width:0px;border-style:solid;}
 .canvas .sheet .bookmark {position:absolute;bottom:5px;right:10px;}
 
 .tabs {position:absolute;left:-30px;top:20px;}

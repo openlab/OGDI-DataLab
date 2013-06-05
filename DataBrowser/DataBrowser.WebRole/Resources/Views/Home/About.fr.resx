@@ -121,17 +121,16 @@
     <value>&lt;p&gt;
             OGDI DataLab (Open Government Data Initiative) est est une initiative menée par les équipes Microsoft en charge du
     &lt;a href="http://www.microsoft.com/france/entreprises/secteur-public/solutions-pour-secteur-public.aspx" target="_blank"&gt; Secteur Public&lt;/a&gt;
-    &lt;img alt="External link for Public Sector Developer Evangelism team" src="/images/ExternalLink.png" longdesc="desc/Publicsector.txt"&gt;.
+    .
     OGDI DataLab utilise la &lt;a href="http://www.microsoft.com/france/windows-azure/" target="_blank"&gt;plateforme Windows Azure&lt;/a&gt;
-    &lt;img alt="External link for Windows Azure Platform" src="/images/ExternalLink.png" longdesc="desc/azureservices.txt"&gt;
     dans les nuages pour faciliter la publication et l'utilisation d’informations publiques (open data) variées provenant d'entités publiques 
     (gouvernement, ministères, collectivités locales et territoriales, mairies, services déconcentrés de l'Etat, etc.). 
     OGDI DataLab est également un kit de démarrage gratuit sous licence libre 
     &lt;a href="http://www.microsoft.com/france/opensource/les-licences-open-source-microsoft.aspx" target="_blank"&gt; Microsoft Public License (Ms-PL) &lt;/a&gt;
-    &lt;img alt="External link for Microsoft Public License (Ms-PL)" src="/images/ExternalLink.png"&gt;
+   
     avec son 
     &lt;a href="http://www.microsoft.com/france/opensource/les-licences-open-source-microsoft.aspx" target="_blank"&gt; code source &lt;/a&gt;
-    &lt;img alt="External link for Microsoft open source licences" src="/images/ExternalLink.png"&gt;
+   
     qui peut être utilisé pour publier des données sur
     l'Internet dans un format reposant sur les principes fondamentaux du Web avec des
     interfaces programmatiques (API) ouvertes faciles d’utilisation. Les API d’OGDI DataLab

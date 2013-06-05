@@ -137,11 +137,7 @@
   <data name="CrimeIncidentsWhereTheReportDatetime" xml:space="preserve">
     <value>Crime incidents where the report date/time is on or after midnight, June 1, 2008,
                         UTC. Date/time literals are expressed in &lt;a 
-                        href="http://en.wikipedia.org/wiki/ISO_8601" target="_blank"&gt;ISO 8601&lt;/a&gt;&lt;img 
-                        src="/Images/ExternalLink.png"
-                        alt="DBPC_ISO8601AltText" 
-                        title="ISO 8601"
-                        longdesc="/Descriptions/Iso.txt" /&gt;
+                        href="http://en.wikipedia.org/wiki/ISO_8601" target="_blank"&gt;ISO 8601&lt;/a&gt;
                         format, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;, where &lt;i&gt;yyyy&lt;/i&gt;
                         is the four-digit year, &lt;i&gt;mm&lt;/i&gt; is the two-digit month number, &lt;i&gt;dd&lt;/i&gt; is the
                         two-digit day of the month, &lt;i&gt;HH&lt;/i&gt; is the two-digit hour (in 24-hour format),
@@ -185,11 +181,7 @@
   <data name="OGDIUsesASubsetOf" xml:space="preserve">
     <value>OGDI uses a subset of the &lt;a 
             href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx"&gt;
-                WCF Data Services query syntax&lt;/a&gt;&lt;img
-                src='/Images/ExternalLink.png'
-                alt='Click to get WCF Data Services query syntax'
-                title='WCF Data Services query syntax'
-                longdesc='/Descriptions/ADOquerysyntax.txt' /&gt;. The basic format
+                WCF Data Services query syntax&lt;/a&gt;. The basic format
             of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
             where &lt;i&gt;property&lt;/i&gt; is the name of a property, &lt;i&gt;comparison&lt;/i&gt; is a comparison
             operator, and &lt;i&gt;expression&lt;/i&gt; is the expression with which the property&amp;#39;s

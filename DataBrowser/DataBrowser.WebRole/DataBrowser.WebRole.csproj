@@ -593,6 +593,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AuthorInfo.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Shared\Buttons.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Buttons.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Shared\Comment.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -620,6 +625,11 @@
     </Compile>
     <Compile Include="Resources\Views\Shared\Comment.fr.Designer.cs">
       <DependentUpon>Comment.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Buttons.Designer.cs">
+      <DependentUpon>Buttons.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -716,8 +726,6 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\banner-fr.png" />
-    <Content Include="Content\css\banner.png" />
     <Content Include="Content\css\buttons\cancel-fr.png" />
     <Content Include="Content\css\buttons\clear-fr.png" />
     <Content Include="Content\css\buttons\create-fr.png" />
@@ -733,7 +741,6 @@
     <Content Include="Content\css\buttons\reply-fr.png" />
     <Content Include="Content\css\buttons\run-fr.png" />
     <Content Include="Content\css\buttons\update-status-fr.png" />
-    <Content Include="Content\css\comments.css" />
     <Content Include="Content\css\styles-fr.css" />
     <Content Include="Content\css\csharp.css" />
     <Content Include="Content\css\icons.gif" />
@@ -764,48 +771,14 @@
     <Content Include="App_Data\Xml\Languages.xml" />
     <Content Include="Content\css\vtabs-fr.png" />
     <Content Include="Content\css\vtabs1-fr.png" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\Microsoft.png" />
+    <Content Include="Content\images\opendata_en.png" />
+    <Content Include="Content\images\opendata_fr.png" />
     <Content Include="Content\images\sort.jpg" />
     <Content Include="Content\images\sorted_desc.jpg" />
     <Content Include="Content\images\sorted_asc.jpg" />
     <Content Include="Default.aspx" />
-    <Content Include="Descriptions\AddSvcRef.txt" />
-    <Content Include="Descriptions\ADOquerysyntax.txt" />
-    <Content Include="Descriptions\ADOServices.txt" />
-    <Content Include="Descriptions\AtomPB.txt" />
-    <Content Include="Descriptions\AtomPBExt.txt" />
-    <Content Include="Descriptions\azureservices.txt" />
-    <Content Include="Descriptions\Bookmark.txt" />
-    <Content Include="Descriptions\Clipboard.txt" />
-    <Content Include="Descriptions\CodePlex.txt" />
-    <Content Include="Descriptions\Collapse.txt" />
-    <Content Include="Descriptions\Download.txt" />
-    <Content Include="Descriptions\Expand.txt" />
-    <Content Include="Descriptions\ExternalLink.txt" />
-    <Content Include="Descriptions\Filter.txt" />
-    <Content Include="Descriptions\GoogleEarth.txt" />
-    <Content Include="Descriptions\GoogleMap.txt" />
-    <Content Include="Descriptions\Home.txt" />
-    <Content Include="Descriptions\IFRAMES.txt" />
-    <Content Include="Descriptions\Iso.txt" />
-    <Content Include="Descriptions\JavaLib.txt" />
-    <Content Include="Descriptions\Json.txt" />
-    <Content Include="Descriptions\JSONP.txt" />
-    <Content Include="Descriptions\KeyImg.txt" />
-    <Content Include="Descriptions\KML.txt" />
-    <Content Include="Descriptions\Logo.txt" />
-    <Content Include="Descriptions\longdesc.txt" />
-    <Content Include="Descriptions\NoScript.txt" />
-    <Content Include="Descriptions\PHPLib.txt" />
-    <Content Include="Descriptions\Privacy.txt" />
-    <Content Include="Descriptions\Publicsector.txt" />
-    <Content Include="Descriptions\QueryTimeoutPagination.txt" />
-    <Content Include="Descriptions\REST.txt" />
-    <Content Include="Descriptions\Run.txt" />
-    <Content Include="Descriptions\T4.txt" />
-    <Content Include="Descriptions\DaisyFormat.txt" />
-    <Content Include="Descriptions\VE.txt" />
-    <Content Include="Descriptions\VS2010.txt" />
-    <Content Include="Descriptions\YahooMaps.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\blank.gif" />
@@ -821,7 +794,6 @@
     <Content Include="Images\collapse.jpg" />
     <Content Include="Images\download.png" />
     <Content Include="Images\expand.jpg" />
-    <Content Include="Images\ExternalLink.png" />
     <Content Include="Images\gray_bl.gif" />
     <Content Include="Images\gray_br.gif" />
     <Content Include="Images\gray_left.gif" />
@@ -964,11 +936,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogOn.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>AccountResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Account\LogOn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogOn.Designer.cs</LastGenOutput>
       <CustomToolNamespace>AccountResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Account\ManageRoles.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1137,6 +1111,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataSetsFilter.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetsFilter.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1175,6 +1150,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DevelopersResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\About.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1192,11 +1168,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Privacy\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
       <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Request\RequestsManage.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1260,6 +1238,11 @@
       <LastGenOutput>AuthorInfo.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.Designer.cs</LastGenOutput>
@@ -1289,6 +1272,11 @@
     <EmbeddedResource Include="Resources\Views\Shared\Comment.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.fr.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SharedResources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\RatesPlusMinus.fr.resx">
@@ -1445,7 +1433,9 @@
     </Content>
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Request\List.cshtml" />
-    <Content Include="Views\Request\New.cshtml" />
+    <Content Include="Views\Request\New.cshtml">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Views\Request\RequestsManage.cshtml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

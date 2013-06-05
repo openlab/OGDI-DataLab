@@ -121,13 +121,13 @@
     <value>About</value>
   </data>
   <data name="AboutWebSite" xml:space="preserve">
-    <value>About WebSite</value>
+    <value>about Microsoft</value>
   </data>
   <data name="AboutWebSiteURL" xml:space="preserve">
     <value>http://www.microsoft.com/about/en/us/default.aspx</value>
   </data>
   <data name="ContactMicrosoft" xml:space="preserve">
-    <value>Contact Microsoft</value>
+    <value>contact Microsoft</value>
   </data>
   <data name="ContactMicrosoftURL" xml:space="preserve">
     <value>http://support.microsoft.com/contactus/?ln=en</value>
@@ -144,11 +144,14 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Logo" xml:space="preserve">
+    <value>opendata_en.png</value>
+  </data>
   <data name="LogOff" xml:space="preserve">
     <value>Log Off</value>
   </data>
   <data name="ManageYourProfile" xml:space="preserve">
-    <value>Manage Your Profile</value>
+    <value>manage your profile</value>
   </data>
   <data name="ManageYourProfileURL" xml:space="preserve">
     <value>https://profile.microsoft.com/RegSysProfileCenter/default.aspx?lcid=1033</value>
@@ -157,19 +160,19 @@
     <value>© 2010 Microsoft Corporation. All rights reserved.</value>
   </data>
   <data name="PrivacyStatement" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>privacy statement</value>
   </data>
   <data name="PrivacyStatementURL" xml:space="preserve">
     <value>http://privacy.microsoft.com/en-us/default.mspx</value>
   </data>
   <data name="TermsOfUse" xml:space="preserve">
-    <value>Terms of use</value>
+    <value>terms of use</value>
   </data>
   <data name="TermsOfUseURL" xml:space="preserve">
     <value>http://go.microsoft.com/?linkid=4412892</value>
   </data>
   <data name="Trademarks" xml:space="preserve">
-    <value>Trademarks</value>
+    <value>trademarks</value>
   </data>
   <data name="TrademarksURL" xml:space="preserve">
     <value>http://www.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx</value>

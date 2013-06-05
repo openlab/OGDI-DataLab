@@ -68,7 +68,7 @@ namespace HomeResources {
         ///            with your open data project, providing:&lt;/p&gt;
         ///        &lt;ul&gt;
         ///            &lt;li&gt;&lt;strong&gt;Data Service&lt;/strong&gt;: a fully-functional API allowing programmatic access
-        ///                to the data. It serves up data using a n [le reste de la chaîne a été tronqué]&quot;;.
+        ///                to the data. It serves up data us [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string AboutPageContent {
             get {

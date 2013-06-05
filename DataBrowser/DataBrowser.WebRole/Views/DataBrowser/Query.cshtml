@@ -3,9 +3,9 @@
 @using Ogdi.InteractiveSdk.Mvc
 
 <div class="query">
-	<div class="label"> @DataBrowserResources.Query.BaseQuery </div>
+	<b>@DataBrowserResources.Query.BaseQuery</b>
 	<div>
-		@ViewData.Model.BaseQueryName
+		<div class="label">@ViewData.Model.BaseQueryName</div>
 		<label id="labelBaseQuery" title="@ViewData.Model.BaseQueryName" visible="false"></label>
 	</div>
 	
@@ -22,8 +22,8 @@
 			</div>
 			<div id="eidBuilder" class="query-builder left" ></div>
 			<div class="left">
-			<a href="javascript:runClicked()">@Html.Raw(Html.NiceButton(this, DataBrowserResources.Query.Run, 0, null))</a>
-			<a href="javascript:clearClicked()">@Html.Raw(Html.NiceButton(this, DataBrowserResources.Query.Clear, 0, null))</a>
+			<a href="javascript:runClicked()">@Html.Raw(Html.NiceButton(this, SharedResources.Buttons.Execute, 0, null))</a>
+			<a href="javascript:clearClicked()">@Html.Raw(Html.NiceButton(this, SharedResources.Buttons.Clear, 0, null))</a>
 			</div>
 			<div class="clear"></div>
 		</div>

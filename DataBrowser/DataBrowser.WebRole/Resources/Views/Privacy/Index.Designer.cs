@@ -69,7 +69,7 @@ namespace PrivacyResources {
         ///        any personal information from you. This site may collect certain anonymous information
         ///        about your visit, such as the name of the Internet service provider and the Internet
         ///        Protocol (IP) address through which you access the Internet; the date and time you
-        ///        access the site; the pages that you [le reste de la chaîne a été tronqué]&quot;;.
+        ///        access the site; the pages  [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string PrivacyPage {
             get {

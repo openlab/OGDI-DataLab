@@ -443,18 +443,6 @@
     <value>/Images/expand.jpg</value>
     <comment>Expand image path.</comment>
   </data>
-  <data name="GC_ExternalLinkAltText" xml:space="preserve">
-    <value>Click to get detailed information</value>
-    <comment>Text for the external link.</comment>
-  </data>
-  <data name="GC_ExternalLinkImagePath" xml:space="preserve">
-    <value>/Images/ExternalLink.png</value>
-    <comment>path of external link.</comment>
-  </data>
-  <data name="GC_ExternalLinkLongDesc" xml:space="preserve">
-    <value>/Descriptions/ExternalLink.txt</value>
-    <comment>External link discription.</comment>
-  </data>
   <data name="GC_LoadingAltText" xml:space="preserve">
     <value>loading...</value>
     <comment>Lodding text.</comment>

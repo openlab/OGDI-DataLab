@@ -84,15 +84,12 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à By default, OGDI DataLab returns data in the &lt;a href=&quot;http://odata.org/&quot;
-        ///				target=&quot;_blank&quot;&gt;Open Data Protocol (OData)&lt;/a&gt;&lt;img
-        ///					src=&quot;/Images/ExternalLink.png&quot; 
-        ///					alt=&quot;Open Data Protocol (OData)&quot;
-        ///					longdesc=&quot;/Descriptions/AtomPBExt.txt&quot; /&gt;
+        ///				target=&quot;_blank&quot;&gt;Open Data Protocol (OData)&lt;/a&gt;
         ///			format. This format extends the broadly adopted &lt;a href=&quot;http://bitworking.org/projects/atom/rfc5023.html&quot;
-        ///				target=&quot;_blank&quot;&gt;Atom Publishing Protocol&lt;/a&gt;&lt;img
-        ///				src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get Atom Publishing Protocol&quot;
-        ///					title=&quot;Ato [le reste de la chaîne a été tronqué]&quot;;.
+        ///				target=&quot;_blank&quot;&gt;Atom Publishing Protocol&lt;/a&gt;
+        ///			and can be easily consumed by a variety of platforms, including
+        ///			Microsoft .NET, Java, Ruby, PHP, and Python. Refer to the code samples on the &lt;a
+        ///				href=&quot;/DataBrowser/dc/CrimeIncidents#param=NOFILTER--DataView--Resul [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ByDefaultOGDIReturnsDataInTheAtomPub {
             get {
@@ -140,16 +137,14 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Developers using &lt;a href=&quot;http://www.microsoft.com/vstudio&quot;
-        ///				target=&quot;_blank&quot;&gt;Microsoft Visual Studio 2010&lt;/a&gt;&lt;img
-        ///				 src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get Microsoft Visual Studio 2010&quot; 
-        ///					title=&quot;Microsoft Visual Studio 2010&quot; 
-        ///					longdesc=&quot;/Descriptions/VS2010.txt&quot; /&gt;
+        ///				target=&quot;_blank&quot;&gt;Microsoft Visual Studio 2010&lt;/a&gt;
         ///			(or later) can use &lt;a href=&quot;http://msdn.microsoft.com/en-us/data/bb931106.aspx&quot;
-        ///				target=&quot;_blank&quot;&gt;WCF Data Services&lt;/a&gt;&lt;img
-        ///				 src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get WCF Data Services&quot; 
-        ///					title [le reste de la chaîne a été tronqué]&quot;;.
+        ///				target=&quot;_blank&quot;&gt;WCF Data Services&lt;/a&gt;
+        ///			to access data from OGDI through easy-to-use .NET classes.
+        ///			Within Visual Studio, this is accomplished by using the &lt;a 
+        ///			href=&quot;http://msdn.microsoft.com/en-us/data/cc974504.aspx&quot; 
+        ///			target=&quot;_blank&quot;&gt;Add Service Reference&lt;/a&gt;
+        ///				feature (see .NET samples on t [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string DevelopersUsingVisualStudio2010 {
             get {
@@ -194,14 +189,12 @@ namespace DevelopersResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Many of the data sets in OGDI DataLab also include geospatial data, which is returned in
-        ///			the &lt;a href=&quot;http://en.wikipedia.org/wiki/Keyhole_Markup_Language&quot; target=&quot;_blank&quot;&gt;
-        ///				Keyhole Markup Language (KML)&lt;/a&gt;&lt;img src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get Keyhole Markup Language&quot; 
-        ///					title=&quot;Keyhole Markup Language (KML)&quot;
-        ///					longdesc=&quot;/Descriptions/KML.txt&quot; /&gt;
-        ///			format. This format is compatible with popular desktop and Web-based mapping technologies
-        ///			including Microsoft &lt;a href=&quot;http: [le reste de la chaîne a été tronqué]&quot;;.
+        ///   Recherche une chaîne localisée semblable à Many of the data sets in OGDI DataLab also include geospatial data, which is returned in the &lt;a href=&quot;http://en.wikipedia.org/wiki/Keyhole_Markup_Language&quot; target=&quot;_blank&quot;&gt; Keyhole Markup Language (KML)&lt;/a&gt; format. This format is compatible with popular desktop and Web-based mapping technologies
+        ///			including Microsoft &lt;a href=&quot;http://dev.live.com/virtualearth&quot;
+        ///				target=&quot;_blank&quot;&gt;Bing Maps&lt;/a&gt;,
+        ///			&lt;a href=&quot;http://maps.google.com&quot; target=&quot;_blank&quot;&gt;
+        ///				Google Maps&lt;/a&gt;,
+        ///			&lt;a href=&quot;http://maps.yahoo.com&quot;  [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ManyOfTheDataSetsInOGDI {
             get {
@@ -233,12 +226,10 @@ namespace DevelopersResources {
         ///   Recherche une chaîne localisée semblable à OGDI DataLab and the underlying Windows Azure Table Storage service support paging through
         ///			large sets of query results. The documentation for &lt;a
         ///			 href=&quot;http://msdn.microsoft.com/en-us/library/dd135718.aspx&quot;
-        ///				target=&quot;_blank&quot;&gt;Query Timeout and Pagination&lt;/a&gt;&lt;img
-        ///				 src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get Query Timeout and Pagination&quot; 
-        ///					title=&quot;Query Timeout and Pagination&quot; 
-        ///					longdesc=&quot;/Descriptions/QueryTimeoutPagination.txt&quot; /&gt;
-        ///			in the Windows Azure Table Storage service pro [le reste de la chaîne a été tronqué]&quot;;.
+        ///				target=&quot;_blank&quot;&gt;Query Timeout and Pagination&lt;/a&gt;
+        ///			in the Windows Azure Table Storage service provides a complete description of how
+        ///			OGDI and the underlying Azure platform support paging. You can also refer to the
+        ///			&quot;C#/ASP.NET Paging&quot; sample on the &lt;a href=&quot;/DataBrowser/dc/CrimeInci [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDIAndTheUnderlyingWindowsAzureTableStorageService {
             get {
@@ -248,14 +239,11 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à OGDI Lab can also return data in the &lt;a href=&quot;http://en.wikipedia.org/wiki/JSON&quot;
-        ///				target=&quot;_blank&quot;&gt;JavaScript Object Notation (JSON)&lt;/a&gt;&lt;img
-        ///				src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get JavaScript Object Notation&quot; 
-        ///					title=&quot;JavaScript Object Notation (JSON)&quot; 
-        ///					longdesc=&quot;/Descriptions/Json.txt&quot; /&gt;
+        ///				target=&quot;_blank&quot;&gt;JavaScript Object Notation (JSON)&lt;/a&gt;
         ///			format, which can be conveniently consumed using JavaScript and other technologies.
         ///			To return data in JSON format, simply append the format=json parameter to your query.
-        ///			For example,  [le reste de la chaîne a été tronqué]&quot;;.
+        ///			For example, to retrieve crime incidents in Washington, DC that occurred during the
+        ///			police department&apos;s evening shift in JSON format:.
         /// </summary>
         public static string OGDICanAlsoReturnDataInTheJSON {
             get {
@@ -265,8 +253,7 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à OGDI DataLab can also return data in the &lt;a href=&quot;http://en.wikipedia.org/wiki/Resource_Description_Framework&quot;
-        ///    target=&quot;_blank&quot;&gt;RDF (Resource Description Framework)&lt;/a&gt;&lt;img src=&quot;/Images/ExternalLink.png&quot;
-        ///                longdesc=&quot;/Descriptions/Json.txt&quot; /&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:.
+        ///    target=&quot;_blank&quot;&gt;RDF (Resource Description Framework)&lt;/a&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:.
         /// </summary>
         public static string OGDICanAlsoReturnDataInTheRDF {
             get {
@@ -277,14 +264,12 @@ namespace DevelopersResources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à OGDI DataLab&apos;s data services also provide direct support for the &lt;a
         ///			 href=&quot;http://en.wikipedia.org/wiki/JSON#JSONP&quot;
-        ///					target=&quot;_blank&quot;&gt;JSONP&lt;/a&gt;&lt;img 
-        ///					src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get JSONP&quot; 
-        ///					title=&quot;JSONP&quot;
-        ///					longdesc=&quot;/Descriptions/JSONP.txt&quot; /&gt;
+        ///					target=&quot;_blank&quot;&gt;JSONP&lt;/a&gt;
         ///			technique. Using this technique, OGDI&apos;s data services will call a callback function
         ///			that you specify, passing in the results of your query in JSON format as an input
-        ///			format. To use this technique, issue a query with the [le reste de la chaîne a été tronqué]&quot;;.
+        ///			format. To use this technique, issue a query with the following additional parameters:
+        ///			format=json&amp;callback=&lt;i&gt;yourCallback&lt;/i&gt;, where &lt;i&gt;yourCallback&lt;/i&gt; is the name
+        ///			of a Ja [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string OGDIDataServicesAlsoProvideDirectSupportForTheJSONP {
             get {
@@ -304,10 +289,7 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à OGDI DataLab exposes data through &lt;a href=&quot;http://en.wikipedia.org/wiki/Representational_State_Transfer&quot; target=&quot;_blank&quot;&gt;
-        ///				REST&lt;/a&gt;&lt;img src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get REST article on the Wikipedia&quot; 
-        ///					title=&quot;REST&quot;
-        ///					longdesc=&quot;/Descriptions/REST.txt&quot; /&gt; Web services. 
+        ///				REST&lt;/a&gt; Web services. 
         ///					The basic format of an OGDI service call is 
         ///					http://ogdi.cloudapp.net/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
         ///			where:.
@@ -348,10 +330,7 @@ namespace DevelopersResources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à &lt;i&gt;query&lt;/i&gt; is your set of query parameters, expressed using a subset of the &lt;a
         ///				href=&quot;http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx&quot; target=&quot;_blank&quot;&gt;WCF
-        ///				Data Services query syntax.&lt;/a&gt;&lt;img src=&quot;/Images/ExternalLink.png&quot;
-        ///					alt=&quot;Click to get WCF Data Services query syntax&quot; 
-        ///					title=&quot;WCF Data Services query syntax&quot; 
-        ///					longdesc=&quot;/Descriptions/ADOquerysyntax.txt&quot; /&gt;.
+        ///				Data Services query syntax.&lt;/a&gt;.
         /// </summary>
         public static string QueryIsYourSetOfQueryParameters {
             get {
@@ -384,7 +363,7 @@ namespace DevelopersResources {
         ///                &lt;a href=&quot;http://www.windowsazure.com/&quot;&gt;Windows Azure Platform&lt;/a&gt; cloud-computing
         ///                platform. Data Service.&lt;br /&gt;&lt;br /&gt;                The DataService uses RESTful Web service to expose data for programmatic access
         ///                via a number of formats, including Open Data Protocol (OData)**, an extension to
-        ///                **Atom Publishing Protocol (AtomPub), Keyhole Markup Language (KML), JSO [le reste de la chaîne a été tronqué]&quot;;.
+        ///                **Atom Publishing Protocol (AtomPub), Keyhole Markup Language (KML), [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string TheOpenGovernmentDataInitiativeIsBased {
             get {
@@ -407,7 +386,7 @@ namespace DevelopersResources {
         ///			one network domain (for example, yourdomain.com) from making HTTP requests to other
         ///			network domains (for example, the ogdi.cloudapp.net network domain that hosts the
         ///			OGDI DataLab data services). This can prevent JavaScript applications hosted in another
-        ///			domain from making straight-forward calls to the OGDI DataLab data services, b [le reste de la chaîne a été tronqué]&quot;;.
+        ///			domain from making straight-forward calls to the OGDI DataLab data servic [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string ToMitigateSecurityVulnerabilities {
             get {

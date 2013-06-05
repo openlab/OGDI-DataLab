@@ -138,9 +138,7 @@ incluent &amp;quot;gt&amp;quot; pour plus grand que, &amp;quot;lt&amp;quot; pour
     <value>Incidents criminels dont la date/heure du rapport est à ou après minuit, 1er Juin
 2008 UTC. Les dates/heures sont exprimées dans le format &lt;a href="http://en.wikipedia.org/wiki/ISO_8601"
     target="_blank"&gt;ISO 8601&lt;/a&gt;
-    &lt;img src="/Images/ExternalLink.png"
-        alt="Click to get ISO 8601" title="ISO 8601"
-        longdesc="/Descriptions/Iso.txt" /&gt;, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;,
+    , &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;,
 où &lt;i&gt;yyyy&lt;/i&gt; est l'année sur 4 digits, &lt;i&gt;mm&lt;/i&gt; est le numéro du mois sur 2 digits,
 &lt;i&gt;dd&lt;/i&gt; est le jour du mois sur 2 digits, &lt;i&gt;HH&lt;/i&gt; est l'heure sur 2 digits (dans
 le format 24H), &lt;i&gt;MM&lt;/i&gt; représente les minutes, et &lt;i&gt;SS&lt;/i&gt; les secondes.</value>
@@ -182,9 +180,7 @@ Les booléens sont représentées par les chaines de caractères &amp;quot;true&
   <data name="OGDIUsesASubsetOf" xml:space="preserve">
     <value>OGDI utilise un sous-ensemble de &lt;a href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx"&gt;
 la syntaxe de requête de WCF Data Services&lt;/a&gt;
-&lt;img src='/Images/ExternalLink.png' alt='Click to get WCF Data Services query syntax' 
-title='WCF Data Services query syntax' 
-longdesc='/Descriptions/ADOquerysyntax.txt' /&gt;. Le format basique d'une
+. Le format basique d'une
 expression de filtrage est &lt;i&gt;propriété&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparaison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
 où &lt;i&gt;propriété&lt;/i&gt; est le nom de la propriété, &lt;i&gt;comparaison&lt;/i&gt; est l'opérateur
 de comparaison, et &lt;i&gt;expression&lt;/i&gt; est l'expression à laquelle la valeur de la
