@@ -9,11 +9,15 @@ body { margin: 0; padding: 0; border: 0px; color:Black;font-family: 'Segoe UI', 
 img { behavior: url('../../Content/css/pngbehavior.htc'); border: none; }
 label { cursor: pointer; }
 
+* { font-size: 14px; }
+
 h1, h2, h3, h4 { font-size: 18pt; margin: 0px; padding: 0px;margin-top:10px; }
 h1 { font-weight: normal; font-size: 30px;color: #222;background: none transparent scroll repeat 0% 0%;}
 h2 { font-size: 22pt;  }
 h3 { font-size: 22pt; font-family: Arial, sans-serif;}
 h4 { font-size: 12pt; /*[c3]*/}
+
+p { font-family: Calibri, arial, sans-serif; }
 
 .block { padding: 10px 10px 0px 10px; }
  
