@@ -726,21 +726,6 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\buttons\cancel-fr.png" />
-    <Content Include="Content\css\buttons\clear-fr.png" />
-    <Content Include="Content\css\buttons\create-fr.png" />
-    <Content Include="Content\css\buttons\delete-fr.png" />
-    <Content Include="Content\css\buttons\filter-fr.png" />
-    <Content Include="Content\css\buttons\login-fr.png" />
-    <Content Include="Content\css\buttons\mark-as-addressed-fr.png" />
-    <Content Include="Content\css\buttons\mark-as-completed-fr.png" />
-    <Content Include="Content\css\buttons\no-action-required-fr.png" />
-    <Content Include="Content\css\buttons\ok-fr.png" />
-    <Content Include="Content\css\buttons\post-comment-fr.png" />
-    <Content Include="Content\css\buttons\refresh-chart-fr.png" />
-    <Content Include="Content\css\buttons\reply-fr.png" />
-    <Content Include="Content\css\buttons\run-fr.png" />
-    <Content Include="Content\css\buttons\update-status-fr.png" />
     <Content Include="Content\css\styles-fr.css" />
     <Content Include="Content\css\csharp.css" />
     <Content Include="Content\css\icons.gif" />
@@ -1375,25 +1360,6 @@
   <ItemGroup>
     <None Include="App_Data\Xml\Languages.xsd" />
     <Content Include="Content\css\bg3.jpg" />
-    <Content Include="Content\css\buttons\btn-left.png" />
-    <Content Include="Content\css\buttons\btn-middle.png" />
-    <Content Include="Content\css\buttons\btn-right.png" />
-    <Content Include="Content\css\buttons\btn.png" />
-    <Content Include="Content\css\buttons\cancel.png" />
-    <Content Include="Content\css\buttons\clear.png" />
-    <Content Include="Content\css\buttons\create.png" />
-    <Content Include="Content\css\buttons\delete.png" />
-    <Content Include="Content\css\buttons\filter.png" />
-    <Content Include="Content\css\buttons\login.png" />
-    <Content Include="Content\css\buttons\mark-as-addressed.png" />
-    <Content Include="Content\css\buttons\mark-as-completed.png" />
-    <Content Include="Content\css\buttons\no-action-required.png" />
-    <Content Include="Content\css\buttons\ok.png" />
-    <Content Include="Content\css\buttons\post-comment.png" />
-    <Content Include="Content\css\buttons\refresh-chart.png" />
-    <Content Include="Content\css\buttons\reply.png" />
-    <Content Include="Content\css\buttons\run.png" />
-    <Content Include="Content\css\buttons\update-status.png" />
     <Content Include="Content\css\calendar.gif" />
     <Content Include="Content\css\icons.png" />
     <Content Include="Content\css\updown.gif" />
