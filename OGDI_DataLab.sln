@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaderConsoleApp", "Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaderGuiApp", "DataLoader\DataLoaderGuiApp\DataLoaderGuiApp.csproj", "{882A3887-768B-4195-A6E3-64CB14239224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgdiConfig", "Shared\Ogdi.Config\OgdiConfig.csproj", "{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogdi.Config", "Shared\Ogdi.Config\Ogdi.Config.csproj", "{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\ConfigTool.csproj", "{A65EAA96-F106-454A-B2D7-D5760EB44FB3}"
 EndProject

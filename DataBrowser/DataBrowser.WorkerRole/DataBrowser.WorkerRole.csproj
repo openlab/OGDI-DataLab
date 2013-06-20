@@ -110,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="XmlValidation\dtbook-2005-3.dtd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

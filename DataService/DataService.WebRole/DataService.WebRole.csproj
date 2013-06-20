@@ -30,6 +30,10 @@
     </UpgradeBackupLocation>
     <TargetFrameworkProfile />
     <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,7 +62,7 @@
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Shared\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -141,9 +145,9 @@
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Ogdi.Config\OgdiConfig.csproj">
+    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
       <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>OgdiConfig</Name>
+      <Name>Ogdi.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +155,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

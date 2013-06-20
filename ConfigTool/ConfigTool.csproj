@@ -28,6 +28,10 @@
     </UpgradeBackupLocation>
     <TargetFrameworkProfile />
     <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,9 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Ogdi.Config\OgdiConfig.csproj">
+    <ProjectReference Include="..\Shared\Ogdi.Config\Ogdi.Config.csproj">
       <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>OgdiConfig</Name>
+      <Name>Ogdi.Config</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

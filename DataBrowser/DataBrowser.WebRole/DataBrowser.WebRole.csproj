@@ -34,6 +34,10 @@
     </UpgradeBackupLocation>
     <UseIISExpress>false</UseIISExpress>
     <TargetFrameworkProfile />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1475,7 +1479,6 @@
     </Content>
     <Content Include="Views\Home\About.cshtml" />
     <None Include="Images\buttons.design" />
-    <Content Include="packages.config" />
     <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
