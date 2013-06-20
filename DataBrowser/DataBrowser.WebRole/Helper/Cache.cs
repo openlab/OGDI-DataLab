@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationServer.Caching;
-using Microsoft.WindowsAzure.ServiceRuntime;
+﻿using Microsoft.WindowsAzure.ServiceRuntime;
 using Ogdi.InteractiveSdk.Mvc.Models;
 using Ogdi.InteractiveSdk.Mvc.Repository;
 using System;
@@ -7,11 +6,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Microsoft.ApplicationServer.Caching;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
-	public class Cache
-	{
+    public class Cache
+    {
         private static DataCacheFactory _DataCacheFactory = null;
 
         private static DataCache _DataCache = null;

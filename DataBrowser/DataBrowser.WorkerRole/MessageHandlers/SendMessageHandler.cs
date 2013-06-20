@@ -53,7 +53,6 @@ namespace InteractiveSdk.WorkerRole.MessageHandlers
 				Trace.TraceError("SmtpSettings must contain 6 parts: host, [port#], [<ssl>], from, [user],[password].");
 				return;
 			}
-
 			int i = 0;
 			var host = parts[i++].Trim();
 			var port = parts[i++].Trim();
@@ -68,18 +67,15 @@ namespace InteractiveSdk.WorkerRole.MessageHandlers
 			{
 				IsBodyHtml = eMessage.IsBodyHtml
 			};
-
 			var smtpClient = new SmtpClient(host)
 			{
 				EnableSsl = ssl.ToLowerInvariant() == "ssl",
 				UseDefaultCredentials = false,
 			};
-
 			if (portNumber != 0)
 			{
 				smtpClient.Port = portNumber;
 			}
-
 			if (!string.IsNullOrEmpty(accountName))
 			{
 				smtpClient.Credentials = new NetworkCredential(accountName, password);
@@ -88,7 +84,6 @@ namespace InteractiveSdk.WorkerRole.MessageHandlers
 			{
 				Trace.TraceError("Anonymous SMTP authentication will be applied.");
 			}
-
 			smtpClient.Send(message);
 		}
 	}

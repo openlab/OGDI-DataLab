@@ -2,13 +2,9 @@
 
 @inherits Ogdi.InteractiveSdk.Mvc.OgdiWebViewPage<Ogdi.InteractiveSdk.Mvc.Models.DataBrowserModel>
 
-
-<script type="text/javascript">
-    var h = '@Model.PieChartHeight';
-    document.getElementById("divPieResultHeight").style.height = parseInt(h) + "px";  
-</script>
-
 @{
+    Layout = null;
+    
     //  Set Page for chart control
     //OgdiPieChart.Page = this.Parent.Page as System.Web.UI.Page;
 

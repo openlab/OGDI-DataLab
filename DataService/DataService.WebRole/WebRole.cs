@@ -1,7 +1,7 @@
-﻿using Microsoft.WindowsAzure;
+﻿using System.Linq;
+using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using System.Linq;
 
 namespace Ogdi.DataServices
 {

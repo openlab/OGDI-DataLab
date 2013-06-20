@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
+  <WebRole name="DataBrowser.WebRole" vmsize="Small">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="DataBrowserIn" endpointName="DataBrowserIn" />
+        </Bindings>
+      </Site>
+      <Site name="Data" physicalDirectory="..\..\..\DataService\DataService.WebRole">
+        <Bindings>
+          <Binding name="DataServiceIn" endpointName="DataServiceIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+      <Setting name="DataConnectionString" />
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="RecaptchaPrivateKey" />
+      <Setting name="RecaptchaPublicKey" />
+      <Setting name="RootServiceNamespace" />
+      <Setting name="IsAnalytics" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ClientDiagnosticLevel" />
+      <Setting name="UseCache" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
+      <InputEndpoint name="DataServiceIn" protocol="http" port="8080" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Caching" />
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <Startup priority="-2">
+      <Task commandLine="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe install" executionContext="elevated" taskType="simple" />
+    </Startup>
+  </WebRole>
+  <WorkerRole name="DataBrowser.WorkerRole" vmsize="ExtraSmall">
+    <ConfigurationSettings>
+      <Setting name="DiagnosticsConnectionString" />
+      <Setting name="DataConnectionString" />
+      <Setting name="SmtpSettings" />
+      <Setting name="serviceUri" />
+      <Setting name="pathDTD" />
+    </ConfigurationSettings>
+  </WorkerRole>
+</ServiceDefinition>

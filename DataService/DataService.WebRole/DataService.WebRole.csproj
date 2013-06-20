@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ogdi.DataServices</RootNamespace>
     <AssemblyName>Ogdi.DataServices</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <RoleType>Web</RoleType>
     <ServiceHostingSDKInstallDir Condition=" '$(ServiceHostingSDKInstallDir)' == '' ">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\ServiceHosting\v1.0@InstallPath)</ServiceHostingSDKInstallDir>
     <SccProjectName>
@@ -30,10 +30,6 @@
     </UpgradeBackupLocation>
     <TargetFrameworkProfile />
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +40,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,29 +52,19 @@
     </CodeAnalysisRules>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationServer.Caching.AzureClientHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.ApplicationServer.Caching.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Shared\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Shared\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Services.Client">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Linq.Dynamic">
-      <HintPath>..\..\Shared\System.Linq.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -116,33 +101,33 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helper\Cache.cs" />
     <Compile Include="Helper\DynamicQueryable.cs" />
     <Compile Include="Helper\QueryString.cs" />
     <Compile Include="Helper\QueryStringClasses.cs" />
     <Compile Include="HttpHandlers\IHttpHandlerExtensionMethods.cs" />
+    <Compile Include="HttpHandlers\NotFoundHandler.cs" />
     <Compile Include="HttpHandlers\v1\AbstractHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\AvailableEndpointsHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\ColumnsMetadataHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\CommentsHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\MainHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\MetadataHttpHandler.cs" />
-    <Compile Include="HttpHandlers\v1\ServiceDocumentHttpHandler.cs" />
     <Compile Include="HttpHandlers\v1\NestedServiceDocumentHttpHandler.cs" />
+    <Compile Include="HttpHandlers\v1\ServiceDocumentHttpHandler.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="HttpHandlers\NotFoundHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helper\Cache.cs" />
     <Compile Include="RouteHandlers\v1\AvailableEndpointsRouteHandler.cs" />
     <Compile Include="RouteHandlers\v1\ColumnsMetadataRouteHandler.cs" />
     <Compile Include="RouteHandlers\v1\CommentsRouteHandler.cs" />
     <Compile Include="RouteHandlers\v1\MainRouteHandler.cs" />
     <Compile Include="RouteHandlers\v1\MetadataRouteHandler.cs" />
-    <Compile Include="RouteHandlers\v1\ServiceDocumentRouteHandler.cs" />
     <Compile Include="RouteHandlers\v1\NestedServiceDocumentRouteHandler.cs" />
+    <Compile Include="RouteHandlers\v1\ServiceDocumentRouteHandler.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +141,9 @@
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Ogdi.Config\Ogdi.Config.csproj">
+    <ProjectReference Include="..\..\Shared\Ogdi.Config\OgdiConfig.csproj">
       <Project>{7242E6D0-0A4D-4877-AEB1-102BE56CD1B5}</Project>
-      <Name>Ogdi.Config</Name>
+      <Name>OgdiConfig</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +151,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

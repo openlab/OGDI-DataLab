@@ -14,7 +14,7 @@ namespace Ogdi.DataServices.v1
 {
     public class MainHttpHandler : AbstractHttpHandler
     {
-        private static readonly string _TermNamespace = AppSettings.RootServiceNamespace + ".{0}.{1}";
+        private readonly string _TermNamespace = AppSettings.RootServiceNamespace + ".{0}.{1}";
         private string _EntityKind;
         
         public override void ProcessRequest(HttpContext httpContext)
@@ -198,34 +198,37 @@ namespace Ogdi.DataServices.v1
             var propertiesElements = this.GetPropertiesElements(feed);
             foreach (var propertiesElement in propertiesElements)
             {
-                string rdfSnip = propertiesElement.Element(_nsd + "rdfsnippet").ToString();
-
-                if (rdfSnip.Contains("ogdiUrl") == true)
+                var rdfSnipperElement = propertiesElement.Element(_nsd + "rdfsnippet");
+                if (rdfSnipperElement != null)
                 {
-                    baseUrl = _HttpContext.Request.Url.AbsoluteUri.Split('?')[0];
-                    beginUrl = baseUrl.Substring(0, baseUrl.IndexOf("v1") + 3);
-                    endUrl = baseUrl.Substring(baseUrl.IndexOf("v1") + 3);
-                    ogdiUrl = beginUrl + "ColumnsMetadata/" + endUrl;
-                    rdfSnip = rdfSnip.Replace("ogdiUrl", ogdiUrl);
-                }
-
-                XElement rdfSnippet = XElement.Parse(rdfSnip);
-                if (rdfSnippet != null)
-                {
-                    string rdfSnippetValue = rdfSnippet.Value;
-                    if (rdfSnippetValue.Contains("RdfSnippetReference"))
+                    string rdfSnip = rdfSnipperElement.ToString();
+                    if (rdfSnip.Contains("ogdiUrl") == true)
                     {
-                        WebRequest request = CreateAzureBlobStorageRequest(XElement.Parse(rdfSnippetValue).Element("Blob").Value);
-                        WebResponse response = request.GetResponse();
-                        StreamReader strReader = new StreamReader(response.GetResponseStream());
-                        string rdfSnippetString = strReader.ReadToEnd();
-
-                        rdfNamespaces.Add(XElement.Parse(rdfSnippetValue).Element(rdfNamespace + "Description"));
+                        baseUrl = _HttpContext.Request.Url.AbsoluteUri.Split('?')[0];
+                        beginUrl = baseUrl.Substring(0, baseUrl.IndexOf("v1") + 3);
+                        endUrl = baseUrl.Substring(baseUrl.IndexOf("v1") + 3);
+                        ogdiUrl = beginUrl + "ColumnsMetadata/" + endUrl;
+                        rdfSnip = rdfSnip.Replace("ogdiUrl", ogdiUrl);
                     }
-                    else
+
+                    XElement rdfSnippet = XElement.Parse(rdfSnip);
+                    if (rdfSnippet != null)
                     {
-                        rdfMetadataValue = XElement.Parse(rdfSnippetValue).Element(rdfNamespace + "Description");
-                        rdfNamespaces.Add(rdfMetadataValue);
+                        string rdfSnippetValue = rdfSnippet.Value;
+                        if (rdfSnippetValue.Contains("RdfSnippetReference"))
+                        {
+                            WebRequest request = CreateAzureBlobStorageRequest(XElement.Parse(rdfSnippetValue).Element("Blob").Value);
+                            WebResponse response = request.GetResponse();
+                            StreamReader strReader = new StreamReader(response.GetResponseStream());
+                            string rdfSnippetString = strReader.ReadToEnd();
+
+                            rdfNamespaces.Add(XElement.Parse(rdfSnippetValue).Element(rdfNamespace + "Description"));
+                        }
+                        else
+                        {
+                            rdfMetadataValue = XElement.Parse(rdfSnippetValue).Element(rdfNamespace + "Description");
+                            rdfNamespaces.Add(rdfMetadataValue);
+                        }
                     }
                 }
             }
@@ -343,16 +346,13 @@ namespace Ogdi.DataServices.v1
             var propertiesElements = feed.Elements(_nsAtom + "entry").Elements(_nsAtom + "content").Elements(_nsm + "properties");
             foreach (var e in propertiesElements)
             {
-                if (e != null)
+                if (e != null && entitySet.Equals(e.Element(_nsd + "entityset").Value, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (entitySet.Equals(e.Element(_nsd + "entityset").Value, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return e.Element(_nsd + "entitykind").Value;
-                    }
+                    return e.Element(_nsd + "entitykind").Value;
                 }
             }
 
-            return null;
+            return string.Empty;
         }
 
         private void ReplaceAzureNamespaceInCategoryTermValue(XElement entry)
@@ -365,7 +365,7 @@ namespace Ogdi.DataServices.v1
 
             XAttribute term = entry.Element(_categoryXName).Attribute("term");
 
-            if (string.IsNullOrEmpty(_EntityKind))
+            if (_EntityKind == null)
             {
                 string termValue = term.Value;
                 int dotLocation = termValue.IndexOf(".");

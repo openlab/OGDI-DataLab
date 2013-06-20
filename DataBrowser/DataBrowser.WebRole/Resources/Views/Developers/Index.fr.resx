@@ -298,7 +298,7 @@ RDF est un modèle de graphe qui permet de décrire de façon formelle des resso
     <value>RDF</value>
   </data>
   <data name="OGDIDemoURLFormat" xml:space="preserve">
-    <value>&lt;a href="http://ogdifrancedataservice.cloudapp.net/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}"&gt;
-                http://ogdifrancedataservice.cloudapp.net/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}&lt;/a&gt;</value>
+    <value>&lt;a href="http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}"&gt;
+                http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}&lt;/a&gt;</value>
   </data>
 </root>

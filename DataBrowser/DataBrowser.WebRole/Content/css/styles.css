@@ -19,6 +19,8 @@ h4 { color: #333; font-size: 16px; font-weight: bold; font-family: 'Helvetica Ne
 
 p { font-family: Calibri, arial, sans-serif; }
 
+.bar { color: black !important; }
+
 .block { padding: 10px 10px 0px 10px; }
  
 .big { color: #404040; margin: 0px; margin-top: 15px;margin-bottom: 15px;font-size: 17px;padding-top: 5px;line-height: 24px;padding-bottom: 5px;}

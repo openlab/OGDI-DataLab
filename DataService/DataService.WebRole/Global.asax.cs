@@ -1,13 +1,14 @@
-﻿using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.ServiceRuntime;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Routing;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Ogdi.DataServices
 {
     public class Global : System.Web.HttpApplication
     {
+
         protected void Application_Start(object sender, EventArgs e)
         {
             CloudStorageAccount.SetConfigurationSettingPublisher((configName, configSetter) =>

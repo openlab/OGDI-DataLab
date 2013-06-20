@@ -647,7 +647,7 @@ namespace Ogdi.DataServices.v1
             }
         }
 
-        // Manual metadata for AvailableEndpoints
+        // Manual metadata for AvailableEndpoint
         private List<DynamicQueryable.DynamicProperty> ColumnsInformation_AvailableEndpoints()
         {
             List<DynamicQueryable.DynamicProperty> ColumnsInformation = new List<DynamicQueryable.DynamicProperty>();
@@ -767,46 +767,46 @@ namespace Ogdi.DataServices.v1
         }
 
         #endregion
-    }
 
-    #region RDF TableColumnsMetadata
+        #region RDF TableColumnsMetadata
 
-    class TableColumnsMetadataDataServiceContext : TableServiceContext
-    {
-        internal TableColumnsMetadataDataServiceContext(string baseAddress,
-               StorageCredentials credentials)
-            : base(baseAddress, credentials)
-        { }
-
-        internal const string TableColumnsMetadataTableName = "TableColumnsMetadata";
-
-        public IQueryable<TableColumnsMetadataEntity> TableColumnsMetadataTable
+        public class TableColumnsMetadataDataServiceContext : TableServiceContext
         {
-            get
+            internal TableColumnsMetadataDataServiceContext(string baseAddress,
+                   StorageCredentials credentials)
+                : base(baseAddress, credentials)
+            { }
+
+            internal const string TableColumnsMetadataTableName = "TableColumnsMetadata";
+
+            public IQueryable<TableColumnsMetadataEntity> TableColumnsMetadataTable
             {
-                return this.CreateQuery<TableColumnsMetadataEntity>(TableColumnsMetadataTableName);
+                get
+                {
+                    return this.CreateQuery<TableColumnsMetadataEntity>(TableColumnsMetadataTableName);
+                }
             }
         }
-    }
 
-    public class TableColumnsMetadataEntity : TableServiceEntity
-    {
-        public TableColumnsMetadataEntity()
-            : base()
+        public class TableColumnsMetadataEntity : TableServiceEntity
         {
-            PartitionKey = Guid.NewGuid().ToString();
-            RowKey = String.Empty;
+            public TableColumnsMetadataEntity()
+                : base()
+            {
+                PartitionKey = Guid.NewGuid().ToString();
+                RowKey = String.Empty;
+            }
+
+            public TableColumnsMetadataEntity(string partitionKey, string rowKey)
+                : base(partitionKey, rowKey)
+            { }
+
+            public string entityset { get; set; }
+            public string column { get; set; }
+            public string columnnamespace { get; set; }
+            public string columndescription { get; set; }
         }
 
-        public TableColumnsMetadataEntity(string partitionKey, string rowKey)
-            : base(partitionKey, rowKey)
-        { }
-
-        public string entityset { get; set; }
-        public string column { get; set; }
-        public string columnnamespace { get; set; }
-        public string columndescription { get; set; }
+        #endregion
     }
-
-    #endregion
 }

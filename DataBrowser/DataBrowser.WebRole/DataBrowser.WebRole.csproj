@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ogdi.InteractiveSdk.Mvc</RootNamespace>
     <AssemblyName>InteractiveSdk.Mvc</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <SccProjectName>
     </SccProjectName>
@@ -34,10 +34,6 @@
     </UpgradeBackupLocation>
     <UseIISExpress>false</UseIISExpress>
     <TargetFrameworkProfile />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +47,6 @@
     <CodeAnalysisRules>
     </CodeAnalysisRules>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,45 +59,66 @@
     </CodeAnalysisRules>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSharpFormat">
       <HintPath>..\..\Shared\CSharpFormat.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationServer.Caching.AzureClientHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.ApplicationServer.Caching.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ApplicationServer.Caching.AzureClientHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.ApplicationServer.Caching.AzureClientHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.AzureCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.ApplicationServer.Caching.AzureCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.ApplicationServer.Caching.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.ApplicationServer.Caching.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Shared\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\Shared\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Shared\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.DistributedCache, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.Web.DistributedCache.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.0.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WindowsAzure.Storage.2.0.5.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsFabric.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.WindowsFabric.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsFabric.Data.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.Caching.2.0.0.0\lib\net40-full\Microsoft.WindowsFabric.Data.Common.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core, Version=1.0.11220.104, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -116,6 +132,10 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DataVisualization">
@@ -593,11 +613,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AuthorInfo.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Views\Shared\Buttons.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Buttons.fr.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Resources\Views\Shared\Buttons.Designer.cs" />
+    <Compile Include="Resources\Views\Shared\Buttons.fr.Designer.cs" />
     <Compile Include="Resources\Views\Shared\Comment.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -625,11 +642,6 @@
     </Compile>
     <Compile Include="Resources\Views\Shared\Comment.fr.Designer.cs">
       <DependentUpon>Comment.fr.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Views\Shared\Buttons.Designer.cs">
-      <DependentUpon>Buttons.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -726,6 +738,7 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\list.css" />
     <Content Include="Content\css\styles-fr.css" />
     <Content Include="Content\css\csharp.css" />
     <Content Include="Content\css\icons.gif" />
@@ -763,8 +776,12 @@
     <Content Include="Content\images\sort.jpg" />
     <Content Include="Content\images\sorted_desc.jpg" />
     <Content Include="Content\images\sorted_asc.jpg" />
+    <Content Include="Content\images\sort_down.jpg" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ArrowCall.gif" />
+    <Content Include="Images\AzureMist.gif" />
+    <Content Include="Images\beta.png" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\blank.gif" />
     <Content Include="Images\blue_bl.gif" />
@@ -772,13 +789,19 @@
     <Content Include="Images\blue_left.gif" />
     <Content Include="Images\blue_right.gif" />
     <Content Include="Images\blue_side.gif" />
+    <Content Include="Images\blue_tl.gif" />
     <Content Include="Images\blue_tr.gif" />
     <Content Include="Images\bottomMedia.jpg" />
+    <Content Include="Images\capitol.gif" />
     <Content Include="Images\clipboard.jpg" />
+    <Content Include="Images\clipboard.png" />
     <Content Include="Images\close.png" />
     <Content Include="Images\collapse.jpg" />
+    <Content Include="Images\delicious.gif" />
+    <Content Include="Images\digg.gif" />
     <Content Include="Images\download.png" />
     <Content Include="Images\expand.jpg" />
+    <Content Include="Images\facebook.gif" />
     <Content Include="Images\gray_bl.gif" />
     <Content Include="Images\gray_br.gif" />
     <Content Include="Images\gray_left.gif" />
@@ -791,7 +814,12 @@
     <Content Include="Images\input.shadow.white.gif" />
     <Content Include="Images\key.png" />
     <Content Include="Images\light.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\loading.png" />
     <Content Include="Images\loading2.gif" />
+    <Content Include="Images\loading3.gif" />
+    <Content Include="Images\Logo.jpg" />
+    <Content Include="Images\Logo.png" />
     <Content Include="Images\menu.gif" />
     <Content Include="Images\microsoft[1].png" />
     <Content Include="Images\middleMedia.jpg" />
@@ -804,14 +832,29 @@
     <Content Include="Images\NoscriptInfo.gif" />
     <Content Include="Images\pushpin-expand.png" />
     <Content Include="Images\pushpin.png" />
+    <Content Include="Images\querybutton.gif" />
     <Content Include="Images\RefreshChart.png" />
     <Content Include="Images\RefreshChart1.png" />
     <Content Include="Images\RefreshChartButtonImage.png" />
     <Content Include="Images\run.png" />
+    <Content Include="Images\searchbutton.gif" />
+    <Content Include="Images\SpaceWaves.gif" />
+    <Content Include="Images\spinner.gif" />
     <Content Include="Images\t.gif" />
+    <Content Include="Images\tabLeft.gif" />
+    <Content Include="Images\tabLeftselected.gif" />
+    <Content Include="Images\tabRight.gif" />
+    <Content Include="Images\tabRightselected.gif" />
+    <Content Include="Images\technorati.gif" />
     <Content Include="Images\thumbs_down.gif" />
     <Content Include="Images\thumbs_up.gif" />
     <Content Include="Images\topMedia.jpg" />
+    <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Microsoft.WindowsAzure.Caching\PerformanceCounters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Reports\Reports.aspx" />
     <Content Include="SampleCodeTemplates\SampleCode_CS_BarChart.txt" />
     <Content Include="SampleCodeTemplates\SampleCode_CS_PieChart.txt" />
@@ -921,13 +964,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogOn.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>AccountResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Account\LogOn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogOn.Designer.cs</LastGenOutput>
       <CustomToolNamespace>AccountResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Account\ManageRoles.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1096,7 +1137,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataSetsFilter.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DataCatalogResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\DataCatalog\DataSetsFilter.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1135,7 +1175,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
       <CustomToolNamespace>DevelopersResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\About.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1153,13 +1192,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
       <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Privacy\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
       <CustomToolNamespace>PrivacyResources</CustomToolNamespace>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Request\RequestsManage.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1223,11 +1260,8 @@
       <LastGenOutput>AuthorInfo.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Shared\Buttons.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Buttons.fr.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>SharedResources</CustomToolNamespace>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.fr.resx" />
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.resx" />
     <EmbeddedResource Include="Resources\Views\Shared\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.Designer.cs</LastGenOutput>
@@ -1257,11 +1291,6 @@
     <EmbeddedResource Include="Resources\Views\Shared\Comment.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.fr.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>SharedResources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Shared\Buttons.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Buttons.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\RatesPlusMinus.fr.resx">
@@ -1399,9 +1428,7 @@
     </Content>
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Request\List.cshtml" />
-    <Content Include="Views\Request\New.cshtml">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="Views\Request\New.cshtml" />
     <Content Include="Views\Request\RequestsManage.cshtml">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -1447,6 +1474,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\About.cshtml" />
+    <None Include="Images\buttons.design" />
+    <Content Include="packages.config" />
+    <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="XmlValidation\dtbook-2005-3.dtd" />
   </ItemGroup>
   <ItemGroup>
@@ -1458,15 +1490,15 @@
       <Project>{61B96500-74D1-46B6-A536-88C984FF46A9}</Project>
       <Name>Ogdi.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AspProviders\AspProviders.csproj">
+    <ProjectReference Include="..\Microsoft.Samples\AspProviders\AspProviders.csproj">
       <Project>{306D2F9E-D6D0-4D96-94F1-173C60A13875}</Project>
       <Name>AspProviders</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StorageInterface\StorageInterface.csproj">
+    <ProjectReference Include="..\Microsoft.Samples\StorageInterface\StorageInterface.csproj">
       <Project>{FAD3320F-4B86-4DC7-94DF-48BE0A275F8F}</Project>
       <Name>StorageInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsAzureStorage\WindowsAzureStorage.csproj">
+    <ProjectReference Include="..\Microsoft.Samples\WindowsAzureStorage\WindowsAzureStorage.csproj">
       <Project>{281E6351-FA80-49F8-9A3A-80894F71548C}</Project>
       <Name>WindowsAzureStorage</Name>
       <Private>True</Private>

@@ -60,7 +60,7 @@ object.dump = function () {
         var info = this.meta[filter.selectedFieldIndex];
         text += info.name + " " + filter.operator.val() + " ";
         if (info.type == "System.String") {
-            text += "'" + filter.constant.val().replace(/'/g,"''") + "'";
+            text += "'" + filter.constant.val().replace("'","''") + "'";
         } else {
             text += "" + filter.constant.val() + "";
         }

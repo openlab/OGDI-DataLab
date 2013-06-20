@@ -2044,7 +2044,7 @@ function drawBarChart(filter, xCol, xRange, yOption, yCol, yColOption) {
     var divChart = document.getElementById("divBarChartResults");
 
     //  Set overflow style for divchart to scroll
-    divChart.style.overflow = "scroll";
+    //divChart.style.overflow = "scroll";
 
     //  This call takes one argument, an object of key/value pairs, 
     //  that are used to initalize and handle the request, 

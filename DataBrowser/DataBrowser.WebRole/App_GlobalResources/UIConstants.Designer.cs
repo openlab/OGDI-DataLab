@@ -1501,6 +1501,33 @@ namespace Ogdi.InteractiveSdk.Mvc.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click to get detailed information.
+        /// </summary>
+        public static string GC_ExternalLinkAltText {
+            get {
+                return ResourceManager.GetString("GC_ExternalLinkAltText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à /Images/ExternalLink.png.
+        /// </summary>
+        public static string GC_ExternalLinkImagePath {
+            get {
+                return ResourceManager.GetString("GC_ExternalLinkImagePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à /Descriptions/ExternalLink.txt.
+        /// </summary>
+        public static string GC_ExternalLinkLongDesc {
+            get {
+                return ResourceManager.GetString("GC_ExternalLinkLongDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à loading....
         /// </summary>
         public static string GC_LoadingAltText {

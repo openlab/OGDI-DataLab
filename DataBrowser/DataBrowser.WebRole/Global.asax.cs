@@ -58,11 +58,13 @@ namespace Ogdi.InteractiveSdk.Mvc
                 new { controller = "DataBrowser", action = "LoadBarChartSampleCode"}
                 );
 
+
             routes.MapRoute(
                 "LoadSampleCodePieChartView",
                 "DataBrowser/LoadSampleCodePieChartView/",
                 new { controller = "DataBrowser", action = "LoadPieChartSampleCode"}
                 );
+
 
             routes.MapRoute(
                 "DataBrowserPaging",
@@ -81,6 +83,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                 "DataBrowser/DataBrowserRunBarChart/",
                 new { controller = "DataBrowser", action = "RunBarChartButtonClicked"}
                 );
+
             
             routes.MapRoute(
                 "DataBrowserRunPieChart",
@@ -113,9 +116,9 @@ namespace Ogdi.InteractiveSdk.Mvc
                 );
 
             routes.MapRoute(
-                "Default",                                                              // Route name
-                "{controller}/{action}/{id}",                                           // URL with parameters
-                new { controller = "DataCatalog", action = "DataSetList", id = "" }     // Parameter defaults
+                "Default",                                              // Route name
+                "{controller}/{action}/{id}",                           // URL with parameters
+                new { controller = "DataCatalog", action = "DataSetList", id = "" }  // Parameter defaults
             );
         }
 

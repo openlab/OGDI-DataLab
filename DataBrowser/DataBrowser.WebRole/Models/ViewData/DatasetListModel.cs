@@ -1,8 +1,8 @@
-﻿using Ogdi.Azure.Data;
-using Ogdi.InteractiveSdk.Mvc.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ogdi.Azure.Data;
+using Ogdi.InteractiveSdk.Mvc.Repository;
 
 namespace Ogdi.InteractiveSdk.Mvc.Models
 {
@@ -70,16 +70,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 
 		public IEnumerable<EntitySetWrapper> GetTopList(Field field)
 		{
-            /*
-            IEnumerable<EntitySetWrapper> top = Cache.Get("top" + field) as List<EntitySetWrapper>;
-            if (top == null)
-            {
-                top = GetDataSets(0, 5, new OrderByInfo { Field = field, Direction = SortDirection.Desc }, null, null);
-                Cache.Put("top" + field, top.ToList());
-            }
-             */
-
-            return GetDataSets(0, 5, new OrderByInfo { Field = field, Direction = SortDirection.Desc }, null, null); ;
+			return GetDataSets(0, 5, new OrderByInfo { Field = field, Direction = SortDirection.Desc }, null, null);
 		}
 
 		public IEnumerable<EntitySetWrapper> MainList
@@ -91,20 +82,13 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		{
 			get
 			{
-                if (_categories == null)
-                {
-                    _categories = Cache.Get("categories") as List<string>;
-                    if (_categories == null)
-                    {
-                        _categories = (from category in GetEntitySets(null)
-                                       orderby category.CategoryValue
-                                       select category.CategoryValue).Distinct();
-
-                        Cache.Put("categories", _categories.ToList());
-                    }
-                }
-
-                return _categories;
+				if (_categories == null)
+				{
+					_categories = (from category in GetEntitySets(null)
+								   orderby category.CategoryValue
+								   select category.CategoryValue).Distinct();
+				}
+				return _categories;
 			}
 		}
 
@@ -125,45 +109,30 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 		{
 			get
 			{
-                if (_datasetInfos == null)
-                {
-                    _datasetInfos = Cache.Get("datasetinfo") as List<AnalyticInfo>;
-                    if (_datasetInfos == null)
-                    {
-                        DatasetInfoDataSource datasetInfoDataSource = new DatasetInfoDataSource();
-                        _datasetInfos = datasetInfoDataSource.SelectAll();
-                        Cache.Put("datasetinfo", _datasetInfos.ToList());
-                    }
-                }
-
-                return _datasetInfos;
+				if (_datasetInfos == null)
+				{
+					var datasetInfoDataSource = new DatasetInfoDataSource();
+					_datasetInfos = datasetInfoDataSource.SelectAll();
+				}
+				return _datasetInfos;
 			}
 		}
 
 		private IEnumerable<EntitySet> GetEntitySets(IEnumerable<string> containers)
 		{
-            containers = containers ?? from container in AllContainers select container.Alias;
-            foreach (var container in containers)
-            {
-                IEnumerable<EntitySet> sets;
-                _entitySets.TryGetValue(container, out sets);
-                if (sets == null)
-                {
-                    sets = Cache.Get(container) as List<EntitySet>;
-                    if (sets == null)
-                    {
-                        sets = EntitySetRepository.GetEntitySets(container, null);
-                        Cache.Put(container, sets.ToList());
-                    }
-
-                    _entitySets.Add(container, sets);
-                }
-
-                foreach (var set in sets)
-                {
-                    yield return set;
-                }
-            }
+			containers = containers ?? from container in AllContainers select container.Alias;
+			foreach (var container in containers)
+			{
+				IEnumerable<EntitySet> sets;
+				_entitySets.TryGetValue(container, out sets);
+				if (sets == null)
+				{
+					sets = EntitySetRepository.GetEntitySets(container, null);
+					_entitySets.Add(container, sets);
+				}
+				foreach (var set in sets)
+					yield return set;
+			}
 		}
 
 		private IEnumerable<EntitySetWrapper> _allDataSets;
@@ -195,20 +164,18 @@ namespace Ogdi.InteractiveSdk.Mvc.Models
 				: sortedResult;
 		}
 
-        private IEnumerable<EntitySetWrapper> GetDataSetWrappers(IEnumerable<EntitySet> filteredSets)
-        {
-            var v = (from es in filteredSets
-                     join dsi in DatasetInfos on Helper.GenerateDatasetItemKey(es.ContainerAlias, es.EntitySetName) equals dsi.RowKey into setInfos
-                     let dsi2 = setInfos.FirstOrDefault()
-                     select new EntitySetWrapper
-                     {
-                         EntitySet = es,
-                         PositiveVotes = dsi2 != null ? dsi2.PositiveVotes : 0,
-                         NegativeVotes = dsi2 != null ? dsi2.NegativeVotes : 0,
-                         Views = dsi2 != null ? dsi2.views_total : 0
-                     }).ToList();
-
-            return v;
-        }
+		private IEnumerable<EntitySetWrapper> GetDataSetWrappers(IEnumerable<EntitySet> filteredSets)
+		{
+			return from es in filteredSets
+				   join dsi in DatasetInfos on Helper.GenerateDatasetItemKey(es.ContainerAlias, es.EntitySetName) equals dsi.RowKey into setInfos
+				   let dsi2 = setInfos.FirstOrDefault()
+				   select new EntitySetWrapper
+							{
+								EntitySet = es,
+								PositiveVotes = dsi2 != null ? dsi2.PositiveVotes : 0,
+								NegativeVotes = dsi2 != null ? dsi2.NegativeVotes : 0,
+								Views = dsi2 != null ? dsi2.views_total : 0
+							};
+		}
 	}
 }
