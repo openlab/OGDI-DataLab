@@ -1,4 +1,4 @@
-OGDI DataLab: Open Government Data Initiative v6
+Open Government Data Initiative v6
 ==================================================
 
 ###Updates:  
@@ -9,7 +9,7 @@ OGDI DataLab: Open Government Data Initiative v6
 About
 -----
 
-DataLab (OGDI) is a cloud-based Open Data Catalogue for organizations that seek to:
+OGDI DataLab is a cloud-based Open Data Catalogue for organizations that seek to:
 
 * Give citizens access to government data, including browse, visualize, analyze & download in multiple formats
 * Enable developers access the data via open standards Application Programming Interfaces (APIs) 
@@ -25,10 +25,10 @@ The older versions of [OGDI v1/v2](http://ogdi.codeplex.com) are available on Co
 
 To see OGDI in action please watch this [short video](http://blip.tv/file/get/Ogditeam-OGDIIntroductoryVideo528.wmv).
 
-DataLab / OGDI is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
+OGDI DataLab is written using **C#** and the **.NET Framework** and uses the [Windows Azure Platform](http://www.microsoft.com/windowsazure)
 
 
-DataLab Components
+OGDI DataLab Components
 ---------------
 
 ###Data Service
