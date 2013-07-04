@@ -4,13 +4,12 @@
 *.vspscc
 *.[Cc]ache
 *.rtf
-[Bb]in
-[Oo]bj
-[Cc]sx
+[Bb]in/
+[Oo]bj/
+[Cc]sx/
 Deployment*/
 _[Rr]e[Ss]harper*/
 _[Uu]pgrade[Rr]eport_[Ff]iles*/
 _instructions*/
 [Uu]pgrade[Ll]og.XML
-packages/*
-packages.config
+packages/
