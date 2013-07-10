@@ -1,10 +1,13 @@
-﻿@using DataConfig.Resources.Views.Home
+﻿@using DataConfig.Resources
 
 @section script {
     <script>
-        var Global = {
-            DeleteCatalog: @Html.Raw(Json.Encode(Index.DeleteCatalog)),
-            ConfirmDeleteCatalog: @Html.Raw(Json.Encode(Index.ConfirmDeleteCatalog))
+        var Strings = {
+            DeleteCatalog: @Html.Raw(Json.Encode(UI.DeleteCatalog)),
+            ConfirmDeleteCatalog: @Html.Raw(Json.Encode(Messages.ConfirmDeleteCatalog)),
+            ShowDatasets: @Html.Raw(Json.Encode(UI.ShowDatasets)),
+            CatalogDeleted: @Html.Raw(Json.Encode(Messages.CatalogDeleted)),
+            CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded))
         };
     </script>
 }
@@ -12,25 +15,25 @@
 <div class="row" id="configuration">
     <div class="twelve columns">
         <fieldset>
-            <legend>@Index.Configuration</legend>
+            <legend>@UI.Configuration</legend>
 
             <div class="row">
                 <div class="nine columns">
                     <div class="row">
                         <div class="six columns">
-                            <label for="storageName">@Index.StorageName</label>
-                            <input type="text" id="storageName" name="storageName" />
+                            <label for="configStorageName">@UI.StorageName</label>
+                            <input type="text" id="configStorageName" />
                         </div>
 
                         <div class="six columns">
-                            <label for="storageKey">@Index.StorageKey</label>
-                            <input type="text" id="storageKey" name="storageKey" />
+                            <label for="configStorageKey">@UI.StorageKey</label>
+                            <input type="text" id="configStorageKey" />
                         </div>
                     </div>
                 </div>
 
                 <div class="three columns" id="showCatalogs">
-                    <button class="radius success button">@Index.ShowCatalogs</button>
+                    <button class="radius success button">@UI.ShowCatalogs</button>
                 </div>
             </div>
 
@@ -40,17 +43,11 @@
 
 <div class="row" id="startMessage">
     <div class="nine columns" id="startMessageText">
-        @Index.StartMessage
+        @Messages.StartMessage
     </div>
 
     <div class="three columns">
         <img src="@Url.Content("~/Content/Images/Arrow.png")" alt="arrow" />
-    </div>
-</div>
-
-<div class="row" id="ajaxLoader">
-    <div class="twelve columns centered">
-        <img src="@Url.Content("~/Content/Images/AjaxLoader.gif")" alt="ajaxLoader" />
     </div>
 </div>
 
@@ -61,14 +58,20 @@
     </div>
 </div>
 
+<div class="row" id="ajaxLoader">
+    <div class="twelve columns centered">
+        <img src="@Url.Content("~/Content/Images/AjaxLoader.gif")" alt="ajaxLoader" />
+    </div>
+</div>
+
 <div id="content">
     <div class="row">
         <div class="eight columns">
-            <h1>Liste des catalogues</h1>
+            <h1>@UI.CatalogsList</h1>
         </div>
 
-        <div class="four columns" style="padding-top: 50px;">
-            <button class="small button right">Ajouter un catalogue</button>
+        <div class="four columns" id="addCatalog">
+            <button class="small button right">@UI.AddCatalog</button>
         </div>
     </div>
 
@@ -78,16 +81,16 @@
                 <thead>
                     <tr>
                         <td></td>
-                        <td>Alias</td>
-                        <td>Description</td>
-                        <td>Disclaimer</td>
-                        <td>Nom du compte de stockage</td>
+                        <td class="hidden"></td>
+                        <td class="hidden"></td>
+                        <td>@UI.TableAlias</td>
+                        <td>@UI.TableDescription</td>
+                        <td>@UI.TableDisclaimer</td>
+                        <td>@UI.TableStorageAccount</td>
                         <td></td>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

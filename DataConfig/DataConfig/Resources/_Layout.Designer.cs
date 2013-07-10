@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataConfig.Resources.Views.Shared {
+namespace DataConfig.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DataConfig.Resources.Views.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DataConfig.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DataConfig.Resources._Layout", typeof(_Layout).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

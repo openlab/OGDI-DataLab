@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataConfig.Resources.Views.Home {
+namespace DataConfig.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DataConfig.Resources.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class UI {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal UI() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DataConfig.Resources.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DataConfig.Resources.Views.Home.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DataConfig.Resources.UI", typeof(UI).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace DataConfig.Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add new catalog.
+        /// </summary>
+        public static string AddCatalog {
+            get {
+                return ResourceManager.GetString("AddCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à List of catalogs.
+        /// </summary>
+        public static string CatalogsList {
+            get {
+                return ResourceManager.GetString("CatalogsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Configuration.
         /// </summary>
         public static string Configuration {
             get {
                 return ResourceManager.GetString("Configuration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this catalog?.
-        /// </summary>
-        public static string ConfirmDeleteCatalog {
-            get {
-                return ResourceManager.GetString("ConfirmDeleteCatalog", resourceCulture);
             }
         }
         
@@ -88,24 +97,6 @@ namespace DataConfig.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Empty storage key.
-        /// </summary>
-        public static string EmptyStorageKey {
-            get {
-                return ResourceManager.GetString("EmptyStorageKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Empty storage name.
-        /// </summary>
-        public static string EmptyStorageName {
-            get {
-                return ResourceManager.GetString("EmptyStorageName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Show catalogs.
         /// </summary>
         public static string ShowCatalogs {
@@ -115,11 +106,11 @@ namespace DataConfig.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à First, configure your storage account.
+        ///   Recherche une chaîne localisée semblable à show datasets.
         /// </summary>
-        public static string StartMessage {
+        public static string ShowDatasets {
             get {
-                return ResourceManager.GetString("StartMessage", resourceCulture);
+                return ResourceManager.GetString("ShowDatasets", resourceCulture);
             }
         }
         
@@ -142,11 +133,38 @@ namespace DataConfig.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Table does not exist.
+        ///   Recherche une chaîne localisée semblable à Alias.
         /// </summary>
-        public static string TableDoesNotExist {
+        public static string TableAlias {
             get {
-                return ResourceManager.GetString("TableDoesNotExist", resourceCulture);
+                return ResourceManager.GetString("TableAlias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string TableDescription {
+            get {
+                return ResourceManager.GetString("TableDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disclaimer.
+        /// </summary>
+        public static string TableDisclaimer {
+            get {
+                return ResourceManager.GetString("TableDisclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Storage account.
+        /// </summary>
+        public static string TableStorageAccount {
+            get {
+                return ResourceManager.GetString("TableStorageAccount", resourceCulture);
             }
         }
     }

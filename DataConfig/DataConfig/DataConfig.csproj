@@ -165,27 +165,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AvailableEndpoint.cs" />
+    <Compile Include="Helper\Global.cs" />
+    <Compile Include="Models\CatalogModels.cs" />
+    <Compile Include="Models\EntityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Views\Home\Index.fr.Designer.cs">
-      <DependentUpon>Index.fr.resx</DependentUpon>
+    <Compile Include="Resources\Messages.fr.Designer.cs">
+      <DependentUpon>Messages.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Views\Home\Index.Designer.cs">
+    <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Index.resx</DependentUpon>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Views\Shared\_Layout.fr.Designer.cs">
+    <Compile Include="Resources\UI.fr.Designer.cs">
+      <DependentUpon>UI.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\_Layout.fr.Designer.cs">
       <DependentUpon>_Layout.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Views\Shared\_Layout.Designer.cs">
+    <Compile Include="Resources\_Layout.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_Layout.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UI.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -257,21 +269,29 @@
     <Content Include="Content\Fonts\Icons_General\general_foundicons.woff" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Views\Home\Index.fr.resx">
+    <EmbeddedResource Include="Resources\Messages.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Home\Index.resx">
+    <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Shared\_Layout.fr.resx">
+    <EmbeddedResource Include="Resources\UI.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UI.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\_Layout.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>_Layout.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Shared\_Layout.resx">
+    <EmbeddedResource Include="Resources\_Layout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>_Layout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

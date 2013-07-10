@@ -1,9 +1,5 @@
 ﻿@import "Variables.less";
 
-.errorMessage {
-    display: none;
-}
-
 #configuration {
     #showCatalogs {
         padding-top: 12px;
@@ -15,7 +11,7 @@
 }
 
 #ajaxLoader {
-    display: none;
+    visibility: hidden;
 }
 
 #startMessageText {
@@ -26,12 +22,33 @@
 }
 
 #content {
-    /*display: none;*/
+    display: none;
+
+    #addCatalog {
+        padding-top: 50px;
+    }
+
     table {
         width: 100%;
 
         td button {
             padding: 2px 4px;
+        }
+
+        td i {
+            font-size: 10px;
+        }
+
+        td.hidden {
+            display: none;
+        }
+
+        td.datasetsLink {
+            width: 180px;
+
+            a:hover {
+                cursor: pointer;
+            }
         }
     }
 }

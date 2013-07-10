@@ -117,26 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCatalog" xml:space="preserve">
+    <value>Ajouter un catalogue</value>
+  </data>
+  <data name="CatalogsList" xml:space="preserve">
+    <value>Liste des catalogues</value>
+  </data>
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
-  </data>
-  <data name="ConfirmDeleteCatalog" xml:space="preserve">
-    <value>Etes-vous sûr de vouloir supprimer ce catalogue ?</value>
   </data>
   <data name="DeleteCatalog" xml:space="preserve">
     <value>Supprimer ce catalogue</value>
   </data>
-  <data name="EmptyStorageKey" xml:space="preserve">
-    <value>Clé du compte vide</value>
-  </data>
-  <data name="EmptyStorageName" xml:space="preserve">
-    <value>Nom du compte vide</value>
-  </data>
   <data name="ShowCatalogs" xml:space="preserve">
     <value>Voir les catalogues</value>
   </data>
-  <data name="StartMessage" xml:space="preserve">
-    <value>Commencez par configurer votre compte de stockage</value>
+  <data name="ShowDatasets" xml:space="preserve">
+    <value>voir les jeux de données</value>
   </data>
   <data name="StorageKey" xml:space="preserve">
     <value>Clé du compte de stockage</value>
@@ -144,7 +141,16 @@
   <data name="StorageName" xml:space="preserve">
     <value>Nom du compte de stockage</value>
   </data>
-  <data name="TableDoesNotExist" xml:space="preserve">
-    <value>La table n'existe pas</value>
+  <data name="TableAlias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="TableDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TableDisclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="TableStorageAccount" xml:space="preserve">
+    <value>Compte de stockage</value>
   </data>
 </root>
