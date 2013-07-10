@@ -70,8 +70,8 @@
             <h1>@UI.CatalogsList</h1>
         </div>
 
-        <div class="four columns" id="addCatalog">
-            <button class="small button right">@UI.AddCatalog</button>
+        <div class="four columns" id="addCatalogButton">
+            <a href="#" class="small button right" data-reveal-id="addCatalog">@UI.AddCatalog</a>
         </div>
     </div>
 
@@ -83,10 +83,10 @@
                         <td></td>
                         <td class="hidden"></td>
                         <td class="hidden"></td>
-                        <td>@UI.TableAlias</td>
-                        <td>@UI.TableDescription</td>
-                        <td>@UI.TableDisclaimer</td>
-                        <td>@UI.TableStorageAccount</td>
+                        <td>@UI.Alias</td>
+                        <td>@UI.Description</td>
+                        <td>@UI.Disclaimer</td>
+                        <td>@UI.StorageAccount</td>
                         <td></td>
                     </tr>
                 </thead>
@@ -94,4 +94,27 @@
             </table>
         </div>
     </div>
+</div>
+
+<div id="addCatalog" class="reveal-modal small">
+    <h1>@UI.NewCatalog</h1>
+    
+    <label for="alias">@UI.Alias</label>
+    <input type="text" id="alias" />
+
+    <label for="description">@UI.Description</label>
+    <input type="text" id="description" />
+
+    <label for="disclaimer">@UI.Disclaimer</label>
+    <input type="text" id="disclaimer" />
+
+    <label for="storageName">@UI.StorageName</label>
+    <input type="text" id="storageName" />
+
+    <label for="storageKey">@UI.StorageKey</label>
+    <input type="text" id="storageKey" />
+
+    <button onclick="Catalogs.Add()" class="right radius success button">OK</button>
+
+    <a class="close-reveal-modal">&#215;</a>
 </div>

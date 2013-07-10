@@ -70,6 +70,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Alias.
+        /// </summary>
+        public static string Alias {
+            get {
+                return ResourceManager.GetString("Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à List of catalogs.
         /// </summary>
         public static string CatalogsList {
@@ -97,6 +106,33 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disclaimer.
+        /// </summary>
+        public static string Disclaimer {
+            get {
+                return ResourceManager.GetString("Disclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New catalog.
+        /// </summary>
+        public static string NewCatalog {
+            get {
+                return ResourceManager.GetString("NewCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Show catalogs.
         /// </summary>
         public static string ShowCatalogs {
@@ -115,6 +151,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Storage account.
+        /// </summary>
+        public static string StorageAccount {
+            get {
+                return ResourceManager.GetString("StorageAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key of the storage account.
         /// </summary>
         public static string StorageKey {
@@ -129,42 +174,6 @@ namespace DataConfig.Resources {
         public static string StorageName {
             get {
                 return ResourceManager.GetString("StorageName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Alias.
-        /// </summary>
-        public static string TableAlias {
-            get {
-                return ResourceManager.GetString("TableAlias", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Description.
-        /// </summary>
-        public static string TableDescription {
-            get {
-                return ResourceManager.GetString("TableDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Disclaimer.
-        /// </summary>
-        public static string TableDisclaimer {
-            get {
-                return ResourceManager.GetString("TableDisclaimer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Storage account.
-        /// </summary>
-        public static string TableStorageAccount {
-            get {
-                return ResourceManager.GetString("TableStorageAccount", resourceCulture);
             }
         }
     }

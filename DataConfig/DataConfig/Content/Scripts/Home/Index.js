@@ -62,6 +62,9 @@ var Catalogs = {
         });
     },
     Add: function () {
+        // Close modal
+        $('#addCatalog').trigger('reveal:close');
+
         // Show AJAX loader
         $("#ajaxLoader").css("visibility", "visible");
 
@@ -89,6 +92,8 @@ var Catalogs = {
                     // Display error
                     $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
                 } else {
+                    console.log(data);
+
                     // Display catalog
                     $("#content table tbody").append(Utils.GetCatalogRow(data.Result));
                     $("#alertBox").append(Utils.GetAlertBox("success", Strings.CatalogAdded));

@@ -105,7 +105,7 @@ namespace DataConfig.Controllers
                 entity.storageaccountname = model.StorageName;
                 entity.storageaccountkey = model.StorageKey;
 
-                availableEndpoints.Execute(TableOperation.Insert(entity));
+                //availableEndpoints.Execute(TableOperation.Insert(entity));
 
                 return Json(new { Result = entity });
             }

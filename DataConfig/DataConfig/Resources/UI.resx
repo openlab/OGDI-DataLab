@@ -120,6 +120,9 @@
   <data name="AddCatalog" xml:space="preserve">
     <value>Add new catalog</value>
   </data>
+  <data name="Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
   <data name="CatalogsList" xml:space="preserve">
     <value>List of catalogs</value>
   </data>
@@ -129,28 +132,28 @@
   <data name="DeleteCatalog" xml:space="preserve">
     <value>Delete this catalog</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Disclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="NewCatalog" xml:space="preserve">
+    <value>New catalog</value>
+  </data>
   <data name="ShowCatalogs" xml:space="preserve">
     <value>Show catalogs</value>
   </data>
   <data name="ShowDatasets" xml:space="preserve">
     <value>show datasets</value>
   </data>
+  <data name="StorageAccount" xml:space="preserve">
+    <value>Storage account</value>
+  </data>
   <data name="StorageKey" xml:space="preserve">
     <value>Key of the storage account</value>
   </data>
   <data name="StorageName" xml:space="preserve">
     <value>Name of the storage account</value>
-  </data>
-  <data name="TableAlias" xml:space="preserve">
-    <value>Alias</value>
-  </data>
-  <data name="TableDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="TableDisclaimer" xml:space="preserve">
-    <value>Disclaimer</value>
-  </data>
-  <data name="TableStorageAccount" xml:space="preserve">
-    <value>Storage account</value>
   </data>
 </root>
