@@ -155,7 +155,7 @@ button:hover { cursor: pointer; background-color: #cfcfcf; transition: 0.4s; }
 
 .tabs {position:absolute;left:-30px;top:20px;}
 .tabs .tab {width:25px;margin-top:5px;}
-.tabs .tab div {width:25px;height:90px;background-image:url(../../Content/css/vtabs1-fr.png);cursor:pointer;}
+.tabs .tab div {width:25px;height:90px;background-image:url(../../Content/css/vtabs1.png);cursor:pointer;}
 .tabs .t1 div {background-position:25px -180px;}
 .tabs .t1 .active {background-position:0px -180px;}
 .tabs .t2 div {background-position:25px -270px;}

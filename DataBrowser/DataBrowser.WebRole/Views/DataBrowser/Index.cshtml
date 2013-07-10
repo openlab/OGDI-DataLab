@@ -176,6 +176,7 @@
     </style>
 
 }
+
 <div class="tabs">
     @if (!Model.IsPlanned)
     { 
@@ -231,13 +232,13 @@ else
     </div>
 }
 
-<div class="tab-content" id="eidCommentsTabContent">
-    @Html.Partial("Comments", Ogdi.InteractiveSdk.Mvc.Models.Comments.CommentInfo.CreateDatasetCommentInfo(Model.Container, Model.EntitySetName, Model.EntitySetWrapper.EntitySet.Name))
-</div>
-
 @if (!Model.IsPlanned)
-{ 
+{
     <div class="tab-content" id="eidDevelopersTabContent">
         @Html.Partial("SampleCode", Model)
     </div>
 }
+
+<div class="tab-content" id="eidCommentsTabContent">
+    @Html.Partial("Comments", Ogdi.InteractiveSdk.Mvc.Models.Comments.CommentInfo.CreateDatasetCommentInfo(Model.Container, Model.EntitySetName, Model.EntitySetWrapper.EntitySet.Name))
+</div>
