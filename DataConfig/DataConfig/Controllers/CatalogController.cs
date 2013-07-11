@@ -20,10 +20,7 @@ namespace DataConfig.Controllers
             try
             {
                 CloudTable availableEndpoints = Azure.GetCloudTable(model.ConfigStorageName, model.ConfigStorageKey, Azure.Table.AvailableEndpoints);
-                if (!availableEndpoints.Exists())
-                {
-                    return Json(new { Error = string.Format(Messages.TableDoesNotExist, Azure.Table.AvailableEndpoints) });
-                }
+                availableEndpoints.CreateIfNotExists();
 
                 IEnumerable<AvailableEndpoint> catalogs = availableEndpoints.ExecuteQuery(new TableQuery<AvailableEndpoint>());
                 if (catalogs != null)
