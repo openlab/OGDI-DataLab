@@ -774,6 +774,7 @@
     <Content Include="Content\css\vtabs-fr.png" />
     <Content Include="Content\css\vtabs1-fr.png" />
     <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\Favicon.png" />
     <Content Include="Content\images\Microsoft.png" />
     <Content Include="Content\images\opendata_en.png" />
     <Content Include="Content\images\opendata_fr.png" />
