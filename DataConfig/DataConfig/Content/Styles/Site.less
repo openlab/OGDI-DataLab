@@ -1,0 +1,65 @@
+﻿@import "Variables.less";
+
+#configuration {
+    #showCatalogs {
+        padding-top: 17px;
+
+        button {
+            width: 100%;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    }
+}
+
+#ajaxLoader {
+    visibility: hidden;
+}
+
+#startMessageText {
+    font-family: @segoePrint;
+    font-size: 24px;
+    text-align: right;
+    padding-top: 36px;
+}
+
+.content {
+    display: none;
+
+    #addCatalogButton {
+        padding-top: 50px;
+    }
+
+    #catalogAlias {
+        font-size: 28px;
+    }
+
+    table {
+        width: 100%;
+
+        td {
+            vertical-align: bottom;
+
+            button {
+                padding: 4px 6px !important;
+            }
+
+            i {
+                font-size: 10px;
+            }
+
+            &.hidden {
+                display: none;
+            }
+
+            &.datasetsLink {
+                width: 184px;
+
+                a:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+         

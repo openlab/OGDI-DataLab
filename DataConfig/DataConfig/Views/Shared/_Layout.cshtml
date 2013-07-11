@@ -1,0 +1,67 @@
+﻿@using DataConfig.Resources
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@_Layout.Title</title>
+
+    <link rel="icon" href="@Url.Content("~/Content/Images/Favicon.png")" type="image/png" />
+
+    @Styles.Render("~/bundles/foundation/style")
+    @Styles.Render("~/bundles/style")
+
+    @Scripts.Render("~/bundles/modernizr/script")
+</head>
+<body>
+    <div id="container">
+        <header>
+            <div class="row">
+                <div class="six columns">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="@Url.Content(string.Format("~/Content/Images/{0}.png", _Layout.Logo))" alt="Open Data" />
+                    </a>
+                </div>
+                <div class="six columns">
+                    <div id="banner" class="right">
+                        <img src="@Url.Content("~/Content/Images/Banner.png")" alt="Banner" />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="body">
+            @RenderBody()
+        </section>
+
+        <footer>
+            <div class="row">
+                <div class="ten columns">
+		            <ul class="inline-list right">
+			            <li><a href="@_Layout.ManageUrl" target="_blank">@_Layout.Manage</a></li>
+			            <li><a href="@_Layout.ContactMSUrl" target="_blank">@_Layout.ContactMS</a></li>
+			            <li><a href="@_Layout.TermsUrl" target="_blank">@_Layout.Terms</a></li>
+			            <li><a href="@_Layout.PrivacyUrl" target="_blank">@_Layout.Privacy</a></li>
+			            <li><a href="@_Layout.AboutUrl" target="_blank">@_Layout.About</a></li>
+			            <li><a href="@_Layout.TrademarksUrl" target="_blank">@_Layout.Trademarks</a></li>
+		            </ul>
+                </div>
+
+                <div class="two columns">
+                    <a href="@_Layout.MicrosoftUrl">
+                        <img src="@Url.Content("~/Content/Images/Microsoft.png")" alt="Microsoft" />
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/foundation/script")
+    @Scripts.Render("~/bundles/jqueryui/script")
+
+    @Scripts.Render("~/bundles/script")
+    @RenderSection("script", required: false)
+</body>
+</html>

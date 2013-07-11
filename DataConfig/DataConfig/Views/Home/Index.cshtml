@@ -1,0 +1,151 @@
+﻿@using DataConfig.Resources
+
+@section script {
+    <script>
+        var Strings = {
+            DeleteCatalog: @Html.Raw(Json.Encode(UI.DeleteCatalog)),
+            DeleteDataset: @Html.Raw(Json.Encode(UI.DeleteDataset)),
+            ConfirmDeleteCatalog: @Html.Raw(Json.Encode(Messages.ConfirmDeleteCatalog)),
+            ConfirmDeleteDataset: @Html.Raw(Json.Encode(Messages.ConfirmDeleteDataset)),
+            CatalogDeleted: @Html.Raw(Json.Encode(Messages.CatalogDeleted)),
+            DatasetDeleted: @Html.Raw(Json.Encode(Messages.DatasetDeleted)),
+            CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded)),
+            ShowDatasets: @Html.Raw(Json.Encode(UI.ShowDatasets))
+        };
+    </script>
+}
+
+<div class="row" id="configuration">
+    <div class="twelve columns">
+        <fieldset>
+            <legend>@UI.Configuration</legend>
+
+            <div class="row">
+                <div class="nine columns">
+                    <div class="row">
+                        <div class="six columns">
+                            <label for="configStorageName">@UI.StorageName</label>
+                            <input type="text" id="configStorageName" />
+                        </div>
+
+                        <div class="six columns">
+                            <label for="configStorageKey">@UI.StorageKey</label>
+                            <input type="text" id="configStorageKey" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="three columns" id="showCatalogs">
+                    <button class="radius button" onclick="Catalogs.Load()">@UI.ShowCatalogs</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+</div>
+
+<div class="row" id="startMessage">
+    <div class="nine columns" id="startMessageText">
+        @Messages.StartMessage
+    </div>
+
+    <div class="three columns">
+        <img src="@Url.Content("~/Content/Images/Arrow.png")" alt="arrow" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        <div id="alertBox">
+        </div>
+    </div>
+</div>
+
+<div class="row" id="ajaxLoader">
+    <div class="twelve columns centered">
+        <img src="@Url.Content("~/Content/Images/AjaxLoader.gif")" alt="ajaxLoader" />
+    </div>
+</div>
+
+<div id="catalogContent" class="content">
+    <div class="row">
+        <div class="eight columns">
+            <h1>@UI.CatalogsList</h1>
+        </div>
+
+        <div class="four columns" id="addCatalogButton">
+            <a href="#" class="small success button right" data-reveal-id="addCatalog">@UI.AddCatalog</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns">
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td class="hidden"></td>
+                        <td class="hidden"></td>
+                        <td>@UI.Alias</td>
+                        <td>@UI.Description</td>
+                        <td>@UI.Disclaimer</td>
+                        <td>@UI.StorageAccount</td>
+                        <td class="hidden"></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="datasetContent" class="content">
+    <div class="row">
+        <div class="twelve columns">
+            <h1>@UI.DatasetsList <span id="catalogAlias"></span></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns">
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td class="hidden"></td>
+                        <td class="hidden"></td>
+                        <td>@UI.EntitySet</td>
+                        <td>@UI.Name</td>
+                        <td>@UI.Source</td>
+                        <td>@UI.Category</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="addCatalog" class="reveal-modal small">
+    <h1>@UI.NewCatalog</h1>
+    
+    <label for="alias">@UI.Alias</label>
+    <input type="text" id="alias" />
+
+    <label for="description">@UI.Description</label>
+    <input type="text" id="description" />
+
+    <label for="disclaimer">@UI.Disclaimer</label>
+    <input type="text" id="disclaimer" />
+
+    <label for="storageName">@UI.StorageName</label>
+    <input type="text" id="storageName" />
+
+    <label for="storageKey">@UI.StorageKey</label>
+    <input type="text" id="storageKey" />
+
+    <button onclick="Catalogs.Add()" class="right radius success button">OK</button>
+
+    <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -103,7 +103,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DAISY\DTBookTranslation.csproj">
+    <ProjectReference Include="..\..\..\DAISY\DTBookTranslation\DTBookTranslation.csproj">
       <Project>{F6CA53E8-CDEA-4FED-AC46-E44B7BBC0A8A}</Project>
       <Name>DTBookTranslation</Name>
     </ProjectReference>
