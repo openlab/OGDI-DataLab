@@ -120,6 +120,9 @@
   <data name="CannotConnect" xml:space="preserve">
     <value>Impossible de se connecter à votre compte de stockage Azure. Merci de vérifier vos informations d'identification.</value>
   </data>
+  <data name="CannotConnectLight" xml:space="preserve">
+    <value>Impossible de se connecter au compte de stockage Azure.</value>
+  </data>
   <data name="CatalogAdded" xml:space="preserve">
     <value>Votre catalogue a été ajouté.</value>
   </data>
@@ -131,6 +134,18 @@
   </data>
   <data name="ConfirmDeleteCatalog" xml:space="preserve">
     <value>Etes-vous sûr de vouloir supprimer ce catalogue ?</value>
+  </data>
+  <data name="ConfirmDeleteDataset" xml:space="preserve">
+    <value>Etes-vous sûr de vouloir supprimer ce jeu de données ?</value>
+  </data>
+  <data name="DatasetDeleted" xml:space="preserve">
+    <value>Votre jeu de données a été supprimé.</value>
+  </data>
+  <data name="DatasetNotFound" xml:space="preserve">
+    <value>Impossible de retrouver ce jeu de données.</value>
+  </data>
+  <data name="IncompleteForm" xml:space="preserve">
+    <value>Votre formulaire est incomplet, merci de remplir les champs manquants.</value>
   </data>
   <data name="StartMessage" xml:space="preserve">
     <value>Commencez par configurer votre compte de stockage</value>

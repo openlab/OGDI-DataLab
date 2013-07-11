@@ -120,6 +120,9 @@
   <data name="CannotConnect" xml:space="preserve">
     <value>Cannot connect to your Azure storage account. Please verify your credentials.</value>
   </data>
+  <data name="CannotConnectLight" xml:space="preserve">
+    <value>Cannot connect to the Azure storage account.</value>
+  </data>
   <data name="CatalogAdded" xml:space="preserve">
     <value>Your catalog has been added.</value>
   </data>
@@ -131,6 +134,18 @@
   </data>
   <data name="ConfirmDeleteCatalog" xml:space="preserve">
     <value>Are you sure you want to delete this catalog?</value>
+  </data>
+  <data name="ConfirmDeleteDataset" xml:space="preserve">
+    <value>Are you sure you want to delete this dataset?</value>
+  </data>
+  <data name="DatasetDeleted" xml:space="preserve">
+    <value>Your dataset has been deleted.</value>
+  </data>
+  <data name="DatasetNotFound" xml:space="preserve">
+    <value>Cannot retrieve this dataset.</value>
+  </data>
+  <data name="IncompleteForm" xml:space="preserve">
+    <value>Your form is incomplete, please fill out missing fields.</value>
   </data>
   <data name="StartMessage" xml:space="preserve">
     <value>First, configure your storage account</value>

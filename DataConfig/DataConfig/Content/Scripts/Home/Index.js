@@ -1,11 +1,4 @@
 ﻿/*
-** Onload
-*/
-$(function () {
-    $("#showCatalogs > button").click(Catalogs.Load);
-});
-
-/*
 ** Catalogs object
 */
 var Catalogs = {
@@ -13,52 +6,53 @@ var Catalogs = {
         // Remove start message
         $("#startMessage").remove();
 
-        // Hide content
-        $("#content").fadeOut("fast", function () {
-            // Show AJAX loader
-            $("#ajaxLoader").css("visibility", "visible");
+        // Hide current content
+        $(".content").hide();
 
-            // Build form
-            var form = {
-                "ConfigStorageName": $("#configStorageName").val(),
-                "ConfigStorageKey": $("#configStorageKey").val()
-            };
+        // Show AJAX loader
+        $("#ajaxLoader").css("visibility", "visible");
 
-            // Send AJAX request
-            $.ajax({
-                type: "POST",
-                url: "/Catalog/Load",
-                data: form,
-                success: function (data) {
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
+        // Build form
+        var form = {
+            "ConfigStorageName": $("#configStorageName").val(),
+            "ConfigStorageKey": $("#configStorageKey").val()
+        };
 
-                    if (data.Error) {
-                        // Display error
-                        $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
-                    } else {
-                        console.log(data);
-
-                        // Delete old AvailableEndpoints
-                        $("#content table tbody tr").remove();
-
-                        // Display each AvailableEndpoint
-                        $.each(data.Result, function (ndx, item) {
-                            $("#content table tbody").append(Utils.GetCatalogRow(item));
-                        });
-
-                        // Display content
-                        $("#content").fadeIn("fast");
-                    }
-                },
-                error: function (data) {
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
-
+        // Send AJAX request
+        $.ajax({
+            type: "POST",
+            url: "/Catalog/Load",
+            data: form,
+            success: function (data) {
+                if (data.Error) {
                     // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+                    $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                } else {
+                    // Delete old AvailableEndpoints
+                    $("#catalogContent table tbody tr").remove();
+
+                    // Display each AvailableEndpoint
+                    $.each(data.Result, function (ndx, item) {
+                        $("#catalogContent table tbody").append(Utils.GetCatalogRow(item));
+                    });
+
+                    // Set datasets link event
+                    Utils.SetDatasetsLinkEvent();
+
+                    // Display content
+                    $("#catalogContent").fadeIn("fast");
                 }
-            });
+
+                // Hide AJAX loader
+                $("#ajaxLoader").css("visibility", "hidden");
+            },
+            error: function (data) {
+                // Display error
+                $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+
+                // Hide AJAX loader
+                $("#ajaxLoader").css("visibility", "hidden");
+            }
         });
     },
     Add: function () {
@@ -85,26 +79,29 @@ var Catalogs = {
             url: "/Catalog/Add",
             data: form,
             success: function (data) {
-                // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
-
                 if (data.Error) {
                     // Display error
                     $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
                 } else {
-                    console.log(data);
-
                     // Display catalog
-                    $("#content table tbody").append(Utils.GetCatalogRow(data.Result));
+                    $("#catalogContent table tbody").append(Utils.GetCatalogRow(data.Result));
+
+                    // Set datasets link event
+                    Utils.SetDatasetsLinkEvent();
+
+                    // Display message
                     $("#alertBox").append(Utils.GetAlertBox("success", Strings.CatalogAdded));
                 }
-            },
-            error: function (data) {
+
                 // Hide AJAX loader
                 $("#ajaxLoader").css("visibility", "hidden");
-
+            },
+            error: function (data) {
                 // Display error
                 $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+
+                // Hide AJAX loader
+                $("#ajaxLoader").css("visibility", "hidden");
             }
         });
     },
@@ -127,16 +124,13 @@ var Catalogs = {
                 url: "/Catalog/Delete",
                 data: form,
                 success: function (data) {
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
-
                     if (data.Error) {
                         // Display error
                         $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
                     } else {
                         // Delete catalog (UI)
-                        $.each($("#content table tbody tr"), function (ndx, item) {
-                            if ($(item).find(".partitionkey").html() == partitionKey && $(item).find(".rowkey").html() == rowKey) {
+                        $.each($("#catalogContent table tbody tr"), function (ndx, item) {
+                            if ($(item).find(".partitionKey").html() == partitionKey && $(item).find(".rowKey").html() == rowKey) {
                                 $(item).fadeOut("slow", function () {
                                     $(item).remove();
                                     $("#alertBox").append(Utils.GetAlertBox("success", Strings.CatalogDeleted));
@@ -145,13 +139,126 @@ var Catalogs = {
                             }
                         });
                     }
-                },
-                error: function (data) {
+
                     // Hide AJAX loader
                     $("#ajaxLoader").css("visibility", "hidden");
-
+                },
+                error: function (data) {
                     // Display error
                     $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+
+                    // Hide AJAX loader
+                    $("#ajaxLoader").css("visibility", "hidden");
+                }
+            });
+        }
+    }
+};
+
+/*
+** Datasets object
+*/
+var Datasets = {
+    _storageName: null,
+    _storageKey: null,
+    Load: function (catalogAlias, storageName, storageKey) {
+        // Build form
+        var form = {
+            "StorageName": storageName,
+            "StorageKey": storageKey
+        };
+
+        // Save current credentials
+        this._storageName = storageName;
+        this._storageKey = storageKey;
+
+        // Send AJAX request
+        $.ajax({
+            type: "POST",
+            url: "/Dataset/Load",
+            data: form,
+            success: function (data) {
+                if (data.Error) {
+                    // Show previous content
+                    $("#catalogContent").toggle("slide");
+
+                    // Display error
+                    $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                } else {
+                    // Delete old content
+                    $("#datasetContent table tbody tr").remove();
+
+                    // Display each Dataset
+                    $.each(data.Result, function (ndx, item) {
+                        $("#datasetContent table tbody").append(Utils.GetDatasetRow(item));
+                    });
+
+                    // Set catalog name
+                    $("#datasetContent #catalogAlias").html("(" + catalogAlias + ")");
+
+                    // Display content
+                    $("#datasetContent").toggle("slide", { "direction": "right" });
+                }
+
+                // Hide AJAX loader
+                $("#ajaxLoader").css("visibility", "hidden");
+            },
+            error: function (data) {
+                // Show previous content
+                $("#catalogContent").toggle("slide");
+
+                // Display error
+                $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+
+                // Hide AJAX loader
+                $("#ajaxLoader").css("visibility", "hidden");
+            }
+        });
+    },
+    Delete: function (partitionKey, rowKey) {
+        if (confirm(Strings.ConfirmDeleteDataset)) {
+            // Show AJAX loader
+            $("#ajaxLoader").css("visibility", "visible");
+
+            // Build form
+            var form = {
+                "StorageName": this._storageName,
+                "StorageKey": this._storageKey,
+                "PartitionKey": partitionKey,
+                "RowKey": rowKey
+            };
+
+            // Send AJAX request
+            $.ajax({
+                type: "POST",
+                url: "/Dataset/Delete",
+                data: form,
+                success: function (data) {
+                    if (data.Error) {
+                        // Display error
+                        $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                    } else {
+                        // Delete dataset (UI)
+                        $.each($("#datasetContent table tbody tr"), function (ndx, item) {
+                            if ($(item).find(".partitionKey").html() == partitionKey && $(item).find(".rowKey").html() == rowKey) {
+                                $(item).fadeOut("slow", function () {
+                                    $(item).remove();
+                                    $("#alertBox").append(Utils.GetAlertBox("success", Strings.DatasetDeleted));
+                                });
+                                return false;
+                            }
+                        });
+                    }
+
+                    // Hide AJAX loader
+                    $("#ajaxLoader").css("visibility", "hidden");
+                },
+                error: function (data) {
+                    // Display error
+                    $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+
+                    // Hide AJAX loader
+                    $("#ajaxLoader").css("visibility", "hidden");
                 }
             });
         }
@@ -162,6 +269,18 @@ var Catalogs = {
 ** Utils object
 */
 var Utils = {
+    SetDatasetsLinkEvent: function () {
+        $(".datasetsLink > a").click(function () {
+            var tr = $(this).parent().parent();
+            var catalogAlias = $(tr).find("td.alias").attr("title");
+            var storageName = $(tr).find("td.storageName").attr("title");
+            var storageKey = $(tr).find("td.storageKey").html();
+            $("#ajaxLoader").css("visibility", "visible");
+            $("#catalogContent").toggle("slide", function () {
+                Datasets.Load(catalogAlias, storageName, storageKey);
+            });
+        });
+    },
     GetAlertBox: function (type, message) {
         var alertBox = $("<div/>");
         alertBox.addClass("alert-box " + type);
@@ -171,29 +290,43 @@ var Utils = {
     },
     GetCatalogRow: function (item) {
         var tr = $("<tr/>");
-        tr.append($("<td/>").html(Utils.GetDeleteCatalogButton(item)));
-        tr.append(Utils.GetTableCell("partitionkey hidden", item["PartitionKey"], -1));
-        tr.append(Utils.GetTableCell("rowkey hidden", item["RowKey"], -1));
+        tr.append($("<td/>").html(Utils.GetDeleteButton(item, "Catalogs", Strings.DeleteCatalog)));
+        tr.append(Utils.GetTableCell("partitionKey hidden", item["PartitionKey"], -1));
+        tr.append(Utils.GetTableCell("rowKey hidden", item["RowKey"], -1));
         tr.append(Utils.GetTableCell("alias", item["alias"], 20));
         tr.append(Utils.GetTableCell("description", item["description"], 32));
         tr.append(Utils.GetTableCell("disclaimer", item["disclaimer"], 32));
-        tr.append(Utils.GetTableCell("storagename", item["storageaccountname"], 20));
+        tr.append(Utils.GetTableCell("storageName", item["storageaccountname"], 20));
+        tr.append(Utils.GetTableCell("storageKey hidden", item["storageaccountkey"], -1));
         tr.append(Utils.GetShowDatasetsLink());
         return tr;
     },
+    GetDatasetRow: function (item) {
+        var tr = $("<tr/>");
+        tr.append($("<td/>").html(Utils.GetDeleteButton(item, "Datasets", Strings.DeleteDataset)));
+        tr.append(Utils.GetTableCell("partitionKey hidden", item["PartitionKey"], -1));
+        tr.append(Utils.GetTableCell("rowKey hidden", item["RowKey"], -1));
+        tr.append(Utils.GetTableCell("entityset", item["entityset"], 20));
+        tr.append(Utils.GetTableCell("name", item["name"], 32));
+        tr.append(Utils.GetTableCell("source", item["source"], 20));
+        tr.append(Utils.GetTableCell("category", item["category"], 20));
+        return tr;
+    },
     GetTableCell: function (classes, content, maxLenght) {
-        var text = (maxLenght != -1 && content.length > maxLenght ? content.substr(0, maxLenght) + "..." : content);
-        var cell = $("<td/>");
-        cell.addClass(classes);
-        cell.attr("title", content);
-        cell.html(text);
+        var cell = $("<td/>").addClass(classes);
+        if (maxLenght == -1 || content == null) {
+            cell.html(content);
+        } else {
+            cell.attr("title", content);
+            cell.html(content.length > maxLenght ? content.substr(0, maxLenght) + "..." : content);
+        }
         return cell;
     },
-    GetDeleteCatalogButton: function (item) {
+    GetDeleteButton: function (item, type, title) {
         var button = $("<button/>");
         button.addClass("tiny radius alert button");
-        button.attr("title", Strings.DeleteCatalog);
-        button.attr("onclick", "Catalogs.Delete('" + item["PartitionKey"] + "', '" + item["RowKey"] + "')");
+        button.attr("title", title);
+        button.attr("onclick", type + ".Delete('" + item["PartitionKey"] + "', '" + item["RowKey"] + "')");
         button.html($("<i/>").addClass("icon-general-remove"));
         return button;
     },

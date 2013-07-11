@@ -126,17 +126,32 @@
   <data name="CatalogsList" xml:space="preserve">
     <value>List of catalogs</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="DatasetsList" xml:space="preserve">
+    <value>List of datasets</value>
+  </data>
   <data name="DeleteCatalog" xml:space="preserve">
     <value>Delete this catalog</value>
+  </data>
+  <data name="DeleteDataset" xml:space="preserve">
+    <value>Delete this dataset</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Disclaimer</value>
+  </data>
+  <data name="EntitySet" xml:space="preserve">
+    <value>Entityset</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NewCatalog" xml:space="preserve">
     <value>New catalog</value>
@@ -146,6 +161,9 @@
   </data>
   <data name="ShowDatasets" xml:space="preserve">
     <value>show datasets</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
   </data>
   <data name="StorageAccount" xml:space="preserve">
     <value>Storage account</value>

@@ -2,10 +2,12 @@
 
 #configuration {
     #showCatalogs {
-        padding-top: 12px;
+        padding-top: 17px;
 
         button {
             width: 100%;
+            padding-top: 8px;
+            padding-bottom: 8px;
         }
     }
 }
@@ -21,33 +23,41 @@
     padding-top: 36px;
 }
 
-#content {
+.content {
     display: none;
 
     #addCatalogButton {
         padding-top: 50px;
     }
 
+    #catalogAlias {
+        font-size: 28px;
+    }
+
     table {
         width: 100%;
 
-        td button {
-            padding: 2px 4px;
-        }
+        td {
+            vertical-align: bottom;
 
-        td i {
-            font-size: 10px;
-        }
+            button {
+                padding: 4px 6px !important;
+            }
 
-        td.hidden {
-            display: none;
-        }
+            i {
+                font-size: 10px;
+            }
 
-        td.datasetsLink {
-            width: 180px;
+            &.hidden {
+                display: none;
+            }
 
-            a:hover {
-                cursor: pointer;
+            &.datasetsLink {
+                width: 184px;
+
+                a:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

@@ -126,17 +126,32 @@
   <data name="CatalogsList" xml:space="preserve">
     <value>Liste des catalogues</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="DatasetsList" xml:space="preserve">
+    <value>Liste des jeux de données</value>
+  </data>
   <data name="DeleteCatalog" xml:space="preserve">
     <value>Supprimer ce catalogue</value>
+  </data>
+  <data name="DeleteDataset" xml:space="preserve">
+    <value>Supprimer ce jeu de données</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Disclaimer</value>
+  </data>
+  <data name="EntitySet" xml:space="preserve">
+    <value>Entityset</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="NewCatalog" xml:space="preserve">
     <value>Nouveau catalogue</value>
@@ -146,6 +161,9 @@
   </data>
   <data name="ShowDatasets" xml:space="preserve">
     <value>voir les jeux de données</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
   </data>
   <data name="StorageAccount" xml:space="preserve">
     <value>Compte de stockage</value>

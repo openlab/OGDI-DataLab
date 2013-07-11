@@ -70,6 +70,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cannot connect to the Azure storage account..
+        /// </summary>
+        public static string CannotConnectLight {
+            get {
+                return ResourceManager.GetString("CannotConnectLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Your catalog has been added..
         /// </summary>
         public static string CatalogAdded {
@@ -102,6 +111,42 @@ namespace DataConfig.Resources {
         public static string ConfirmDeleteCatalog {
             get {
                 return ResourceManager.GetString("ConfirmDeleteCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this dataset?.
+        /// </summary>
+        public static string ConfirmDeleteDataset {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteDataset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your dataset has been deleted..
+        /// </summary>
+        public static string DatasetDeleted {
+            get {
+                return ResourceManager.GetString("DatasetDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cannot retrieve this dataset..
+        /// </summary>
+        public static string DatasetNotFound {
+            get {
+                return ResourceManager.GetString("DatasetNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your form is incomplete, please fill out missing fields..
+        /// </summary>
+        public static string IncompleteForm {
+            get {
+                return ResourceManager.GetString("IncompleteForm", resourceCulture);
             }
         }
         
