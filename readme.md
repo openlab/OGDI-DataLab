@@ -1,10 +1,6 @@
 Open Government Data Initiative v6
 ==================================================
 
-###Updates:  
-
-* *Feb 6, 2013 -- two more updates for an HTML5/jQuery DataLab front-end as an alternative to the .NET Data Browser with RSS-based management capability provided by SharePoint - coming soon.*
-
 
 About
 -----
@@ -29,7 +25,7 @@ OGDI DataLab is written using **C#** and the **.NET Framework** and uses the [Wi
 
 
 OGDI DataLab Components
----------------
+-----------------------
 
 ###Data Service
 OGDI uses RESTful Web service [a web service implemented using HTTP and the principles of Representational State Transfer (REST)] to expose data for programmatic access. Data service renders data using a number of formats, including **Open Data Protocol ([OData](http://www.odata.org))**, an extension to **Atom Publishing Protocol (AtomPub)**, **Keyhole Markup Language (KML)**, **JSON** and **JSONP**. OData leverages Uniform Resource Identifiers (URIs) for resource identification and an HTTP-based uniform interface for interacting with those resources just as a user would do with any Web-based application. By building on these principles, OData enables users to achieve high levels of data integration and interoperability across a broad range of clients, servers, services, protocols and tools. 
@@ -49,7 +45,20 @@ In addition to browsing the data, developers can quickly learn how to use publis
 The data loader is a tool that helps implementers quickly start enjoying the benefits of OGDI. OGDI includes both GUI-based and console-based data loader tools. The console tool takes CSV formatted data and publishes it into OGDI. In the process of loading the data, the utility can create a new dataset, add data, or update data in an already published dataset. Console tool is controlled through command line parameters and can be automated using shell scripts.
 
 
-##License
+Contributors
+------------
+
+![Open Data Bordeaux](https://mspartner.microsoft.com/fr/fr/ApplicationLogs/Open%20Data%20bordeaux.png)
+
+Afin de concrétiser pleinement sa démarche open data, la Ville de Bordeaux a privilégié des outils, formats et licence les plus standards et ouverts possibles. Ainsi, sur le portail  [opendata.bordeaux.fr](http://www.opendata.bordeaux.fr) cohabitent différents formats de fichiers permettant à tous les utilisateurs, experts ou novices, de télécharger et d'exploiter les données municipales de manière simple et performante.
+
+Dans cet esprit, Bordeaux a choisi la plateforme de publication des données ouvertes OGDI DataLab. La Ville s'est mobilisée, en collaboration avec les équipes de Stéria et de Microsoft, pour améliorer le service de données en conformité avec les spécifications du protocole ouvert OData pris en charge. L'objectif a été d'étendre la prise en charge des spécifications OData par le service de données OGDI DataLab en intégrant de nouveaux mots-clés et de nombreuses options de requêtes dans le but de faciliter l'accès et l'exploitation des données publiques.
+
+Ces évolutions et d'autres sont maintenant disponibles pour tous, dans la nouvelle version de la plateforme de publication OGDI DataLab v6 proposé dans cette solution Open Data Clé en main.
+
+
+License
+-------
 
 ###Microsoft Public License (Ms-PL)
 
