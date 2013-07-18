@@ -48,6 +48,8 @@ The data loader is a tool that helps implementers quickly start enjoying the ben
 Contributors
 ------------
 
+###Ville de Bordeaux
+
 ![Open Data Bordeaux](https://mspartner.microsoft.com/fr/fr/ApplicationLogs/Open%20Data%20bordeaux.png)
 
 Afin de concrétiser pleinement sa démarche open data, la Ville de Bordeaux a privilégié des outils, formats et licence les plus standards et ouverts possibles. Ainsi, sur le portail  [opendata.bordeaux.fr](http://www.opendata.bordeaux.fr) cohabitent différents formats de fichiers permettant à tous les utilisateurs, experts ou novices, de télécharger et d'exploiter les données municipales de manière simple et performante.
