@@ -11,6 +11,11 @@ namespace Ogdi.DataServices.v1
             string entitySet = requestContext.RouteData.Values["EntitySet"] as string;
             string remainder = requestContext.RouteData.Values["Remainder"] as string;
 
+            if (entitySet.EndsWith("()"))
+            {
+                entitySet = entitySet.Substring(0, entitySet.Length - 2);
+            }
+
             if (!AppSettings.EnabledStorageAccounts.ContainsKey(ogdiAlias))
             {
                 // If the requested OgdiAlias for the storage account is not already cached, then refresh the cache.
