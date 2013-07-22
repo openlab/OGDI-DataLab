@@ -52,11 +52,11 @@ Contributors
 
 ![Open Data Bordeaux](https://mspartner.microsoft.com/fr/fr/ApplicationLogs/Open%20Data%20bordeaux.png)
 
-Afin de concrétiser pleinement sa démarche open data, la Ville de Bordeaux a privilégié des outils, formats et licence les plus standards et ouverts possibles. Ainsi, sur le portail  [opendata.bordeaux.fr](http://www.opendata.bordeaux.fr) cohabitent différents formats de fichiers permettant à tous les utilisateurs, experts ou novices, de télécharger et d'exploiter les données municipales de manière simple et performante.
+To fully realize its opendata approach, the City of Bordeaux has focused on tools, data formats and licensing standards the most open as possible. Thus, in the [opendata.bordeaux.fr](http://www.opendata.bordeaux.fr) portal, different file formats are available for all users, experts or novices, so they can download and use municipal data very easily. 
 
-Dans cet esprit, Bordeaux a choisi la plateforme de publication des données ouvertes OGDI DataLab. La Ville s'est mobilisée, en collaboration avec les équipes de Stéria et de Microsoft, pour améliorer le service de données en conformité avec les spécifications du protocole ouvert OData pris en charge. L'objectif a été d'étendre la prise en charge des spécifications OData par le service de données OGDI DataLab en intégrant de nouveaux mots-clés et de nombreuses options de requêtes dans le but de faciliter l'accès et l'exploitation des données publiques.
+In this spirit, Bordeaux chose OGDI DataLab, the publishing platform for open data developed by Microsoft. The city worked in close collaboration with teams from Steria and Microsoft to improve the data service in accordance with the specifications of the OData open protocol. The goal was to extend the management of the OData specification by the OGDI DataLab data service, including new keywords and many query options in order to facilitate access and reuse of public data. 
 
-Ces évolutions et d'autres sont maintenant disponibles pour tous, dans la nouvelle version de la plateforme de publication OGDI DataLab v6 proposé dans cette solution Open Data Clé en main.
+These developments, and others to come, are now available for all users in the new version of the publication platform OGDI DataLab v6 proposed in the Microsoft Open Data "in a box" solution. 
 
 
 License
