@@ -292,6 +292,6 @@
   </data>
   <data name="OGDIDemoURLFormat" xml:space="preserve">
     <value>&lt;blockquote&gt;
-                http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;format={0}&lt;/blockquote&gt;</value>
+                http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq 'EVENING'&amp;format={0}&lt;/blockquote&gt;</value>
   </data>
 </root>

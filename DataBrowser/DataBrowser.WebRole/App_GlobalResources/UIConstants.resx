@@ -302,7 +302,7 @@
     <value>/Descriptions/Download.txt</value>
   </data>
   <data name="DPC_EquationLink" xml:space="preserve">
-    <value>http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;amp;format=json</value>
+    <value>http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq 'EVENING'&amp;amp;format=json</value>
   </data>
   <data name="DPC_GoogleEarthAltText" xml:space="preserve">
     <value>Click to get Google Earth</value>
