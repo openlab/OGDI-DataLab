@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ogdi.InteractiveSdk.Mvc.Repository {
+namespace Ogdi.InteractiveSdk.Mvc.Repository
+{
     using System;
     
     

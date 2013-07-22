@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ogdi.InteractiveSdk.Mvc.Resources.Views.Shared {
+namespace SharedResources
+{
     using System;
     
     
