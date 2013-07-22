@@ -294,8 +294,8 @@ var Utils = {
         tr.append(Utils.GetTableCell("partitionKey hidden", item["PartitionKey"], -1));
         tr.append(Utils.GetTableCell("rowKey hidden", item["RowKey"], -1));
         tr.append(Utils.GetTableCell("alias", item["alias"], 20));
-        tr.append(Utils.GetTableCell("description", item["description"], 32));
-        tr.append(Utils.GetTableCell("disclaimer", item["disclaimer"], 32));
+        tr.append(Utils.GetTableCell("description", item["description"], 28));
+        tr.append(Utils.GetTableCell("disclaimer", item["disclaimer"], 28));
         tr.append(Utils.GetTableCell("storageName", item["storageaccountname"], 20));
         tr.append(Utils.GetTableCell("storageKey hidden", item["storageaccountkey"], -1));
         tr.append(Utils.GetShowDatasetsLink());
