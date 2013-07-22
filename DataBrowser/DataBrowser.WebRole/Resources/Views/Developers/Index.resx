@@ -233,7 +233,7 @@
     <value>OGDI DataLab exposes data through &lt;a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank"&gt;
 				REST&lt;/a&gt; Web services. 
 					The basic format of an OGDI service call is 
-					http://ogdi.cloudapp.net/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
+					http://ogdifrance.cloudapp.net:8080/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
 			where:</value>
   </data>
   <data name="Paging" xml:space="preserve">
@@ -292,6 +292,6 @@
   </data>
   <data name="OGDIDemoURLFormat" xml:space="preserve">
     <value>&lt;blockquote&gt;
-                http://ogdi.cloudapp.net/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;format={0}&lt;/blockquote&gt;</value>
+                http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq 'EVN'&amp;format={0}&lt;/blockquote&gt;</value>
   </data>
 </root>

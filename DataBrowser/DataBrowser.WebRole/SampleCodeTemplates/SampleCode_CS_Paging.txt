@@ -19,7 +19,7 @@
     //      5. Right click on the project node in Solution Explorer
     //      6. Select Add Service Reference
     //      7. Enter service endpoint URL into the Address field
-    //         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc    
+    //         For this example, we are using the dc container and the url is http://ogdifrance.cloudapp.net:8080/v1/dc    
     //
     // The Ogdi.DataServiceContexts sample makes it
     // very easy for .NET developers to query
@@ -138,7 +138,7 @@
 
     private DataServiceQuery<Ogdi.BankLocationsItem> CreateDataServiceQuery()
     {
-        var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
+        var context = new Ogdi.dcDataService(new Uri("http://ogdifrance.cloudapp.net:8080/v1/dc"));
 
         var query = (from locations in context.BankLocations
                      select locations).Take(this.pageSize);

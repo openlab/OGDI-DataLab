@@ -880,7 +880,7 @@ namespace Ogdi.InteractiveSdk.Mvc.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à http://ogdi.cloudapp.net/v1/dc/CrimeIncidents?$filter=shift eq &apos;EVN&apos;&amp;amp;format=json.
+        ///   Recherche une chaîne localisée semblable à http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq &apos;EVN&apos;&amp;amp;format=json.
         /// </summary>
         public static string DPC_EquationLink {
             get {

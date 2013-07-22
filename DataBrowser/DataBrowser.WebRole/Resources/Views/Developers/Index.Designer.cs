@@ -279,7 +279,7 @@ namespace DevelopersResources {
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à &lt;blockquote&gt;
-        ///                http://ogdi.cloudapp.net/v1/dc/CrimeIncidents?$filter=shift eq &apos;EVN&apos;&amp;format={0}&lt;/blockquote&gt;.
+        ///                http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents?$filter=shift eq &apos;EVN&apos;&amp;format={0}&lt;/blockquote&gt;.
         /// </summary>
         public static string OGDIDemoURLFormat {
             get {
@@ -291,7 +291,7 @@ namespace DevelopersResources {
         ///   Recherche une chaîne localisée semblable à OGDI DataLab exposes data through &lt;a href=&quot;http://en.wikipedia.org/wiki/Representational_State_Transfer&quot; target=&quot;_blank&quot;&gt;
         ///				REST&lt;/a&gt; Web services. 
         ///					The basic format of an OGDI service call is 
-        ///					http://ogdi.cloudapp.net/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
+        ///					http://ogdifrance.cloudapp.net:8080/v1/&lt;i&gt;container&lt;/i&gt;/&lt;i&gt;dataset&lt;/i&gt;?&lt;i&gt;query&lt;/i&gt;,
         ///			where:.
         /// </summary>
         public static string OGDIExposesDataThrough {
