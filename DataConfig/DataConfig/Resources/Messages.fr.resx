@@ -133,7 +133,7 @@
     <value>Impossible de retrouver ce catalogue.</value>
   </data>
   <data name="ConfirmDeleteCatalog" xml:space="preserve">
-    <value>Etes-vous sûr de vouloir supprimer ce catalogue ?</value>
+    <value>Etes-vous sûr de vouloir supprimer ce catalogue ainsi que tous les jeux de données associés ?</value>
   </data>
   <data name="ConfirmDeleteDataset" xml:space="preserve">
     <value>Etes-vous sûr de vouloir supprimer ce jeu de données ?</value>
