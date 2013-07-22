@@ -286,9 +286,6 @@ techniques qui peuvent être utilisées comme la &lt;a href="http://softwareas.c
     <value>Pour retourner des données géo-spatiales au format KML, il suffit de rajouter &lt;i&gt;format=kml&lt;/i&gt;
 à la requête. Par exemple, pour retourner les points d'apport volontaire des déchets ménagers en verre pour la métropole de Rennes au format KML :</value>
   </data>
-  <data name="ProjectEstLeNomDuProjet" xml:space="preserve">
-    <value>&lt;b&gt;&lt;i&gt;project&lt;/i&gt;&lt;/b&gt; est le nom de projet de service pour la publication du service fondé sur le Kit de démarrage OGDI DataLab dans Windows Azure (par exemple "ogdifrancedataservice") ;</value>
-  </data>
   <data name="OGDICanAlsoReturnDataInTheRDF" xml:space="preserve">
     <value>Le service de données d’OGDI DataLab peut aussi retourner les données au format  &lt;a href="http://fr.wikipedia.org/wiki/Resource_Description_Framework"
     target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt;.

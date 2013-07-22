@@ -1,12 +1,11 @@
-﻿using Microsoft.WindowsAzure.ServiceRuntime;
+﻿using Microsoft.ApplicationServer.Caching;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Ogdi.InteractiveSdk.Mvc.Models;
-using Ogdi.InteractiveSdk.Mvc.Repository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
-using Microsoft.ApplicationServer.Caching;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {
@@ -126,8 +125,8 @@ namespace Ogdi.InteractiveSdk.Mvc
 		{
 			var list = from element in Helper.ServiceObject.GetData(
 					containerAlias,
-					Resources.EntitySetTableName, null,
-					Convert.ToInt32(Resources.EntitySetPageSize, CultureInfo.InvariantCulture),
+                    Ogdi.InteractiveSdk.Mvc.Repository.Resources.EntitySetTableName, null,
+                    Convert.ToInt32(Ogdi.InteractiveSdk.Mvc.Repository.Resources.EntitySetPageSize, CultureInfo.InvariantCulture),
 					null, null
 				).Elements("properties") 
                        select CreateEntitySet(element, containerAlias);

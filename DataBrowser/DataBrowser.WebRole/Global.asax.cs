@@ -129,18 +129,21 @@ namespace Ogdi.InteractiveSdk.Mvc
             RegisterRoutes(RouteTable.Routes);
         }
 
-        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        protected void Application_BeginRequest()
         {
-            if (HttpContext.Current.Request.UserLanguages != null)
+            CultureInfo ci = new CultureInfo("en-US");
+
+            if (!string.IsNullOrEmpty(Request.QueryString["lang"]))
             {
-                var culture = HttpContext.Current.Request.UserLanguages[0];
-                if (!string.IsNullOrEmpty(culture))
-                {
-                    CultureInfo ci = new CultureInfo(culture);
-                    Thread.CurrentThread.CurrentCulture = ci;
-                    Thread.CurrentThread.CurrentUICulture = ci;
-                }
+                ci = new CultureInfo(Request.QueryString["lang"]);
             }
+            else if (Request.UserLanguages.Length > 0)
+            {
+                ci = new CultureInfo(Request.UserLanguages[0]);
+            }
+
+            Thread.CurrentThread.CurrentUICulture = ci;
+            Thread.CurrentThread.CurrentCulture = ci;
         }
     }
 }

@@ -617,8 +617,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AuthorInfo.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Views\Shared\Buttons.Designer.cs" />
-    <Compile Include="Resources\Views\Shared\Buttons.fr.Designer.cs" />
+    <Compile Include="Resources\Views\Shared\Buttons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Buttons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Buttons.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Buttons.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Shared\Comment.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1265,8 +1273,14 @@
       <LastGenOutput>AuthorInfo.Designer.cs</LastGenOutput>
       <CustomToolNamespace>SharedResources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\Shared\Buttons.fr.resx" />
-    <EmbeddedResource Include="Resources\Views\Shared\Buttons.resx" />
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Buttons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.Designer.cs</LastGenOutput>

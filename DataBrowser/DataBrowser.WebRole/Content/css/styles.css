@@ -13,8 +13,8 @@ label { cursor: pointer; }
 
 h1, h2, h3, h4 { font-size: 18pt; margin: 0px; padding: 0px;margin-top:10px; }
 h1 { font-weight: normal; font-size: 30px;color: #222;background: none transparent scroll repeat 0% 0%;}
-h2 { font-size: 50px; font-weight: 200; font-family: 'Segoe UI Light', arial, sans-serif; }
-h3 { font-size: 40px; font-weight: 200; font-family: 'Segoe UI Light', Arial, sans-serif; }
+h2 { font-size: 50px; font-weight: lighter; font-family: 'Segoe UI Light', 'Segoe UI', arial, sans-serif; }
+h3 { font-size: 40px; font-weight: lighter; font-family: 'Segoe UI Light', 'Segoe UI', Arial, sans-serif; }
 h4 { color: #333; font-size: 16px; font-weight: bold; font-family: 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif; }
 
 p { font-family: Calibri, arial, sans-serif; }

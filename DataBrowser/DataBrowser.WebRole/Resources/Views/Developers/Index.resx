@@ -283,9 +283,6 @@
 			query. For example, to retrieve geospatial points in KML format for crime incidents
 			in DC that occurred during the police department's evening shift:</value>
   </data>
-  <data name="ProjectEstLeNomDuProjet" xml:space="preserve">
-    <value>&lt;project&gt; is the name of the service project for the publication service based on the OGDI DataLab starter kit in Windows Azure ("ogdifrancedataservice" for example)</value>
-  </data>
   <data name="OGDICanAlsoReturnDataInTheRDF" xml:space="preserve">
     <value>OGDI DataLab can also return data in the &lt;a href="http://en.wikipedia.org/wiki/Resource_Description_Framework"
     target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt; format. RDF is a graph model for describing formally web resources and their associated metadata. Developed by W3C, RDF is a base language for semantic Web. To return data in RDF format, simply append the format=rdf parameter to your query:</value>
