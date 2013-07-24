@@ -3,18 +3,13 @@ using DataConfig.Models;
 using DataConfig.Resources;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace DataConfig.Controllers
 {
     public class DatasetController : Controller
     {
-        //
-        // POST: /Dataset/Load
-
-        [HttpPost]
+        /*
         public ActionResult Load(LoadDataset model)
         {
             try
@@ -38,6 +33,7 @@ namespace DataConfig.Controllers
                 return Json(new { Error = Messages.CannotConnectLight });
             }
         }
+         * */
 
         //
         // POST: /Dataset/Delete
@@ -47,7 +43,7 @@ namespace DataConfig.Controllers
         {
             try
             {
-                CloudTable tableMetadata = Azure.GetCloudTable(model.StorageName, model.StorageKey, Azure.Table.TableMetadata);
+                CloudTable tableMetadata = Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, Azure.Table.TableMetadata);
                 if (!tableMetadata.Exists())
                 {
                     return Json(new { Error = string.Format(Messages.TableDoesNotExist, Azure.Table.TableMetadata) });
@@ -67,7 +63,7 @@ namespace DataConfig.Controllers
                 tableMetadata.Execute(TableOperation.Delete(entity));
 
                 // Deleting rows in TableColumnsMetadata
-                CloudTable tableColumnsMetadata = Azure.GetCloudTable(model.StorageName, model.StorageKey, Azure.Table.TableColumnsMetadata);
+                CloudTable tableColumnsMetadata = Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, Azure.Table.TableColumnsMetadata);
                 if (tableColumnsMetadata.Exists())
                 {
                     TableQuery<TableColumnsMetadata> rangeQuery = new TableQuery<TableColumnsMetadata>().Where(TableQuery.GenerateFilterCondition("entityset", QueryComparisons.Equal, entitySet));
@@ -78,7 +74,7 @@ namespace DataConfig.Controllers
                 }
 
                 // Deleting rows in EntityMetadata
-                CloudTable entityMetadata = Azure.GetCloudTable(model.StorageName, model.StorageKey, Azure.Table.EntityMetadata);
+                CloudTable entityMetadata = Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, Azure.Table.EntityMetadata);
                 if (entityMetadata.Exists())
                 {
                     TableQuery<EntityMetadata> rangeQuery = new TableQuery<EntityMetadata>().Where(TableQuery.GenerateFilterCondition("entityset", QueryComparisons.Equal, entitySet));
@@ -89,7 +85,7 @@ namespace DataConfig.Controllers
                 }
 
                 // Deleting rows in ProcessorParams
-                CloudTable processorParams = Azure.GetCloudTable(model.StorageName, model.StorageKey, Azure.Table.ProcessorParams);
+                CloudTable processorParams = Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, Azure.Table.ProcessorParams);
                 if (processorParams.Exists())
                 {
                     TableQuery<ProcessorParams> rangeQuery = new TableQuery<ProcessorParams>().Where(TableQuery.GenerateFilterCondition("entityset", QueryComparisons.Equal, entitySet));
@@ -100,7 +96,7 @@ namespace DataConfig.Controllers
                 }
 
                 // Deleting the data table
-                Azure.GetCloudTable(model.StorageName, model.StorageKey, entitySet).DeleteIfExists();
+                Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, entitySet).DeleteIfExists();
 
                 return Json(new { Result = string.Empty });
             }

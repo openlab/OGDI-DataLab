@@ -132,8 +132,8 @@
   <data name="CatalogNotFound" xml:space="preserve">
     <value>Cannot retrieve this catalog.</value>
   </data>
-  <data name="ConfirmDeleteCatalog" xml:space="preserve">
-    <value>Are you sure you want to delete this catalog and all associated datasets?</value>
+  <data name="ConfirmDeleteCatalogs" xml:space="preserve">
+    <value>Are you sure you want to delete the selected catalogs and all the associated datasets?</value>
   </data>
   <data name="ConfirmDeleteDataset" xml:space="preserve">
     <value>Are you sure you want to delete this dataset?</value>
@@ -144,8 +144,20 @@
   <data name="DatasetNotFound" xml:space="preserve">
     <value>Cannot retrieve this dataset.</value>
   </data>
+  <data name="DeleteSelectedCatalogs" xml:space="preserve">
+    <value>Delete the selected catalogs</value>
+  </data>
   <data name="IncompleteForm" xml:space="preserve">
     <value>Your form is incomplete, please fill out missing fields.</value>
+  </data>
+  <data name="MissingStorageKey" xml:space="preserve">
+    <value>Storage key is a mandatory field.</value>
+  </data>
+  <data name="MissingStorageName" xml:space="preserve">
+    <value>Storage name is a mandatory field.</value>
+  </data>
+  <data name="NoCatalogSelected" xml:space="preserve">
+    <value>No catalog selected.</value>
   </data>
   <data name="StartMessage" xml:space="preserve">
     <value>First, configure your storage account</value>

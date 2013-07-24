@@ -123,14 +123,23 @@
   <data name="Alias" xml:space="preserve">
     <value>Alias</value>
   </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
   <data name="CatalogsList" xml:space="preserve">
     <value>List of catalogs</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="Change" xml:space="preserve">
+    <value>CHANGE</value>
+  </data>
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="Dataset" xml:space="preserve">
+    <value>Dataset</value>
   </data>
   <data name="DatasetsList" xml:space="preserve">
     <value>List of datasets</value>
@@ -144,8 +153,14 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>Deselect all</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Disclaimer</value>
+  </data>
+  <data name="DisplayBy" xml:space="preserve">
+    <value>Display by</value>
   </data>
   <data name="EntitySet" xml:space="preserve">
     <value>Entityset</value>
@@ -155,6 +170,15 @@
   </data>
   <data name="NewCatalog" xml:space="preserve">
     <value>New catalog</value>
+  </data>
+  <data name="NoCatalog" xml:space="preserve">
+    <value>No catalog found</value>
+  </data>
+  <data name="NoDataset" xml:space="preserve">
+    <value>No dataset found</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
   </data>
   <data name="ShowCatalogs" xml:space="preserve">
     <value>Show catalogs</value>

@@ -162,7 +162,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\DatasetController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +170,7 @@
     <Compile Include="Models\CatalogModels.cs" />
     <Compile Include="Models\DatasetModels.cs" />
     <Compile Include="Models\EntityModels.cs" />
+    <Compile Include="Models\MainModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.fr.Designer.cs">
       <DependentUpon>Messages.fr.resx</DependentUpon>
@@ -212,6 +213,7 @@
     <Content Include="Content\Images\Microsoft.png" />
     <Content Include="Content\Images\OpenData_en.png" />
     <Content Include="Content\Images\OpenData_fr.png" />
+    <Content Include="Content\Scripts\Home\Index.old.js" />
     <Content Include="Content\Scripts\Home\Index.js" />
     <Content Include="Content\Scripts\Shared\_Layout.js" />
     <Content Include="Content\Scripts\Vendor\app.js" />
@@ -262,13 +264,15 @@
     <Content Include="Content\Styles\Layout.less" />
     <Content Include="Content\Styles\Site.less" />
     <Content Include="Content\Styles\Variables.less" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.eot" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.ttf" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.woff" />
     <Content Include="Content\Fonts\Icons_General\general_foundicons.eot" />
     <Content Include="Content\Fonts\Icons_General\general_foundicons.ttf" />
     <Content Include="Content\Fonts\Icons_General\general_foundicons.woff" />
+    <Content Include="Views\Main\Start.cshtml" />
+    <Content Include="Views\Main\Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Messages.fr.resx">

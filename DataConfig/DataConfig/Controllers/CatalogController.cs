@@ -3,39 +3,12 @@ using DataConfig.Models;
 using DataConfig.Resources;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace DataConfig.Controllers
 {
     public class CatalogController : Controller
     {
-        //
-        // POST: /Catalog/Load
-
-        [HttpPost]
-        public ActionResult Load(LoadCatalog model)
-        {
-            try
-            {
-                CloudTable availableEndpoints = Azure.GetCloudTable(model.ConfigStorageName, model.ConfigStorageKey, Azure.Table.AvailableEndpoints);
-                availableEndpoints.CreateIfNotExists();
-
-                IEnumerable<AvailableEndpoint> catalogs = availableEndpoints.ExecuteQuery(new TableQuery<AvailableEndpoint>());
-                if (catalogs != null)
-                {
-                    catalogs = catalogs.OrderBy(c => c.alias);
-                }
-
-                return Json(new { Result = catalogs });
-            }
-            catch (Exception)
-            {
-                return Json(new { Error = Messages.CannotConnect });
-            }
-        }
-
         //
         // POST: /Catalog/Add
 
@@ -48,12 +21,12 @@ namespace DataConfig.Controllers
 
                 availableEndpoints.CreateIfNotExists();
 
-                AvailableEndpoint entity = new AvailableEndpoint(model.Alias, string.Empty);
+                AvailableEndpoint entity = new AvailableEndpoint(model.Alias, model.Alias);
                 entity.alias = model.Alias;
                 entity.description = model.Description;
                 entity.disclaimer = model.Disclaimer;
-                entity.storageaccountname = model.StorageName;
-                entity.storageaccountkey = model.StorageKey;
+                entity.storageaccountname = model.DataStorageName;
+                entity.storageaccountkey = model.DataStorageKey;
 
                 if (!entity.IsValid())
                 {
@@ -116,7 +89,7 @@ namespace DataConfig.Controllers
                 Azure.GetCloudTable(dataStorageName, dataStorageKey, Azure.Table.ProcessorParams).DeleteIfExists();
                 Azure.GetCloudTable(dataStorageName, dataStorageKey, Azure.Table.TableColumnsMetadata).DeleteIfExists();
 
-                return Json(new { Result = string.Empty });
+                return Json(new { PartitionKey = model.PartitionKey, RowKey = model.RowKey ?? string.Empty });
             }
             catch (Exception ex)
             {

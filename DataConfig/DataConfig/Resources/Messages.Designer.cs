@@ -106,11 +106,11 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this catalog and all associated datasets?.
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete the selected catalogs and all the associated datasets?.
         /// </summary>
-        public static string ConfirmDeleteCatalog {
+        public static string ConfirmDeleteCatalogs {
             get {
-                return ResourceManager.GetString("ConfirmDeleteCatalog", resourceCulture);
+                return ResourceManager.GetString("ConfirmDeleteCatalogs", resourceCulture);
             }
         }
         
@@ -142,11 +142,47 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete the selected catalogs.
+        /// </summary>
+        public static string DeleteSelectedCatalogs {
+            get {
+                return ResourceManager.GetString("DeleteSelectedCatalogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Your form is incomplete, please fill out missing fields..
         /// </summary>
         public static string IncompleteForm {
             get {
                 return ResourceManager.GetString("IncompleteForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Storage key is a mandatory field..
+        /// </summary>
+        public static string MissingStorageKey {
+            get {
+                return ResourceManager.GetString("MissingStorageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Storage name is a mandatory field..
+        /// </summary>
+        public static string MissingStorageName {
+            get {
+                return ResourceManager.GetString("MissingStorageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No catalog selected..
+        /// </summary>
+        public static string NoCatalogSelected {
+            get {
+                return ResourceManager.GetString("NoCatalogSelected", resourceCulture);
             }
         }
         

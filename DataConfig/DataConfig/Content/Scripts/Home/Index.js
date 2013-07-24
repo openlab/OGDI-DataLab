@@ -1,76 +1,48 @@
 ﻿/*
+** Onload
+*/
+$(function () {
+    // Bind row click event
+    $("tbody tr").click(Utils.RowClickEvent);
+
+    // Bind catalogs buttons
+    $("#selectAllCatalogs").click(Catalogs.SelectAll);
+    $("#addCatalog").click(Catalogs.Add);
+    $("#deleteCatalogs").click(Catalogs.Delete);
+});
+
+
+/*
 ** Catalogs object
 */
 var Catalogs = {
-    Load: function () {
-        // Remove start message
-        $("#startMessage").remove();
+    _selectAll: true,
+    SelectAll: function () {
+        // Select or unselect all catalogs
+        $("#catalogs .deleteBox input").prop("checked", Catalogs._selectAll);
 
-        // Hide current content
-        $(".content").hide();
+        // Switch flag
+        Catalogs._selectAll = !Catalogs._selectAll;
 
-        // Show AJAX loader
-        $("#ajaxLoader").css("visibility", "visible");
-
-        // Build form
-        var form = {
-            "ConfigStorageName": $("#configStorageName").val(),
-            "ConfigStorageKey": $("#configStorageKey").val()
-        };
-
-        // Send AJAX request
-        $.ajax({
-            type: "POST",
-            url: "/Catalog/Load",
-            data: form,
-            success: function (data) {
-                if (data.Error) {
-                    // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
-                } else {
-                    // Delete old AvailableEndpoints
-                    $("#catalogContent table tbody tr").remove();
-
-                    // Display each AvailableEndpoint
-                    $.each(data.Result, function (ndx, item) {
-                        $("#catalogContent table tbody").append(Utils.GetCatalogRow(item));
-                    });
-
-                    // Set datasets link event
-                    Utils.SetDatasetsLinkEvent();
-
-                    // Display content
-                    $("#catalogContent").fadeIn("fast");
-                }
-
-                // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
-            },
-            error: function (data) {
-                // Display error
-                $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
-
-                // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
-            }
-        });
+        // Change button value
+        $("#selectAllCatalogs").html(Catalogs._selectAll ? Strings.SelectAll : Strings.DeselectAll);
     },
     Add: function () {
         // Close modal
-        $('#addCatalog').trigger('reveal:close');
+        $('#addCatalogModal').trigger('reveal:close');
 
         // Show AJAX loader
-        $("#ajaxLoader").css("visibility", "visible");
+        $("#ajaxLoader").css("display", "inline-block");
 
         // Build form
         var form = {
-            "ConfigStorageName": $("#configStorageName").val(),
-            "ConfigStorageKey": $("#configStorageKey").val(),
-            "Alias": $("#addCatalog #alias").val(),
-            "Description": $("#addCatalog #description").val(),
-            "Disclaimer": $("#addCatalog #disclaimer").val(),
-            "StorageName": $("#addCatalog #storageName").val(),
-            "StorageKey": $("#addCatalog #storageKey").val()
+            "ConfigStorageName": Config.StorageName,
+            "ConfigStorageKey": Config.StorageKey,
+            "Alias": $("#addCatalogModal #alias").val(),
+            "Description": $("#addCatalogModal #description").val(),
+            "Disclaimer": $("#addCatalogModal #disclaimer").val(),
+            "DataStorageName": $("#addCatalogModal #dataStorageName").val(),
+            "DataStorageKey": $("#addCatalogModal #dataStorageKey").val()
         };
 
         // Send AJAX request
@@ -81,79 +53,92 @@ var Catalogs = {
             success: function (data) {
                 if (data.Error) {
                     // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                    $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.Error));
                 } else {
-                    // Display catalog
-                    $("#catalogContent table tbody").append(Utils.GetCatalogRow(data.Result));
+                    // Generate new catalog row
+                    var tr = Utils.GetCatalogRow(data.Result);
 
-                    // Set datasets link event
-                    Utils.SetDatasetsLinkEvent();
+                    // Display new catalog row
+                    $("#catalogs tbody").append(tr);
 
-                    // Display message
-                    $("#alertBox").append(Utils.GetAlertBox("success", Strings.CatalogAdded));
+                    // Bind row click event
+                    $(tr).click(Utils.RowClickEvent);
+
+                    // Display success message
+                    $("#alertBoxContainer").append(Utils.GetAlertBox("success", Strings.CatalogAdded));
                 }
-
-                // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
             },
             error: function (data) {
                 // Display error
-                $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
-
+                $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.responseText));
+            },
+            complete: function () {
                 // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
+                $("#ajaxLoader").css("display", "none");
             }
         });
     },
-    Delete: function (partitionKey, rowKey) {
-        if (confirm(Strings.ConfirmDeleteCatalog)) {
+    Delete: function () {
+        var checkboxes = $("#catalogs .deleteBox input:checked");
+
+        // Check if at least one catalog has been selected
+        if ($(checkboxes).length == 0) {
+            alert(Strings.NoCatalogSelected);
+            return;
+        }
+
+        // Deletion confirmation message
+        if (confirm(Strings.ConfirmDeleteCatalogs)) {
             // Show AJAX loader
-            $("#ajaxLoader").css("visibility", "visible");
+            $("#ajaxLoader").css("display", "inline-block");
 
-            // Build form
-            var form = {
-                "ConfigStorageName": $("#configStorageName").val(),
-                "ConfigStorageKey": $("#configStorageKey").val(),
-                "PartitionKey": partitionKey,
-                "RowKey": rowKey
-            };
+            // Delete each selected catalog
+            for (var ndx = 0; ndx < checkboxes.length; ++ndx) {
+                // Retrieve current row
+                var tr = $(checkboxes[ndx]).parents("tr");
 
-            // Send AJAX request
-            $.ajax({
-                type: "POST",
-                url: "/Catalog/Delete",
-                data: form,
-                success: function (data) {
-                    if (data.Error) {
+                // Build form
+                var form = {
+                    "ConfigStorageName": Config.StorageName,
+                    "ConfigStorageKey": Config.StorageKey,
+                    "PartitionKey": $(tr).find(".partitionKey").html(),
+                    "RowKey": $(tr).find(".rowKey").html()
+                };
+
+                // Send AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: "/Catalog/Delete",
+                    data: form,
+                    success: function (data) {
+                        if (data.Error) {
+                            // Display error
+                            $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.Error));
+                        } else {
+                            // Remove current catalog row
+                            $("#catalogs tbody tr").each(function () {
+                                if ($(this).find(".partitionKey").html() == data.PartitionKey && $(this).find(".rowKey").html() == data.RowKey) {
+                                    $(this).fadeOut("slow", function () { $(this).remove(); });
+                                }
+                            });
+                        }
+                    },
+                    error: function (data) {
                         // Display error
-                        $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
-                    } else {
-                        // Delete catalog (UI)
-                        $.each($("#catalogContent table tbody tr"), function (ndx, item) {
-                            if ($(item).find(".partitionKey").html() == partitionKey && $(item).find(".rowKey").html() == rowKey) {
-                                $(item).fadeOut("slow", function () {
-                                    $(item).remove();
-                                    $("#alertBox").append(Utils.GetAlertBox("success", Strings.CatalogDeleted));
-                                });
-                                return false;
-                            }
-                        });
+                        $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.responseText));
+                    },
+                    complete: function () {
+                        // Hide AJAX loader only when all catalogs have been deleted
+                        if (ndx == checkboxes.length) {
+                            $("#ajaxLoader").css("display", "none");
+                        }
                     }
-
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
-                },
-                error: function (data) {
-                    // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
-
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
-                }
-            });
+                });
+            }
         }
     }
 };
+
 
 /*
 ** Datasets object
@@ -183,7 +168,7 @@ var Datasets = {
                     $("#catalogContent").toggle("slide");
 
                     // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                    $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.Error));
                 } else {
                     // Delete old content
                     $("#datasetContent table tbody tr").remove();
@@ -201,24 +186,25 @@ var Datasets = {
                 }
 
                 // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
+                $("#ajaxLoader").css("display", "none");
             },
             error: function (data) {
                 // Show previous content
                 $("#catalogContent").toggle("slide");
 
                 // Display error
-                $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
+                $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.responseText));
 
                 // Hide AJAX loader
-                $("#ajaxLoader").css("visibility", "hidden");
+                $("#ajaxLoader").css("display", "none");
             }
         });
     },
     Delete: function (partitionKey, rowKey) {
+        // Deletion confirmation
         if (confirm(Strings.ConfirmDeleteDataset)) {
             // Show AJAX loader
-            $("#ajaxLoader").css("visibility", "visible");
+            $("#ajaxLoader").css("display", "inline-block");
 
             // Build form
             var form = {
@@ -236,50 +222,43 @@ var Datasets = {
                 success: function (data) {
                     if (data.Error) {
                         // Display error
-                        $("#alertBox").append(Utils.GetAlertBox("alert", data.Error));
+                        $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.Error));
+                        $("#ajaxLoader").css("display", "none");
                     } else {
                         // Delete dataset (UI)
                         $.each($("#datasetContent table tbody tr"), function (ndx, item) {
                             if ($(item).find(".partitionKey").html() == partitionKey && $(item).find(".rowKey").html() == rowKey) {
                                 $(item).fadeOut("slow", function () {
                                     $(item).remove();
-                                    $("#alertBox").append(Utils.GetAlertBox("success", Strings.DatasetDeleted));
+                                    $("#alertBoxContainer").append(Utils.GetAlertBox("success", Strings.DatasetDeleted));
                                 });
                                 return false;
                             }
                         });
-                    }
 
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
+                        // Hide AJAX loader
+                        $("#ajaxLoader").css("display", "none");
+                    }
                 },
                 error: function (data) {
-                    // Display error
-                    $("#alertBox").append(Utils.GetAlertBox("alert", data.responseText));
-
-                    // Hide AJAX loader
-                    $("#ajaxLoader").css("visibility", "hidden");
+                    $("#alertBoxContainer").append(Utils.GetAlertBox("alert", data.responseText));
+                    $("#ajaxLoader").css("display", "none");
                 }
             });
         }
     }
 };
 
+
 /*
 ** Utils object
 */
 var Utils = {
-    SetDatasetsLinkEvent: function () {
-        $(".datasetsLink > a").click(function () {
-            var tr = $(this).parent().parent();
-            var catalogAlias = $(tr).find("td.alias").attr("title");
-            var storageName = $(tr).find("td.storageName").attr("title");
-            var storageKey = $(tr).find("td.storageKey").html();
-            $("#ajaxLoader").css("visibility", "visible");
-            $("#catalogContent").toggle("slide", function () {
-                Datasets.Load(catalogAlias, storageName, storageKey);
-            });
-        });
+    RowClickEvent: function(e) {
+        if (!$(e.toElement).is("input")) {
+            var checkbox = $(this).find("input[type=checkbox]");
+            $(checkbox).prop("checked", $(checkbox).is(":checked") ? false : true);
+        }
     },
     GetAlertBox: function (type, message) {
         var alertBox = $("<div/>");
@@ -290,22 +269,20 @@ var Utils = {
     },
     GetCatalogRow: function (item) {
         var tr = $("<tr/>");
-        tr.append($("<td/>").html(Utils.GetDeleteButton(item, "Catalogs", Strings.DeleteCatalog)));
-        tr.append(Utils.GetTableCell("partitionKey hidden", item["PartitionKey"], -1));
-        tr.append(Utils.GetTableCell("rowKey hidden", item["RowKey"], -1));
-        tr.append(Utils.GetTableCell("alias", item["alias"], 20));
-        tr.append(Utils.GetTableCell("description", item["description"], 28));
-        tr.append(Utils.GetTableCell("disclaimer", item["disclaimer"], 28));
-        tr.append(Utils.GetTableCell("storageName", item["storageaccountname"], 20));
-        tr.append(Utils.GetTableCell("storageKey hidden", item["storageaccountkey"], -1));
-        tr.append(Utils.GetShowDatasetsLink());
+        tr.append(Utils.GetTableCell("deleteBox", "<input type='checkbox' />", -1));
+        tr.append(Utils.GetTableCell("hidden partitionKey", item["PartitionKey"], -1));
+        tr.append(Utils.GetTableCell("hidden rowKey", item["RowKey"], -1));
+        tr.append(Utils.GetTableCell(null, item["alias"], 20));
+        tr.append(Utils.GetTableCell(null, item["description"], 28));
+        tr.append(Utils.GetTableCell(null, item["disclaimer"], 28));
+        tr.append(Utils.GetTableCell(null, item["storageaccountname"], 20));
         return tr;
     },
     GetDatasetRow: function (item) {
         var tr = $("<tr/>");
-        tr.append($("<td/>").html(Utils.GetDeleteButton(item, "Datasets", Strings.DeleteDataset)));
-        tr.append(Utils.GetTableCell("partitionKey hidden", item["PartitionKey"], -1));
-        tr.append(Utils.GetTableCell("rowKey hidden", item["RowKey"], -1));
+        tr.append(Utils.GetTableCell("deleteBox", "<input type='checkbox' />", -1));
+        tr.append(Utils.GetTableCell("hidden partitionKey", item["PartitionKey"], -1));
+        tr.append(Utils.GetTableCell("hidden rowKey", item["RowKey"], -1));
         tr.append(Utils.GetTableCell("entityset", item["entityset"], 20));
         tr.append(Utils.GetTableCell("name", item["name"], 32));
         tr.append(Utils.GetTableCell("source", item["source"], 20));
@@ -320,22 +297,6 @@ var Utils = {
             cell.attr("title", content);
             cell.html(content.length > maxLenght ? content.substr(0, maxLenght) + "..." : content);
         }
-        return cell;
-    },
-    GetDeleteButton: function (item, type, title) {
-        var button = $("<button/>");
-        button.addClass("tiny radius alert button");
-        button.attr("title", title);
-        button.attr("onclick", type + ".Delete('" + item["PartitionKey"] + "', '" + item["RowKey"] + "')");
-        button.html($("<i/>").addClass("icon-general-remove"));
-        return button;
-    },
-    GetShowDatasetsLink: function () {
-        var cell = $("<td/>");
-        var link = $("<a/>");
-        link.html(Strings.ShowDatasets + " <i class='icon-general-right-arrow'></i>");
-        cell.addClass("datasetsLink");
-        cell.html(link);
         return cell;
     }
 };

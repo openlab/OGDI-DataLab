@@ -1,19 +1,9 @@
 ﻿@import "Variables.less";
 
-#configuration {
-    #showCatalogs {
-        padding-top: 17px;
-
-        button {
-            width: 100%;
-            padding-top: 8px;
-            padding-bottom: 8px;
-        }
-    }
-}
-
-#ajaxLoader {
-    visibility: hidden;
+#startButton {
+    margin-top: 17px;
+    width: 100%;
+    padding: 8px 0;
 }
 
 #startMessageText {
@@ -23,43 +13,58 @@
     padding-top: 36px;
 }
 
-.content {
-    display: none;
+.alert-box {
+    margin: 12px 0 0 0 !important;
+}
 
-    #addCatalogButton {
-        padding-top: 50px;
-    }
+.panel {
+    margin: 0;
+    padding: 12px 20px;
 
-    #catalogAlias {
-        font-size: 28px;
-    }
+    h5 {
+        margin: 0;
 
-    table {
-        width: 100%;
-
-        td {
-            vertical-align: bottom;
-
-            button {
-                padding: 4px 6px !important;
-            }
-
-            i {
-                font-size: 10px;
-            }
-
-            &.hidden {
-                display: none;
-            }
-
-            &.datasetsLink {
-                width: 184px;
-
-                a:hover {
-                    cursor: pointer;
-                }
-            }
+        i {
+            color: green;
         }
     }
 }
-         
+
+#ajaxLoader {
+    display: none;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    margin: 0;
+
+    tbody tr:hover {
+        cursor: pointer;
+        background-color: @blueLight;
+    }
+
+    td.hidden {
+        display: none;
+    }
+
+    td.deleteBox {
+        width: 20px;
+    }
+
+    button {
+        padding: 4px 6px !important;
+    }
+
+    i {
+        font-size: 10px;
+    }
+}
+
+.buttonBar {
+    margin-bottom: 6px !important;
+
+    a {
+        margin-left: 6px;
+    }
+}
