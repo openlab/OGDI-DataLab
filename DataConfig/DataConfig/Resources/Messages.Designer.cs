@@ -115,11 +115,11 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this dataset?.
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete the selected datasets?.
         /// </summary>
-        public static string ConfirmDeleteDataset {
+        public static string ConfirmDeleteDatasets {
             get {
-                return ResourceManager.GetString("ConfirmDeleteDataset", resourceCulture);
+                return ResourceManager.GetString("ConfirmDeleteDatasets", resourceCulture);
             }
         }
         
@@ -147,6 +147,15 @@ namespace DataConfig.Resources {
         public static string DeleteSelectedCatalogs {
             get {
                 return ResourceManager.GetString("DeleteSelectedCatalogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete the selected datasets.
+        /// </summary>
+        public static string DeleteSelectedDatasets {
+            get {
+                return ResourceManager.GetString("DeleteSelectedDatasets", resourceCulture);
             }
         }
         
@@ -183,6 +192,15 @@ namespace DataConfig.Resources {
         public static string NoCatalogSelected {
             get {
                 return ResourceManager.GetString("NoCatalogSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No dataset selected..
+        /// </summary>
+        public static string NoDatasetSelected {
+            get {
+                return ResourceManager.GetString("NoDatasetSelected", resourceCulture);
             }
         }
         

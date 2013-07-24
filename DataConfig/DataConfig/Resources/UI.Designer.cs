@@ -259,15 +259,6 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à show datasets.
-        /// </summary>
-        public static string ShowDatasets {
-            get {
-                return ResourceManager.GetString("ShowDatasets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Source.
         /// </summary>
         public static string Source {

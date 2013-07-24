@@ -98,7 +98,7 @@ namespace DataConfig.Controllers
                 // Deleting the data table
                 Azure.GetCloudTable(model.DataStorageName, model.DataStorageKey, entitySet).DeleteIfExists();
 
-                return Json(new { Result = string.Empty });
+                return Json(new { PartitionKey = model.PartitionKey, RowKey = model.RowKey ?? string.Empty });
             }
             catch (Exception ex)
             {

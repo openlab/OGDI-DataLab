@@ -183,9 +183,6 @@
   <data name="ShowCatalogs" xml:space="preserve">
     <value>Show catalogs</value>
   </data>
-  <data name="ShowDatasets" xml:space="preserve">
-    <value>show datasets</value>
-  </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>
   </data>

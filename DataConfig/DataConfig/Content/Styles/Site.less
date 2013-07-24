@@ -44,12 +44,19 @@ table {
         background-color: @blueLight;
     }
 
-    td.hidden {
-        display: none;
-    }
+    td {
+        max-width: 150px;
+        word-wrap: break-word;
+        overflow: hidden;
 
-    td.deleteBox {
-        width: 20px;
+        &.hidden {
+            display: none;
+        }
+
+        &.deleteBox {
+            width: 40px;
+            padding-right: 4px;
+        }
     }
 
     button {

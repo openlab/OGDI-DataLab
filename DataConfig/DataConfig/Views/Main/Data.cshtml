@@ -13,21 +13,21 @@
 
         var Strings = {
             NoCatalogSelected: @Html.Raw(Json.Encode(Messages.NoCatalogSelected)),
+            NoDatasetSelected: @Html.Raw(Json.Encode(Messages.NoDatasetSelected)),
             ConfirmDeleteCatalogs: @Html.Raw(Json.Encode(Messages.ConfirmDeleteCatalogs)),
+            ConfirmDeleteDatasets: @Html.Raw(Json.Encode(Messages.ConfirmDeleteDatasets)),
             SelectAll: @Html.Raw(Json.Encode(UI.SelectAll)),
             DeselectAll: @Html.Raw(Json.Encode(UI.DeselectAll)),
             DeleteCatalog: @Html.Raw(Json.Encode(UI.DeleteCatalog)),
             DeleteDataset: @Html.Raw(Json.Encode(UI.DeleteDataset)),
-            ConfirmDeleteDataset: @Html.Raw(Json.Encode(Messages.ConfirmDeleteDataset)),
             CatalogDeleted: @Html.Raw(Json.Encode(Messages.CatalogDeleted)),
             DatasetDeleted: @Html.Raw(Json.Encode(Messages.DatasetDeleted)),
-            CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded)),
-            ShowDatasets: @Html.Raw(Json.Encode(UI.ShowDatasets))
+            CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded))
         };
     </script>
 }
 
-<form action="/Main/Data" method="post" id="dataForm">
+<form action="/Main/Data" method="post" id="datasetForm">
     <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
     <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
     <input type="hidden" name="Page" value="@Model.Page" />
@@ -86,7 +86,7 @@
                     <table id="catalogs">
                         <thead>
                             <tr>
-                                <td>
+                                <td class="deleteBox">
                                     <button class="tiny radius alert button" id="deleteCatalogs" title="@Messages.DeleteSelectedCatalogs">
                                         <i class="icon-general-remove"></i>
                                     </button>
@@ -106,10 +106,10 @@
                                     <td class="deleteBox"><input type="checkbox" /></td>
                                     <td class="hidden partitionKey">@catalog.PartitionKey</td>
                                     <td class="hidden rowKey">@catalog.RowKey</td>
-                                    <td>@(catalog.alias != null && catalog.alias.Length > 28 ? catalog.alias.Substring(0, 26) + "..." : catalog.alias)</td>
-                                    <td>@(catalog.description != null && catalog.description.Length > 28 ? catalog.description.Substring(0, 26) + "..." : catalog.description)</td>
-                                    <td>@(catalog.disclaimer != null && catalog.disclaimer.Length > 28 ? catalog.disclaimer.Substring(0, 26) + "..." : catalog.disclaimer)</td>
-                                    <td>@(catalog.storageaccountname != null && catalog.storageaccountname.Length > 28 ? catalog.storageaccountname.Substring(0, 26) + "..." : catalog.storageaccountname)</td>
+                                    <td title="@catalog.alias">@(catalog.alias != null && catalog.alias.Length > 20 ? catalog.alias.Substring(0, 18) + "..." : catalog.alias)</td>
+                                    <td title="@catalog.description">@(catalog.description != null && catalog.description.Length > 32 ? catalog.description.Substring(0, 30) + "..." : catalog.description)</td>
+                                    <td title="@catalog.disclaimer">@(catalog.disclaimer != null && catalog.disclaimer.Length > 32 ? catalog.disclaimer.Substring(0, 30) + "..." : catalog.disclaimer)</td>
+                                    <td title="@catalog.storageaccountname">@(catalog.storageaccountname != null && catalog.storageaccountname.Length > 32 ? catalog.storageaccountname.Substring(0, 30) + "..." : catalog.storageaccountname)</td>
                                 </tr>
                             }
                         </tbody>
@@ -126,13 +126,51 @@
                     @if (Model.Datasets != null)
                     {
                         <div class="nine columns">
-                            @foreach (var dataset in Model.Datasets)
-                            {
-                                <h5>@dataset.entityset</h5>
-                            }
+                            <div class="row buttonBar">
+                                <div class="twelve columns">
+                                    <a class="right small radius success button" data-reveal-id="addDatasetModal">@UI.NewCatalog</a>
+                                    <a class="right small radius secondary button" id="selectAllDatasets">@UI.SelectAll</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="twelve columns">
+                                    <table id="datasets">
+                                        <thead>
+                                            <tr>
+                                                <td class="deleteBox">
+                                                    <button class="tiny radius alert button" id="deleteDatasets" title="@Messages.DeleteSelectedDatasets">
+                                                        <i class="icon-general-remove"></i>
+                                                    </button>
+                                                </td>
+                                                <td class="hidden"></td>
+                                                <td class="hidden"></td>
+                                                <td>@UI.EntitySet</td>
+                                                <td>@UI.Name</td>
+                                                <td>@UI.Source</td>
+                                                <td>@UI.Category</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var dataset in Model.Datasets)
+                                            {
+                                                <tr>
+                                                    <td class="deleteBox"><input type="checkbox" /></td>
+                                                    <td class="hidden partitionKey">@dataset.PartitionKey</td>
+                                                    <td class="hidden rowKey">@dataset.RowKey</td>
+                                                    <td title="@dataset.entityset">@(dataset.entityset != null && dataset.entityset.Length > 30 ? dataset.entityset.Substring(0, 28) + "..." : dataset.entityset)</td>
+                                                    <td title="@dataset.name">@(dataset.name != null && dataset.name.Length > 30 ? dataset.name.Substring(0, 28) + "..." : dataset.name)</td>
+                                                    <td title="@dataset.source">@(dataset.source != null && dataset.source.Length > 30 ? dataset.source.Substring(0, 28) + "..." : dataset.source)</td>
+                                                    <td title="@dataset.category">@(dataset.category != null && dataset.category.Length > 30 ? dataset.category.Substring(0, 28) + "..." : dataset.category)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div class="three columns">
-                            Filtering
+                            <h5>Filtering</h5>
                         </div>
                     }
                     else

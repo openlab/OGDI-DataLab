@@ -135,8 +135,8 @@
   <data name="ConfirmDeleteCatalogs" xml:space="preserve">
     <value>Etes-vous sûr de vouloir supprimer les catalogues séléctionnés ainsi que tous les jeux de données associés ?</value>
   </data>
-  <data name="ConfirmDeleteDataset" xml:space="preserve">
-    <value>Etes-vous sûr de vouloir supprimer ce jeu de données ?</value>
+  <data name="ConfirmDeleteDatasets" xml:space="preserve">
+    <value>Etes-vous sûr de vouloir supprimer les jeux de données séléctionnés ?</value>
   </data>
   <data name="DatasetDeleted" xml:space="preserve">
     <value>Votre jeu de données a été supprimé.</value>
@@ -146,6 +146,9 @@
   </data>
   <data name="DeleteSelectedCatalogs" xml:space="preserve">
     <value>Supprimer les catalogues séléctionnés</value>
+  </data>
+  <data name="DeleteSelectedDatasets" xml:space="preserve">
+    <value>Supprimer les jeux de données séléctionnés</value>
   </data>
   <data name="IncompleteForm" xml:space="preserve">
     <value>Votre formulaire est incomplet, merci de remplir les champs manquants.</value>
@@ -158,6 +161,9 @@
   </data>
   <data name="NoCatalogSelected" xml:space="preserve">
     <value>Aucun catalogue séléctionné.</value>
+  </data>
+  <data name="NoDatasetSelected" xml:space="preserve">
+    <value>Aucun jeu de données séléctionné.</value>
   </data>
   <data name="StartMessage" xml:space="preserve">
     <value>Commencez par configurer votre compte de stockage</value>

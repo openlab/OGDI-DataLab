@@ -31,16 +31,10 @@ namespace DataConfig.Models
         public string CategoryFilter { get; set; }
         public string KeywordFilter { get; set; }
 
-        private IEnumerable<AvailableEndpoint> _Catalogs;
         public IEnumerable<AvailableEndpoint> Catalogs
         {
             get
             {
-                if (_Catalogs != null)
-                {
-                    return _Catalogs;
-                }
-
                 try
                 {
                     CloudTable availableEndpoints = Azure.GetCloudTable(this.ConfigStorageName, this.ConfigStorageKey, Azure.Table.AvailableEndpoints);
@@ -53,33 +47,46 @@ namespace DataConfig.Models
                         catalogs = catalogs.OrderBy(c => c.alias);
                     }
 
-                    _Catalogs = catalogs;
+                    return catalogs;
                 }
                 catch (Exception)
                 { }
 
-                return _Catalogs;
+                return null;
             }
         }
 
-        private IEnumerable<TableMetadata> _Datasets;
         public IEnumerable<TableMetadata> Datasets
         {
             get
             {
-                if (_Datasets != null)
+                if (this.Catalogs != null)
                 {
-                    return _Datasets;
+                    IEnumerable<TableMetadata> datasets = null;
+
+                    foreach (var catalog in this.Catalogs)
+                    {
+                        try
+                        {
+                            CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
+
+                            IEnumerable<TableMetadata> tmpDatasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
+
+                            datasets = (datasets == null ? tmpDatasets : datasets.Concat(tmpDatasets));
+                        }
+                        catch (Exception)
+                        { }
+                    }
+
+                    if (datasets != null)
+                    {
+                        datasets = datasets.OrderBy(d => d.entityset);
+                    }
+
+                    return datasets;
                 }
 
-                try
-                {
-                    //TODO: Implement here
-                }
-                catch (Exception)
-                { }
-
-                return _Datasets;
+                return null;
             }
         }
     }
