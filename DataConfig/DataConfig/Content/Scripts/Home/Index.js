@@ -5,27 +5,19 @@ $(function () {
     // Bind row click event
     $("tbody tr").click(Utils.RowClickEvent);
 
-    // Bind catalogs buttons
+    // Bind catalogs events
     $("#selectAllCatalogs").click(Catalogs.SelectAll);
     $("#addCatalog").click(Catalogs.Add);
     $("#deleteCatalogs").click(Catalogs.Delete);
 
-    // Bind datasets buttons
+    // Bind datasets events
     $("#selectAllDatasets").click(Datasets.SelectAll);
     $("#addDataset").click(Datasets.Add);
     $("#deleteDatasets").click(Datasets.Delete);
 
-    // Bind displayAll buttons
-    $(".displayAll").click(function () {
-        var filterList = $(this).parents(".filterBlock").find(".filterList");
-        if ($(this).html() == Strings.Hide) {
-            filterList.animate({ "maxHeight": "270px" }, 1000);
-            $(this).html(Strings.DisplayAll);
-        } else {
-            filterList.animate({ "maxHeight": filterList[0].scrollHeight }, 1000);
-            $(this).html(Strings.Hide);
-        }
-    });
+    // Bind filter events
+    $(".displayAll").click(Filter.DisplayAll);
+    $("a.filter").click(Filter.Filter);
 });
 
 
@@ -233,6 +225,34 @@ var Datasets = {
     }
 };
 
+/*
+** Filter object
+*/
+var Filter = {
+    DisplayAll: function () {
+        var filterList = $(this).parents(".filterBlock").find(".filterList");
+        if ($(this).html() == Strings.Hide) {
+            filterList.animate({ "maxHeight": "270px" }, 1000);
+            $(this).html(Strings.DisplayAll);
+        } else {
+            filterList.animate({ "maxHeight": filterList[0].scrollHeight }, 1000);
+            $(this).html(Strings.Hide);
+        }
+    },
+    Filter: function () {
+        var filter = $(this).attr("title");
+
+        if ($(this).hasClass("catalog")) {
+            $("#dataForm > #catalogFilter").val(filter);
+        } else if ($(this).hasClass("category")) {
+            $("#dataForm > #categoryFilter").val(filter);
+        } else if ($(this).hasClass("keyword")) {
+            $("#dataForm > #keywordFilter").val(filter);
+        } else return;
+
+        $("#dataForm").submit();
+    }
+};
 
 /*
 ** Utils object

@@ -262,7 +262,6 @@
     <Content Include="Content\Styles\Layout.less" />
     <Content Include="Content\Styles\Site.less" />
     <Content Include="Content\Styles\Variables.less" />
-    <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.eot" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.ttf" />
     <Content Include="Content\Fonts\Icons_Enclosed\general_enclosed_foundicons.woff" />

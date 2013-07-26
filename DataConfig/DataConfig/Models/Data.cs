@@ -25,7 +25,6 @@ namespace DataConfig.Models
         public string ConfigStorageName { get; set; }
         public string ConfigStorageKey { get; set; }
 
-        public int? Page { get; set; }
         public string Order { get; set; }
         public string CatalogFilter { get; set; }
         public string CategoryFilter { get; set; }

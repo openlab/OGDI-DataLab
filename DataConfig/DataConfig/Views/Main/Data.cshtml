@@ -24,20 +24,26 @@
             DatasetDeleted: @Html.Raw(Json.Encode(Messages.DatasetDeleted)),
             CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded)),
             DisplayAll: @Html.Raw(Json.Encode(UI.DisplayAll)),
-            Hide: @Html.Raw(Json.Encode(UI.Hide)),
+            Hide: @Html.Raw(Json.Encode(UI.Hide))
         };
     </script>
 }
 
-<form action="/Main/Data" method="post" id="datasetForm">
+<form action="/Main/Data" method="post" id="dataForm">
     <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
     <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
-    <input type="hidden" name="Page" value="@Model.Page" />
-    <input type="hidden" name="Order" value="@Model.Order" />
-    <input type="hidden" name="CatalogFilter" value="@Model.CatalogFilter" />
-    <input type="hidden" name="CategoryFilter" value="@Model.CategoryFilter" />
-    <input type="hidden" name="KeywordFilter" value="@Model.KeywordFilter" />
+    <input type="hidden" name="Order" id="order" value="@Model.Order" />
+    <input type="hidden" name="CatalogFilter" id="catalogFilter" value="@Model.CatalogFilter" />
+    <input type="hidden" name="CategoryFilter" id="categoryFilter" value="@Model.CategoryFilter" />
+    <input type="hidden" name="KeywordFilter" id="keywordFilter" value="@Model.KeywordFilter" />
 </form>
+
+<ul>
+    <li>Order: @Model.Order</li>
+    <li>CatalogFilter: @Model.CatalogFilter</li>
+    <li>CategoryFilter: @Model.CategoryFilter</li>
+    <li>KeywordFilter: @Model.KeywordFilter</li>
+</ul>
 
 <div class="row">
     <div class="twelve columns">
@@ -189,10 +195,7 @@
                                             @foreach (var catalog in Model.Catalogs)
                                             {
                                                 <li>
-                                                    <a href="." title="@catalog.Key.alias">
-                                                        @(catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)
-                                                    </a>
-                                                    (@catalog.Value.Count)
+                                                    <a class="filter catalog" title="@catalog.Key.alias">@(catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)</a> (@catalog.Value.Count)
                                                 </li>
                                             }
                                         </ul>
@@ -212,10 +215,7 @@
                                             @foreach (var category in Model.Categories)
                                             {
                                                 <li>
-                                                    <a href="." title="@category.Key">
-                                                        @(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)
-                                                    </a>
-                                                    (@category.Value)
+                                                    <a class="filter category" title="@category.Key">@(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)</a> (@category.Value)
                                                 </li>
                                             }
                                         </ul>
@@ -235,10 +235,7 @@
                                             @foreach (var keyword in Model.Keywords)
                                             {
                                                 <li>
-                                                    <a href="." title="@keyword.Key">
-                                                        @(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)
-                                                    </a>
-                                                    (@keyword.Value)
+                                                    <a class="filter keyword" title="@keyword.Key">@(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)</a> (@keyword.Value)
                                                 </li>
                                             }
                                         </ul>
