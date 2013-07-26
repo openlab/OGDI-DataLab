@@ -156,6 +156,9 @@
   <data name="DeleteDataset" xml:space="preserve">
     <value>Delete this dataset</value>
   </data>
+  <data name="DeleteFilter" xml:space="preserve">
+    <value>Delete this filter</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>

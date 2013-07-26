@@ -243,11 +243,23 @@ var Filter = {
         var filter = $(this).attr("title");
 
         if ($(this).hasClass("catalog")) {
-            $("#dataForm > #catalogFilter").val(filter);
+            if ($(this).hasClass("clear")) {
+                $("#dataForm > #catalogFilter").val("");
+            } else {
+                $("#dataForm > #catalogFilter").val(filter);
+            }
         } else if ($(this).hasClass("category")) {
-            $("#dataForm > #categoryFilter").val(filter);
+            if ($(this).hasClass("clear")) {
+                $("#dataForm > #categoryFilter").val("");
+            } else {
+                $("#dataForm > #categoryFilter").val(filter);
+            }
         } else if ($(this).hasClass("keyword")) {
-            $("#dataForm > #keywordFilter").val(filter);
+            if ($(this).hasClass("clear")) {
+                $("#dataForm > #keywordFilter").val("");
+            } else {
+                $("#dataForm > #keywordFilter").val(filter);
+            }
         } else return;
 
         $("#dataForm").submit();

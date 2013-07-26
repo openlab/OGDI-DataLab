@@ -78,7 +78,32 @@ namespace DataConfig.Models
             {
                 if (_Datasets == null)
                 {
-                    _Datasets = this.Catalogs.SelectMany(d => d.Value).OrderBy(d => d.entityset).ToList();
+                    IEnumerable<TableMetadata> datasets;
+
+                    // Filter on catalog if any
+                    if (!string.IsNullOrEmpty(this.CatalogFilter))
+                    {
+                        datasets = this.Catalogs.Where(d => d.Key.alias == this.CatalogFilter).Single().Value as IEnumerable<TableMetadata>;
+                    }
+                    else
+                    {
+                        datasets = this.Catalogs.SelectMany(d => d.Value);
+                    }
+
+                    // Filter on category if any
+                    if (!string.IsNullOrEmpty(this.CategoryFilter))
+                    {
+                        datasets = datasets.Where(d => d.category.ToLower() == this.CategoryFilter.ToLower());
+                    }
+
+                    // Filter on keyword if any
+                    if (!string.IsNullOrEmpty(this.KeywordFilter))
+                    {
+                        datasets = datasets.Where(d => d.KeywordsList != null && d.KeywordsList.Contains(this.KeywordFilter));
+                    }
+
+                    // Order datasets
+                    _Datasets = datasets.OrderBy(d => d.entityset).ToList();
                 }
 
                 return _Datasets;
@@ -93,6 +118,7 @@ namespace DataConfig.Models
                 if (_Categories == null)
                 {
                     _Categories = (from d in this.Datasets
+                                   orderby d.category
                                    group d by d.category into cat
                                    select cat).ToDictionary(d => d.Key, d => d.Count());
                 }
@@ -112,6 +138,7 @@ namespace DataConfig.Models
                                  where d.KeywordsList != null
                                  from e in d.KeywordsList
                                  group d by e into key
+                                 orderby key.Key
                                  select key).ToDictionary(d => d.Key, d => d.Count());
                 }
 

@@ -29,7 +29,7 @@
     </script>
 }
 
-<form action="/Main/Data" method="post" id="dataForm">
+<form action="/Main/Data#displayByDataset" method="post" id="dataForm">
     <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
     <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
     <input type="hidden" name="Order" id="order" value="@Model.Order" />
@@ -37,13 +37,6 @@
     <input type="hidden" name="CategoryFilter" id="categoryFilter" value="@Model.CategoryFilter" />
     <input type="hidden" name="KeywordFilter" id="keywordFilter" value="@Model.KeywordFilter" />
 </form>
-
-<ul>
-    <li>Order: @Model.Order</li>
-    <li>CatalogFilter: @Model.CatalogFilter</li>
-    <li>CategoryFilter: @Model.CategoryFilter</li>
-    <li>KeywordFilter: @Model.KeywordFilter</li>
-</ul>
 
 <div class="row">
     <div class="twelve columns">
@@ -191,14 +184,23 @@
                                 <div class="filterBlock">
                                     <h6>@UI.Catalogs</h6>
                                     <div class="filterList">
-                                        <ul>
-                                            @foreach (var catalog in Model.Catalogs)
-                                            {
-                                                <li>
-                                                    <a class="filter catalog" title="@catalog.Key.alias">@(catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)</a> (@catalog.Value.Count)
-                                                </li>
-                                            }
-                                        </ul>
+                                        @if (!string.IsNullOrEmpty(Model.CatalogFilter))
+                                        {
+                                            <div class="filtered">
+                                                <a class="filter clear catalog" title="@UI.DeleteFilter">[x]</a> @Model.CatalogFilter
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <ul>
+                                                @foreach (var catalog in Model.Catalogs)
+                                                {
+                                                    <li>
+                                                        <a class="filter catalog" title="@catalog.Key.alias">@(catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)</a> (@catalog.Value.Count)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
                                     </div>
                                     @if (Model.Catalogs.Count() > 11)
                                     {
@@ -211,14 +213,23 @@
                                 <div class="filterBlock">
                                     <h6>@UI.Categories</h6>
                                     <div class="filterList">
-                                        <ul>
-                                            @foreach (var category in Model.Categories)
-                                            {
-                                                <li>
-                                                    <a class="filter category" title="@category.Key">@(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)</a> (@category.Value)
-                                                </li>
-                                            }
-                                        </ul>
+                                        @if (!string.IsNullOrEmpty(Model.CategoryFilter))
+                                        {
+                                            <div class="filtered">
+                                                <a class="filter clear category" title="@UI.DeleteFilter">[x]</a> @Model.CategoryFilter
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <ul>
+                                                @foreach (var category in Model.Categories)
+                                                {
+                                                    <li>
+                                                        <a class="filter category" title="@category.Key">@(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)</a> (@category.Value)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
                                     </div>
                                     @if (Model.Categories.Count() > 11)
                                     {
@@ -231,14 +242,23 @@
                                 <div class="filterBlock">
                                     <h6>@UI.Keywords</h6>
                                     <div class="filterList">
-                                        <ul>
-                                            @foreach (var keyword in Model.Keywords)
-                                            {
-                                                <li>
-                                                    <a class="filter keyword" title="@keyword.Key">@(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)</a> (@keyword.Value)
-                                                </li>
-                                            }
-                                        </ul>
+                                        @if (!string.IsNullOrEmpty(Model.KeywordFilter))
+                                        {
+                                            <div class="filtered">
+                                                <a class="filter clear keyword" title="@UI.DeleteFilter">[x]</a> @Model.KeywordFilter
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <ul>
+                                                @foreach (var keyword in Model.Keywords)
+                                                {
+                                                    <li>
+                                                        <a class="filter keyword" title="@keyword.Key">@(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)</a> (@keyword.Value)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
                                     </div>
                                     @if (Model.Keywords.Count() > 11)
                                     {

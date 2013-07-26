@@ -178,6 +178,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete this filter.
+        /// </summary>
+        public static string DeleteFilter {
+            get {
+                return ResourceManager.GetString("DeleteFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Description.
         /// </summary>
         public static string Description {
