@@ -88,11 +88,29 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catalogs.
+        /// </summary>
+        public static string Catalogs {
+            get {
+                return ResourceManager.GetString("Catalogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à List of catalogs.
         /// </summary>
         public static string CatalogsList {
             get {
                 return ResourceManager.GetString("CatalogsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Categories.
+        /// </summary>
+        public static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
             }
         }
         
@@ -187,6 +205,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à display all.
+        /// </summary>
+        public static string DisplayAll {
+            get {
+                return ResourceManager.GetString("DisplayAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Display by.
         /// </summary>
         public static string DisplayBy {
@@ -205,6 +232,33 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Filtering.
+        /// </summary>
+        public static string Filtering {
+            get {
+                return ResourceManager.GetString("Filtering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à hide.
+        /// </summary>
+        public static string Hide {
+            get {
+                return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Keywords.
+        /// </summary>
+        public static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
         public static string Name {
@@ -219,6 +273,15 @@ namespace DataConfig.Resources {
         public static string NewCatalog {
             get {
                 return ResourceManager.GetString("NewCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New dataset.
+        /// </summary>
+        public static string NewDataset {
+            get {
+                return ResourceManager.GetString("NewDataset", resourceCulture);
             }
         }
         

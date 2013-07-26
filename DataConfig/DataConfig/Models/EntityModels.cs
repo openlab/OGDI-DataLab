@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataConfig.Models
 {
@@ -37,10 +38,24 @@ namespace DataConfig.Models
             this.RowKey = rowKey;
         }
 
+        public IEnumerable<string> KeywordsList
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.keywords))
+                {
+                    return (from k in this.keywords.Split(',') select k.ToLower().Trim());
+                }
+
+                return null;
+            }
+        }
+
         public string entityset { get; set; }
         public string name { get; set; }
         public string source { get; set; }
         public string category { get; set; }
+        public string keywords { get; set; }
         public string entitykind { get; set; }
     }
 

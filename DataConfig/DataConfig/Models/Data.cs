@@ -31,62 +31,92 @@ namespace DataConfig.Models
         public string CategoryFilter { get; set; }
         public string KeywordFilter { get; set; }
 
-        public IEnumerable<AvailableEndpoint> Catalogs
+        private Dictionary<AvailableEndpoint, List<TableMetadata>> _Catalogs = null;
+        public Dictionary<AvailableEndpoint, List<TableMetadata>> Catalogs
         {
             get
             {
-                try
+                if (_Catalogs == null)
                 {
-                    CloudTable availableEndpoints = Azure.GetCloudTable(this.ConfigStorageName, this.ConfigStorageKey, Azure.Table.AvailableEndpoints);
+                    _Catalogs = new Dictionary<AvailableEndpoint, List<TableMetadata>>();
 
-                    availableEndpoints.CreateIfNotExists();
-
-                    IEnumerable<AvailableEndpoint> catalogs = availableEndpoints.ExecuteQuery(new TableQuery<AvailableEndpoint>());
-                    if (catalogs != null)
+                    try
                     {
-                        catalogs = catalogs.OrderBy(c => c.alias);
+                        CloudTable availableEndpoints = Azure.GetCloudTable(this.ConfigStorageName, this.ConfigStorageKey, Azure.Table.AvailableEndpoints);
+
+                        availableEndpoints.CreateIfNotExists();
+
+                        IEnumerable<AvailableEndpoint> catalogs = availableEndpoints.ExecuteQuery(new TableQuery<AvailableEndpoint>());
+                        if (catalogs != null)
+                        {
+                            catalogs = catalogs.OrderBy(c => c.alias);
+                            foreach (var catalog in catalogs)
+                            {
+                                CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
+
+                                IEnumerable<TableMetadata> datasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
+                                if (datasets != null)
+                                {
+                                    datasets = datasets.OrderBy(d => d.entityset);
+                                }
+
+                                _Catalogs.Add(catalog, datasets.ToList());
+                            }
+                        }
                     }
-
-                    return catalogs;
+                    catch (Exception)
+                    { }
                 }
-                catch (Exception)
-                { }
 
-                return null;
+                return _Catalogs;
             }
         }
 
-        public IEnumerable<TableMetadata> Datasets
+        private List<TableMetadata> _Datasets = null;
+        public List<TableMetadata> Datasets
         {
             get
             {
-                if (this.Catalogs != null)
+                if (_Datasets == null)
                 {
-                    IEnumerable<TableMetadata> datasets = null;
-
-                    foreach (var catalog in this.Catalogs)
-                    {
-                        try
-                        {
-                            CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
-
-                            IEnumerable<TableMetadata> tmpDatasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
-
-                            datasets = (datasets == null ? tmpDatasets : datasets.Concat(tmpDatasets));
-                        }
-                        catch (Exception)
-                        { }
-                    }
-
-                    if (datasets != null)
-                    {
-                        datasets = datasets.OrderBy(d => d.entityset);
-                    }
-
-                    return datasets;
+                    _Datasets = this.Catalogs.SelectMany(d => d.Value).OrderBy(d => d.entityset).ToList();
                 }
 
-                return null;
+                return _Datasets;
+            }
+        }
+
+        private Dictionary<string, int> _Categories = null;
+        public Dictionary<string, int> Categories
+        {
+            get
+            {
+                if (_Categories == null)
+                {
+                    _Categories = (from d in this.Datasets
+                                   group d by d.category into cat
+                                   select cat).ToDictionary(d => d.Key, d => d.Count());
+                }
+
+                return _Categories;
+            }
+        }
+
+        private Dictionary<string, int> _Keywords = null;
+        public Dictionary<string, int> Keywords
+        {
+            get
+            {
+                if (_Keywords == null)
+                {
+                    _Keywords = (from d in this.Datasets
+                                 where d.KeywordsList != null
+                                 from e in d.KeywordsList
+                                 group d by e into key
+                                 select key).ToDictionary(d => d.Key, d => d.Count());
+                }
+
+                return _Keywords;
             }
         }
     }

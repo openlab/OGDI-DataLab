@@ -14,6 +14,18 @@ $(function () {
     $("#selectAllDatasets").click(Datasets.SelectAll);
     $("#addDataset").click(Datasets.Add);
     $("#deleteDatasets").click(Datasets.Delete);
+
+    // Bind displayAll buttons
+    $(".displayAll").click(function () {
+        var filterList = $(this).parents(".filterBlock").find(".filterList");
+        if ($(this).html() == Strings.Hide) {
+            filterList.animate({ "maxHeight": "270px" }, 1000);
+            $(this).html(Strings.DisplayAll);
+        } else {
+            filterList.animate({ "maxHeight": filterList[0].scrollHeight }, 1000);
+            $(this).html(Strings.Hide);
+        }
+    });
 });
 
 

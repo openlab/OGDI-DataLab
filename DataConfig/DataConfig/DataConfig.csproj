@@ -167,10 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Azure.cs" />
-    <Compile Include="Models\CatalogModels.cs" />
-    <Compile Include="Models\DatasetModels.cs" />
     <Compile Include="Models\EntityModels.cs" />
     <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\FormModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.fr.Designer.cs">
       <DependentUpon>Messages.fr.resx</DependentUpon>

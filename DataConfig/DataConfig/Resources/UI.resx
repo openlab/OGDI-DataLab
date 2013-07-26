@@ -126,8 +126,14 @@
   <data name="Catalog" xml:space="preserve">
     <value>Catalog</value>
   </data>
+  <data name="Catalogs" xml:space="preserve">
+    <value>Catalogs</value>
+  </data>
   <data name="CatalogsList" xml:space="preserve">
     <value>List of catalogs</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
@@ -159,17 +165,32 @@
   <data name="Disclaimer" xml:space="preserve">
     <value>Disclaimer</value>
   </data>
+  <data name="DisplayAll" xml:space="preserve">
+    <value>display all</value>
+  </data>
   <data name="DisplayBy" xml:space="preserve">
     <value>Display by</value>
   </data>
   <data name="EntitySet" xml:space="preserve">
     <value>Entityset</value>
   </data>
+  <data name="Filtering" xml:space="preserve">
+    <value>Filtering</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>hide</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NewCatalog" xml:space="preserve">
     <value>New catalog</value>
+  </data>
+  <data name="NewDataset" xml:space="preserve">
+    <value>New dataset</value>
   </data>
   <data name="NoCatalog" xml:space="preserve">
     <value>No catalog found</value>

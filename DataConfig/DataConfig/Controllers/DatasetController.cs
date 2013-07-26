@@ -9,32 +9,6 @@ namespace DataConfig.Controllers
 {
     public class DatasetController : Controller
     {
-        /*
-        public ActionResult Load(LoadDataset model)
-        {
-            try
-            {
-                CloudTable tableMetadata = Azure.GetCloudTable(model.StorageName, model.StorageKey, Azure.Table.TableMetadata);
-                if (!tableMetadata.Exists())
-                {
-                    return Json(new { Result = string.Empty });
-                }
-
-                IEnumerable<TableMetadata> datasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
-                if (datasets != null)
-                {
-                    datasets = datasets.OrderBy(d => d.entityset);
-                }
-
-                return Json(new { Result = datasets });
-            }
-            catch (Exception)
-            {
-                return Json(new { Error = Messages.CannotConnectLight });
-            }
-        }
-         * */
-
         //
         // POST: /Dataset/Delete
 
