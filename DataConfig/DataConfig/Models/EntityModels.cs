@@ -51,6 +51,8 @@ namespace DataConfig.Models
             }
         }
 
+        public string Catalog { get; set; }
+
         public string entityset { get; set; }
         public string name { get; set; }
         public string source { get; set; }

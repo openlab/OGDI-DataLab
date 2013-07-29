@@ -53,13 +53,16 @@ namespace DataConfig.Models
                             {
                                 CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
 
-                                IEnumerable<TableMetadata> datasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
-                                if (datasets != null)
+                                List<TableMetadata> datasets = null;
+                                IEnumerable<TableMetadata> tmpDatasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
+                                if (tmpDatasets != null)
                                 {
-                                    datasets = datasets.OrderBy(d => d.entityset);
+                                    tmpDatasets = tmpDatasets.OrderBy(d => d.entityset);
+                                    datasets = tmpDatasets.ToList();
+                                    datasets.ForEach(delegate(TableMetadata t) { t.Catalog = catalog.alias; });
                                 }
 
-                                _Catalogs.Add(catalog, datasets.ToList());
+                                _Catalogs.Add(catalog, datasets);
                             }
                         }
                     }
@@ -78,16 +81,12 @@ namespace DataConfig.Models
             {
                 if (_Datasets == null)
                 {
-                    IEnumerable<TableMetadata> datasets;
+                    IEnumerable<TableMetadata> datasets = this.Catalogs.SelectMany(d => d.Value);
 
                     // Filter on catalog if any
                     if (!string.IsNullOrEmpty(this.CatalogFilter))
                     {
-                        datasets = this.Catalogs.Where(d => d.Key.alias == this.CatalogFilter).Single().Value as IEnumerable<TableMetadata>;
-                    }
-                    else
-                    {
-                        datasets = this.Catalogs.SelectMany(d => d.Value);
+                        datasets = datasets.Where(d => d.Catalog.ToLower() == this.CatalogFilter.ToLower());
                     }
 
                     // Filter on category if any
@@ -110,31 +109,48 @@ namespace DataConfig.Models
             }
         }
 
-        private Dictionary<string, int> _Categories = null;
-        public Dictionary<string, int> Categories
+        private Dictionary<string, int> _AllCatalogs = null;
+        public Dictionary<string, int> AllCatalogs
         {
             get
             {
-                if (_Categories == null)
+                if (_AllCatalogs == null)
                 {
-                    _Categories = (from d in this.Datasets
-                                   orderby d.category
-                                   group d by d.category into cat
-                                   select cat).ToDictionary(d => d.Key, d => d.Count());
+                    _AllCatalogs = (from d in this.Datasets
+                                    orderby d.Catalog
+                                    group d by d.Catalog into cat
+                                    select cat).ToDictionary(d => d.Key, d => d.Count());
                 }
 
-                return _Categories;
+                return _AllCatalogs;
             }
         }
 
-        private Dictionary<string, int> _Keywords = null;
-        public Dictionary<string, int> Keywords
+        private Dictionary<string, int> _AllCategories = null;
+        public Dictionary<string, int> AllCategories
         {
             get
             {
-                if (_Keywords == null)
+                if (_AllCategories == null)
                 {
-                    _Keywords = (from d in this.Datasets
+                    _AllCategories = (from d in this.Datasets
+                                      orderby d.category
+                                      group d by d.category into cat
+                                      select cat).ToDictionary(d => d.Key, d => d.Count());
+                }
+
+                return _AllCategories;
+            }
+        }
+
+        private Dictionary<string, int> _AllKeywords = null;
+        public Dictionary<string, int> AllKeywords
+        {
+            get
+            {
+                if (_AllKeywords == null)
+                {
+                    _AllKeywords = (from d in this.Datasets
                                  where d.KeywordsList != null
                                  from e in d.KeywordsList
                                  group d by e into key
@@ -142,7 +158,7 @@ namespace DataConfig.Models
                                  select key).ToDictionary(d => d.Key, d => d.Count());
                 }
 
-                return _Keywords;
+                return _AllKeywords;
             }
         }
     }

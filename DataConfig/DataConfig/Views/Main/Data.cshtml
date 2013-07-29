@@ -193,21 +193,22 @@
                                         else
                                         {
                                             <ul>
-                                                @foreach (var catalog in Model.Catalogs)
+                                                @foreach (var catalog in Model.AllCatalogs)
                                                 {
                                                     <li>
-                                                        <a class="filter catalog" title="@catalog.Key.alias">@(catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)</a> (@catalog.Value.Count)
+                                                        <a class="filter catalog" title="@catalog.Key">@(catalog.Key.Length > 20 ? catalog.Key.Substring(0, 18) + "..." : catalog.Key)</a> (@catalog.Value)
                                                     </li>
                                                 }
                                             </ul>
+                                            
+                                            if (Model.AllCatalogs.Count() > 11)
+                                            {
+                                                <div class="displayAll secondary tiny button">
+                                                    @UI.DisplayAll
+                                                </div>
+                                            }
                                         }
                                     </div>
-                                    @if (Model.Catalogs.Count() > 11)
-                                    {
-                                        <div class="displayAll secondary tiny button">
-                                            @UI.DisplayAll
-                                        </div>
-                                    }
                                 </div>
 
                                 <div class="filterBlock">
@@ -222,21 +223,22 @@
                                         else
                                         {
                                             <ul>
-                                                @foreach (var category in Model.Categories)
+                                                @foreach (var category in Model.AllCategories)
                                                 {
                                                     <li>
                                                         <a class="filter category" title="@category.Key">@(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)</a> (@category.Value)
                                                     </li>
                                                 }
                                             </ul>
+                                            
+                                            if (Model.AllCategories.Count() > 11)
+                                            {
+                                                <div class="displayAll secondary tiny button">
+                                                    @UI.DisplayAll
+                                                </div>
+                                            }
                                         }
                                     </div>
-                                    @if (Model.Categories.Count() > 11)
-                                    {
-                                        <div class="displayAll secondary tiny button">
-                                            @UI.DisplayAll
-                                        </div>
-                                    }
                                 </div>
 
                                 <div class="filterBlock">
@@ -251,21 +253,22 @@
                                         else
                                         {
                                             <ul>
-                                                @foreach (var keyword in Model.Keywords)
+                                                @foreach (var keyword in Model.AllKeywords)
                                                 {
                                                     <li>
                                                         <a class="filter keyword" title="@keyword.Key">@(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)</a> (@keyword.Value)
                                                     </li>
                                                 }
                                             </ul>
+                                            
+                                            if (Model.AllKeywords.Count() > 11)
+                                            {
+                                                <div class="displayAll secondary tiny button">
+                                                    @UI.DisplayAll
+                                                </div>
+                                            }
                                         }
                                     </div>
-                                    @if (Model.Keywords.Count() > 11)
-                                    {
-                                        <div class="displayAll secondary tiny button">
-                                            @UI.DisplayAll
-                                        </div>
-                                    }
                                 </div>
                             </div>
                         </div>
