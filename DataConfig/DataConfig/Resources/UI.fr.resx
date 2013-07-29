@@ -123,6 +123,9 @@
   <data name="Alias" xml:space="preserve">
     <value>Alias</value>
   </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>croissant</value>
+  </data>
   <data name="Catalog" xml:space="preserve">
     <value>Catalogue</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="DeleteFilter" xml:space="preserve">
     <value>Supprimer ce filtre</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>décroissant</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -191,6 +197,15 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Tout séléctionner</value>
+  </data>
+  <data name="SortByCategory" xml:space="preserve">
+    <value>Trier par Catégorie</value>
+  </data>
+  <data name="SortByEntityset" xml:space="preserve">
+    <value>Trier par Entityset</value>
+  </data>
+  <data name="SortBySource" xml:space="preserve">
+    <value>Trier par Source</value>
   </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>

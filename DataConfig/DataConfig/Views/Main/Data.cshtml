@@ -27,7 +27,8 @@
 <form action="/Main/Data" method="post" id="dataForm">
     <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
     <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
-    <input type="hidden" name="Order" id="order" value="@Model.Order" />
+    <input type="hidden" name="SortParam" id="sortParam" value="@Model.SortParam" />
+    <input type="hidden" name="SortOrder" id="sortOrder" value="@Model.SortOrder" />
     <input type="hidden" name="CatalogFilter" id="catalogFilter" value="@Model.CatalogFilter" />
     <input type="hidden" name="CategoryFilter" id="categoryFilter" value="@Model.CategoryFilter" />
     <input type="hidden" name="KeywordFilter" id="keywordFilter" value="@Model.KeywordFilter" />
@@ -148,10 +149,28 @@
                                                 </td>
                                                 <td class="hidden"></td>
                                                 <td class="hidden"></td>
-                                                <td>@UI.EntitySet</td>
+                                                <td>
+                                                    <a class="sort entityset" title="@UI.SortByEntityset (@ViewBag.NextSortOrder)">@UI.EntitySet</a>
+                                                    @if (Model.SortParam == "entityset")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
                                                 <td>@UI.Name</td>
-                                                <td>@UI.Source</td>
-                                                <td>@UI.Category</td>
+                                                <td>
+                                                    <a class="sort source" title="@UI.SortBySource (@ViewBag.NextSortOrder)">@UI.Source</a>
+                                                    @if (Model.SortParam == "source")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a class="sort category" title="@UI.SortByCategory (@ViewBag.NextSortOrder)">@UI.Category</a>
+                                                    @if (Model.SortParam == "category")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -181,15 +200,17 @@
                             <div id="filterContent">
                                 <div class="filterBlock">
                                     <h6>@UI.Catalogs</h6>
-                                    <div class="filterList">
-                                        @if (!string.IsNullOrEmpty(Model.CatalogFilter))
-                                        {
+                                    @if (!string.IsNullOrEmpty(Model.CatalogFilter))
+                                    {
+                                        <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear catalog" title="@UI.DeleteFilter">[x]</a> @Model.CatalogFilter
                                             </div>
-                                        }
-                                        else
-                                        {
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filterList">
                                             <ul>
                                                 @foreach (var catalog in Model.AllCatalogs)
                                                 {
@@ -198,28 +219,30 @@
                                                     </li>
                                                 }
                                             </ul>
-                                            
-                                            if (Model.AllCatalogs.Count() > 11)
-                                            {
-                                                <div class="displayAll secondary tiny button">
-                                                    @UI.DisplayAll
-                                                </div>
-                                            }
+                                        </div>
+
+                                        if (Model.AllCatalogs.Count() > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
                                         }
-                                    </div>
+                                    }
                                 </div>
 
                                 <div class="filterBlock">
                                     <h6>@UI.Categories</h6>
-                                    <div class="filterList">
-                                        @if (!string.IsNullOrEmpty(Model.CategoryFilter))
-                                        {
+                                    @if (!string.IsNullOrEmpty(Model.CategoryFilter))
+                                    {
+                                        <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear category" title="@UI.DeleteFilter">[x]</a> @Model.CategoryFilter
                                             </div>
-                                        }
-                                        else
-                                        {
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filterList">
                                             <ul>
                                                 @foreach (var category in Model.AllCategories)
                                                 {
@@ -228,28 +251,30 @@
                                                     </li>
                                                 }
                                             </ul>
+                                        </div>
                                             
-                                            if (Model.AllCategories.Count() > 11)
-                                            {
-                                                <div class="displayAll secondary tiny button">
-                                                    @UI.DisplayAll
-                                                </div>
-                                            }
+                                        if (Model.AllCategories.Count() > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
                                         }
-                                    </div>
+                                    }
                                 </div>
 
                                 <div class="filterBlock">
                                     <h6>@UI.Keywords</h6>
-                                    <div class="filterList">
-                                        @if (!string.IsNullOrEmpty(Model.KeywordFilter))
-                                        {
+                                    @if (!string.IsNullOrEmpty(Model.KeywordFilter))
+                                    {
+                                        <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear keyword" title="@UI.DeleteFilter">[x]</a> @Model.KeywordFilter
                                             </div>
-                                        }
-                                        else
-                                        {
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filterList">
                                             <ul>
                                                 @foreach (var keyword in Model.AllKeywords)
                                                 {
@@ -258,15 +283,15 @@
                                                     </li>
                                                 }
                                             </ul>
-                                            
-                                            if (Model.AllKeywords.Count() > 11)
-                                            {
-                                                <div class="displayAll secondary tiny button">
-                                                    @UI.DisplayAll
-                                                </div>
-                                            }
+                                        </div>
+                                        
+                                        if (Model.AllKeywords.Count() > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
                                         }
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>

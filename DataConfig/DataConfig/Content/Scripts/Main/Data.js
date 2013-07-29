@@ -18,6 +18,9 @@ $(function () {
     // Bind filter events
     $(".displayAll").click(Filter.DisplayAll);
     $("a.filter").click(Filter.Filter);
+
+    // Bind sort events
+    $("a.sort").click(Sort.Sort);
 });
 
 
@@ -238,6 +241,29 @@ var Filter = {
 };
 
 /*
+** Sort object
+*/
+var Sort = {
+    Sort: function () {
+        // Set sort param to the form
+        if ($(this).hasClass("entityset")) {
+            $("#dataForm > #sortParam").val("entityset");
+        } else if ($(this).hasClass("source")) {
+            $("#dataForm > #sortParam").val("source");
+        } else if ($(this).hasClass("category")) {
+            $("#dataForm > #sortParam").val("category");
+        } else return;
+
+        // Set sort order to the form
+        $("#dataForm > #sortOrder").val($("#dataForm > #sortOrder").val() == "asc" ? "desc" : "asc");
+
+        // Submit form
+        Utils.ReloadPage(false, "#displayByDataset");
+    }
+};
+
+
+/*
 ** Utils object
 */
 var Utils = {
@@ -249,7 +275,8 @@ var Utils = {
     },
     ReloadPage: function (withReset, urlSuffix) {
         if (withReset) {
-            $("#dataForm > #order").val("");
+            $("#dataForm > #sortOrder").val("");
+            $("#dataForm > #sortParam").val("");
             $("#dataForm > #catalogFilter").val("");
             $("#dataForm > #categoryFilter").val("");
             $("#dataForm > #keywordFilter").val("");

@@ -25,7 +25,8 @@ namespace DataConfig.Models
         public string ConfigStorageName { get; set; }
         public string ConfigStorageKey { get; set; }
 
-        public string Order { get; set; }
+        public string SortOrder { get; set; }
+        public string SortParam { get; set; }
         public string CatalogFilter { get; set; }
         public string CategoryFilter { get; set; }
         public string KeywordFilter { get; set; }
@@ -106,7 +107,18 @@ namespace DataConfig.Models
                     }
 
                     // Order datasets
-                    _Datasets = datasets.OrderBy(d => d.entityset).ToList();
+                    if (this.SortParam == "source")
+                    {
+                        _Datasets = (this.SortOrder == "asc" ? datasets.OrderBy(d => d.source).ToList() : datasets.OrderByDescending(d => d.source).ToList());
+                    }
+                    else if (this.SortParam == "category")
+                    {
+                        _Datasets = (this.SortOrder == "asc" ? datasets.OrderBy(d => d.category).ToList() : datasets.OrderByDescending(d => d.category).ToList());
+                    }
+                    else
+                    {
+                        _Datasets = (this.SortOrder == "asc" ? datasets.OrderBy(d => d.entityset).ToList() : datasets.OrderByDescending(d => d.entityset).ToList());
+                    }
                 }
 
                 return _Datasets;

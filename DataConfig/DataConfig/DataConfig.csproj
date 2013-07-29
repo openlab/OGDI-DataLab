@@ -207,6 +207,8 @@
     <Content Include="Content\Fonts\Icons_General\general_foundicons.svg" />
     <Content Include="Content\Images\AjaxLoader.gif" />
     <Content Include="Content\Images\Arrow.png" />
+    <Content Include="Content\Images\Arrow_asc.png" />
+    <Content Include="Content\Images\Arrow_desc.png" />
     <Content Include="Content\Images\Banner.png" />
     <Content Include="Content\Images\Favicon.png" />
     <Content Include="Content\Images\Microsoft.png" />

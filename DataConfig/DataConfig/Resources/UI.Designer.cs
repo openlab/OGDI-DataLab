@@ -79,6 +79,15 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à ascending.
+        /// </summary>
+        public static string Ascending {
+            get {
+                return ResourceManager.GetString("Ascending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Catalog.
         /// </summary>
         public static string Catalog {
@@ -147,6 +156,15 @@ namespace DataConfig.Resources {
         public static string DeleteFilter {
             get {
                 return ResourceManager.GetString("DeleteFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à descending.
+        /// </summary>
+        public static string Descending {
+            get {
+                return ResourceManager.GetString("Descending", resourceCulture);
             }
         }
         
@@ -282,6 +300,33 @@ namespace DataConfig.Resources {
         public static string SelectAll {
             get {
                 return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sort by Category.
+        /// </summary>
+        public static string SortByCategory {
+            get {
+                return ResourceManager.GetString("SortByCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sort by Entityset.
+        /// </summary>
+        public static string SortByEntityset {
+            get {
+                return ResourceManager.GetString("SortByEntityset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sort by Source.
+        /// </summary>
+        public static string SortBySource {
+            get {
+                return ResourceManager.GetString("SortBySource", resourceCulture);
             }
         }
         

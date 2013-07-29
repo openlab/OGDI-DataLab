@@ -41,6 +41,11 @@ namespace DataConfig.Controllers
                 return View("Start", model);
             }
 
+            model.SortOrder = model.SortOrder ?? "asc";
+            model.SortParam = model.SortParam ?? "entityset";
+
+            ViewBag.NextSortOrder = (model.SortOrder == "asc" ? UI.Descending : UI.Ascending);
+
             return View(model);
         }
 
