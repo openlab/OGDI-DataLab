@@ -97,15 +97,6 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à List of catalogs.
-        /// </summary>
-        public static string CatalogsList {
-            get {
-                return ResourceManager.GetString("CatalogsList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Categories.
         /// </summary>
         public static string Categories {
@@ -147,33 +138,6 @@ namespace DataConfig.Resources {
         public static string Dataset {
             get {
                 return ResourceManager.GetString("Dataset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à List of datasets.
-        /// </summary>
-        public static string DatasetsList {
-            get {
-                return ResourceManager.GetString("DatasetsList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete this catalog.
-        /// </summary>
-        public static string DeleteCatalog {
-            get {
-                return ResourceManager.GetString("DeleteCatalog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete this dataset.
-        /// </summary>
-        public static string DeleteDataset {
-            get {
-                return ResourceManager.GetString("DeleteDataset", resourceCulture);
             }
         }
         
@@ -318,15 +282,6 @@ namespace DataConfig.Resources {
         public static string SelectAll {
             get {
                 return ResourceManager.GetString("SelectAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Show catalogs.
-        /// </summary>
-        public static string ShowCatalogs {
-            get {
-                return ResourceManager.GetString("ShowCatalogs", resourceCulture);
             }
         }
         

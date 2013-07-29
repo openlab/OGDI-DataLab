@@ -18,18 +18,13 @@
             ConfirmDeleteDatasets: @Html.Raw(Json.Encode(Messages.ConfirmDeleteDatasets)),
             SelectAll: @Html.Raw(Json.Encode(UI.SelectAll)),
             DeselectAll: @Html.Raw(Json.Encode(UI.DeselectAll)),
-            DeleteCatalog: @Html.Raw(Json.Encode(UI.DeleteCatalog)),
-            DeleteDataset: @Html.Raw(Json.Encode(UI.DeleteDataset)),
-            CatalogDeleted: @Html.Raw(Json.Encode(Messages.CatalogDeleted)),
-            DatasetDeleted: @Html.Raw(Json.Encode(Messages.DatasetDeleted)),
-            CatalogAdded: @Html.Raw(Json.Encode(Messages.CatalogAdded)),
             DisplayAll: @Html.Raw(Json.Encode(UI.DisplayAll)),
             Hide: @Html.Raw(Json.Encode(UI.Hide))
         };
     </script>
 }
 
-<form action="/Main/Data#displayByDataset" method="post" id="dataForm">
+<form action="/Main/Data" method="post" id="dataForm">
     <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
     <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
     <input type="hidden" name="Order" id="order" value="@Model.Order" />
@@ -123,6 +118,9 @@
                 else
                 {
                     <h5 class="centered">@UI.NoCatalog</h5>
+                    <div class="centered">
+                        <a class="small radius success button" data-reveal-id="addCatalogModal">@UI.NewCatalog</a>
+                    </div>
                 }
             </li>
 

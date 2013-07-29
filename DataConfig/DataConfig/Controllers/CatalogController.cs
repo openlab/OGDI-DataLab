@@ -35,7 +35,7 @@ namespace DataConfig.Controllers
 
                 availableEndpoints.Execute(TableOperation.Insert(entity));
 
-                return Json(new { Result = entity });
+                return Json(new { Result = string.Empty });
             }
             catch (Exception ex)
             {
@@ -89,7 +89,7 @@ namespace DataConfig.Controllers
                 Azure.GetCloudTable(dataStorageName, dataStorageKey, Azure.Table.ProcessorParams).DeleteIfExists();
                 Azure.GetCloudTable(dataStorageName, dataStorageKey, Azure.Table.TableColumnsMetadata).DeleteIfExists();
 
-                return Json(new { PartitionKey = model.PartitionKey, RowKey = model.RowKey ?? string.Empty });
+                return Json(new { Result = string.Empty });
             }
             catch (Exception ex)
             {

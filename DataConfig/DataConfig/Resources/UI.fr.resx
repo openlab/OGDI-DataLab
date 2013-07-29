@@ -129,9 +129,6 @@
   <data name="Catalogs" xml:space="preserve">
     <value>Catalogues</value>
   </data>
-  <data name="CatalogsList" xml:space="preserve">
-    <value>Liste des catalogues</value>
-  </data>
   <data name="Categories" xml:space="preserve">
     <value>Catégories</value>
   </data>
@@ -146,15 +143,6 @@
   </data>
   <data name="Dataset" xml:space="preserve">
     <value>Jeu de données</value>
-  </data>
-  <data name="DatasetsList" xml:space="preserve">
-    <value>Liste des jeux de données</value>
-  </data>
-  <data name="DeleteCatalog" xml:space="preserve">
-    <value>Supprimer ce catalogue</value>
-  </data>
-  <data name="DeleteDataset" xml:space="preserve">
-    <value>Supprimer ce jeu de données</value>
   </data>
   <data name="DeleteFilter" xml:space="preserve">
     <value>Supprimer ce filtre</value>
@@ -203,9 +191,6 @@
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Tout séléctionner</value>
-  </data>
-  <data name="ShowCatalogs" xml:space="preserve">
-    <value>Voir les catalogues</value>
   </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>

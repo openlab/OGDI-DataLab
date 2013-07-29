@@ -70,33 +70,6 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Cannot connect to the Azure storage account..
-        /// </summary>
-        public static string CannotConnectLight {
-            get {
-                return ResourceManager.GetString("CannotConnectLight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Your catalog has been added..
-        /// </summary>
-        public static string CatalogAdded {
-            get {
-                return ResourceManager.GetString("CatalogAdded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Your catalog has been deleted..
-        /// </summary>
-        public static string CatalogDeleted {
-            get {
-                return ResourceManager.GetString("CatalogDeleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Cannot retrieve this catalog..
         /// </summary>
         public static string CatalogNotFound {
@@ -120,15 +93,6 @@ namespace DataConfig.Resources {
         public static string ConfirmDeleteDatasets {
             get {
                 return ResourceManager.GetString("ConfirmDeleteDatasets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Your dataset has been deleted..
-        /// </summary>
-        public static string DatasetDeleted {
-            get {
-                return ResourceManager.GetString("DatasetDeleted", resourceCulture);
             }
         }
         

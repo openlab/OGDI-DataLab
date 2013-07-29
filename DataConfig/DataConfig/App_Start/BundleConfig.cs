@@ -48,7 +48,7 @@ namespace DataConfig
 
             bundles.Add(new ScriptBundle("~/bundles/script").Include(
                 "~/Content/Scripts/Shared/_Layout.js",
-                "~/Content/Scripts/Home/Index.js"));
+                "~/Content/Scripts/Main/Data.js"));
         }
     }
 }

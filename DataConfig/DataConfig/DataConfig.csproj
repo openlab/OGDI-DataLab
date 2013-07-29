@@ -212,7 +212,7 @@
     <Content Include="Content\Images\Microsoft.png" />
     <Content Include="Content\Images\OpenData_en.png" />
     <Content Include="Content\Images\OpenData_fr.png" />
-    <Content Include="Content\Scripts\Home\Index.js" />
+    <Content Include="Content\Scripts\Main\Data.js" />
     <Content Include="Content\Scripts\Shared\_Layout.js" />
     <Content Include="Content\Scripts\Vendor\app.js" />
     <Content Include="Content\Scripts\Vendor\foundation.js" />

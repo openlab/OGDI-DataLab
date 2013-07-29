@@ -51,18 +51,22 @@ namespace DataConfig.Models
                             catalogs = catalogs.OrderBy(c => c.alias);
                             foreach (var catalog in catalogs)
                             {
-                                CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
-
-                                List<TableMetadata> datasets = null;
-                                IEnumerable<TableMetadata> tmpDatasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
-                                if (tmpDatasets != null)
+                                try
                                 {
-                                    tmpDatasets = tmpDatasets.OrderBy(d => d.entityset);
-                                    datasets = tmpDatasets.ToList();
-                                    datasets.ForEach(delegate(TableMetadata t) { t.Catalog = catalog.alias; });
-                                }
+                                    CloudTable tableMetadata = Azure.GetCloudTable(catalog.storageaccountname, catalog.storageaccountkey, Azure.Table.TableMetadata);
 
-                                _Catalogs.Add(catalog, datasets);
+                                    IEnumerable<TableMetadata> tmpDatasets = tableMetadata.ExecuteQuery(new TableQuery<TableMetadata>());
+                                    tmpDatasets = tmpDatasets.OrderBy(d => d.entityset);
+
+                                    List<TableMetadata> datasets = tmpDatasets.ToList();
+                                    datasets.ForEach(delegate(TableMetadata t) { t.Catalog = catalog.alias; });
+
+                                    _Catalogs.Add(catalog, datasets);
+                                }
+                                catch (Exception)
+                                {
+                                    _Catalogs.Add(catalog, new List<TableMetadata>());
+                                }
                             }
                         }
                     }
@@ -151,11 +155,11 @@ namespace DataConfig.Models
                 if (_AllKeywords == null)
                 {
                     _AllKeywords = (from d in this.Datasets
-                                 where d.KeywordsList != null
-                                 from e in d.KeywordsList
-                                 group d by e into key
-                                 orderby key.Key
-                                 select key).ToDictionary(d => d.Key, d => d.Count());
+                                    where d.KeywordsList != null
+                                    from e in d.KeywordsList
+                                    group d by e into key
+                                    orderby key.Key
+                                    select key).ToDictionary(d => d.Key, d => d.Count());
                 }
 
                 return _AllKeywords;

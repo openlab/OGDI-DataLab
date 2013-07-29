@@ -120,15 +120,6 @@
   <data name="CannotConnect" xml:space="preserve">
     <value>Cannot connect to your Azure storage account. Please verify your credentials.</value>
   </data>
-  <data name="CannotConnectLight" xml:space="preserve">
-    <value>Cannot connect to the Azure storage account.</value>
-  </data>
-  <data name="CatalogAdded" xml:space="preserve">
-    <value>Your catalog has been added.</value>
-  </data>
-  <data name="CatalogDeleted" xml:space="preserve">
-    <value>Your catalog has been deleted.</value>
-  </data>
   <data name="CatalogNotFound" xml:space="preserve">
     <value>Cannot retrieve this catalog.</value>
   </data>
@@ -137,9 +128,6 @@
   </data>
   <data name="ConfirmDeleteDatasets" xml:space="preserve">
     <value>Are you sure you want to delete the selected datasets?</value>
-  </data>
-  <data name="DatasetDeleted" xml:space="preserve">
-    <value>Your dataset has been deleted.</value>
   </data>
   <data name="DatasetNotFound" xml:space="preserve">
     <value>Cannot retrieve this dataset.</value>
