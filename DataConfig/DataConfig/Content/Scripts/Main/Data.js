@@ -267,8 +267,8 @@ var Sort = {
 ** Utils object
 */
 var Utils = {
-    RowClickEvent: function(e) {
-        if (!$(e.toElement).is("input")) {
+    RowClickEvent: function (e) {
+        if (e.target.type !== 'checkbox') {
             var checkbox = $(this).find("input[type=checkbox]");
             $(checkbox).prop("checked", $(checkbox).is(":checked") ? false : true);
         }
