@@ -199,17 +199,18 @@
 
                             <div id="filterContent">
                                 <div class="filterBlock">
-                                    <h6>@UI.Catalogs</h6>
                                     @if (!string.IsNullOrEmpty(Model.CatalogFilter))
                                     {
+                                        <h6>@UI.Catalogs</h6>
                                         <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear catalog" title="@UI.DeleteFilter">[x]</a> @Model.CatalogFilter
                                             </div>
                                         </div>
                                     }
-                                    else
+                                    else if (Model.AllCatalogs.Count > 0)
                                     {
+                                        <h6>@UI.Catalogs</h6>
                                         <div class="filterList">
                                             <ul>
                                                 @foreach (var catalog in Model.AllCatalogs)
@@ -221,7 +222,7 @@
                                             </ul>
                                         </div>
 
-                                        if (Model.AllCatalogs.Count() > 11)
+                                        if (Model.AllCatalogs.Count > 11)
                                         {
                                             <div class="displayAll secondary tiny button">
                                                 @UI.DisplayAll
@@ -231,17 +232,18 @@
                                 </div>
 
                                 <div class="filterBlock">
-                                    <h6>@UI.Categories</h6>
                                     @if (!string.IsNullOrEmpty(Model.CategoryFilter))
                                     {
+                                        <h6>@UI.Categories</h6>
                                         <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear category" title="@UI.DeleteFilter">[x]</a> @Model.CategoryFilter
                                             </div>
                                         </div>
                                     }
-                                    else
+                                    else if (Model.AllCategories.Count > 0)
                                     {
+                                        <h6>@UI.Categories</h6>
                                         <div class="filterList">
                                             <ul>
                                                 @foreach (var category in Model.AllCategories)
@@ -253,7 +255,7 @@
                                             </ul>
                                         </div>
                                             
-                                        if (Model.AllCategories.Count() > 11)
+                                        if (Model.AllCategories.Count > 11)
                                         {
                                             <div class="displayAll secondary tiny button">
                                                 @UI.DisplayAll
@@ -263,17 +265,18 @@
                                 </div>
 
                                 <div class="filterBlock">
-                                    <h6>@UI.Keywords</h6>
                                     @if (!string.IsNullOrEmpty(Model.KeywordFilter))
                                     {
+                                        <h6>@UI.Keywords</h6>
                                         <div class="filterList">
                                             <div class="filtered">
                                                 <a class="filter clear keyword" title="@UI.DeleteFilter">[x]</a> @Model.KeywordFilter
                                             </div>
                                         </div>
                                     }
-                                    else
+                                    else if (Model.AllKeywords.Count > 0)
                                     {
+                                        <h6>@UI.Keywords</h6>
                                         <div class="filterList">
                                             <ul>
                                                 @foreach (var keyword in Model.AllKeywords)
@@ -285,7 +288,7 @@
                                             </ul>
                                         </div>
                                         
-                                        if (Model.AllKeywords.Count() > 11)
+                                        if (Model.AllKeywords.Count > 11)
                                         {
                                             <div class="displayAll secondary tiny button">
                                                 @UI.DisplayAll
