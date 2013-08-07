@@ -133,7 +133,7 @@ namespace DataConfig.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Configuration.
+        ///   Recherche une chaîne localisée semblable à OGDI DataLab configuration account.
         /// </summary>
         public static string Configuration {
             get {
