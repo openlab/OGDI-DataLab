@@ -22,8 +22,31 @@ namespace DataConfig.Models
 
         public List<string> Errors { get; set; }
 
-        public string ConfigStorageName { get; set; }
-        public string ConfigStorageKey { get; set; }
+        private string _ConfigStorageName;
+        public string ConfigStorageName
+        {
+            get
+            {
+                return _ConfigStorageName;
+            }
+            set
+            {
+                _ConfigStorageName = value.ToLower();
+            }
+        }
+
+        private string _ConfigStorageKey;
+        public string ConfigStorageKey
+        {
+            get
+            {
+                return _ConfigStorageKey;
+            }
+            set
+            {
+                _ConfigStorageKey = value;
+            }
+        }
 
         public string SortOrder { get; set; }
         public string SortParam { get; set; }
