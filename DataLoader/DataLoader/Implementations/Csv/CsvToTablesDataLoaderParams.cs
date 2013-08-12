@@ -49,7 +49,13 @@ namespace Ogdi.Data.DataLoader.Csv
                     ? CreateEmptyData(csvFileName)
                     : new CsvToTablesDataLoaderParams
                     {
-                        TableMetadataEntity = new TableMetadataEntity { IsEmpty = true, ReleasedDate = DateTime.Now, ExpiredDate = DateTime.Now.AddDays(1), LastUpdateDate = DateTime.Now },
+                        TableMetadataEntity = new TableMetadataEntity
+                        {
+                            IsEmpty = true,
+                            ReleasedDate = DateTime.Now,
+                            ExpiredDate = DateTime.Now.AddDays(1),
+                            LastUpdateDate = DateTime.Now
+                        },
                         ProcessorParams = new TableProcessorParams
                         {
                             PartitionKeyPropertyName = string.Empty,
