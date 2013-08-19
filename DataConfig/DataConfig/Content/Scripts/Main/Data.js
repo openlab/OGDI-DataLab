@@ -141,6 +141,15 @@ var Datasets = {
         // Change button value
         $("#selectAllDatasets").html(Datasets._selectAll ? Strings.SelectAll : Strings.DeselectAll);
     },
+    Add: function () {
+        // Close modal
+        $('#addDatasetModal').trigger('reveal:close');
+
+        // Alert not implemented
+        alert('This feature is not implemented yet');
+
+        //TODO: Implement here
+    },
     Delete: function () {
         // Retrieve all checked datasets
         var checkboxes = $("#datasets tbody .deleteBox input:checked");

@@ -195,9 +195,6 @@
   <data name="NoDataset" xml:space="preserve">
     <value>Aucun jeu de données trouvé</value>
   </data>
-  <data name="NotAvailable" xml:space="preserve">
-    <value>Pas encore disponible</value>
-  </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Tout séléctionner</value>
   </data>
