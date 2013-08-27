@@ -15,6 +15,7 @@
 				<xs:element name="core" type="CoreSettings_SchemaType" minOccurs="0" maxOccurs="1" />
 				<xs:element name="less" type="LessSettings_SchemaType" minOccurs="0" maxOccurs="1" />
 				<xs:element name="sassAndScss" type="SassAndScssSettings_SchemaType" minOccurs="0" maxOccurs="1" />
+				<xs:element name="coffeeScript" type="CoffeeScriptSettings_SchemaType" minOccurs="0" maxOccurs="1" />
 				<xs:element name="typeScript" type="TypeScriptSettings_SchemaType" minOccurs="0" maxOccurs="1" />
 				<xs:element name="microsoftAjax" type="MicrosoftAjaxSettings_SchemaType" minOccurs="0" maxOccurs="1" />
 				<xs:element name="yui" type="YuiSettings_SchemaType" minOccurs="0" maxOccurs="1" />
@@ -49,11 +50,6 @@
 			<xs:element name="js" type="JsSettings_SchemaType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Configuration settings of processing JS-assets</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="assetHandler" type="AssetHandlerSettings_SchemaType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Configuration settings of HTTP-handler, that responsible for text output of processed asset</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:all>
@@ -214,61 +210,6 @@
 	</xs:complexType>
 
 	<xs:complexType name="ClearAssetProcessorRegistrationBase_SchemaType" abstract="true" />
-
-	<xs:complexType name="AssetHandlerSettings_SchemaType">
-		<xs:attribute name="clientCacheDurationInDays" use="optional" default="365">
-			<xs:annotation>
-				<xs:documentation>Duration of storage text content of processed asset in browser cache (in days)</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:int">
-					<xs:minInclusive value="0" />
-					<xs:maxInclusive value="365" />
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="enableCompression" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to enable GZIP/Deflate-compression of processed asset</xs:documentation>
-			</xs:annotation>			
-		</xs:attribute>
-		<xs:attribute name="useLastModifiedHeader" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to enable using HTTP-header "Last-Modified" for notify browser about change files of processed asset</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="useETagHeader" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to enable using HTTP-header "ETag" for notify browser about change files of processed asset</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="serverCacheDurationInMinutes" use="optional" default="15">
-			<xs:annotation>
-				<xs:documentation>Duration of storage the text content of processed asset in server cache (in minutes)</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:int">
-					<xs:minInclusive value="1" />
-					<xs:maxInclusive value="1440" />
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="useServerCacheSlidingExpiration" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to enable sliding expiration time of server cache</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="disableClientCacheInDebugMode" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disable storage text content of processed asset in browser cache during debugging</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="disableCompressionInDebugMode" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disable GZIP/Deflate-compression of processed asset during debugging</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
 	<!-- /Core settings -->
 
 	<!-- LESS settings -->
@@ -281,16 +222,47 @@
 				<xs:documentation>Flag for whether to allow the use of native minification</xs:documentation>
 			</xs:annotation>			
 		</xs:attribute>
-		<xs:attribute name="severity" use="optional" default="0">
+		<xs:attribute name="ieCompat" type="Boolean_SchemaType" use="optional" default="true">
 			<xs:annotation>
-				<xs:documentation>Severity level of errors:
- 0 - only syntax error messages;
- 1 - only syntax error messages and warnings</xs:documentation>
+				<xs:documentation>Flag for whether to enforce IE compatibility (IE8 data-uri)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="strictMath" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether math has to be within parenthesis</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="strictUnits" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether units need to evaluate correctly</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dumpLineNumbers" use="optional" default="None">
+			<xs:annotation>
+				<xs:documentation>Output mode of the debug information</xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
-				<xs:restriction base="xs:int">
-					<xs:minInclusive value="0" />
-					<xs:maxInclusive value="1" />
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="None">
+						<xs:annotation>
+							<xs:documentation>No output the debug information</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Comments">
+						<xs:annotation>
+							<xs:documentation>Output the debug information within comments</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MediaQuery">
+						<xs:annotation>
+							<xs:documentation>Output the debug information within a fake media query which is compatible with the SASS format</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="All">
+						<xs:annotation>
+							<xs:documentation>Output the debug information within comments and fake media query</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -307,40 +279,70 @@
 				<xs:documentation>Flag for whether to allow the use of native minification</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="lineNumbers" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to output the line number and file within comments</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="traceSelectors" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to output the full trace of imports and mixins before each selector</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="debugInfo" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to output the line number and file within a fake media query</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<!-- /Sass and SCSS settings -->
+
+	<!-- CoffeeScript settings -->
+	<xs:complexType name="CoffeeScriptSettings_SchemaType">
+		<xs:annotation>
+			<xs:documentation>Configuration settings of CoffeeScript-translator</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="bare" type="Boolean_SchemaType" use="optional" default="true">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to allow compilation to JavaScript without the top-level function safety wrapper</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- /CoffeeScript settings -->
 
 	<!-- TypeScript settings -->
 	<xs:complexType name="TypeScriptSettings_SchemaType">
 		<xs:annotation>
 			<xs:documentation>Configuration settings of TypeScript-translator</xs:documentation>
 		</xs:annotation>
-		<xs:all>
-			<xs:element name="style" type="TypeScriptStyleSettings_SchemaType" minOccurs="0" maxOccurs="1" />
-		</xs:all>
-		<xs:attribute name="useNativeMinification" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to allow the use of native minification</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 		<xs:attribute name="useDefaultLib" type="Boolean_SchemaType" use="optional" default="true">
 			<xs:annotation>
 				<xs:documentation>Flag for whether to include a default lib.d.ts with global declarations</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="propagateConstants" type="Boolean_SchemaType" use="optional" default="false">
+		<xs:attribute name="propagateEnumConstants" type="Boolean_SchemaType" use="optional" default="false">
 			<xs:annotation>
-				<xs:documentation>Flag for whether to propagate constants to emitted code</xs:documentation>
+				<xs:documentation>Flag for whether to propagate enum constants to emitted code</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="errorOnWith" type="Boolean_SchemaType" use="optional" default="true">
+		<xs:attribute name="removeComments" type="Boolean_SchemaType" use="optional" default="false">
 			<xs:annotation>
-				<xs:documentation>Flag for whether to disallow with statements</xs:documentation>
+				<xs:documentation>Flag for whether to do not emit comments to output</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="inferPropertiesFromThisAssignment" type="Boolean_SchemaType" use="optional" default="false">
+		<xs:attribute name="allowBool" type="Boolean_SchemaType" use="optional" default="false">
 			<xs:annotation>
-				<xs:documentation>Flag for whether to infer class properties from top-level assignments to 'this'</xs:documentation>
+				<xs:documentation>Flag for whether to allow 'bool' as a synonym for 'boolean'</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="allowAutomaticSemicolonInsertion" type="Boolean_SchemaType" use="optional" default="true">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to allow automatic semicolon insertion</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="noImplicitAny" type="Boolean_SchemaType" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Flag for whether to warn on expressions and declarations with an implied 'any' type</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="codeGenTarget" use="optional" default="EcmaScript3">
@@ -353,87 +355,6 @@
 					<xs:enumeration value="EcmaScript5" />
 				</xs:restriction>
 			</xs:simpleType>
-		</xs:attribute>
-	</xs:complexType>
-
-	<xs:complexType name="TypeScriptStyleSettings_SchemaType">
-		<xs:annotation>
-			<xs:documentation>Configuration settings of code stylization</xs:documentation>
-		</xs:annotation>
-		<xs:attribute name="bitwise" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to allow bitwise operations</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="blockInCompoundStatement" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disallow non-block statements as bodies of compound statements</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="eqEqEq" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disallow == and !=</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="forIn" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to require body of for in loop to start with a filter</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="emptyBlocks" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit empty blocks</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="newMustBeUsed" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to require result of new expression to be used (no new just for side-effects)</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="requireSemicolons" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to require semicolons to terminate statements</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="assignmentInConditions" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disallow top-level assignment in conditionals if (a=b) { ...</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="eqNull" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to disallow == null or != null</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="evalOk" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit eval</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="innerScopeDeclarationsEscape" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit var use if declaration in inner scope as in if (c) { var v=10; } v=11;</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="functionsInLoops" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit functions in loops</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="reDeclareLocal" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit re-declaration of local variable</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="literalSubscript" type="Boolean_SchemaType" use="optional" default="true">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to permit obj['x'] in addition to obj.x</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="implicitAny" type="Boolean_SchemaType" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>Flag for whether to implicit 'any'</xs:documentation>
-			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
 	<!-- /TypeScript settings -->
