@@ -1,34 +1,34 @@
 ﻿<Window x:Class="Ogdi.Data.DataLoaderGuiApp.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources"
         xmlns:views="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Views"
         xmlns:Commands="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Commands"
         Title="OGDI DataLab" Height="400" Width="800"
         WindowStartupLocation="CenterScreen">
-    
     <Grid Name="MainGrid">
         <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding ElementName=MainGrid, Path=ActualWidth}">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Open" Command="{Binding OpenCommand}"></MenuItem>
-                <MenuItem Header="_New Planned" Command="{Binding NewPlannedDatasetCommand}"></MenuItem>
+            <MenuItem Header="{x:Static r:ViewR.File}">
+                <MenuItem Header="{x:Static r:ViewR.Open}" Command="{Binding OpenCommand}"></MenuItem>
+                <MenuItem Header="{x:Static r:ViewR.New}" Command="{Binding NewPlannedDatasetCommand}"></MenuItem>
                 <Separator />
-                <MenuItem Header="_Settings" Command="{Binding SettingsCommand}"></MenuItem>
+                <MenuItem Header="{x:Static r:ViewR.Setting}" Command="{Binding SettingsCommand}"></MenuItem>
                 <Separator />
-                <MenuItem Header="_Exit" Command="{Binding ExitCommand}"></MenuItem>
+                <MenuItem Header="{x:Static r:ViewR.Exit}" Command="{Binding ExitCommand}"></MenuItem>
             </MenuItem>
-            
-            <MenuItem Header="_Action">
-                <MenuItem Header="_Start Transfer" Command="{Binding StartCommand}">
+
+            <MenuItem Header="{x:Static r:ViewR.Action}">
+                <MenuItem Header="{x:Static r:ViewR.Start}" Command="{Binding StartCommand}">
                     <MenuItem.Icon>
                         <Image Source="/Images/start.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Delete Selection" Command="{Binding DeleteProcessCommand}">
+                <MenuItem Header="{x:Static r:ViewR.Delete}" Command="{Binding DeleteProcessCommand}">
                     <MenuItem.Icon>
                         <Image Source="/Images/delete.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Clear All" Command="{Binding ClearAllCommand}">
+                <MenuItem Header="{x:Static r:ViewR.Clear}" Command="{Binding ClearAllCommand}">
                     <MenuItem.Icon>
                         <Image Source="/Images/clear.png" Width="16"/>
                     </MenuItem.Icon>

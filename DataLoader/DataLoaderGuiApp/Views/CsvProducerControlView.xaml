@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls"
-             xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels">
+             xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels"
+             xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style x:Key="BaseLabelCellStyle" TargetType="{x:Type Label}">
@@ -88,7 +89,7 @@
 			<DataGrid Grid.Row="0" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding PropertyToTypeMaps}" SelectedItem="{Binding SelectedItem}" >
 				<DataGrid.Columns>
 					<Controls:LabelTextBoxColumn
-                        Header="Column Name"
+                        Header="{x:Static r:ViewR.Column_Name}"
                         Width="200"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         ElementStyle="{StaticResource BaseLabelCellStyle}"
@@ -96,13 +97,13 @@
                         Binding="{Binding Path=Name}"/>
 
 					<DataGridTemplateColumn
-                        Header="Data Type"
+                        Header="{x:Static r:ViewR.Data_Type}"
                         Width="100"
                         CellTemplate="{StaticResource ComboBoxCellDataTemplate}"
                         CellEditingTemplate="{StaticResource ComboBoxCellEditingTemplate}"/>
 
 					<DataGridTemplateColumn
-                        Header="Push Pin Mapping"
+                        Header="{x:Static r:ViewR.Push_Pin_Mapping}"
                         Width="100"
                         CellTemplate="{StaticResource ComboBoxCellDataTemplate1}"
                         CellEditingTemplate="{StaticResource ComboBoxCellEditingTemplate1}"/>
@@ -125,25 +126,18 @@
 				<ColumnDefinition Width="150" />
 			</Grid.ColumnDefinitions>
 
-			<CheckBox Grid.Row="0" Name="chbPlacamark" IsChecked="{Binding PlacemarksEnabled}"  Foreground="Black">Bind To Map</CheckBox>
+            <CheckBox Grid.Row="0" Name="chbPlacamark" IsChecked="{Binding PlacemarksEnabled}"  Foreground="Black" Content="{x:Static r:ViewR.Bind}"></CheckBox>
 
-            <Label Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold">
-                Map Push Pin Text Format String
+            <Label Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Content="{x:Static r:ViewR.StringFormat}">
             </Label>
             
 			<TextBox Grid.Row="2" Grid.ColumnSpan="2" Name="nameFormatCtr" Text="{Binding NamePropertyFormatString}" VerticalAlignment="Top" IsEnabled="{Binding PlacemarksEnabled}" />
-            
-			<TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  TextWrapping="Wrap" Foreground="Black" Style="{StaticResource RightAlignedTextBlock}">
-                (Example: Suppose the dataset contains columns named A and B and you would like push pins text to read as "valueof(A) - valueof(B)". To achieve that place symbols {0} and {1} into the Push Pin Mapping column against A and B respectively and enter {0} - {1} into the Map Push Pin Format String text field.)
-            </TextBlock>
 
-            <Label Grid.Row="4" Grid.Column="0" FontWeight="Bold">
-                Longitude Col. Name
-            </Label>
-            
-			<Label Grid.Row="4" Grid.Column="1" FontWeight="Bold">
-                Latitude Col. Name
-            </Label>
+            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  TextWrapping="Wrap" Foreground="Black" Style="{StaticResource RightAlignedTextBlock}" Text="{x:Static r:ViewR.Exemple}"></TextBlock>
+
+            <Label Grid.Row="4" Grid.Column="0" FontWeight="Bold" Content="{x:Static r:ViewR.Longitude}"></Label>
+
+            <Label Grid.Row="4" Grid.Column="1" FontWeight="Bold" Content="{x:Static r:ViewR.Latitude}"></Label>
             
 			<ComboBox Grid.Row="5" Grid.Column="0"
                       VerticalAlignment="Top" HorizontalAlignment="Left"

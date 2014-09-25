@@ -1,51 +1,46 @@
 ﻿@model DataBrowserModel
-
 @section HeadContent {
-
     <link href="../../Content/css/csharp.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="@Url.Content("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js")"></script>
     <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/jquery.clipboard.min.js")"></script>
- 	
-  	@if (!Model.IsPlanned)
-   { 
-  	    <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/DataBrowser.js")"></script>
-        
+
+    @if (!Model.IsPlanned)
+    {
+        <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/DataBrowser.js")"></script>
+
         @*fix firefox bug with bing maps attachevent *@
         if (HttpContext.Current.Request.Browser.Browser.ToLower().Contains("firefox"))
         {
             <script type="text/javascript" language="javascript" src="http://js.shared.live.com/xugouxKQdlbopFQsKLF0!Q/B/AtlasCompat.js"></script>
         }
-           
-       <script type="text/javascript" language="javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&mkt=en-us"></script>
-      <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/querybuilder.js")"></script>
-   } 
-    <script src="http://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js" type="text/javascript"></script>  
 
+        <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=@ViewBag.Culture"></script>
+        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/querybuilder.js")"></script>
+    }
+    <script src="http://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js" type="text/javascript"></script>
     <!-- If you are using IE8, then COMMENT / UNCOMMENT this meta tag
          to demonstrate working in IE7 -->
     @*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />*@
-    
 
     <script type="text/javascript">
-        Sys.Application.set_enableHistory(true);      
-    </script>   
-    @if (!Model.IsPlanned) { 
-    <script type="text/javascript">
-         Sys.Application.add_init(page_init);      
+        Sys.Application.set_enableHistory(true);
     </script>
-        }
-        
+    @if (!Model.IsPlanned)
+    {
+        <script type="text/javascript">
+            Sys.Application.add_init(page_init);
+        </script>
+    }
+
     <script type="text/javascript">
         //  Constant used for storing damaged bookmark error
         var mapControlError = '@UIConstants.DBPC_mapControlError';
-        
+
         // Separator used for separating bookmarking parameters in URL Hash
         var hashSeparator = '@UIConstants.DBPC_hashSeparator';
-        
+
         var map;
-        var kmlLayer;
         var mapLoaded = false;
-        var kmlQuery;
         var ExpanderImage = '@UIConstants.GC_ExpandImagePath';
         var ExpanderImageDescription = '@UIConstants.GC_ExpandImageLongDesc';
         var CollapserImage = '@UIConstants.GC_CollapseImagePath';
@@ -69,7 +64,7 @@
         var isBookmarked = '@ViewData.Model.IsBookmarked';
         var viewType = '';
         var tagType = '';
-        var sampleCodeLanguage = '';       
+        var sampleCodeLanguage = '';
         var longitude = 0;
         var latitude = 0;
         var zoomLevel = 11;
@@ -77,7 +72,7 @@
         var mapStyle;
         var sceneId = 0;
         var birdseyeSceneOrientation = 0;
-        var isSelectOne = '@ViewData.Model.IsSelectOne';        
+        var isSelectOne = '@ViewData.Model.IsSelectOne';
         var noFilterText = '@UIConstants.DBPC_NoFilterText';
         var clientSideError = '@UIConstants.GC_BadRequestErrorString';
         var noRunClickedError = '@UIConstants.GC_NoRunClickedError';
@@ -86,39 +81,37 @@
         var filterRunned = noFilterText;
         var siteTitle = '@UIConstants.SiteTitle';
     </script>
-    
+
     <style type="text/css">
-        .hidepanle
-        {
+        .hidepanle {
             width: 100%;
             border-bottom: solid 1px #c4c4c4;
         }
-        .hidepanle h1
-        {
-            background: #ffffff url(/Content/images/arrow-square.gif) no-repeat right -51px;
-            padding: 7px 15px;
-            margin: 0;
-            font: bold 16px Arial;
-            border: solid 1px #cccccc;
-            border-bottom: none;
-            cursor: pointer;
-        }
-        .hidepanle h1.active
-        {
-            background-position: right 5px;
-            background-color: #e3e2e2;
-        }
-        .hidepanle div.hidepanle
-        {
-            background: #ffffff;
-            margin: 0;
-            padding: 10px 15px 20px;
-            border-left: solid 1px #cccccc;
-            border-right: solid 1px #cccccc;
-        }
 
-        td.dslistheader
-        {
+            .hidepanle h1 {
+                background: #ffffff url(/Content/images/arrow-square.gif) no-repeat right -51px;
+                padding: 7px 15px;
+                margin: 0;
+                font: bold 16px Arial;
+                border: solid 1px #cccccc;
+                border-bottom: none;
+                cursor: pointer;
+            }
+
+                .hidepanle h1.active {
+                    background-position: right 5px;
+                    background-color: #e3e2e2;
+                }
+
+            .hidepanle div.hidepanle {
+                background: #ffffff;
+                margin: 0;
+                padding: 10px 15px 20px;
+                border-left: solid 1px #cccccc;
+                border-right: solid 1px #cccccc;
+            }
+
+        td.dslistheader {
             padding: 4px;
             background: url(/Content/images/sort.jpg);
             background-repeat: no-repeat;
@@ -131,114 +124,104 @@
             font-size: 12px;
             cursor: pointer;
         }
-        
-        td.desc
-        {
+
+        td.desc {
             background: url(/Content/images/sorted_desc.jpg);
             background-repeat: no-repeat;
             background-position: left;
-        } 
+        }
 
-        td.asc
-        {
+        td.asc {
             background: url(/Content/images/sorted_asc.jpg);
             background-repeat: no-repeat;
             background-position: left;
-        } 
+        }
 
 
-        table.dslistrow
-        {
+        table.dslistrow {
             background: url(/Content/images/listrow.jpg);
             height: 34px;
             border: 1px double #cccccc;
             margin-top: 2px;
             margin-bottom: 2px;
         }
-        table.dslistrowselected
-        {
+
+        table.dslistrowselected {
             background: url(/Content/images/listrowh.jpg);
             height: 34px;
             border: 1px double #cccccc;
             margin-top: 2px;
             margin-bottom: 2px;
         }
-        td.dslistrow
-        {
+
+        td.dslistrow {
             padding: 4px;
             text-align: left;
             font-family: Verdana;
             font-size: 11px;
             color: #404040;
         }
-        
-        .canvas .sheet {border-left-width:5px;}
+
+        .canvas .sheet {
+            border-left-width: 5px;
+        }
     </style>
-
 }
-
 <div class="tabs">
     @if (!Model.IsPlanned)
-    { 
-    <div class="tab tc1 t1" title="@DataBrowserResources.Index.Data">
-        <div class="active" onclick='q.Tabs.switchTabs(this, "eidDataTabContent")'></div>
-    </div>
+    {
+        <div class="tab tc1 t1" title="@DataBrowserResources.Index.Data">
+            <div class="active" onclick='q.Tabs.switchTabs(this, "eidDataTabContent")'></div>
+        </div>
     }
-  
+
     <div class="tab tc2 t2" title="@DataBrowserResources.Index.Comments">
         <div onclick='q.Tabs.switchTabs(this, "eidCommentsTabContent")'></div>
     </div>
-
     <div class="tab tc3 t3" title="@DataBrowserResources.Index.Details">
-        @if (Model.IsPlanned) {
-        <div class="active" onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div>}
-        else {
-        <div onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div>}
+        @if (Model.IsPlanned)
+        {
+            <div class="active" onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div>}
+        else
+        {
+            <div onclick='q.Tabs.switchTabs(this, "eidDetailsTabContent")'></div>}
     </div>
-
     @if (!Model.IsPlanned)
-    { 
+    {
         <div class="tab tc4 t4" title="@DataBrowserResources.Index.Developers">
             <div onclick='q.Tabs.switchTabs(this, "eidDevelopersTabContent")'></div>
         </div>
     }
 </div>
-
 <iframe id="__historyFrame" src="@Url.Action("Index", "HistoryIframeHelper")" style="display:none;"></iframe>
-
 @Html.Partial("DataSetView", Model.EntitySetWrapper)
-
 <div id="divError" style="display: none">
     @Html.Partial("ErrorView", ViewData)
 </div>
-
 @if (!Model.IsPlanned)
-{ 
+{
     <div class="tab-content" id="eidDataTabContent" style="display: block;">
         @Html.Partial("DataSetData", Model)
     </div>
 }
-
-@if (Model.IsPlanned) 
+@if (Model.IsPlanned)
 {
     <div class="tab-content" id="eidDetailsTabContent" style="display:block;">
         @Html.Partial("DataSetDetails", Model.EntitySetWrapper)
     </div>
-} 
+}
 else
 {
     <div class="tab-content" id="eidDetailsTabContent">
         @Html.Partial("DataSetDetails", Model.EntitySetWrapper)
     </div>
 }
-
+<div class="tab-content" id="eidCommentsTabContent">
+    @Html.Partial("Comments", Ogdi.InteractiveSdk.Mvc.Models.Comments.CommentInfo.CreateDatasetCommentInfo(Model.Container, Model.EntitySetName, Model.EntitySetWrapper.EntitySet.Name))
+</div>
 @if (!Model.IsPlanned)
 {
     <div class="tab-content" id="eidDevelopersTabContent">
         @Html.Partial("SampleCode", Model)
     </div>
 }
-
-<div class="tab-content" id="eidCommentsTabContent">
-    @Html.Partial("Comments", Ogdi.InteractiveSdk.Mvc.Models.Comments.CommentInfo.CreateDatasetCommentInfo(Model.Container, Model.EntitySetName, Model.EntitySetWrapper.EntitySet.Name))
-</div>

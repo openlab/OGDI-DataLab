@@ -1,0 +1,131 @@
+﻿@import "Variables.less";
+
+#startButton {
+    margin-top: 17px;
+    width: 100%;
+    padding: 8px 0;
+}
+
+#startMessageText {
+    font-family: @segoePrint;
+    font-size: 24px;
+    text-align: right;
+    padding-top: 36px;
+}
+
+.alert-box {
+    margin: 12px 0 0 0 !important;
+}
+
+.panel {
+    margin: 0;
+    padding: 12px 20px;
+
+    h5 {
+        margin: 0;
+
+        i {
+            color: green;
+        }
+    }
+}
+
+#ajaxLoader {
+    display: none;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    margin: 0;
+
+    tbody tr:hover {
+        cursor: pointer;
+        background-color: @blueLight;
+    }
+
+    td {
+        max-width: 150px;
+        word-wrap: break-word;
+        overflow: hidden;
+
+        &.hidden {
+            display: none;
+        }
+
+        &.deleteBox {
+            width: 40px;
+            padding-right: 4px;
+        }
+    }
+
+    button {
+        padding: 4px 6px !important;
+    }
+
+    i {
+        font-size: 10px;
+    }
+}
+
+.buttonBar {
+    margin-bottom: 6px !important;
+
+    a {
+        margin-left: 6px;
+    }
+}
+
+a.sort:hover {
+    cursor: pointer;
+}
+
+#filter {
+    padding-left: 0;
+    margin-top: 6px;
+
+    #filterTitle {
+        font-size: 18px;
+        color: @theme;
+    }
+
+    #filterContent {
+        background-color: @greyUltraLight;
+        border-top: 1px solid @theme;
+        padding: 10px 0 10px 10px;
+
+        .filterBlock {
+            margin-bottom: 12px;
+
+            h6 {
+                color: @dark;
+                margin: 0;
+            }
+
+            .filterList {
+                max-height: 270px;
+                overflow: hidden;
+
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    margin-left: 10px;
+
+                }
+
+                a:hover {
+                    cursor: pointer;
+                }
+
+                .filtered {
+                    margin-top: 6px;
+                    margin-left: 10px;
+                }
+            }
+
+            .displayAll {
+                margin-left: 10px;
+            }
+        }
+    }
+}

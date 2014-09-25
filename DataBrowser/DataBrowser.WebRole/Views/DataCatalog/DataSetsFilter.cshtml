@@ -131,12 +131,15 @@
                             @{index = 0;}
                             @foreach (Container container in ViewData.Model.AllContainers)
                             {
-                                var id = "ds" + (index++);
+                                if (@container.Description != null)
+                                {
+                                    var id = "ds" + (index++);
                             
-                                <div class="item">
-                                    <input type="checkbox" name="@container.Alias" value="@container.Alias" id="@id" />
-                                    <label for="@id">@container.Description</label>
-                                </div>
+                                    <div class="item">
+                                        <input type="checkbox" name="@container.Alias" value="@container.Alias" id="@id" />
+                                        <label for="@id">@container.Description</label>
+                                    </div>
+                                }   
                             }
                         </div>
                     </div>

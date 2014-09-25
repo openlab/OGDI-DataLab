@@ -64,7 +64,7 @@ namespace Ogdi.InteractiveSdk.Mvc.Repository
         internal SampleCodeGenerator(string templateFilespec)
         {
             // Create an object of the class StreamReader
-            StreamReader codeReader = new StreamReader(templateFilespec);
+            StreamReader codeReader = new StreamReader(templateFilespec,true);
 
             // Read the stream upto end in the Template property
             Template = codeReader.ReadToEnd();

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Controls="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Controls"
              xmlns:ViewModels="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels"
+             xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources"
              xmlns:ogdiConverter="clr-namespace:Ogdi.Data.DataLoaderGuiApp.ViewModels"
              mc:Ignorable="d"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -75,7 +76,7 @@
             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding PropertyToTypeColumnsMetadataItems }" Grid.ColumnSpan="4" CanUserAddRows="False" Name="DataGrid2" SelectionUnit="FullRow" LoadingRow="DataGrid2_LoadingRow">
                 <DataGrid.Columns>
                     <Controls:LabelTextBoxColumn
-                        Header="Column Name"
+                        Header="{x:Static r:ViewR.Column_Name}"
                         Width="150"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         ElementStyle="{StaticResource BaseLabelCellStyle}"
@@ -84,13 +85,13 @@
                         IsReadOnly="True" />
                     
                     <DataGridTemplateColumn
-                        Header="What it represent?"
+                        Header="{x:Static r:ViewR.Represent}"
                         Width="150"
                         CellTemplate="{StaticResource ComboBoxCellDataTemplate}"
                         CellEditingTemplate="{StaticResource ComboBoxCellEditingTemplate}"/>
                         
                     <Controls:LabelTextBoxColumn
-                        Header="Description"
+                        Header="{x:Static r:ViewR.Description}"
                         Width="200"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         ElementStyle="{StaticResource BaseLabelCellStyle}"
@@ -98,7 +99,7 @@
                         Binding="{Binding Path=ColumnDescription}"/>
                         
                     <Controls:LabelTextBoxColumn
-                        Header="Namespace"
+                        Header="{x:Static r:ViewR.Namespace}"
                         Width="150"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         ElementStyle="{StaticResource BaseLabelCellStyle}"
@@ -119,11 +120,8 @@
                 Instructions
             </TextBlock>
 
-            <TextBlock Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top">
-			Please fill these columns to get proper columns metadata for the dataset. <LineBreak/><LineBreak/>
-			"What it represent?" - choose what best describes the column. If you leave blank you can fill the Description and the Namespace.<LineBreak/><LineBreak/>
-			"Description" (only if you left "What it represents?" blank) - enter the description of the column.<LineBreak/><LineBreak/>
-			"Namespace" (only if you left "What it represents?" blank) - choose the namespace where your column metadata is defined. Use the format: prefix="namespace url" (ex: foaf="http://xmlns.com/foaf/0.1/"). To choose the dataset url as the namespace use ogdi="ogdiUrl".</TextBlock>
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="{x:Static r:ViewR.Instructions}">
+			</TextBlock>
         </Grid>
 	</Grid>
     

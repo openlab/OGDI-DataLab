@@ -127,32 +127,7 @@
     <value>Bar Chart</value>
   </data>
   <data name="ClickToViewResultsAsXMLKML" xml:space="preserve">
-    <value>(Click to view results as XML/KML)</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheMethodCode" xml:space="preserve">
-    <value>Crime incidents where the method code is equal to 2. Other comparison operators
-                        include &amp;quot;gt&amp;quot; for greater than, &amp;quot;lt&amp;quot; for less than, &amp;quot;ge&amp;quot;
-                        for greater than or equal to, and &amp;quot;le&amp;quot; for less than or equal to.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheReportDatetime" xml:space="preserve">
-    <value>Crime incidents where the report date/time is on or after midnight, June 1, 2008,
-                        UTC. Date/time literals are expressed in &lt;a 
-                        href="http://en.wikipedia.org/wiki/ISO_8601" target="_blank"&gt;ISO 8601&lt;/a&gt;
-                        format, &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;, where &lt;i&gt;yyyy&lt;/i&gt;
-                        is the four-digit year, &lt;i&gt;mm&lt;/i&gt; is the two-digit month number, &lt;i&gt;dd&lt;/i&gt; is the
-                        two-digit day of the month, &lt;i&gt;HH&lt;/i&gt; is the two-digit hour (in 24-hour format),
-                        &lt;i&gt;MM&lt;/i&gt; is the two-digit minute, and &lt;i&gt;SS&lt;/i&gt; is the two-digit second.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheShiftIsEqualTo" xml:space="preserve">
-    <value>Crime incidents where the shift is equal to &amp;quot;EVN;&amp;quot; or &amp;quot;MID&amp;quot;.
-                        The filter syntax supports the &amp;quot;and&amp;quot;, &amp;quot;or&amp;quot;, and &amp;quot;not&amp;quot;
-                        logical operators. Expressions can grouped with parentheses, as in many popular
-                        programming languages.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheShiftProperty" xml:space="preserve">
-    <value>Crime incidents where the &amp;quot;shift&amp;quot; property is equal to &amp;quot;EVN&amp;quot;.
-                        String literals must be enclosed in single quotes. Boolean literals are represented
-                        as &amp;quot;true&amp;quot; or &amp;quot;false&amp;quot; (without the double quotes).</value>
+    <value>(Click to view results as JSON)</value>
   </data>
   <data name="DataView" xml:space="preserve">
     <value>Data View</value>
@@ -178,15 +153,6 @@
   <data name="NumberOfPlacemarksInAResultSetExceedsThePinDisplayCountLimit" xml:space="preserve">
     <value>Number of placemarks in a result set exceeds the pin display count limit (50 placemarks)</value>
   </data>
-  <data name="OGDIUsesASubsetOf" xml:space="preserve">
-    <value>OGDI uses a subset of the &lt;a 
-            href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx"&gt;
-                WCF Data Services query syntax&lt;/a&gt;. The basic format
-            of a filter expression is &lt;i&gt;property&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
-            where &lt;i&gt;property&lt;/i&gt; is the name of a property, &lt;i&gt;comparison&lt;/i&gt; is a comparison
-            operator, and &lt;i&gt;expression&lt;/i&gt; is the expression with which the property&amp;#39;s
-            value should be compared.</value>
-  </data>
   <data name="Option1" xml:space="preserve">
     <value>Option 1</value>
   </data>
@@ -208,9 +174,6 @@
   <data name="SelectOne" xml:space="preserve">
     <value>(Select one)</value>
   </data>
-  <data name="SomeExamplesOfFilterExpressions" xml:space="preserve">
-    <value>Some examples of filter expressions using the CrimeIncidents data set from the DC  container are:</value>
-  </data>
   <data name="VerticalAxis" xml:space="preserve">
     <value>Vertical Axis</value>
   </data>
@@ -219,5 +182,12 @@
   </data>
   <data name="RefreshChart" xml:space="preserve">
     <value>refresh-chart</value>
+  </data>
+  <data name="QuerySyntax" xml:space="preserve">
+    <value>Query_Syntax</value>
+  </data>
+  <data name="QuerySyntaxText" xml:space="preserve">
+    <value>The OGDI DataLab's data service enables to specify a set of query parameters, expressed using a subset of the &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;OData query syntax&lt;/a&gt;. OGDI DataLab currently only supports the $top, $skip, $orderby, $filter and $top query options in the OData query syntax. &lt;/p&gt;&lt;p&gt;
+Also note that if a property has a null value for a particular entity in the data set, it will be omitted entirely from the result set returned by OGDI DataLab. Your (modern) application design should take this into account and handle potentially missing properties.</value>
   </data>
 </root>

@@ -1,0 +1,345 @@
+﻿@using DataConfig.Helper
+@using DataConfig.Models
+@using DataConfig.Resources
+
+@model Data
+
+@section script {
+    <script>
+        var Config = {
+            StorageName: @Html.Raw(Json.Encode(Model.ConfigStorageName)),
+            StorageKey: @Html.Raw(Json.Encode(Model.ConfigStorageKey))
+        };
+
+        var Strings = {
+            NoCatalogSelected: @Html.Raw(Json.Encode(Messages.NoCatalogSelected)),
+            NoDatasetSelected: @Html.Raw(Json.Encode(Messages.NoDatasetSelected)),
+            ConfirmDeleteCatalogs: @Html.Raw(Json.Encode(Messages.ConfirmDeleteCatalogs)),
+            ConfirmDeleteDatasets: @Html.Raw(Json.Encode(Messages.ConfirmDeleteDatasets)),
+            SelectAll: @Html.Raw(Json.Encode(UI.SelectAll)),
+            DeselectAll: @Html.Raw(Json.Encode(UI.DeselectAll)),
+            DisplayAll: @Html.Raw(Json.Encode(UI.DisplayAll)),
+            Hide: @Html.Raw(Json.Encode(UI.Hide))
+        };
+    </script>
+}
+
+<form action="/Main/Data" method="post" id="dataForm">
+    <input type="hidden" name="ConfigStorageName" value="@Model.ConfigStorageName" />
+    <input type="hidden" name="ConfigStorageKey" value="@Model.ConfigStorageKey" />
+    <input type="hidden" name="SortParam" id="sortParam" value="@Model.SortParam" />
+    <input type="hidden" name="SortOrder" id="sortOrder" value="@Model.SortOrder" />
+    <input type="hidden" name="CatalogFilter" id="catalogFilter" value="@Model.CatalogFilter" />
+    <input type="hidden" name="CategoryFilter" id="categoryFilter" value="@Model.CategoryFilter" />
+    <input type="hidden" name="KeywordFilter" id="keywordFilter" value="@Model.KeywordFilter" />
+</form>
+
+<div class="row">
+    <div class="twelve columns">
+        <div id="alertBoxContainer">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        <fieldset>
+            <legend>@UI.Configuration</legend>
+            <div class="panel radius">
+                <div class="row">
+                    <div class="ten columns">
+                        <h5><i class="icon-general-checkmark"></i> @Model.ConfigStorageName</h5>
+                    </div>
+                    <div class="two columns">
+                        <a href="/Main/Start" class="right tiny secondary button">@UI.Change</a>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="twelve columns">
+        <dl class="tabs contained">
+            <dt>@UI.DisplayBy</dt>
+            <dd class="active"><a href="#displayByCatalog">@UI.Catalog</a></dd>
+            <dd><a href="#displayByDataset">@UI.Dataset</a></dd>
+            <div id="ajaxLoader" class="right">
+                <img src="@Url.Content("~/Content/Images/AjaxLoader.gif")" alt="loading..." />
+            </div>
+        </dl>
+        <ul class="tabs-content contained">
+            <li class="active" id="displayByCatalogTab">
+                @if (Model.Catalogs.Count > 0)
+                {
+                    <div class="row buttonBar">
+                        <div class="twelve columns">
+                            <a class="right small radius success button" data-reveal-id="addCatalogModal">@UI.NewCatalog</a>
+                            <a class="right small radius secondary button" id="selectAllCatalogs">@UI.SelectAll</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="twelve columns">
+                            <table id="catalogs">
+                                <thead>
+                                    <tr>
+                                        <td class="deleteBox">
+                                            <button class="tiny radius alert button" id="deleteCatalogs" title="@Messages.DeleteSelectedCatalogs">
+                                                <i class="icon-general-remove"></i>
+                                            </button>
+                                        </td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <td>@UI.Alias</td>
+                                        <td>@UI.Description</td>
+                                        <td>@UI.Disclaimer</td>
+                                        <td>@UI.StorageAccount</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var catalog in Model.Catalogs)
+                                    {
+                                        <tr>
+                                            <td class="deleteBox"><input type="checkbox" /></td>
+                                            <td class="hidden partitionKey">@catalog.Key.PartitionKey</td>
+                                            <td class="hidden rowKey">@catalog.Key.RowKey</td>
+                                            <td title="@catalog.Key.alias">@(catalog.Key.alias != null && catalog.Key.alias.Length > 20 ? catalog.Key.alias.Substring(0, 18) + "..." : catalog.Key.alias)</td>
+                                            <td title="@catalog.Key.description">@(catalog.Key.description != null && catalog.Key.description.Length > 32 ? catalog.Key.description.Substring(0, 30) + "..." : catalog.Key.description)</td>
+                                            <td title="@catalog.Key.disclaimer">@(catalog.Key.disclaimer != null && catalog.Key.disclaimer.Length > 32 ? catalog.Key.disclaimer.Substring(0, 30) + "..." : catalog.Key.disclaimer)</td>
+                                            <td title="@catalog.Key.storageaccountname">@(catalog.Key.storageaccountname != null && catalog.Key.storageaccountname.Length > 32 ? catalog.Key.storageaccountname.Substring(0, 30) + "..." : catalog.Key.storageaccountname)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h5 class="centered">@UI.NoCatalog</h5>
+                    <div class="centered">
+                        <a class="small radius success button" data-reveal-id="addCatalogModal">@UI.NewCatalog</a>
+                    </div>
+                }
+            </li>
+
+            <li id="displayByDatasetTab">
+                @if (Model.Datasets.Count > 0)
+                {
+                    <div class="row">
+                        <div class="nine columns">
+                            <div class="row buttonBar">
+                                <div class="twelve columns">
+                                    <!-- 
+                                        <a class="right small radius success button" data-reveal-id="addDatasetModal">@UI.NewDataset</a>
+                                    -->
+                                    <a class="right small radius secondary button" id="selectAllDatasets">@UI.SelectAll</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="twelve columns">
+                                    <table id="datasets">
+                                        <thead>
+                                            <tr>
+                                                <td class="deleteBox">
+                                                    <button class="tiny radius alert button" id="deleteDatasets" title="@Messages.DeleteSelectedDatasets">
+                                                        <i class="icon-general-remove"></i>
+                                                    </button>
+                                                </td>
+                                                <td class="hidden"></td>
+                                                <td class="hidden"></td>
+                                                <td class="hidden"></td>
+                                                <td>
+                                                    <a class="sort entityset" title="@UI.SortByEntityset (@ViewBag.NextSortOrder)">@UI.EntitySet</a>
+                                                    @if (Model.SortParam == "entityset")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
+                                                <td>@UI.Name</td>
+                                                <td>
+                                                    <a class="sort source" title="@UI.SortBySource (@ViewBag.NextSortOrder)">@UI.Source</a>
+                                                    @if (Model.SortParam == "source")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a class="sort category" title="@UI.SortByCategory (@ViewBag.NextSortOrder)">@UI.Category</a>
+                                                    @if (Model.SortParam == "category")
+                                                    {
+                                                        <img src="@Url.Content(Model.SortOrder == "asc" ? "~/Content/Images/Arrow_asc.png" : "~/Content/Images/Arrow_desc.png")" alt="@Model.SortOrder" />
+                                                    }
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var dataset in Model.Datasets)
+                                            {
+                                                <tr>
+                                                    <td class="deleteBox"><input type="checkbox" /></td>
+                                                    <td class="hidden catalog">@dataset.Catalog</td> 
+                                                    <td class="hidden partitionKey">@dataset.PartitionKey</td>
+                                                    <td class="hidden rowKey">@dataset.RowKey</td>
+                                                    <td title="@dataset.entityset">@(dataset.entityset != null && dataset.entityset.Length > 30 ? dataset.entityset.Substring(0, 28) + "..." : dataset.entityset)</td>
+                                                    <td title="@dataset.name">@(dataset.name != null && dataset.name.Length > 30 ? dataset.name.Substring(0, 28) + "..." : dataset.name)</td>
+                                                    <td title="@dataset.source">@(dataset.source != null && dataset.source.Length > 30 ? dataset.source.Substring(0, 28) + "..." : dataset.source)</td>
+                                                    <td title="@dataset.category">@(dataset.category != null && dataset.category.Length > 30 ? dataset.category.Substring(0, 28) + "..." : dataset.category)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="three columns" id="filter">
+                            <div id="filterTitle">
+                                @UI.Filtering
+                            </div>
+
+                            <div id="filterContent">
+                                <div class="filterBlock">
+                                    @if (!string.IsNullOrEmpty(Model.CatalogFilter))
+                                    {
+                                        <h6>@UI.Catalogs</h6>
+                                        <div class="filterList">
+                                            <div class="filtered">
+                                                <a class="filter clear catalog" title="@UI.DeleteFilter">[x]</a> @Model.CatalogFilter
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.AllCatalogs.Count > 0)
+                                    {
+                                        <h6>@UI.Catalogs</h6>
+                                        <div class="filterList">
+                                            <ul>
+                                                @foreach (var catalog in Model.AllCatalogs)
+                                                {
+                                                    <li>
+                                                        <a class="filter catalog" title="@catalog.Key">@(catalog.Key.Length > 20 ? catalog.Key.Substring(0, 18) + "..." : catalog.Key)</a> (@catalog.Value)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+
+                                        if (Model.AllCatalogs.Count > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="filterBlock">
+                                    @if (!string.IsNullOrEmpty(Model.CategoryFilter))
+                                    {
+                                        <h6>@UI.Categories</h6>
+                                        <div class="filterList">
+                                            <div class="filtered">
+                                                <a class="filter clear category" title="@UI.DeleteFilter">[x]</a> @Model.CategoryFilter
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.AllCategories.Count > 0)
+                                    {
+                                        <h6>@UI.Categories</h6>
+                                        <div class="filterList">
+                                            <ul>
+                                                @foreach (var category in Model.AllCategories)
+                                                {
+                                                    <li>
+                                                        <a class="filter category" title="@category.Key">@(category.Key.Length > 20 ? category.Key.Substring(0, 18) + "..." : category.Key)</a> (@category.Value)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                            
+                                        if (Model.AllCategories.Count > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="filterBlock">
+                                    @if (!string.IsNullOrEmpty(Model.KeywordFilter))
+                                    {
+                                        <h6>@UI.Keywords</h6>
+                                        <div class="filterList">
+                                            <div class="filtered">
+                                                <a class="filter clear keyword" title="@UI.DeleteFilter">[x]</a> @Model.KeywordFilter
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.AllKeywords.Count > 0)
+                                    {
+                                        <h6>@UI.Keywords</h6>
+                                        <div class="filterList">
+                                            <ul>
+                                                @foreach (var keyword in Model.AllKeywords)
+                                                {
+                                                    <li>
+                                                        <a class="filter keyword" title="@keyword.Key">@(keyword.Key.Length > 20 ? keyword.Key.Substring(0, 18) + "..." : keyword.Key)</a> (@keyword.Value)
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        
+                                        if (Model.AllKeywords.Count > 11)
+                                        {
+                                            <div class="displayAll secondary tiny button">
+                                                @UI.DisplayAll
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h5 class="centered">@UI.NoDataset</h5>
+                }
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="addCatalogModal" class="reveal-modal small">
+    <h1>@UI.NewCatalog</h1>
+    
+    <label for="alias">@UI.Alias</label>
+    <input type="text" id="alias" />
+
+    <label for="description">@UI.Description</label>
+    <input type="text" id="description" />
+
+    <label for="disclaimer">@UI.Disclaimer</label>
+    <input type="text" id="disclaimer" />
+
+    <label for="dataStorageName">@UI.StorageName</label>
+    <input type="text" id="dataStorageName" />
+
+    <label for="dataStorageKey">@UI.StorageKey</label>
+    <input type="text" id="dataStorageKey" />
+
+    <button id="addCatalog" class="right radius success button">OK</button>
+
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="addDatasetModal" class="reveal-modal medium">
+    <h1>@UI.NewDataset</h1>
+    
+    <button id="addDataset" class="right radius success button">OK</button>
+
+    <a class="close-reveal-modal">&#215;</a>
+</div>

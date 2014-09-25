@@ -18,25 +18,87 @@ namespace Ogdi.Data.DataLoader.Csv
         readonly EntityProducerParams _params;
         readonly Entity _schemaEntity;
         readonly bool _sourceOrder;
+        char separator;
+        char numberSeparator;
+        Encoding enc;
 
         public CsvEntityProducer(string fileSetName, string entitySet, string entityKind, EntityProducerParams parameters, bool sourceOrder)
         {
+            //Init CSV Separators and encoding file 
+            InitSeparators(fileSetName);
+            GetEncoding(fileSetName);
+
             // Calculate entities count
             // TODO: Need to rewrite in better way.
-            using (var countReader = new CsvReader(new StreamReader(fileSetName + DataLoaderConstants.FileExtCsv), true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]))
-            {
+            using (var countReader = new CsvReader(new StreamReader(fileSetName + DataLoaderConstants.FileExtCsv,enc), true, separator))
+            {   
                 while (countReader.ReadNextRecord())
                 {
                     EntityCount++;
                 }
             }
 
-            var reader = new StreamReader(string.Concat(fileSetName, DataLoaderConstants.FileExtCsv));
-            _csvReader = new CsvReader(reader, true, System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator[0]);
+            var reader = new StreamReader(string.Concat(fileSetName, DataLoaderConstants.FileExtCsv),enc);
+            _csvReader = new CsvReader(reader, true, separator);
 
             _params = parameters;
             _schemaEntity = GetSchemaEntity(entitySet, entityKind, parameters.PropertyToTypeMap);
             _sourceOrder = sourceOrder;
+        }
+
+        //Initialize CSV Separators 
+        private void InitSeparators(string fileSetName)
+        {
+            using (StreamReader read = new StreamReader(fileSetName + DataLoaderConstants.FileExtCsv))
+            {
+                if (read.ReadLine().Contains(';'))
+                {
+                    separator = ';';
+                    numberSeparator = ',';
+                }
+                else
+                {
+                    separator = ',';
+                    numberSeparator = '.';
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get Encoding Format of file 
+        /// </summary>
+        /// <param name="path">Chemin du fichier</param>
+        /// <returns>File Encoding</returns>
+        private void GetEncoding(string path)
+        {
+            string encode;
+            using (FileStream fs = File.OpenRead(path + DataLoaderConstants.FileExtCsv))
+            {
+                Ude.CharsetDetector cdet = new Ude.CharsetDetector();
+                cdet.Feed(fs);
+                cdet.DataEnd();
+                if (cdet.Charset != null)
+                {
+                    encode = cdet.Charset;
+                }
+                else
+                {
+                    encode = "failed";
+                }
+            }
+            if (encode == "failed")
+                enc = Encoding.Default;
+            else
+            {
+                switch (encode.ToLower())
+                {
+                    case "utf-8": enc = Encoding.UTF8; break;
+                    case "utf-16le": enc = Encoding.Unicode; break;
+                    case "utf-16be": enc = Encoding.BigEndianUnicode; break;
+                    case "windows-1252": goto default;
+                    default: enc = Encoding.Default; break;
+                }
+            }
         }
 
         //check that source data contains columns listed in metadata
@@ -82,7 +144,6 @@ namespace Ogdi.Data.DataLoader.Csv
             var properties = _params.PropertyToTypeMap.GetProperties().ToDictionary(c => c.Key.ToLower(), c => c.Value);
             string[] headers = _csvReader.GetFieldHeaders();
             bool isInlineKmlSnippetProvided = false;
-
             #region RDF
             string entitySet = SchemaEntity["EntitySet"].ToString();
 
@@ -216,9 +277,10 @@ namespace Ogdi.Data.DataLoader.Csv
 
                         if (longitude.GetType() != typeof(DBNull) && latitude.GetType() != typeof(DBNull))
                         {
-                            var formatInfo = CultureInfo.InvariantCulture.NumberFormat;
-                            var lon = decimal.Parse(longitude.Replace(',', '.'), formatInfo);
-                            var lat = decimal.Parse(latitude.Replace(',', '.'), formatInfo);
+                            decimal lon;
+                            decimal lat;
+
+                            FormatLonLat(out lon, out lat, longitude, latitude);
 
                             if (!(lon == 0 && lat == 0))
                             {
@@ -267,6 +329,22 @@ namespace Ogdi.Data.DataLoader.Csv
             }
         }
 
+        //Format longitude and latitude to InvariantCulture
+        private void FormatLonLat(out decimal lon, out decimal lat, string longitude, string latitude)
+        {
+            var formatInfo = CultureInfo.InvariantCulture.NumberFormat;
+
+            if (numberSeparator == ',')
+            {
+                lon = decimal.Parse(longitude.Replace(',', '.'), formatInfo);
+                lat = decimal.Parse(latitude.Replace(',', '.'), formatInfo);
+            }
+            else
+            {
+                lon = decimal.Parse(longitude, formatInfo);
+                lat = decimal.Parse(latitude, formatInfo);
+            }
+        }
 
         private static Entity GetSchemaEntity(string entitySet, string entityKind, PropertyToTypeMapper mapper)
         {

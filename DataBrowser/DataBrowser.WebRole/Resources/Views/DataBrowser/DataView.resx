@@ -123,6 +123,9 @@
   <data name="ClickToViewResultsAsXMLAtom" xml:space="preserve">
     <value>(Click to view results as XML/Atom)</value>
   </data>
+  <data name="ColumnDisplayed" xml:space="preserve">
+    <value>Select or unselect columns to display</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>

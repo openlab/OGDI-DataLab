@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using Tomers.WPF.MVVM;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 using System.Text;
+using Ogdi.Data.DataLoader.Csv;
 
 namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 {
@@ -86,7 +88,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
         {
             if (_dataLoaderParams.TableMetadataEntity.ExpiredDate <= _dataLoaderParams.TableMetadataEntity.ReleasedDate)
             {
-                MessageBox.Show("Expiration date cannot be less or equal to Release date.");
+                MessageBox.Show(Ressources.ViewR.ExpiredDateError);
                 return;
             }
 
@@ -111,22 +113,23 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             }
 
             string fileName = Path.Combine(_uploadParam.Directory, _uploadParam.Name + ".cfg");
-
+            string csvFile = Path.Combine(_uploadParam.Directory, _uploadParam.Name + ".csv");
             try
             {
+                
                 _dataLoaderParams.Validate(fileName);
                 var viewModel = (MatadataControlViewModel)_metadata.DataContext;
                 if (viewModel.Errors.Count > 0)
                 {
                     StringBuilder errorBuilder = new StringBuilder();
-                    errorBuilder.AppendLine("Error with the following fields\n");
+                    errorBuilder.AppendLine(Ressources.ViewR.TextError+"\n");
                     foreach (var error in viewModel.Errors)
                     {
                         errorBuilder.AppendLine(error.Key);
 
                         foreach (var message in error.Value)
                         {
-                            errorBuilder.AppendLine(string.Format("\t- {0}", message));
+                            errorBuilder.AppendLine(string.Format("- {0}", message));
                         }
                     }
                     MessageBox.Show(errorBuilder.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -135,12 +138,12 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             }
             catch (WarningException ex)
             {
-                if (MessageBox.Show(ex.Message, "OGDI Metadata", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) != MessageBoxResult.OK)
+                if (MessageBox.Show(ex.Message, "OGDI "+Ressources.ViewR.Metadata, MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) != MessageBoxResult.OK)
                     return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error occured. " + ex.Message, "OGDI Metadata", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Ressources.ViewR.ErrorOccured + ex.Message, "OGDI "+Ressources.ViewR.Metadata, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -148,6 +151,8 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             _uploadParam.VerifyConfiguration();
             Close();
         }
+
+       
 
         #endregion
 

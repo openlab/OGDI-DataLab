@@ -266,7 +266,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     return settings;
                 }
                 stream.Seek(0, SeekOrigin.Begin);
-                reader = new StreamReader(stream);
+                reader = new StreamReader(stream,true);
 
                 // Read names, values, and buf from the blob
                 line = reader.ReadLine();

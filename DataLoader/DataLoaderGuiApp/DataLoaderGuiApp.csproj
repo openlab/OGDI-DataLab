@@ -14,14 +14,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -62,10 +58,12 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared\Ogdi.Azure\bin\Debug\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient">
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.4\bin\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -102,6 +100,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <EmbeddedResource Include="Ressources\ViewR.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewR.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\ViewR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <Page Include="Themes\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -215,6 +221,16 @@
     <Compile Include="PropertyToTypeColumnsMetadataMap.cs" />
     <Compile Include="PropertyToTypeMap.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Ressources\ViewR.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewR.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ressources\ViewR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewR.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ColumnsMetadataWindowViewModel.cs" />
     <Compile Include="ViewModels\CsvProducerControlViewModel.cs" />
     <Compile Include="Uploader.cs" />
@@ -238,7 +254,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Ressources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -265,11 +281,12 @@
       <DependentUpon>UploaderControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Ressources\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -283,7 +300,7 @@
     </ProjectReference>
     <ProjectReference Include="..\DataLoader\DataLoader.csproj">
       <Project>{92D9A4A7-46F2-48A6-98BC-9DFCE9E23E15}</Project>
-      <Name>DataLoader %28DataLoader\DataLoader%29</Name>
+      <Name>DataLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +329,8 @@
     <Resource Include="Images\clear.png" />
     <Resource Include="Images\delete.png" />
     <Resource Include="Images\start.png" />
+    <Resource Include="Images\icon.ico" />
+    <Resource Include="icon.ico" />
     <Content Include="RDFNamespaces.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

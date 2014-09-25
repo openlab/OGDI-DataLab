@@ -60,8 +60,8 @@ namespace Ogdi.Data.DataLoader
                 if (prop.Name.ToLower() == "additionalinfo")
                     AdditionalInfo = prop.Value.ToString();
 
-                if (prop.Name.ToLower() == "isempty")
-                    IsEmpty = prop.Value.ToString().Length == 4;
+				if (prop.Name.ToLower() == "isempty")
+					IsEmpty = prop.Value.ToString().Length == 4;
             }
         }
 
@@ -126,9 +126,7 @@ namespace Ogdi.Data.DataLoader
         [ValidateField("EntityKind", FieldType.Optinal)]                        
         public string EntityKind { get; set; }
 
-        public bool IsEmpty { get; set; }
-
-        public bool KML { get; set; }
+		public bool IsEmpty { get; set; }
 
         public static implicit operator Entity(TableMetadataEntity me)
         {

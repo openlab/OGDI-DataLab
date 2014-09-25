@@ -27,7 +27,7 @@ namespace Ogdi.InteractiveSdk.Mvc
 
 			string recaptchaResponse;
 			HttpWebResponse myResp = myReq.GetResponse() as HttpWebResponse;
-			using (StreamReader reader = new StreamReader(myResp.GetResponseStream()))
+			using (StreamReader reader = new StreamReader(myResp.GetResponseStream(),true))
 			{
 				recaptchaResponse = reader.ReadLine();
 				return recaptchaResponse.ToLower() == "true";

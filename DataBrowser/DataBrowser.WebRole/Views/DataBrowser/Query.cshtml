@@ -6,7 +6,7 @@
 	<b>@DataBrowserResources.Query.BaseQuery</b>
 	<div>
 		<div class="label">@ViewData.Model.BaseQueryName</div>
-		<label id="labelBaseQuery" title="@ViewData.Model.BaseQueryName" visible="false"></label>
+		<label id="labelBaseQuery" title="@ViewData.Model.BaseQueryName"></label>
 	</div>
 	
 		<div class="label"> @DataBrowserResources.Query.FilterExpression </div>
@@ -17,7 +17,12 @@
 		<div>
 			<div class="expression left" id="eidQueryBoxContainer" style="display:none;">
 				<div class="left"><textarea id="queryBox" rows="3" cols="20" >@ViewData.Model.FilterText</textarea></div>
-				<div class="left"><a onclick="javascript:ShowFilterHintsDialog()"><img src="@Url.Content("~/Content/ico.png")" class="ico icoQuestion" title="Show Filter Hints" alt=""/></a></div>
+				<div class="left"><a onclick="javascript:ShowFilterHintsDialog()"><img src="@Url.Content("~/Content/ico.png")" class="ico icoQuestion" title="Show Filter Hints" alt=""/></a><br />
+                    <div style="position:absolute">
+                        <img src="@Url.Content("~/Content/images/Arrow.png")" />
+                        <label style="position:relative;font-family:'Segoe UI';font-size:16px;font-style:italic;bottom:25px;cursor:none">@DataBrowserResources.Query.EnterQuery</label>
+                    </div>
+                </div>
 				<div class="clear"></div>
 			</div>
 			<div id="eidBuilder" class="query-builder left" ></div>
@@ -25,6 +30,7 @@
 			<a href="javascript:runClicked()">@Html.Raw(Html.NiceButton(this, SharedResources.Buttons.Execute, 0, null))</a>
 			<a href="javascript:clearClicked()">@Html.Raw(Html.NiceButton(this, SharedResources.Buttons.Clear, 0, null))</a>
 			</div>
+            
 			<div class="clear"></div>
 		</div>
 </div>

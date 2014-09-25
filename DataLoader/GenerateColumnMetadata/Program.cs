@@ -943,7 +943,7 @@ namespace GenerateColumnMetadata
 
                     if ((int)response.StatusCode == 200)
                     {
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream(),true))
                         {
                             string result = reader.ReadToEnd();
 

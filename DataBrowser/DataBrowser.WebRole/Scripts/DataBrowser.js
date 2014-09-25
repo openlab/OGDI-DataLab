@@ -52,6 +52,7 @@ var current_verticalColumnOptions;
 //********************************
 
 // **** HASH *****************
+var hash_columns = null;
 var hash_filter;
 var hash_viewType;
 var hash_tagType;
@@ -60,7 +61,7 @@ var hash_language
 //  Result Accordion
 //  MapView
 var hash_mapStyle;
-var hash_zoomLevel;
+var hash_zoomLevel = 11;
 var hash_longitude;
 var hash_latitude;
 var hash_sceneId = 0;
@@ -85,10 +86,14 @@ var isBookMarkedMapView = 'N';
 var isHashChangeRoute = false;
 var isBookmarkedUrl = false;
 
+var map;
 var birdsEyeViewSceneIdChange = false;
 var centerPixel;
 var birdsEyeViewZoomLevel = 11;
 var birdsEyeSceneGlobal = 'North';
+
+
+
 
 /// <summary>
 /// This function gets the current status of map 
@@ -96,15 +101,10 @@ var birdsEyeSceneGlobal = 'North';
 /// </summary>
 function getCurrentMapStatus() {
     try {
-        current_mapStyle = map.GetMapStyle();
-        switch (current_mapStyle) {
-            case 'r': case 'a': case 'h': var center = map.GetCenter(); current_zoomLevel = map.GetZoomLevel(); current_longitude = center.Longitude; current_latitude = center.Latitude;
-                current_mapDetails = current_mapStyle + "/" + current_zoomLevel + "/" + current_longitude + "/" + current_latitude;
-                break;
-            case 'b': case 'o': var birdseyeScene = map.GetBirdseyeScene(); current_zoomLevel = map.GetZoomLevel(); var centerPixel = birdseyeScene.LatLongToPixel(map.GetCenter(), current_zoomLevel); current_longitude = centerPixel.x; current_latitude = centerPixel.y; current_sceneId = birdseyeScene.GetID(); current_birdseyeSceneOrientation = birdseyeScene.GetOrientation();
-                current_mapDetails = current_mapStyle + "/" + current_zoomLevel + "/" + current_longitude + "/" + current_latitude + "/" + current_sceneId + "/" + current_birdseyeSceneOrientation;
-                break;
-        }
+        current_mapStyle = map.getMapTypeId();
+        var center = map.getCenter(); current_zoomLevel = map.getZoom(); current_longitude = center.Longitude; current_latitude = center.Latitude;
+        current_mapDetails = current_mapStyle + "/" + current_zoomLevel + "/" + current_longitude + "/" + current_latitude;
+
     } catch (e) {
         errorFunction(mapControlError, true);
         hideLoadingIndicator();
@@ -121,62 +121,22 @@ function viewHandler() {
         Sys.Application.addHistoryPoint({ param: hashValue }, siteTitle);
     }
 }
-
 /// <summary>
 /// This function sets the Map view according to
 /// current URL hash value 
 /// </summary>
 function setMapViewByHash() {
     try {
-        map.DetachEvent("onchangeview", viewHandler);
-        switch (hash_mapStyle) {
-            case 'r':
-            case 'a':
-            case 'h':
-                showLoadingIndicator();
-                map.SetMapStyle(hash_mapStyle);
-                getCurrentMapStatus();
-                if ((current_zoomLevel != hash_zoomLevel) || (current_latitude != hash_latitude) || (current_longitude != hash_longitude)) {
-                    map.AttachEvent("onchangeview", hideLoadingIndicatorAndDetach);
-                    map.SetCenterAndZoom(new VELatLong(hash_latitude, hash_longitude), hash_zoomLevel);
-
-                }
-                else {
-                    hideLoadingIndicatorAndDetach();
-                }
-                break;
-
-            case 'o':
-            case 'b':
-                showLoadingIndicator();
-                if (current_mapStyle != hash_mapStyle) {
-                    map.AttachEvent("onchangemapstyle", onChangeMapStyleOfBirdsEye);
-                    map.SetMapStyle(hash_mapStyle);
-                }
-                else {
-                    onChangeMapStyleOfBirdsEye();
-                }
-                break;
-        }
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-}
-
-/// <summary>
-/// This function sets the Birds Eye view according to 
-/// sceneID mentioned in URL hash
-/// </summary>
-function onChangeMapStyleOfBirdsEye() {
-    try {
-        map.DetachEvent("onchangemapstyle", onChangeMapStyleOfBirdsEye);
-        if ((current_sceneId != hash_sceneId)) {
-            map.AttachEvent("onobliquechange", onChangeSceneIdOfBirdsEye);
-            map.SetBirdseyeScene(hash_sceneId);
+        Microsoft.Maps.Events.removeHandler("onchangeview");
+        showLoadingIndicator();
+        map.setMapType(hash_mapStyle);
+        getCurrentMapStatus();
+        if ((current_zoomLevel != hash_zoomLevel) || (current_latitude != hash_latitude) || (current_longitude != hash_longitude)) {
+            Microsoft.Maps.Events.addHandler(map, "onchangeview", hideLoadingIndicatorAndDetach);
+            map.setOptions({ center: new Microsoft.Maps.Location(hash_latitude, hash_longitude), zoom: hash_zoomLevel });
         }
         else {
-            onChangeSceneIdOfBirdsEye();
+            hideLoadingIndicatorAndDetach();
         }
     } catch (e) {
         errorFunction(mapControlError, true);
@@ -184,95 +144,28 @@ function onChangeMapStyleOfBirdsEye() {
     }
 }
 
-/// <summary>
-/// This function sets the Birds Eye scene using
-/// orientation, lat-long, zoomLevel values mentioned in
-/// URL hash
-/// </summary>
-function onChangeSceneIdOfBirdsEye() {
-    try {
-        map.DetachEvent("onobliquechange", onChangeSceneIdOfBirdsEye);
-        map.AttachEvent("onchangeview", hideLoadingIndicatorAndDetach);
-        birdsEyeViewZoomLevel = parseInt(hash_zoomLevel);
-        centerPixel = new VEPixel(hash_longitude, hash_latitude);
-        birdsEyeSceneGlobal = map.GetBirdseyeScene();
-        var encLatLong = birdsEyeSceneGlobal.PixelToLatLong(centerPixel, birdsEyeViewZoomLevel);
-        switch (hash_birdseyeSceneOrientation) {
-            case 'North': //  VEOrientation.North
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.North,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'South': //  VEOrientation.South
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.South,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'East': //  VEOrientation.East
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.East,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'West': //  VEOrientation.West
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.West,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-        }
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-}
 
 /// <summary>
 /// Everything inside this function will load as soon as 
 /// the DOM is loaded and before the page contents are loaded
 /// </summary>
 $(document).ready(
-function() {
+function () {
 
     //  This is executed when Ajax calls begin
-    $("#LoadingIndicatorPanel").ajaxStart(function() {
+    $("#LoadingIndicatorPanel").ajaxStart(function () {
         //  Call to showLoadingIndicator function
         showLoadingIndicator();
     });
 
     //  This is executed when Ajax calls Stop
-    $("#LoadingIndicatorPanel").ajaxStop(function() {
+    $("#LoadingIndicatorPanel").ajaxStop(function () {
         //  Call to hideLoadingIndicator function
         hideLoadingIndicator();
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesDataView").change(function() {
+    $("select#languagesDataView").change(function () {
 
         //  Call to languageDataViewSelectedIndexChanged function
         languageDataViewSelectedIndexChanged();
@@ -280,7 +173,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesMapView").change(function() {
+    $("select#languagesMapView").change(function () {
 
         //  Call to languageMapViewSelectedIndexChanged function
         languageMapViewSelectedIndexChanged();
@@ -288,7 +181,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesBarChartView").change(function() {
+    $("select#languagesBarChartView").change(function () {
 
         //  Call to languageBarChartViewSelectedIndexChanged function
         languageBarChartViewSelectedIndexChanged();
@@ -296,7 +189,7 @@ function() {
     });
 
     //  This is executed when selected index for dropdown list is changed
-    $("select#languagesPieChartView").change(function() {
+    $("select#languagesPieChartView").change(function () {
 
         //  Call to languagePieChartViewSelectedIndexChanged function
         languagePieChartViewSelectedIndexChanged();
@@ -304,7 +197,7 @@ function() {
     });
 
     //  This is executed when user clicks on 1st paragraph on this page
-    $("#Para1").click(function() {
+    $("#Para1").click(function () {
 
         //  Slide toggle Para2 panel with 350 ms delay
         $(this).next("#Para2").slideToggle(350);
@@ -316,7 +209,7 @@ function() {
     //  Does things when Para1 toggles
     $('#Para1').toggle(
 
-       function() {
+       function () {
 
            //  Change Expand Collapse image to CollapserImage
            $('#ExpandCollapseImage').attr('src', CollapserImage);
@@ -327,7 +220,7 @@ function() {
            //  Change alt of that image to "Hide Details"
            $('#ExpandCollapseImage').attr('alt', "Hide Details");
 
-       }, function() {
+       }, function () {
 
            //  Change Expand/Collapse image to ExpanderImage
            $('#ExpandCollapseImage').attr('src', ExpanderImage);
@@ -345,6 +238,7 @@ function() {
 /// This function initializes the page elements
 /// </summary>
 function initializePage() {
+
     //  Set filter dialog properties
     $("#filterDialog").dialog({
 
@@ -373,116 +267,6 @@ function initializePage() {
 
     //  Set filter dialog CSS properties
     $("#filterDialog").css({ visibility: "visible", cursor: "pointer" });
-
-/*
-    //  Set Result accordion as Active accordion and 
-    //  bind dataViewAccordionChanged function to dataViewAccordion change event
-    $("#dataViewAccordion").accordion({
-
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
-
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
-
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
-
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: dataViewAccordionChanged,
-
-        //  NO animation is used for this accordion
-        animated: false
-
-    });
-
-    //  Set Result accordion as Active accordion and 
-    //  bind mapViewAccordionChanged function to mapViewAccordion change event
-    $("#mapViewAccordion").accordion({
-
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
-
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
-
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
-
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: mapViewAccordionChanged,
-
-        //  NO animation is used for this accordion
-        animated: false
-
-    });
-
-    //  Set Result accordion as Active accordion and 
-    //  bind barChartAccordionChanged function to barChartAccordion change event
-    $("#barChartAccordion").accordion({
-
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
-
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
-
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
-
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: barChartAccordionChanged,
-
-        //  NO animation is used for this accordion
-        animated: false
-
-    });
-
-    //  Set Result accordion as Active accordion and 
-    //  bind pieChartAccordionChanged function to pieChartAccordion change event
-    $("#pieChartAccordion").accordion({
-
-        //  Selector for the active element.Set to false to display none 
-        //  at start. Needs collapsible: true.
-        active: 1,
-
-        //  Whether all the sections can be closed at once. 
-        //  Allows collapsing the active section by the triggering event 
-        //  (click is the default).
-        collapsible: true,
-
-        //  If set, the highest content part is used as height reference 
-        //  for all other parts.
-        autoHeight: true,
-
-        //  This event is triggered every time the accordion changes. 
-        //  If the accordion is animated, the event will be triggered upon 
-        //  completion of the animation; otherwise, it is triggered immediately.
-        change: pieChartAccordionChanged,
-
-        //  NO animation is used for this accordion
-        animated: false
-
-    });
-*/
 
     //  Attach function with select event(triggered when clicking a tab).
     $('#tabs').tabs({ select: tabsSelected });
@@ -524,28 +308,54 @@ function initializePage() {
 /// This function sets the elements on the page when page gets loaded
 /// </summary>
 function page_init() {
-    
+
     //  Normal page load URL is considered as bookmarked URL
     isBookmarkedUrl = true;
     isHashChangeRoute = false;
-
-    //  Create a new instance of the VEMap object.
-    map = new VEMap('myMap');
-
-    //  Load the specified map.
-    map.LoadMap();
-
-    //  Attach event to map which will be triggered on map control error
-    map.AttachEvent("onerror", showMapControlError);
-
-    //  Resize the map based on the specified width and height.
-    map.Resize(862, 450);
-
+    //  Create a new instance of the Map object.
+    var tmp = document.getElementById("bmc");
+    map = new Microsoft.Maps.Map(document.getElementById("myMap"), { credentials: tmp.textContent, enableSearchLogo: false, height: 450, width: 862 });
+    Microsoft.Maps.Events.addHandler(map, "onerror", showMapControlError);
     initializePage();
+
+    if (hash_columns == null) {
+        var nbCol = document.getElementsByTagName("th").length;
+        hash_columns = new Array(nbCol);
+        $.each(hash_columns, function (ndx) {
+            hash_columns[ndx] = true;
+        });
+    }
     readHashValueIntoHashVariables();
+
     setPageAccordingToHashVariables();
 
 }
+
+function btn_click_column(column) {
+
+    if (isHold(column)) {
+        document.getElementById(column).className = "myround secondary";
+        hash_columns[column] = false;
+        $("[name=" + column + "]").each(function (ndx) {
+            this.style.display = "none";
+        });
+    }
+    else {
+        document.getElementById(column).className = "myround secondary-hold";
+        hash_columns[column] = true;
+        $("[name=" + column + "]").each(function (ndx) {
+            this.style.display = "table-cell";
+        });
+    }
+
+}
+
+function isHold(data) {
+    if (document.getElementById(data).className.indexOf("hold", 0) != -1)
+        return true;
+    else return false;
+}
+
 
 /// <summary>
 /// This function replaces the current variables with hash variables
@@ -891,7 +701,7 @@ function setPageAccordingToHashVariables() {
             isBookmarkedUrl = false;
             break;
 
-        
+
     }
 }
 
@@ -948,7 +758,7 @@ function isDeltaInHashAndCurrent() {
                         return false;
                     }
                     break;
-                
+
             }
             break;
         case "MapView":
@@ -960,26 +770,7 @@ function isDeltaInHashAndCurrent() {
                         return false;
                     }
                     break;
-                case "Results":
-                    getCurrentMapStatus();
-                    switch (hash_mapStyle) {
-                        case 'r': case 'a': case 'h':
-                            if ((hash_filter != current_filter) || (hash_viewType != current_viewType) || (hash_tagType != current_tagType) || (hash_mapStyle != current_mapStyle) || (hash_zoomLevel != current_zoomLevel) || (hash_longitude != current_longitude) || (hash_latitude != current_latitude)) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                            break;
-                        case 'b': case 'o':
-                            if ((hash_filter != current_filter) || (hash_viewType != current_viewType) || (hash_tagType != current_tagType) || (hash_mapStyle != current_mapStyle) || (hash_zoomLevel != current_zoomLevel) || (hash_longitude != current_longitude) || (hash_latitude != current_latitude) || (hash_sceneId != current_sceneId) || (hash_birdseyeSceneOrientation != current_birdseyeSceneOrientation)) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                            break;
-                    }
-                    break;
-               
+                case "Results": break;
             }
             break;
 
@@ -1000,10 +791,10 @@ function isDeltaInHashAndCurrent() {
                         return false;
                     }
                     break;
-               
+
             }
             break;
-       
+
 
     }
 }
@@ -1038,8 +829,7 @@ function errorFunction(error, isString) {
                     dataType: 'html',
 
                     //  A function to be called if the request succeeds.
-                    success: function(html) {
-
+                    success: function (html) {
                         //  Set display Style for tabs to block
                         //  (Set matched element with id == divError VISIBLE)
                         document.getElementById("divError").style.display = "block";
@@ -1079,17 +869,16 @@ function getData(filter) {
             dataType: 'html',
 
             //  A function to be called if the request fails.
-            error: function(error) {
+            error: function (error) {
                 errorFunction(error, false);
             },
-            
-            //  A function to be called if the request succeeds.
-            success: function(html) {
 
+            //  A function to be called if the request succeeds.
+            success: function (html) {
                 //  If substring 'id="pError"' is present in 
                 //  html data  returned from server then ...
-                if (html.toString().indexOf('id="pError"', 0) >= 0) {
 
+                if (html.toString().indexOf('id="pError"', 0) >= 0) {
                     //  Set display Style for tabs to block
                     //  (Set matched element with id == divError VISIBLE)
                     document.getElementById("divError").style.display = "block";
@@ -1181,7 +970,6 @@ function ShowFilterHintsDialog() {
 /// </summary>
 function ShowHideError() {
     var error = document.getElementById("labelError").title;
-
     //  If there is no ERROR in "error" variable then ...
     if (error == '') {
 
@@ -1205,7 +993,7 @@ function ShowHideError() {
 /// in combo box in Data View
 /// </summary>
 function languageDataViewSelectedIndexChanged() {
-	current_language = readSampleCodeLanguageFromActiveViewType();
+    current_language = readSampleCodeLanguageFromActiveViewType();
     var hashValue = createHashValue();
     changeDataViewLanguage(current_language);
     if (isBookmarkedUrl == false) {
@@ -1235,13 +1023,13 @@ function changeDataViewLanguage(selectedLanguage) {
             url: "../LoadSampleCodeDataView/",
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the tag(id == divDataViewSampleCode) with 
                 //  html in "html" variable passed to this function
@@ -1273,13 +1061,13 @@ function changeMapViewLanguage(selectedLanguage) {
 
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the tag(id == divMapViewSampleCode) with 
                 //  html in "html" variable passed to this function
@@ -1340,13 +1128,13 @@ function changeBarChartViewLanguage(selectedLanguage) {
             url: "../LoadSampleCodeBarChartView/",
 
             data: { selectedFileName: selectedLanguage, container: container, entitySet: entitySet },
-            
+
             //  The type of data that you're expecting 
             //  back from the server is set to html
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the 
                 //  tag(id == divBarChartViewSampleCode) with 
@@ -1399,7 +1187,7 @@ function changePieChartViewLanguage(selectedLanguage) {
             dataType: 'html',
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  Set html content in the 
                 //  tag(id == divPieChartViewSampleCode) with 
@@ -1443,12 +1231,12 @@ function previousClicked() {
                 dataType: 'html',
 
                 //  A function to be called if the request fails.
-                error: function(error) {
+                error: function (error) {
                     errorFunction(error, false);
                 },
 
                 //  A function to be called if the request succeeds.
-                success: function(html) {
+                success: function (html) {
 
                     //  If substring 'id="pError"' is present in 
                     //  html data  returned from server then ...
@@ -1467,7 +1255,7 @@ function previousClicked() {
                         document.getElementById("tabs").style.display = "none";
 
                     } //  If substring 'id="pError"' is NOT present in 
-                    //  html data  returned from server then ...
+                        //  html data  returned from server then ...
                     else {
 
                         //  Set display Style for divError to none
@@ -1485,6 +1273,10 @@ function previousClicked() {
                         //  html in "html" variable passed to this function
                         $("#divDataViewResults").html(html);
 
+                        $.each(hash_columns, function (ndx) {
+                            if (!hash_columns[ndx])
+                                btn_click_column(ndx);
+                        });
                     }
                 }
             }
@@ -1525,12 +1317,12 @@ function nextClicked() {
                 dataType: 'html',
 
                 //  A function to be called if the request fails.
-                error: function(error) {
+                error: function (error) {
                     errorFunction(error, false);
                 },
 
                 //  A function to be called if the request succeeds.
-                success: function(html) {
+                success: function (html) {
 
                     //  If substring 'id="pError"' is present in 
                     //  html data  returned from server then ...
@@ -1549,7 +1341,7 @@ function nextClicked() {
                         document.getElementById("tabs").style.display = "none";
 
                     } //  If substring 'id="pError"' is NOT present in 
-                    //  html data  returned from server then ...
+                        //  html data  returned from server then ...
                     else {
 
                         //  Set display Style for divError to none
@@ -1567,6 +1359,10 @@ function nextClicked() {
                         //  html in "html" variable passed to this function
                         $("#divDataViewResults").html(html);
 
+                        $.each(hash_columns, function (ndx) {
+                            if (!hash_columns[ndx])
+                                btn_click_column(ndx);
+                        });
                     }
                 }
             }
@@ -1590,7 +1386,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--DataView--Results    
+                    //  NOFILTER--DataView--Results    
                 case "Results":
                     hash_tagType = "Results";
                     break;
@@ -1608,11 +1404,11 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--MapView--Results--r--4---99.49218750000001--37.02009820136811 
+                    //  NOFILTER--MapView--Results--r--4---99.49218750000001--37.02009820136811 
                 case "Results":
                     hash_tagType = "Results";
                     hash_mapStyle = "r";
-                    hash_zoomLevel = 1;
+                    hash_zoomLevel = 11;
                     hash_longitude = "0";
                     hash_latitude = "0";
                     break;
@@ -1629,7 +1425,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--BarChartView--Results--X--X--Option1--X--Aggregate   
+                    //  NOFILTER--BarChartView--Results--X--X--Option1--X--Aggregate   
                 case "Results":
                     hash_tagType = "Results";
                     hash_horizontalColumnName = "X";
@@ -1651,7 +1447,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     hash_language = $("[id =" + "languages" + hash_viewType + "]")[0].value;
                     break;
 
-                //  NOFILTER--PieChartView--Results--X--X--Option1--X--Aggregate   
+                    //  NOFILTER--PieChartView--Results--X--X--Option1--X--Aggregate   
                 case "Results":
                     hash_tagType = "Results";
                     hash_horizontalColumnName = "X";
@@ -1662,7 +1458,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
                     break;
             }
             break;
-    }    
+    }
 }
 
 
@@ -1671,7 +1467,7 @@ function getDefaultHashValueFor(defaultViewToGo, defaultTagToGo) {
 /// dropdownlist or not
 /// </summary>
 function isValuePresentInLanguageComboBox(languageInHash, viewType) {
-    var dropDownList = $("[id =" + "languages" + viewType + "]");        
+    var dropDownList = $("[id =" + "languages" + viewType + "]");
     for (var i = 0; i < dropDownList[0].length; i++) {
         if (dropDownList[0][i].value == languageInHash) {
             return true;
@@ -1692,14 +1488,14 @@ function readHashValueIntoHashVariables() {
         getDefaultHashValueFor("DataView", "Results");
         return;
     }
-    
+
     //  Since length of string "#param=" is 7 ...
-    var hashParametersArray = decodeURI((hashURL)).substr(7).split(hashSeparator);    
+    var hashParametersArray = decodeURI((hashURL)).substr(7).split(hashSeparator);
     if (hashParametersArray.length <= 2) {
         getDefaultHashValueFor("DataView", "Results");
         return;
     }
-    
+
     if (hashParametersArray.length >= 2) {
         hash_filter = unescape(hashParametersArray[0]);
         hash_viewType = hashParametersArray[1];
@@ -1709,9 +1505,9 @@ function readHashValueIntoHashVariables() {
                 switch (hash_tagType) {
                     case 'SampleCode':
                         hash_language = hashParametersArray[3];
-                        if (hash_language == "" || (!isValuePresentInLanguageComboBox(hash_language,"DataView"))) {
+                        if (hash_language == "" || (!isValuePresentInLanguageComboBox(hash_language, "DataView"))) {
                             getDefaultHashValueFor("DataView", "SampleCode");
-                        } 
+                        }
                         break;
 
                     case 'Results':
@@ -1768,7 +1564,7 @@ function readHashValueIntoHashVariables() {
                                 if (hash_birdseyeSceneOrientation != 'North' && hash_birdseyeSceneOrientation != 'South' && hash_birdseyeSceneOrientation != 'East' && hash_birdseyeSceneOrientation != 'West') {
                                     getDefaultHashValueFor("MapView", "Results");
                                     return;
-                                }                                
+                                }
                                 break;
                         }
                         break;
@@ -1832,19 +1628,20 @@ function readHashValueIntoHashVariables() {
 }
 
 /// <summary>
-/// This function gets the data for applied filter and sets the kml accordingly 
+/// This function gets the data for applied filter and sets the json accordingly 
 /// into the map
 /// </summary>
 function runClicked() {
-	current_filter = GetFilter();
+    current_filter = GetFilter();
     getData(current_filter);
-    loadKml(current_filter);
+    loadJson(current_filter);
     if (isBookmarkedUrl == false) {
         switch (current_viewType) {
             case 'DataView':
             case 'MapView':
                 ResetBarChartFilter();
                 ResetPieChartFilter();
+                setMapViewByHash();
                 break;
             case 'BarChartView':
                 if (current_tagType == "Results") {
@@ -1900,15 +1697,10 @@ function createHashValue() {
 
                 case 'MapView':
                     try {
-                        current_mapStyle = map.GetMapStyle();
-                        switch (current_mapStyle) {
-                            case 'r': case 'a': case 'h': var center = map.GetCenter(); current_zoomLevel = map.GetZoomLevel(); current_longitude = center.Longitude; current_latitude = center.Latitude;
-                                current_mapDetails = current_mapStyle + hashSeparator + current_zoomLevel + hashSeparator + current_longitude + hashSeparator + current_latitude;
-                                break;
-                            case 'b': case 'o': var birdseyeScene = map.GetBirdseyeScene(); current_zoomLevel = map.GetZoomLevel(); var centerPixel = birdseyeScene.LatLongToPixel(map.GetCenter(), current_zoomLevel); current_longitude = centerPixel.x; current_latitude = centerPixel.y; current_sceneId = birdseyeScene.GetID(); current_birdseyeSceneOrientation = birdseyeScene.GetOrientation();
-                                current_mapDetails = current_mapStyle + hashSeparator + current_zoomLevel + hashSeparator + current_longitude + hashSeparator + current_latitude + hashSeparator + current_sceneId + hashSeparator + current_birdseyeSceneOrientation;
-                                break;
-                        }
+                        current_mapStyle = map.getImageryId();
+                        var center = map.getCenter(); current_zoomLevel = map.getZoom(); current_longitude = center.Longitude; current_latitude = center.Latitude;
+                        current_mapDetails = current_mapStyle + hashSeparator + current_zoomLevel + hashSeparator + current_longitude + hashSeparator + current_latitude;
+
                     } catch (e) {
                         errorFunction(mapControlError, true);
                         hideLoadingIndicator();
@@ -2069,6 +1861,7 @@ function drawBarChart(filter, xCol, xRange, yOption, yCol, yColOption) {
 
         //  A function to be called if the request fails.
         error: function (error) {
+            alert("drawBarChart");
             errorFunction(error, false);
         },
 
@@ -2413,12 +2206,12 @@ function drawPieChart(filter, xCol, xRange, yOption, yCol, yColOption) {
             dataType: 'html',
 
             //  A function to be called if the request fails.
-            error: function(error) {
+            error: function (error) {
                 errorFunction(error, false);
             },
 
             //  A function to be called if the request succeeds.
-            success: function(html) {
+            success: function (html) {
 
                 //  If substring 'id="pError"' is present in 
                 //  html data  returned from server then ...
@@ -2491,22 +2284,22 @@ function tabsSelected(event, ui) {
     switch (ui.index) {
         case 0:
             current_viewType = "DataView";
-            map.DetachEvent("onchangeview", viewHandler);
+            Microsoft.Maps.Events.removeHandler("onchangeview");
             break;
 
         case 1:
             current_viewType = "MapView";
-            map.AttachEvent("onchangeview", viewHandler);
+            Microsoft.Maps.Events.addHandler(map, "onchangeview", viewHandler);
             break;
 
         case 2:
             current_viewType = "BarChartView";
-            map.DetachEvent("onchangeview", viewHandler);
+            Microsoft.Maps.Events.removeHandler("onchangeview");
             break;
 
         case 3:
             current_viewType = "PieChartView";
-            map.DetachEvent("onchangeview", viewHandler);
+            Microsoft.Maps.Events.removeHandler("onchangeview");
             break;
     }
     current_tagType = "Results";
@@ -2517,47 +2310,46 @@ function tabsSelected(event, ui) {
 }
 
 /// <summary>
-/// This function loads data in kml format for displaying it in the map
+/// This function loads data in Json format for displaying it in the map
 /// </summary>
-function loadKml(filter) {
-
-    map.DetachEvent("onchangeview", viewHandler);
-
+function loadJson(filter) {
+    Microsoft.Maps.Events.removeHandler("onchangeview");
     if (filter == noFilterText) {
         filter = '';
     }
+    map.entities.clear();
 
-    //  Removes all shapes, shape layers, and search results on the map.
-    //  Also removes the route from the map, if one is displayed.
-    map.Clear();
-
-    //  Contains information about shape layers. 
-    //  Shape layers are a mechanism to create and manage arbitrary 
-    //  groups of shapes (pushpines, polylines, and polygons). 
-    //  Map shape layers can be created from GeoRSS XML files, 
-    //  custom map tiles, or from any public Bing Maps 
-    //  (http://maps.live.com) collection.
-    kmlLayer = new VEShapeLayer();
-
-    kmlQuery = document.getElementById("labelBaseQuery").title + "?";
+    JsonQuery = document.getElementById("labelBaseQuery").title + "?";
 
     if (filter != defaultFilterText
         && document.getElementById("queryBox") != "") {
-        kmlQuery += "$filter=" + filter;
+        JsonQuery += "$filter=" + filter;
     }
 
-    kmlQuery += "&format=kml";
+    JsonQuery += "&format=json";
+    $.getJSON(JsonQuery + '&callback=?', function (data) {
+        data = data.d;
+        if (data.length > 0 && data[0].latitude && data[0].longitude) {
+            if (whatDecimalSeparator(data[0].latitude) == ',')
+                for (var i = 0; i < data.length; i++) {
+                    map.entities.push(new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(parseFloat(data[i].latitude.replace(',', '.')), parseFloat(data[i].longitude.replace(',', '.')))));
+                }
+            else
+                for (var i = 0; i < data.length; i++) {
+                    map.entities.push(new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(parseFloat(data[i].latitude), parseFloat(data[i].longitude))));
+                }
+        }
+        jsonLoaded(map.entities);
+    });
+}
 
-    // Limit the query to 50 items
-    var veLayerSpec = new VEShapeSourceSpecification(
-                        VEDataType.ImportXML,
-                        kmlQuery + "&$top=50",
-                        kmlLayer);
-    
-    //  Imports data from a GeoRSS feed, Bing Maps (http://maps.live.com)
-    //  collection, or KML URL.
-    map.ImportShapeLayerData(veLayerSpec, kmlLoaded, true);
-
+/// <summary>
+/// This function find the decimal separator used in the json file
+/// </summary>
+function whatDecimalSeparator(data) {
+    if (data.indexOf(',') != -1)
+        return ',';
+    else return '.';
 }
 
 /// <summary>
@@ -2565,49 +2357,33 @@ function loadKml(filter) {
 /// 1. sets custom pushpind on shape layer
 /// 2. sets Map View state
 /// </summary>
-function kmlLoaded(veShapeLayer) {
-
-    map.DetachEvent("onchangeview", viewHandler);
+function jsonLoaded(data) {
 
     //  Get shape count
-    var shapeCount = veShapeLayer.GetShapeCount();    
+    var shapeCount = data.getLength();
 
     //  If shapecount is not zero(is +ve) then ...
     if (shapeCount > 0) {
+        map.setView({ center: data.get(0).getLocation(), zoom: hash_zoomLevel });
 
-        //  Set custom pushpins on shapelayer
-        setCustomPushpins(veShapeLayer);
+        //  Set mapFullQueryUrlHyperlink text on UI with value in JsonQuery
+        $("#mapFullQueryUrlHyperlink").html(JsonQuery);
 
-        //  Hide shape layer polygon
-        hidePolyIcon(veShapeLayer);
-
-        //  Set mapFullQueryUrlHyperlink text on UI with value in kmlQuery
-        $("#mapFullQueryUrlHyperlink").html(kmlQuery);
-
-        //  Set mapFullQueryUrlHyperlink HYPERLINK on UI with value in kmlQuery
-        $("#mapFullQueryUrlHyperlink").attr({ href: kmlQuery });
+        //  Set mapFullQueryUrlHyperlink HYPERLINK on UI with value in JsonQuery
+        $("#mapFullQueryUrlHyperlink").attr({ href: JsonQuery });
 
         //  Show mapFullQueryPanel
         $("#mapFullQueryPanel").show();
 
         //  Hide mapNoResultsDiv
         $("#mapNoResultsDiv").hide();
-        
-        //  Give notice of large placemarkers number
-        if (shapeCount == 50) {
-            // Show mapManyPlacemarksDiv
-            $("#mapManyPlacemarksDiv").show();
-        } else {
-            // Hide mapManyPlacemarksDiv
-            $("#mapManyPlacemarksDiv").hide();
-        }
 
     }
     else {
 
         //  Hide mapFullQueryPanel
         $("#mapFullQueryPanel").hide();
-        
+
         //  Show mapNoResultsDiv
         $("#mapNoResultsDiv").show();
 
@@ -2620,410 +2396,15 @@ function kmlLoaded(veShapeLayer) {
     }
 
     //alert("Attach");
-    map.AttachEvent("onchangeview", viewHandler);
+    Microsoft.Maps.Events.addHandler(map, 'onchangeview', viewHandler);
 
-    // Sets MapView State according to bookmarking parameters/default parameters
-    setMapViewState();
 
 }
 
-/// <summary>
-/// This function hides polygon shape on the given layer
-/// </summary>
-function hidePolyIcon(layer) {
 
-    //  Get the total number of shapes in the current layer.
-    var shapeCount = layer.GetShapeCount();
 
-    //  For all shapes on this layer do ...
-    for (var i = 0; i < shapeCount; i++) {
 
-        //  Get a reference to a VEShape Class object 
-        //  contained in this layer based on the specified index.
-        var shape = layer.GetShapeByIndex(i);
 
-        //  If type of the VEShape object is Polygon
-        if (shape.GetType() == VEShapeType.Polygon) {
-
-            //  Hide the icon associated with a polyline or polygon.
-            shape.HideIcon();
-
-        }
-    }
-}
-
-/// <summary>
-/// This function sets custom pushpins on the given layer & handles clustering of those pushpins
-/// </summary>
-function setCustomPushpins(layer) {
-
-    //  Get the total number of shapes in the current layer.
-    var numShapes = layer.GetShapeCount();
-
-    var shape;
-
-    //  For all shapes on this layer do ...
-    for (var i = 0; i < numShapes; ++i) {
-
-        //  Get a reference to a VEShape Class object 
-        //  contained in this layer based on the specified index.
-        shape = layer.GetShapeByIndex(i);
-
-        //  Section 508 - Added alternate and descriptive text for image
-        shape.SetCustomIcon(
-        "<img src='/Images/pushpin.png' alt='image showing the location of the selected place' longdesc='desc/longdesc.txt'/>");
-
-    }
-    //  Enable clustering with a custom icon...
-    //  Specify the appearance of a VEShape Class 
-    //  object's custom icon.
-    var customIcon = new VECustomIconSpecification();
-
-    //  Set String representing the URL of an image file.
-    customIcon.Image = "/Images/pushpin-expand.png";
-
-    //  Create the options for customizing a pushpin cluster display.
-    var options = new VEClusteringOptions();
-
-    //  Set a VECustomIconSpecification Class object which describes the 
-    //  icon representing the pushpin cluster.
-    options.Icon = customIcon;
-
-    //  Set the method for determining which pushpins 
-    //  are clustered as well as how the cluster is displayed.
-    layer.SetClusteringConfiguration(VEClusteringType.Grid, options);
-
-    map.AttachEvent("onchangeview", viewHandler);
-
-}
-
-/// <summary>
-/// This function sets state of Map View
-/// </summary>
-function setMapViewState() {
-
-    //  switch on isBookMarkedMapView
-    switch (isBookMarkedMapView) {
-
-        case 'N': // When not bookmarked
-            if (hash_viewType == "MapView" && hash_tagType == "Results") {
-                setMapViewByHash();
-            }
-            break;
-
-        case 'Y': // When bookmarked            
-            map.DetachEvent("onchangeview", viewHandler);
-
-            isBookMarkedMapView = 'N';
-            showLoadingIndicator();
-            mapMode = 1;
-            mapStyle = hash_mapStyle;
-            zoomLevel = hash_zoomLevel;
-            longitude = hash_longitude;
-            latitude = hash_latitude;
-            sceneId = hash_sceneId;
-            birdseyeSceneOrientation = hash_birdseyeSceneOrientation;
-
-            try {
-
-                //  Set the mode of the map.
-                map.SetMapMode(mapMode);
-
-                //  Switch on MapStyle 
-                //  Road = The road map style = 'r'
-                //  Aerial = The aerial map style = 'a'
-                //  Hybrid = The hybrid map style, which is an aerial map with a label overlay = 'h'
-                //  Oblique = The oblique map style, which is the same as Birdseye = '0'
-                //  Birdseye = The bird's eye (oblique-angle) imagery map style = 'b'
-                switch (mapStyle) {
-
-                    case 'r': //  Road = The road map style = 'r'                  
-                    case 'a': //  Aerial = The aerial map style = 'a'                   
-                    case 'h': //  Hybrid = The hybrid map style, which is
-                        // an aerial map with a label overlay = 'h'
-
-                        //  Set the style of the map                        
-                        map.SetMapStyle(mapStyle);
-
-                        //  Attach a Map Control event - onchangeview
-                        //  to hideLoadingIndicatorAndDetach function.
-                        map.AttachEvent("onchangeview", hideLoadingIndicatorAndDetach);
-
-                        //  Attach a Map Control event - onendzoom
-                        //  to applyProperZoom function.
-                        map.AttachEvent("onendzoom", applyProperZoom);
-
-                        //  If zoomLevel is one greater than defaultZoomLevelOfMapSet then ...
-                        if (zoomLevel == (defaultZoomLevelOfMapSet + 1)) {
-
-                            map.SetCenterAndZoom(new VELatLong(latitude, longitude), zoomLevel);
-
-                        }
-                        else {
-
-                            //  Center the map to a specific latitude and
-                            //  longitude and set the zoom level one less
-                            //  than the actual one.
-                            //  This is done for adjusting pushpins position
-                            //  (For avoiding clubbing of pushpins)
-                            //  See applyProperZoom function for more details about
-                            //  why zoomlevel is set one less than the expected one
-                            map.SetCenterAndZoom(new VELatLong(latitude, longitude), zoomLevel - 1);
-
-                        }
-
-
-                        break;
-
-                    case 'o': //  Oblique = The oblique map style, 
-                        //  which is the same as Birdseye = '0'
-
-                        //  Attach a Map Control event - onchangemapstyle 
-                        //  to onchangemapstyleBirdseye function.
-                        map.AttachEvent("onchangemapstyle", onChangeMapStyleOblique);
-
-                        //  Set the style of the map.
-                        map.SetMapStyle(mapStyle);
-
-                        break;
-
-                    case 'b': //  Birdseye = The bird's eye (oblique-angle)
-                        //  imagery map style = 'b'
-
-                        //  Attach a Map Control event - onchangemapstyle 
-                        //  to onchangemapstyleBirdseye function.
-                        map.AttachEvent("onchangemapstyle", onChangeMapStyleBirdseye);
-
-                        //  Set the style of the map.
-                        map.SetMapStyle(mapStyle);
-
-                        break;
-                }
-            } catch (e) {
-                errorFunction(mapControlError, true);
-                hideLoadingIndicator();
-            }
-
-            break;
-    }
-}
-
-
-/// <summary>
-/// This function applies proper(actual zoom mentioned 
-/// in bookmarked URL)
-/// </summary>
-function applyProperZoom() {
-
-    try {
-        //  This statement will change the
-        //  view of map.(if the default view has been bookmarked)
-        //  It will help us to call hideLoadingIndicatorAndDetach
-        //  function which hides loading indicator and detaches
-        //  required map control events else it will fail to call  
-        //  hideLoadingIndicatorAndDetach function
-        map.SetZoomLevel(zoomLevel);
-
-        //  Detach the onendzoom map control event so
-        //  that it no longer calls the applyProperZoom function.
-        map.DetachEvent("onendzoom", applyProperZoom);
-
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-
-}
-
-/// <summary>
-/// This function attaches map control
-/// events required for Oblique('o')
-/// </summary>
-function onChangeMapStyleOblique(event) {
-    try {
-        //  Attach a Map Control event - onchangeview
-        //  to onChangeViewOblique function.
-        map.AttachEvent("onchangeview", onChangeViewOblique);
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-
-}
-
-/// <summary>
-/// This function attaches map control 
-/// events required for Birdseye('b')
-/// </summary>
-function onChangeMapStyleBirdseye(event) {
-
-    try {
-        //  Attach a Map Control event - onchangeview
-        //  to onchangeviewBirdseye function.
-        map.AttachEvent("onchangeview", onChangeViewBirdseye);
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-}
-
-/// <summary>
-/// This function sets sceneID required for Birdseye('b')
-/// & removes map control events which are not required 
-/// </summary>
-function onChangeViewBirdseye(event) {
-
-    try {
-        if (event.birdseyeSceneID != sceneId) {
-
-            //  Display the bird's eye image specified by the 
-            //  VEBirdseyeScene Class ID
-            map.SetBirdseyeScene(sceneId);
-
-            //  Detach the onchangemapstyle map control event so
-            //  that it no longer calls the onChangeMapStyleBirdseye function.
-            map.DetachEvent("onchangemapstyle", onChangeMapStyleBirdseye);
-
-        }
-        else {
-
-            //  Detach the onchangeview map control event so
-            //  that it no longer calls the onChangeViewBirdseye function.
-            map.DetachEvent("onchangeview", onChangeViewBirdseye);
-
-
-            //  Call to function setOtherParamsForBirdsEyeView which
-            //  sets other paramters for Birds Eye view
-            setOtherParamsForBirdsEyeView();
-        }
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-
-}
-
-/// <summary>
-/// This function sets sceneID required for Oblique('o')
-/// & removes map control events which are not required 
-/// </summary>
-function onChangeViewOblique(event) {
-
-    try {
-        if (event.birdseyeSceneID != sceneId) {
-
-            //  Display the bird's eye image specified by the 
-            //  VEBirdseyeScene Class ID
-            map.SetBirdseyeScene(sceneId);
-
-            //  Detach the onchangemapstyle map control event so
-            //  that it no longer calls the onChangeMapStyleOblique function.
-            map.DetachEvent("onchangemapstyle", onChangeMapStyleOblique);
-
-        }
-        else {
-
-            //  Detach the onchangeview map control event so
-            //  that it no longer calls the onChangeViewOblique function.
-            map.DetachEvent("onchangeview", onChangeViewOblique);
-
-            //  Call to function setOtherParamsForBirdsEyeView which
-            //  sets other paramters for Birds Eye view
-            setOtherParamsForBirdsEyeView();
-
-        }
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-
-}
-
-/// <summary>
-/// This function sets other paramters for Birds Eye view
-/// </summary>
-function setOtherParamsForBirdsEyeView() {
-
-    try {
-        //  Get integer value of zoomLevel for Bird's eye 
-        //  View from bookmarked URL
-        birdsEyeViewZoomLevel = parseInt(zoomLevel);
-
-        //  Create CenterPixel for Bird's Eye View using longitude & 
-        //  latitude from bookmarked URL
-        centerPixel = new VEPixel(longitude, latitude);
-
-        //  Get Birdseye Scene for previously set Bird's eye view
-        birdsEyeSceneGlobal = map.GetBirdseyeScene();
-
-        //  Encode centerPixel & birdsEyeViewZoomLevel to lat long
-        var encLatLong
-        = birdsEyeSceneGlobal.PixelToLatLong(centerPixel, birdsEyeViewZoomLevel);
-
-
-        //  Attach a Map Control event - onchangeview
-        //  to hideLoadingIndicatorAndDetach function.
-        map.AttachEvent("onchangeview", hideLoadingIndicatorAndDetach);
-
-
-        //  Switch for again setting the Birds Eye scene 
-        //  using encLatLong,encLatLong & Bird's eye orientation
-        switch (birdseyeSceneOrientation) {
-
-            case 'North': //  VEOrientation.North
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.North,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'South': //  VEOrientation.South
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.South,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'East': //  VEOrientation.East
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.East,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-
-            case 'West': //  VEOrientation.West
-
-                //  Set the Birds Eye scene using encLatLong,encLatLong 
-                //  & Bird's eye orientation
-                map.SetBirdseyeScene(
-                encLatLong,
-                VEOrientation.West,
-                birdsEyeViewZoomLevel,
-                dummyCallback);
-
-                break;
-        }
-    } catch (e) {
-        errorFunction(mapControlError, true);
-        hideLoadingIndicator();
-    }
-
-}
 
 /// <summary>
 /// This function hides loading indicator and detaches 
@@ -3034,13 +2415,13 @@ function hideLoadingIndicatorAndDetach() {
     try {
         //  Detach the onchangeview map control event so
         //  that it no longer calls the hideLoadingIndicatorAndDetach function.
-        map.DetachEvent("onchangeview", hideLoadingIndicatorAndDetach);
+        Microsoft.Maps.Events.removeHandler("onchangeview");
 
         //  Setting map style again is required for BirdsEye view since
         //  processing on BirdsEye view removes labels
         //  By resetting map style we ensure labels on the map if labels
         //  are expected to be seen on the map
-        map.SetMapStyle(hash_mapStyle);
+        map.setMapType(hash_mapStyle);
 
         setTimeout(hideLoadingIndicatorAndAttachViewHandler, 3000);
     } catch (e) {
@@ -3055,7 +2436,7 @@ function hideLoadingIndicatorAndAttachViewHandler() {
     //  Hide Loading Indicator
     hideLoadingIndicator();
 
-    map.AttachEvent("onchangeview", viewHandler);
+    Microsoft.Maps.Events.addHandler(map, "onchangeview", viewHandler);
 }
 
 /// <summary>
@@ -3397,7 +2778,7 @@ function SetBarChartLabel() {
         columnNameSelected = horizontalAxisColText;
 
     } //  If dropdownlist has selected value other than watermark
-    // then ...
+        // then ...
     else {
 
         // If columnNameSelected has length more than 20 chars then ...
@@ -3467,7 +2848,7 @@ function SetPieChartLabel() {
         columnNameSelected = horizontalAxisColText;
 
     } //  If dropdownlist has selected value other than watermark
-    // then ...
+        // then ...
     else {
 
         // If columnNameSelected has length more than 20 chars then ...

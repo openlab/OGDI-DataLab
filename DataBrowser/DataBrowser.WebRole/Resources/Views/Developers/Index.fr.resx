@@ -117,185 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlsoNoteThatIfAPropertyHasANullValue" xml:space="preserve">
-    <value>A noter que si une propriété d'un ensemble de données a une valeur nulle, elle sera inexistante dans le résultat retourné par le service de données d’OGDI DataLab. Par exemple, si dans un ensemble de données vous avez la propriété ville et arrondissement et que votre requête ne retourne que des villes sans arrondissement, le champ arrondissement ne sera pas retourné. Votre application doit prendre en compte la possible absence d'un champ dans le résultat retourné.</value>
-  </data>
-  <data name="AtomPub" xml:space="preserve">
-    <value>AtomPub</value>
-  </data>
-  <data name="ByDefaultOGDIReturnsDataInTheAtomPub" xml:space="preserve">
-    <value>Par défaut, OGDI DataLab retourne les données dans
-le format du &lt;a href="http://odata.org/"
-				target="_blank"&gt;protocole Odata (Open Data Protocol)&lt;/a&gt;. 
-                    Ce format étend le protocole largement utilisé
-                    &lt;a href="http://tools.ietf.org/html/rfc5023"
-				target="_blank"&gt;Atom Pub&lt;/a&gt;  
-                    et peut être utilisé par une variété de plateformes incluant .NET, Java, Ruby,
-PHP et Python. Différents exemples de code sont proposés sur la page de &lt;a
-				href="/DataBrowser/frOpenData/RennesPAV#param=NOFILTER--DataView--Results"&gt;visualisation des données&lt;/a&gt;.</value>
-  </data>
   <data name="ClientLibraries" xml:space="preserve">
     <value>Bibliothèques clientes</value>
   </data>
-  <data name="ContainerIsTheNameOfTheContainer" xml:space="preserve">
-    <value>&lt;b&gt;&lt;i&gt;container&lt;/i&gt;&lt;/b&gt; est le nom du conteneur (par exemple, "frOpenData" pour les ensembles de données mis à disposition par l’entrepôt de données) ;</value>
+  <data name="ClientLibrariesText" xml:space="preserve">
+    <value>Les développeurs utilisant &lt;a href="http://microsoft.com/vstudio/" target="_blank"&gt;Microsoft Visual Studio 2010&lt;/a&gt; (ou ultérieur) peuvent utiliser &lt;a href="http://msdn.microsoft.com/en-us/data/bb931106.aspx" target="_blank"&gt;WCF Data Services&lt;/a&gt; pour accéder aux données ainsi exposées via des classes .NET. Avec Visual Studio, cela s’effectue simplement au travers de la fonctionnalité &lt;a href="http://msdn.microsoft.com/fr-fr/library/bb628652.aspx" target="_blank"&gt;Ajouter une référence de service&lt;/a&gt; (voir les exemples avec le Microsoft Framework.NET la page Visualisation des données  &lt;a href="http://ogdifrance.cloudapp.net/DataBrowser/frOpenData/RennesPAV#param=NOFILTER--DataView--Results" taget="_blank"&gt;ici&lt;/a&gt; de la plateforme de démonstration mise à disposition par Microsoft France). Les interfaces de programmation Web proposées par OGDI DataLab sont accessibles à une grande variété de technologies client. Les développeurs peuvent se référer à la liste des &lt;a href="http://www.odata.org/libraries/" target="_blank"&gt;nombreuses bibliothèques&lt;/a&gt; proposées par le site OData vis-à-vis de leur langage de prédilection. Ainsi, par exemple, les développeurs Java peuvent utiliser la bibliothèque &lt;a href="https://github.com/MSOpenTech/ODataJClient" target="_blank"&gt;ODataJClient&lt;/a&gt;. De même, les développeurs PHP peuvent tirer parti du kit de développement logiciel &lt;a href="http://odataphp.codeplex.com/" target="_blank"&gt;OData SDK for PHP&lt;/a&gt;.</value>
   </data>
-  <data name="DataFormats" xml:space="preserve">
+  <data name="DataFormat" xml:space="preserve">
     <value>Format de données</value>
   </data>
-  <data name="DatasetIsTheNameOfTheDataSet" xml:space="preserve">
-    <value>&lt;b&gt;&lt;i&gt;dataset&lt;/i&gt;&lt;/b&gt; est le nom de l'ensemble de données (par exemple, "RennesPAV" vis-à-vis de l'ensemble
-des données localisant les points d'apport volontaire (PAV) des déchets ménagers
-mis à disposition par le 
-&lt;a href="http://www.data.rennes-metropole.fr/les-donnees/catalogue/?tx_icsopendatastore_pi1%5buid%5d=47" target="_blank"&gt;Service SIG Rennes Métropole&lt;/a&gt;
-
-) ;</value>
+  <data name="DataFormatText" xml:space="preserve">
+    <value>&lt;h4&gt;AtomPub&lt;/h4&gt; 
+&lt;p&gt;Par défaut, OGDI DataLab retourne les données dans le format du &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;protocole OData (Open Data Protocol)&lt;/a&gt;. Ce format étend le protocole largement utilisé &lt;a href="http://tools.ietf.org/html/rfc5023" target=""_blank"&gt;Atom Pub&lt;/a&gt; et peut être utilisé par une variété de plateformes incluant .NET, Java, Ruby, PHP et Python. Différents exemples de code sont proposés sur la page Visualisation des données &lt;a href="http://ogdifrance.cloudapp.net/Databrowser/frOpenData/RennesPAV" target="_blank"&gt;ici&lt;/a&gt; de la plateforme de démonstration mise à disposition par Microsoft France. &lt;/p&gt;
+&lt;h4&gt;JSON&lt;/h4&gt; 
+&lt;p&gt;Le service de données d’OGDI DataLab peut aussi retourner les données au format &lt;a href="http://fr.wikipedia.org/wiki/JavaScript_Object_Notation" target="_blank"&gt;JSON (JavaScript Object Notation)&lt;/a&gt; qui peut être plus facilement exploitable depuis JavaScript ou autre technologie. Pour retourner des données au format JSON, il suffit d'ajouter format=json à votre requête. Par exemple, pour retourner les points d'apport volontaire des déchets ménagers en verre pour la métropole de Rennes au format JSON : 
+&lt;/p&gt;
+&lt;dd&gt;&lt;a href="http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=json"&gt;http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=json&lt;/a&gt; 
+&lt;/dd&gt;&lt;br/&gt;
+&lt;h4&gt;JSONP &lt;/h4&gt;
+&lt;p&gt;Pour diminuer la vulnérabilité en terme de sécurité liée aux attaques de type scriptage intersite (cross-site scripting ou XSS en abrégé), généralement les navigateurs empêchent le JavaScript d'une page Web venant d'un domaine X de faire des requêtes http vers un autre domaine Y. Cela empêche tout code JavaScript hébergé sur un domaine de faire des appels directs au service de données OGDI DataLab, mais il existe plusieurs techniques qui peuvent être utilisées comme la technique fondée sur des IFrames. &lt;/p&gt;&lt;p&gt;
+OGDI DataLab fournit un support direct pour la technique &lt;a href="http://fr.wikipedia.org/wiki/JavaScript_Object_Notation#JSONP" target="_blank"&gt;JSONP&lt;/a&gt;. En utilisant cette technique, le service de données OGDI DataLab appelle la fonction de rappel (callback) que vous aurez spécifiée, passant le résultat de votre requête au format JSON comme format d'entrée. Pour utiliser cette technique, il convient de construire votre requête avec les paramètres additionnels format=json&amp;callback= où est le nom de votre fonction de rappel JavaScript définie dans la page émettant la requête. &lt;/p&gt;&lt;p&gt;
+Vous pouvez consulter l'exemple de code JavaScript sur la page Visualisation des données &lt;a href="http://ogdifrance.cloudapp.net/Databrowser/frOpenData/RennesPAV" target="_blank"&gt;ici&lt;/a&gt; de la plateforme de démonstration mise à disposition par Microsoft France pour un exemple utilisant JSONP avec OGDI DataLab. Dans cet exemple, la fonction AdditionalDataLoaded() est la fonction de callback JSONP. &lt;/p&gt;
+&lt;h4&gt;RDF&lt;/h4&gt; 
+&lt;p&gt;Le service de données d’OGDI DataLab peut aussi retourner les données au format &lt;a href="http://fr.wikipedia.org/wiki/Resource_Description_Framework" target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt;. RDF est un modèle de graphe qui permet de décrire de façon formelle des ressources web et leur métadonnées associées. Développé par le W3C, RDF est le langage de base du Web sémantique. Pour retourner des données au format RDF, il suffit d’ajouter format=rdf à votre requête. Par exemple, pour retourner les points d’apport volontaire des déchets ménagers en verre pour la métropole de rennes au format RDF : &lt;/p&gt;
+&lt;dd&gt;&lt;a href="
+http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=rdf" target="_blank"&gt;
+http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=rdf&lt;/a&gt; &lt;/dd&gt;&lt;br/&gt;
+&lt;h4&gt;Données géospatiales&lt;/h4&gt; 
+&lt;p&gt;La plupart des ensembles de données ainsi proposés est susceptible d’inclure également des données géo spatiales, qui peuvent être alors retournées dans le format &lt;a href="http://fr.wikipedia.org/wiki/Keyhole_Markup_Language" target="_blank"&gt;KML (Keyhole Markup Language)&lt;/a&gt;, rendant OGDI DataLab compatible avec des technologies de cartographie sur poste de travail ou sur le Web, comme &lt;a href="http://www.geoportail.gouv.fr/accueil" target="_blank"&gt;Géoportail&lt;/a&gt;, &lt;a href="http://www.google.com/earth/" target="_blank"&gt;Google Earth&lt;/a&gt;, &lt;a href="https://maps.google.com/" target="_blank"&gt;Google Maps&lt;/a&gt;, ou encore &lt;a href="https://maps.yahoo.com/" target="_blank"&gt;Yahoo! Maps&lt;/a&gt;. 
+Pour retourner des données géospatiales au format KML, il suffit de rajouter format=kml à la requête. Par exemple, pour retourner les points d'apport volontaire des déchets ménagers en verre pour la métropole de Rennes au format KML : &lt;/p&gt;
+&lt;dd&gt;&lt;a href="
+http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=kml "&gt;
+http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format=kml&lt;/a&gt; &lt;/dd&gt;
+&lt;p&gt;A noter que Si le jeu de données ne contient pas de données de géolocalisation, une requête de type KML au service de données OGDI DataLab retournera un résultat vide. &lt;/p&gt;
+&lt;h4&gt;A propos de la pagination&lt;/h4&gt; 
+&lt;p&gt;Le service de données OGDI DataLab et le service sous-jacent de tables Azure supportent la pagination pour les résultats d'un volume important. L’article MSDN &lt;a href="http://msdn.microsoft.com/fr-fr/library/dd135718.aspx" target="_blank"&gt;Délai d'expiration de requête et pagination&lt;/a&gt; de la documentation Azure une description complète sur la façon dont OGDI DataLab et la plateforme Azure prennent en charge la pagination. Vous pouvez vous référer également au code exemple "Pagination C#/ASP.NET" la page Visualisation des données ici de la plateforme de démonstration mise à disposition par Microsoft France, qui illustre comment gérer la pagination en utilisant la bibliothèque cliente &lt;a href="http://msdn.microsoft.com/fr-fr/data/bb931106.aspx" target="_blank"&gt;WCF Data Services&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
-  <data name="DevelopersUsingVisualStudio2010" xml:space="preserve">
-    <value>Les développeurs utilisant &lt;a href="http://www.microsoft.com/france/visualstudio/" target="_blank"&gt;
-    Microsoft Visual Studio 2010&lt;/a&gt;
- peuvent utiliser WCF Data Services pour accéder aux données ainsi exposées via des classes .NET. 
- Avec Visual Studio, cela s’effectue simplement au travers de la fonctionnalité 
- &lt;a href="http://msdn.microsoft.com/en-us/data/cc974504.aspx" target="_blank"&gt;Add Service Reference&lt;/a&gt;
- (Ajouter une référence à un service)
-(voir les exemples avec le Microsoft Framework.NET sur la page de &lt;a href="/DataBrowser/frOpenData/RennesPAV#param=NOFILTER--DataView--Results"&gt;
-    visualisation des donées&lt;/a&gt;). 
-Les interfaces de programmation Web proposées par le Kit de démarrage OGDI sont accessibles à une grande variété de technologies client. 
-Ainsi, par exemple, les développeurs Java peuvent utiliser la bibliothèque 
-&lt;a href="http://www.restlet.org/downloads/" target="_blank"&gt;Restlet Extension for OData&lt;/a&gt;,
-une composante du projet Open Source Restlet mettant à disposition un Framework léger REST pour Java.
-Les développeurs PHP peuvent tirer parti du kit de développement logiciel 
-&lt;a href="http://odataphp.codeplex.com/" target="_blank"&gt;OData pour PHP&lt;/a&gt;
-.</value>
+  <data name="OverView" xml:space="preserve">
+    <value>Vue d’ensemble</value>
   </data>
-  <data name="ForDevelopers" xml:space="preserve">
-    <value>Pour les développeurs</value>
-  </data>
-  <data name="GeospatialData" xml:space="preserve">
-    <value>Données géospaciales</value>
-  </data>
-  <data name="JSON" xml:space="preserve">
-    <value>JSON</value>
-  </data>
-  <data name="JSONP" xml:space="preserve">
-    <value>JSONP</value>
-  </data>
-  <data name="ManyOfTheDataSetsInOGDI" xml:space="preserve">
-    <value>La plupart des ensembles de données ainsi proposés est susceptible d’inclure également des données géo spatiales, qui peuvent être alors retournées dans le format 
-            &lt;a href="http://fr.wikipedia.org/wiki/Keyhole_Markup_Language" target="_blank"&gt;
-				 KML (Keyhole Markup Language)&lt;/a&gt; 
-                    ,rendant le Kit de démarrage OGDI compatible avec des technologies de cartographie sur poste de travail ou sur le Web, comme 			
-            &lt;a href="http://www.geoportail.fr/" target="_blank"&gt;
-				Géoportail&lt;/a&gt;,
-			&lt;a href="http://earth.google.com" target="_blank"&gt;
-				Google Earth&lt;/a&gt;,
-            &lt;a href="http://maps.google.com" target="_blank"&gt;
-				Google Maps&lt;/a&gt;,
-            &lt;a href="http://www.bing.com/maps/" target="_blank"&gt;
-                    Microsoft Bing Maps&lt;/a&gt; ou encore
-            &lt;a href="http://maps.yahoo.com" target="_blank"&gt;
-				Yahoo! Maps&lt;/a&gt;.</value>
-  </data>
-  <data name="NoteThatIfTheDataSet" xml:space="preserve">
-    <value>A noter que Si l'ensemble de données ne contient pas de données de géolocalisation, une requête de type KML au service de données OGDI DataLab retournera un résultat vide.</value>
-  </data>
-  <data name="NoteThatOGDICurrentlyOnlySupportsThe" xml:space="preserve">
-    <value>A noter que le kit de démarrage OGDI DataLab ne supporte actuellement que les options
-de requête de WCF Data Services $filter et $stop. Des requêtes exemples utilisant
-l'ensemble des données "RennesPAV" sont disponibles sur la page &lt;a href="/Databrowser/frOpenData/RennesPAV"&gt;visualisation
-des données&lt;/a&gt; du kit de développement logiciel (SDK).</value>
-  </data>
-  <data name="OGDIAndTheUnderlyingWindowsAzureTableStorageService" xml:space="preserve">
-    <value>Le service de données OGDI DataLab et le service sous-jacent de tables Windows Azure supportent
-la pagination pour les résultats d'un volume important. L’article MSDN &lt;a href="http://msdn.microsoft.com/en-us/library/dd135718.aspx"
-    target="_blank"&gt;Query Timeout et la Pagination&lt;/a&gt;
-
-de la documentation Windows Azure une description complète sur la façon dont OGDI
-et la plateforme Windows Azure prennent en charge la pagination. Vous pouvez vous
-référer également au code exemple "Pagination C#/ASP.NET " sur la page de &lt;a href="/DataBrowser/frOpenData/RennesPAV#param=NOFILTER--DataView--Results"&gt;
-    visualisation des données&lt;/a&gt;, 
-    qui illustre comment gérer la pagination en utilisant la bibliothèque cliente  
-    &lt;a href="http://msdn.microsoft.com/fr-fr/data/bb931106.aspx" target="_blank"&gt;WCF Data Services.&lt;/a&gt;</value>
-  </data>
-  <data name="OGDICanAlsoReturnDataInTheJSON" xml:space="preserve">
-    <value>Le service de données d’OGDI DataLab peut aussi retourner les données au format &lt;a href="http://fr.wikipedia.org/wiki/JSON"
-    target="_blank"&gt;JSON (JavaScript Object Notation)&lt;/a&gt;
-qui peut être plus facilement exploitable depuis JavaScript ou autre technologie.
-Pour retourner des données au format JSON, il suffit d'ajouter format=json à votre
-requête. Par exemple, pour retourner les points d'apport volontaire des déchets
-ménagers en verre pour la métropole de Rennes au format JSON :</value>
-  </data>
-  <data name="OGDIDataServicesAlsoProvideDirectSupportForTheJSONP" xml:space="preserve">
-    <value>OGDI DataLab fournit un support direct pour la technique &lt;a href="http://fr.wikipedia.org/wiki/JSON#JSONP"
-    target="_blank"&gt;JSONP&lt;/a&gt;. En utilisant cette
-technique, le service de données OGDI DataLab appelle la fonction de rappel (callback) que
-vous aurez spécifiée, passant le résultat de votre requête au format JSON comme
-format d'entrée. Pour utiliser cette technique, il convient de construire votre
-requête avec les paramètres additionnels &lt;i&gt;format=json&amp;callback=&lt;callback&gt;&lt;/i&gt; où &lt;i&gt;&lt;callback&gt;&lt;/i&gt;
-est le nom de votre fonction de rappel JavaScript définie dans la page émettant
-la requête.</value>
-  </data>
-  <data name="OGDIExposesDataThrough" xml:space="preserve">
-    <value>Le kit de démarrage OGDI DataLab utilise et expose des services Web &lt;a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank"&gt;
-				RESTful&lt;/a&gt;, en l’occurrence, des services
-Web implémentés à l'aide du protocole http et des principes REST, pour exposer des
-données pour la programmation.
-Le format de base des URLs pour invoquer un service du kit est la suivante: http://&lt;b&gt;&lt;i&gt;[project]&lt;/i&gt;&lt;/b&gt;.cloudapp.net/v1/&lt;b&gt;&lt;i&gt;[container]&lt;/i&gt;&lt;/b&gt;/&lt;b&gt;&lt;i&gt;[dataset]&lt;/i&gt;&lt;/b&gt;?&lt;b&gt;&lt;i&gt;[query]&lt;/i&gt;&lt;/b&gt; où:</value>
-  </data>
-  <data name="Paging" xml:space="preserve">
-    <value>A propos de la pagination</value>
+  <data name="OverViewText" xml:space="preserve">
+    <value>La plateforme de publication &lt;strong&gt;OGDI (Open Government Data Initiative) DataLab&lt;/strong&gt; repose sur la &lt;a href="http://azure.microsoft.com/" target="_blank"&gt;plateforme Microsoft Azure&lt;/a&gt;, un environnement d’exécution et d’hébergement ouvert pour aider les développeurs à rapidement et facilement créer, déployer, gérer et exécuter des applications et services Web à l'échelle de l'Internet. La plateforme Azure permet ainsi aux développeurs de se concentrer sur leur cœur de métier : les applications et les services Web. Les développeurs utilisent leurs compétences existantes (.NET, Ruby, Python, Java, PHP, etc.) et leurs outils actuels (Visual Studio, Eclipse, etc.) pour développer ces applications et services Web et les déployer dans le Cloud. Pour en savoir plus, n'hésitez pas à aller sur la page d’accueil de la &lt;a href="http://azure.microsoft.com/" target="_blank"&gt;plateforme Microsoft Azure&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;
+OGDI DataLab est écrit en C #, et s’appuie sur le Framework .NET et ASP.NET MVC. Le service de données d’OGDI Datalab expose les données pour l'accès programmatique selon un certain nombre de formats, y compris le standard protocolaire &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;Open Data Protocol (OData)&lt;/a&gt;**, une extension **&lt;a href="http://tools.ietf.org/html/rfc5023" target="_blank"&gt;Atom Publishing Protocol (AtomPub)&lt;/a&gt;, &lt;a href="http://fr.wikipedia.org/wiki/Keyhole_Markup_Language"  target"_blank"&gt;Keyhole Markup Language (KML)&lt;/a&gt;, &lt;a href="http://fr.wikipedia.org/wiki/JavaScript_Object_Notation" target="_blank"&gt;JavaScript Object Notation (JSON)&lt;/a&gt; et &lt;a href="http://fr.wikipedia.org/wiki/JavaScript_Object_Notation#JSONP" target="_blank"&gt;JSONP&lt;/a&gt;. OGDI Datalab utilise jQuery et une variété d'autres composants sous licence libre et permet aux utilisateurs de parcourir et d'interroger les (différents (catalogues de) jeux de) données ainsi publiés.</value>
   </data>
   <data name="QueryingOGDI" xml:space="preserve">
     <value>Requêter OGDI DataLab</value>
   </data>
-  <data name="QueryIsYourSetOfQueryParameters" xml:space="preserve">
-    <value>&lt;b&gt;&lt;i&gt;query&lt;/i&gt;&lt;/b&gt; est l’ensemble des paramètres de la requête, exprimé en utilisant un sous ensemble  de la 
-&lt;a href="http://msdn.microsoft.com/fr-fr/library/dd673933.aspx" target="_blank"&gt;syntaxe de requête de WCF
-Data Services.&lt;/a&gt;</value>
-  </data>
-  <data name="ReferToTheJavaScriptSampleOnThe" xml:space="preserve">
-    <value>Vous pouvez consulter l'exemple de code JavaScript sur la page  &lt;a href="/DataBrowser/frOpenData/RennesPAV#param=NOFILTER--DataView--Results"&gt;visualisation
-des données&lt;/a&gt; pour un exemple utilisant JSONP avec OGDI. Dans cet exemple, la fonction AdditionalDataLoaded() est la fonction de callback JSONP.</value>
-  </data>
-  <data name="TheOpenGovernmentDataInitiativeIsBased" xml:space="preserve">
-    <value>OGDI DataLab repose sur la plateforme Windows Azure, l’offre Platform as a Service
-(PaaS) de Microsoft, un environnement d’exécution et d’hébergement ouvert qui aide
-les développeurs à rapidement et facilement créer, déployer, gérer et exécuter des
-applications et services Web à l'échelle de l'internet. La plateforme Windows Azure
-permet ainsi aux développeurs de se concentrer sur leur cœur de métier : les applications
-et les services Web. Les développeurs utilisent leurs compétences existantes (.NET,
-Ruby, Python, Java, PHP, etc.) et leurs outils actuels (Visual Studio, Eclipse,
-etc.) pour développer ces applications et services Web et les déployer dans le Cloud.
-Pour en savoir plus, n'hésitez pas à aller sur la page d’accueil de la 
-&lt;a href="http://www.microsoft.com/france/windows-azure/" target="_blank"&gt;
-plateforme Windows Azure.&lt;/a&gt;</value>
-  </data>
-  <data name="TheWindowsAzurePlatform" xml:space="preserve">
-    <value>Plateforme Windows Azure</value>
-  </data>
-  <data name="ToMitigateSecurityVulnerabilities" xml:space="preserve">
-    <value>Pour diminuer la vulnérabilité en terme de sécurité liée aux attaques de type scriptage
-intersite (cross-site scripting ou XSS en abrégé), généralement les navigateurs
-empêchent le JavaScript d'une page Web venant d'un domaine X de faire des requêtes
-http vers un autre domaine Y. Cela empêche tout code JavaScript hébergé sur un domaine
-de faire des appels directs au service de données OGDI DataLab, mais il existe plusieurs
-techniques qui peuvent être utilisées comme la &lt;a href="http://softwareas.com/cross-domain-communication-with-iframes"
-    target="_blank"&gt;technique fondée sur des IFrames.&lt;/a&gt;</value>
-  </data>
-  <data name="ToReturnGeospatialDataInKMLFormat" xml:space="preserve">
-    <value>Pour retourner des données géo-spatiales au format KML, il suffit de rajouter &lt;i&gt;format=kml&lt;/i&gt;
-à la requête. Par exemple, pour retourner les points d'apport volontaire des déchets ménagers en verre pour la métropole de Rennes au format KML :</value>
-  </data>
-  <data name="OGDICanAlsoReturnDataInTheRDF" xml:space="preserve">
-    <value>Le service de données d’OGDI DataLab peut aussi retourner les données au format  &lt;a href="http://fr.wikipedia.org/wiki/Resource_Description_Framework"
-    target="_blank"&gt;RDF (Resource Description Framework)&lt;/a&gt;.
-RDF est un modèle de graphe qui permet de décrire de façon formelle des ressources web et leur métadonnées associées. Développé par le W3C, RDF est le langage de base du Web sémantique. Pour retourner des données au format RDF, il suffit d’ajouter format=rdf à votre requête. Par exemple, pour retourner les points d’apport volontaire des déchets ménagers en verre pour la métropole de rennes au format RDF :</value>
-  </data>
-  <data name="RDF" xml:space="preserve">
-    <value>RDF</value>
-  </data>
-  <data name="OGDIDemoURLFormat" xml:space="preserve">
-    <value>&lt;a href="http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}"&gt;
-                http://ogdifrance.cloudapp.net:8080/v1/frOpenData/RennesPAV/?$filter=flux eq 'VE' &amp;format={0}&lt;/a&gt;</value>
+  <data name="QueryingOGDIText" xml:space="preserve">
+    <value>OGDI DataLab utilise et expose des services Web &lt;a href="http://fr.wikipedia.org/wiki/Representational_state_transfer" target="_blank"&gt;REST&lt;/a&gt;, en l’occurrence, des services Web implémentés à l'aide du protocole http et des principes REST, pour exposer des données pour la programmation. Le format de base des URLs pour invoquer le service OGDIDataLab est la suivante: &lt;br/&gt;http://&lt;strong&gt;projet&lt;/strong&gt;.cloudapp.net[:8080]/v1/&lt;strong&gt;catalogue&lt;/strong&gt;/&lt;strong&gt;jeudedonnees&lt;/strong&gt;?&lt;strong&gt;requete&lt;/strong&gt; où: 
+&lt;ul&gt;&lt;li&gt;&lt;strong&gt;projet&lt;/strong&gt; est le nom du projet de déploiement pour la plateforme de publication OGDI DataLab dans Azure (par exemple "ogdifrance" pour la plateforme de démonstration mise à disposition par Microsoft France). Le port 8080 est utilisé à partir de la version 2013-06 (v6) d’OGDI DataLab.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;catalogue&lt;/strong&gt; est le nom du catalogue/conteneur (par exemple, "frOpenData" pour les jeux de données du catalogue de démonstration par défaut).&lt;/li&gt; 
+&lt;li&gt;&lt;strong&gt;jeudedonnees&lt;/strong&gt; est le nom du jeu de données (par exemple, "RennesPAV" pour le jeu des données localisant les points d'apport volontaire (PAV) des déchets ménagers mis à disposition par le &lt;a href="http://www.data.rennes-metropole.fr/les-donnees/catalogue/?tx_icsopendatastore_pi1%5buid%5d=47" target="_blank"&gt;Service SIG Rennes Métropole )&lt;/a&gt;.&lt;/li&gt; 
+&lt;li&gt;&lt;strong&gt;requete&lt;/strong&gt; est l’ensemble des paramètres de la requête, exprimé en utilisant un sous ensemble de la &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;syntaxe de requête d'OData&lt;/a&gt;.&lt;/li&gt;&lt;/ul&gt; 
+A noter qu’OGDI DataLab ne supporte actuellement que les options de requête OData $top, $skip, $orderby, $filter et $top. Des requêtes exemples utilisant l'ensemble des données "RennesPAV" sont disponibles sur la page Visualisation des données &lt;a href="http://ogdifrance.cloudapp.net/Databrowser/frOpenData/RennesPAV" target="_blank"&gt;ici&lt;/a&gt; de la plateforme de démonstration mise à disposition par Microsoft France. Pour plus d’informations, vous pouvez consulter le billet &lt;a href="http://blogs.msdn.com/b/ogdifrance/archive/2013/10/29/utiliser-la-plateforme-de-publication-ogdi-datalab.aspx" target="_blank"&gt;Utiliser la plateforme de publication OGDI DataLab&lt;/a&gt; sur le blog &lt;a href="http://blogs.msdn.com/b/ogdifrance/" target="_blank"&gt;aka.ms/OpenDataFrance&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;
+A noter que si une propriété d'un jeu de données a une valeur nulle, elle sera inexistante dans le résultat retourné par le service de données d’OGDI DataLab. Par exemple, si dans un jeu de données vous avez la propriété ville et arrondissement et que votre requête ne retourne que des villes sans arrondissement, le champ arrondissement ne sera pas retourné. Votre application doit prendre en compte la possible absence d'un champ dans le résultat retourné. </value>
   </data>
 </root>

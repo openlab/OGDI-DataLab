@@ -127,31 +127,7 @@
     <value>Graphique en colonnes</value>
   </data>
   <data name="ClickToViewResultsAsXMLKML" xml:space="preserve">
-    <value>(Cliquer pour voir les résultats au format XML/KML)</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheMethodCode" xml:space="preserve">
-    <value>Incidents criminels où le code de la méthode est égal à 2. les autres opérateurs de comparaison
-incluent &amp;quot;gt&amp;quot; pour plus grand que, &amp;quot;lt&amp;quot; pour moins que,
-&amp;quot;ge&amp;quot; pour plus grand que ou égal à, et &amp;quot;le&amp;quot; pour moins que ou égal à.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheReportDatetime" xml:space="preserve">
-    <value>Incidents criminels dont la date/heure du rapport est à ou après minuit, 1er Juin
-2008 UTC. Les dates/heures sont exprimées dans le format &lt;a href="http://en.wikipedia.org/wiki/ISO_8601"
-    target="_blank"&gt;ISO 8601&lt;/a&gt;
-    , &lt;i&gt;yyyy&lt;/i&gt;-&lt;i&gt;mm&lt;/i&gt;-&lt;i&gt;dd&lt;/i&gt;T&lt;i&gt;HH&lt;/i&gt;:&lt;i&gt;MM&lt;/i&gt;:&lt;i&gt;SS&lt;/i&gt;,
-où &lt;i&gt;yyyy&lt;/i&gt; est l'année sur 4 digits, &lt;i&gt;mm&lt;/i&gt; est le numéro du mois sur 2 digits,
-&lt;i&gt;dd&lt;/i&gt; est le jour du mois sur 2 digits, &lt;i&gt;HH&lt;/i&gt; est l'heure sur 2 digits (dans
-le format 24H), &lt;i&gt;MM&lt;/i&gt; représente les minutes, et &lt;i&gt;SS&lt;/i&gt; les secondes.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheShiftIsEqualTo" xml:space="preserve">
-    <value>Incidents criminels où le &amp;quot;shift&amp;quot; est égal à &amp;quot;EVN;&amp;quot; ou &amp;quot;MID&amp;quot;.
-La syntaxe de filtrage supporte les opérateurs logiques &amp;quot;and&amp;quot;, &amp;quot;or&amp;quot;, and &amp;quot;not&amp;quot;
-Les expressions peuvent être groupées avec des parenthèses, comme dans de nombreux langages de programmation.</value>
-  </data>
-  <data name="CrimeIncidentsWhereTheShiftProperty" xml:space="preserve">
-    <value>Incidents criminels où la propriété &amp;quot;shift&amp;quot; est égale à &amp;quot;EVN&amp;quot;.
-Les chaines de caractères doivent être entourées par des guillemets simples.
-Les booléens sont représentées par les chaines de caractères &amp;quot;true&amp;quot; ou &amp;quot;false&amp;quot; (sans les guillemets doubles).</value>
+    <value>(Cliquer pour voir les résultats au format JOSN)</value>
   </data>
   <data name="DataView" xml:space="preserve">
     <value>Vue données</value>
@@ -177,15 +153,6 @@ Les booléens sont représentées par les chaines de caractères &amp;quot;true&
   <data name="NumberOfPlacemarksInAResultSetExceedsThePinDisplayCountLimit" xml:space="preserve">
     <value>Nombre d'emplacements dans le résultat excède la limite d'affichage du nombre de points  (50 emplacements)</value>
   </data>
-  <data name="OGDIUsesASubsetOf" xml:space="preserve">
-    <value>OGDI utilise un sous-ensemble de &lt;a href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx"&gt;
-la syntaxe de requête de WCF Data Services&lt;/a&gt;
-. Le format basique d'une
-expression de filtrage est &lt;i&gt;propriété&lt;/i&gt;&amp;nbsp;&lt;i&gt;comparaison&lt;/i&gt;&amp;nbsp;&lt;i&gt;expression&lt;/i&gt;,
-où &lt;i&gt;propriété&lt;/i&gt; est le nom de la propriété, &lt;i&gt;comparaison&lt;/i&gt; est l'opérateur
-de comparaison, et &lt;i&gt;expression&lt;/i&gt; est l'expression à laquelle la valeur de la
-propriété est comparée.</value>
-  </data>
   <data name="Option1" xml:space="preserve">
     <value>Option 1</value>
   </data>
@@ -207,9 +174,6 @@ propriété est comparée.</value>
   <data name="SelectOne" xml:space="preserve">
     <value>(Sélectionner...)</value>
   </data>
-  <data name="SomeExamplesOfFilterExpressions" xml:space="preserve">
-    <value>Quelques exemples d'expressions de filtrage utilisant les données de CrimeIncidents du conteneur DC:</value>
-  </data>
   <data name="VerticalAxis" xml:space="preserve">
     <value>Axe vertical</value>
   </data>
@@ -218,5 +182,12 @@ propriété est comparée.</value>
   </data>
   <data name="RefreshChart" xml:space="preserve">
     <value>refresh-chart-fr</value>
+  </data>
+  <data name="QuerySyntax" xml:space="preserve">
+    <value>Syntaxe_de_requête</value>
+  </data>
+  <data name="QuerySyntaxText" xml:space="preserve">
+    <value>Le service de données OGDI DataLab permet de spécifier un ensemble de paramètres de requête exprimé selon un sous-ensemble de la &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;syntaxe de requête d'Odata&lt;/a&gt;. OGDI DataLab prend ainsi en charge les paramètres de requête OData $filter, $top, $skip, $orderby et $top. Pour plus d’informations, vous pouvez consulter le billet &lt;a href="http://blogs.msdn.com/b/ogdifrance/archive/2013/10/29/utiliser-la-plateforme-de-publication-ogdi-datalab.aspx" target="_blank"&gt;Utiliser la plateforme de publication OGDI DataLab&lt;/a&gt; sur le blog &lt;a href="http://blogs.msdn.com/b/ogdifrance/" target="_blank"&gt;aka.ms/OpenDataFrance&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;
+A noter que si une propriété d'un jeu de données a une valeur nulle, elle sera inexistante dans le résultat retourné par le service de données d’OGDI DataLab. Par exemple, si dans un ensemble de données vous avez la propriété ville et arrondissement et que votre requête ne retourne que des villes sans arrondissement, le champ arrondissement ne sera pas retourné. Votre application doit prendre en compte la possible absence d'un champ dans le résultat retourné.</value>
   </data>
 </root>

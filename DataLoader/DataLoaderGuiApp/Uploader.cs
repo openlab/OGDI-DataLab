@@ -41,7 +41,7 @@ namespace Ogdi.Data.DataLoaderGuiApp
                 {
                     DataSetInfos.Remove(item);
                 }
-
+                
                 UploadParam uploadParam = new UploadParam(fileName);
 
                 uploadParam.VerifyConfiguration();

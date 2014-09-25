@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Specialized="clr-namespace:System.Collections.Specialized;assembly=System"
+             xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources"
              xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
@@ -49,55 +50,51 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label  Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label15" Content="Dataset Name (internal)"/>
+            <Label  Grid.Row="0" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label15" Content="{x:Static r:ViewR.Dataset_Intern}"/>
             <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntitySet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=true}" />
 
-            <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label1" Content="Dataset Name (external)"/>
+            <Label  Grid.Row="0" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label1" Content="{x:Static r:ViewR.Dataset_Extern}"/>
             <TextBox Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label  Grid.Row="1" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label3" Content="Category"/>
+            <Label  Grid.Row="1" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label3" Content="{x:Static r:ViewR.Category}"/>
             <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Category}" />
 
-            <Label  Grid.Row="1" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label2" Content="Dataset Source"/>
+            <Label  Grid.Row="1" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label2" Content="{x:Static r:ViewR.Dataset_Source}"/>
             <TextBox Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Text="{Binding Source}" />
 
-            <Label  Grid.Row="2" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label4" Content="Date Released"/>
+            <Label  Grid.Row="2" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label4" Content="{x:Static r:ViewR.ReleasedDate}"/>
             <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding ReleasedDate}" />
 
-            <Label  Grid.Row="2" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label5" Content="Date Updated"/>
+            <Label  Grid.Row="2" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label5" Content="{x:Static r:ViewR.LastUpdateDate}"/>
             <DatePicker Grid.Row="2" Grid.Column="3" SelectedDate="{Binding LastUpdateDate}" />
 
-            <Label  Grid.Row="3" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label6" Content="Expiration Date"/>
+            <Label  Grid.Row="3" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label6" Content="{x:Static r:ViewR.ExpiredDate}"/>
             <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding ExpiredDate}" />
 
-            <Label  Grid.Row="3" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label7" Content="Update Frequency"/>
+            <Label  Grid.Row="3" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label7" Content="{x:Static r:ViewR.UpdateFrequency}"/>
             <ComboBox Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Text="{Binding UpdateFrequency}" Margin="0,2,4,0">
-                <ComboBox.ItemsSource>
-                    <Specialized:StringCollection>
-                        <System:String>never</System:String>
-                        <System:String>10 years</System:String>
-                        <System:String>5 years</System:String>
-                        <System:String>3 years</System:String>
-                        <System:String>2 years</System:String>
-                        <System:String>1 year</System:String>
-                        <System:String>semi anuilly</System:String>
-                        <System:String>quarterly</System:String>
-                        <System:String>monthly</System:String>
-                        <System:String>be-weekly</System:String>
-                        <System:String>weekly</System:String>
-                        <System:String>daily</System:String>
-                        <System:String>hourly</System:String>
-                    </Specialized:StringCollection>
-                </ComboBox.ItemsSource>
+                <ComboBoxItem Content="{x:Static r:ViewR.never}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.ten_years}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.five_years}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.three_years}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.two_years}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.one_year}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.semi_anually}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.quarterly}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.monthly}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.be_weekly}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.weekly}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.daily}"/>
+                <ComboBoxItem Content="{x:Static r:ViewR.hourly}"/>
             </ComboBox>
-            
-            <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label11" Content="Time Period Covered"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label11" Content="{x:Static r:ViewR.PeriodCovered}"/>
             <TextBox x:Name="periodCtr" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding PeriodCovered}" />
-            
-            <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label12" Content="Geographic Coverage"/>
+
+            <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource RightAlignedLabel}" x:Name="Label12" Content="{x:Static r:ViewR.GeographicCoverage}"/>
             <TextBox Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Text="{Binding GeographicCoverage}" />
-            
-            <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label13" Content="Collection Mode"/>
+
+            <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource RightAlignedLabel}" x:Name="Label13" Content="{x:Static r:ViewR.CollectionMode}"/>
             <TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CollectionMode}" />
         </Grid>
 
@@ -113,22 +110,22 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Label Style="{DynamicResource Label}" Content="Description"/>
+                <Label Style="{DynamicResource Label}" Content="{x:Static r:ViewR.Description}"/>
                 <TextBox AcceptsReturn="True" Text="{Binding Description}" />
             </StackPanel>
             
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <Label Style="{DynamicResource Label}" Content="Metadata Url"/>
+                <Label Style="{DynamicResource Label}" Content="{x:Static r:ViewR.MetadataUrl}"/>
                 <TextBox x:Name="urlCtr" Text="{Binding MetadataUrl}" />
             </StackPanel>
             
             <StackPanel Grid.Row="2" Grid.Column="0">
-                <Label Style="{DynamicResource Label}" Content="Keywords"/>
+                <Label Style="{DynamicResource Label}" Content="{x:Static r:ViewR.Keywords}"/>
                 <TextBox AcceptsReturn="True" Text="{Binding Keywords}" />
             </StackPanel>
             
             <StackPanel Grid.Row="3" Grid.Column="0">
-                <Label Style="{DynamicResource Label}" Content="Links/References"/>
+                <Label Style="{DynamicResource Label}" Content="{x:Static r:ViewR.Links}"/>
                 <TextBox AcceptsReturn="True" Text="{Binding Links}" />
             </StackPanel>
         </Grid>
@@ -145,16 +142,16 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource Label}" Content="Collection Instruments" />
+            <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource Label}" Content="{x:Static r:ViewR.CollectionInstruments}" />
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding CollectionInstruments}" />
 
-            <Label Grid.Row="0" Grid.Column="2" Style="{DynamicResource Label}" Content="Data Dictionary/Variables" />
+            <Label Grid.Row="0" Grid.Column="2" Style="{DynamicResource Label}" Content="{x:Static r:ViewR.DataDictionaryVariables}" />
             <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding DataDictionaryVariables}" />
 
-            <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource Label}" Content="Technical Documentation"/>
+            <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource Label}" Content="{x:Static r:ViewR.TechnicalInfo}"/>
             <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding TechnicalInfo}" />
 
-            <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource Label}" Content="Additional information"/>
+            <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource Label}" Content="{x:Static r:ViewR.AdditionalInfo}"/>
             <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding AdditionalInfo}" />
         </Grid>
     </Grid>

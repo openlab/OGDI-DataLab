@@ -52,7 +52,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.4\bin\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -79,7 +82,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataLoader\DataLoader.csproj">
       <Project>{92D9A4A7-46F2-48A6-98BC-9DFCE9E23E15}</Project>
-      <Name>DataLoader %28DataLoader\DataLoader%29</Name>
+      <Name>DataLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

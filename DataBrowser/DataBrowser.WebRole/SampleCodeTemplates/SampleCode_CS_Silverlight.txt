@@ -7,7 +7,7 @@
 //      2. Right click on the project node in Solution Explorer
 //      3. Select Add Service Reference
 //      4. Enter service endpoint URL into the Address field
-//         For this example, we are using the dc container and the url is http://ogdifrance.cloudapp.net:8080/v1/dc
+//         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc
 //      5. Update Page.xaml and Page.xaml.cs with the corresponding code below. 
 //
 // The Ogdi.DataServiceContexts sample makes it
@@ -48,7 +48,7 @@ namespace OgdiSamplesSilverlight2
             //       is that you can use the more advanced techniques in those samples
             //       with Silverlight 2 as well.
                       
-            var context = new Ogdi.dcDataService(new Uri("http://ogdifrance.cloudapp.net:8080/v1/dc"));
+            var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
 
             // NOTE: You can replace BankLocations with any EntitySet available
             //       See http://ogdisdk.cloudapp.net/DataCatalog.aspx
@@ -58,7 +58,7 @@ namespace OgdiSamplesSilverlight2
                         select locations;
 
             // The query above translates into the following URL:
-            //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()
+            //      http://ogdi.cloudapp.net/v1/dc/BankLocations()
 
             // Execute query...
             // All network calls in Silverlight must be asynchronous

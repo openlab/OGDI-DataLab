@@ -19,7 +19,7 @@
     //      5. Right click on the project node in Solution Explorer
     //      6. Select Add Service Reference
     //      7. Enter service endpoint URL into the Address field
-    //         For this example, we are using the dc container and the url is http://ogdifrance.cloudapp.net:8080/v1/dc
+    //         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc
     //
     // The Ogdi.DataServiceContexts sample makes it
     // very easy for .NET developers to query
@@ -30,7 +30,7 @@
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        var context = new Ogdi.dcDataService(new Uri("http://ogdifrance.cloudapp.net:8080/v1/dc"));
+        var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
         
         //var context = new Ogdi.DataServiceContexts.dc.dcDataServiceContext();
 
@@ -42,7 +42,7 @@
                     select locations;
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()
+        //      http://ogdi.cloudapp.net/v1/dc/BankLocations()
 
         // Execute query
         List<Ogdi.BankLocationsItem> results = query.ToList();
@@ -65,21 +65,21 @@
                  select locations).Take(5);
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()?$top=5
+        //      http://ogdi.cloudapp.net/v1/dc/BankLocations()?$top=5
 
         query = from locations in context.BankLocations
                 where locations.name == "Adams Bank"
                 select locations;
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'
+        //      http://ogdi.cloudapp.net/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'
 
         query = (from locations in context.BankLocations
                  where locations.name == "Adams Bank"
                  select locations).Take(5);
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'&$top=5
+        //      http://ogdi.cloudapp.net/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'&$top=5
 
         // Although $filter is supported, not all $filter options 
         // are available.  For example, substringof() is not supported.
@@ -89,7 +89,7 @@
                 select locations;
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()?$filter=substringof('Adam',name)
+        //      http://ogdi.cloudapp.net/v1/dc/BankLocations()?$filter=substringof('Adam',name)
 
         // Any LINQ queries that translate into usage of unsupported
         // WCF Data Services querystring parameters will
@@ -102,7 +102,7 @@
                  select locations).Skip(5).Take(5);
 
         // The query above translates into the following URL:
-        //      {http://ogdifrance.cloudapp.net:8080/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'&$skip=5&$top=5
+        //      {http://ogdi.cloudapp.net/v1/dc/BankLocations()?$filter=name eq 'Adams Bank'&$skip=5&$top=5
 
         // NOTE: To implement paging, see "C#/.NET Paging" sample
     }

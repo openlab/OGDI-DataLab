@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>_Action</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>_Clear All</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="Columns_Metadata" xml:space="preserve">
+    <value>Columns Metadata</value>
+  </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="Dataset" xml:space="preserve">
+    <value>Dataset</value>
+  </data>
+  <data name="Dataset_Extern" xml:space="preserve">
+    <value>Dataset Name (external)</value>
+  </data>
+  <data name="Dataset_Intern" xml:space="preserve">
+    <value>Dataset Name (internal)</value>
+  </data>
+  <data name="Dataset_Source" xml:space="preserve">
+    <value>Dataset Source</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>_Delete Selection</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>_Exit</value>
+  </data>
+  <data name="ExpiredDate" xml:space="preserve">
+    <value>Expiration Date</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Account Key</value>
+  </data>
+  <data name="LastUpdateDate" xml:space="preserve">
+    <value>Date Updated</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Upload Mode</value>
+  </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>_New Planned</value>
+  </data>
+  <data name="OGDI_Setting" xml:space="preserve">
+    <value>OGDI DataLab - Endpoint Settings</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>_Open</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Preserve Original Dataset Order</value>
+  </data>
+  <data name="Planned" xml:space="preserve">
+    <value>Is Planned?</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ReleasedDate" xml:space="preserve">
+    <value>Date Released</value>
+  </data>
+  <data name="Represent" xml:space="preserve">
+    <value>What it represent?</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>_Setting</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>_Start</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UpdateFrequency" xml:space="preserve">
+    <value>Update Frequency</value>
+  </data>
+  <data name="AdditionalInfo" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+  <data name="be_weekly" xml:space="preserve">
+    <value>be-weekly</value>
+  </data>
+  <data name="Bind" xml:space="preserve">
+    <value>Bind To Map</value>
+  </data>
+  <data name="CollectionInstruments" xml:space="preserve">
+    <value>Collection Instruments</value>
+  </data>
+  <data name="CollectionMode" xml:space="preserve">
+    <value>Collection Mode</value>
+  </data>
+  <data name="daily" xml:space="preserve">
+    <value>daily</value>
+  </data>
+  <data name="DataDictionaryVariables" xml:space="preserve">
+    <value>Data Dictionary/Variables</value>
+  </data>
+  <data name="Data_Type" xml:space="preserve">
+    <value>Data Type</value>
+  </data>
+  <data name="Exemple" xml:space="preserve">
+    <value>(Example: Suppose the dataset contains columns named A and B and you would like push pins text to read as "valueof(A) - valueof(B)". To achieve that place symbols {0} and {1} into the Push Pin Mapping column against A and B respectively and enter {0} - {1} into the Map Push Pin Format String text field.)</value>
+  </data>
+  <data name="five_years" xml:space="preserve">
+    <value>5 years</value>
+  </data>
+  <data name="GeographicCoverage" xml:space="preserve">
+    <value>Geographic Coverage</value>
+  </data>
+  <data name="hourly" xml:space="preserve">
+    <value>hourly</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Please fill these columns to get proper columns metadata for the dataset.
+
+"What it represent?" - choose what best describes the column. If you leave blank you can fill the Description and the Namespace.
+
+"Description" (only if you left "What it represents?" blank) - enter the description of the column.
+
+"Namespace" (only if you left "What it represents?" blank) - choose the namespace where your column metadata is defined. Use the format: prefix="namespace url" (ex: foaf="http://xmlns.com/foaf/0.1/"). To choose the dataset url as the namespace use ogdi="ogdiUrl".</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude Col. Name</value>
+  </data>
+  <data name="Links" xml:space="preserve">
+    <value>Links/References</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude Col. Name</value>
+  </data>
+  <data name="MetadataUrl" xml:space="preserve">
+    <value>Metadata Url</value>
+  </data>
+  <data name="monthly" xml:space="preserve">
+    <value>monthly</value>
+  </data>
+  <data name="never" xml:space="preserve">
+    <value>never</value>
+  </data>
+  <data name="one_year" xml:space="preserve">
+    <value>1 jear</value>
+  </data>
+  <data name="PartitionKeyPropertyName" xml:space="preserve">
+    <value>Dataset Partition Key</value>
+  </data>
+  <data name="PeriodCovered" xml:space="preserve">
+    <value>Time Period Covered</value>
+  </data>
+  <data name="Push_Pin_Mapping" xml:space="preserve">
+    <value>Push Pin Mapping</value>
+  </data>
+  <data name="quarterly" xml:space="preserve">
+    <value>quarterly</value>
+  </data>
+  <data name="RowKeyPropertyName" xml:space="preserve">
+    <value>Dataset RowKey</value>
+  </data>
+  <data name="semi_anually" xml:space="preserve">
+    <value>semi anually</value>
+  </data>
+  <data name="SourceTimeZoneName" xml:space="preserve">
+    <value>Data Source Timezone</value>
+  </data>
+  <data name="StringFormat" xml:space="preserve">
+    <value>Map Push Pin Text Format String</value>
+  </data>
+  <data name="TechnicalInfo" xml:space="preserve">
+    <value>Technical Documentation</value>
+  </data>
+  <data name="ten_years" xml:space="preserve">
+    <value>10 years</value>
+  </data>
+  <data name="three_years" xml:space="preserve">
+    <value>3 years</value>
+  </data>
+  <data name="two_years" xml:space="preserve">
+    <value>2 years</value>
+  </data>
+  <data name="weekly" xml:space="preserve">
+    <value>weekly</value>
+  </data>
+  <data name="AccountError" xml:space="preserve">
+    <value>Please enter your account name</value>
+  </data>
+  <data name="ConfigItemError" xml:space="preserve">
+    <value>One or more items cannot be processed since they haven't been properly configured</value>
+  </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>Error occured.</value>
+  </data>
+  <data name="ExpiredDateError" xml:space="preserve">
+    <value>Expiration date cannot be less or equal to Release date.</value>
+  </data>
+  <data name="KeyError" xml:space="preserve">
+    <value>Please enter your account key</value>
+  </data>
+  <data name="TableError" xml:space="preserve">
+    <value>DataSet Intern Name is incorrect, it must contain only alpha-numeric characters</value>
+  </data>
+  <data name="TableLengthError" xml:space="preserve">
+    <value>Entity Set must be at least 3 characters</value>
+  </data>
+  <data name="TextError" xml:space="preserve">
+    <value>Error with the following fields</value>
+  </data>
+</root>

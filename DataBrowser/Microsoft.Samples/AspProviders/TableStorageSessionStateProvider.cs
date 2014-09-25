@@ -761,7 +761,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                     throw new ProviderException("Couldn't read session blob!", e);
                 }
 
-                reader = new StreamReader(stream);
+                reader = new StreamReader(stream,true);
                 if (actions == SessionStateActions.InitializeItem)
                 {
                     // Return an empty SessionStateStoreData                    

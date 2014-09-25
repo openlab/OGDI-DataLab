@@ -1,92 +1,94 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">    
-	<head id="Head1" runat="server">
-		<title>Open Government Data Initiative</title>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Open Government Data Initiative</title>
 
-        <link rel="icon" href="@Url.Content("~/Content/images/Favicon.png")" type="image/png" />
-		<link href="../../Resource/Css" rel="stylesheet" type="text/css" />
-		<link href="../../Content/css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../Resource/Css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" type="text/css" />
 
-		<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>
-		<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
-		<script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/common.js")"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("../../Scripts/common.js")"></script>
 
-		<style type="text/css">
-			Containers #MSVE_obliqueNotification { visibility: hidden; }
-		</style>
+    <style type="text/css">
+        Containers #MSVE_obliqueNotification {
+            visibility: hidden;
+        }
+    </style>
 
-		<script type="text/javascript">
-			var RecaptchaOptions = {
-				theme: 'white'
-			};
-		</script>
+    <script type="text/javascript">
+        var RecaptchaOptions = {
+            theme: 'white'
+        };
+    </script>
 
-		@RenderSection("TitleContent", false)
-		@RenderSection("HeadContent", false)
+    @RenderSection("TitleContent", false)
+    @RenderSection("HeadContent", false)
 
-		<script type="text/javascript">
-			vpath = '@Url.Content("~/")';
-		</script>
-	</head>
+    <script type="text/javascript">
+        vpath = '@Url.Content("~/")';
+    </script>
+</head>
 
-	<body>
-        <div id="container">
-		<div class="top">
-			<div class="header">
+<body>
+    <div id="container">
+        <div class="top">
+            <div class="header">
                 <div class="logo">
                     <a href="/">
-                       <img src="../../Content/images/@SharedResources.OGDIMasterPage.Logo" alt="Open Data" />
+                        <img src="../../Content/images/@SharedResources.OGDIMasterPage.Logo" alt="Open Data" />
                     </a>
                 </div>
                 <div class="banner">
                     <img src="../../Content/images/banner.png" alt="Open Data" />
                 </div>
                 <div class="clear"></div>
-			</div>
+            </div>
         </div>
-        
-		<div class="navigation">
-			<ul>
-				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Data, "DataSetList", "DataCatalog")</li>
-				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.Developers, "Index", "Developers")</li>
-				<li>@Html.ActionLink(SharedResources.OGDIMasterPage.About, "About", "Home")</li>
-			</ul>
 
-			<div id="logindisplay">
-				@if (Request.IsAuthenticated){
-					<p>[ @Html.ActionLink(SharedResources.OGDIMasterPage.LogOff, "LogOff", "Account") ]</p>
-				}
-			</div>
-			<div class="clear"></div>
-		</div>
+        <div class="navigation">
+            <ul>
+                <li>@Html.ActionLink(SharedResources.OGDIMasterPage.Data, "DataSetList", "DataCatalog")</li>
+                <li>@Html.ActionLink(SharedResources.OGDIMasterPage.Developers, "Index", "Developers")</li>
+                <li>@Html.ActionLink(SharedResources.OGDIMasterPage.About, "About", "Home")</li>
+            </ul>
 
-		<div id="bg">
-			<div id="wrapper" class="canvas">
-				<div class="sheet">
-					<noscript>
-						<div id="dvErr">
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<td>
-										<img alt="@UIConstants.GC_NoScriptAltText" 
-											 src="@UIConstants.GC_NoScriptImagePath" 
-											 title="@UIConstants.GC_NoScriptAltText" 
-											 longdesc="@UIConstants.GC_NoScriptLongDesc" />
-									</td>
-									<td style="width: 100%">
-										@UIConstants.GC_NoScriptMessage
-									</td>
-								</tr>
-							</table>
-						</div>
-					</noscript>
-					@RenderBody()
-				</div>
-			</div>
-		</div>
-		
-		<div class="bottom">
+            <div id="logindisplay">
+                @if (Request.IsAuthenticated)
+                {
+                    <p>[ @Html.ActionLink(SharedResources.OGDIMasterPage.LogOff, "LogOff", "Account") ]</p>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="bg">
+            <div id="wrapper" class="canvas">
+                <div class="sheet">
+                    <noscript>
+                        <div id="dvErr">
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <img alt="@UIConstants.GC_NoScriptAltText"
+                                             src="@UIConstants.GC_NoScriptImagePath"
+                                             title="@UIConstants.GC_NoScriptAltText"
+                                             longdesc="@UIConstants.GC_NoScriptLongDesc" />
+                                    </td>
+                                    <td style="width: 100%">
+                                        @UIConstants.GC_NoScriptMessage
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </noscript>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom">
             <div class="footer">
                 <div class="microsoft">
                     <a href="http://www.microsoft.com/en-us/default.aspx">
@@ -105,7 +107,7 @@
 
                 <div class="clear"></div>
             </div>
-		</div>
         </div>
-	</body>
+    </div>
+</body>
 </html>

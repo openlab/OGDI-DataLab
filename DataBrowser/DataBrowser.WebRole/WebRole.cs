@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using Microsoft.Web.Administration;
+using System.Xml.Linq;
+using System;
 
 namespace Ogdi.InteractiveSdk.Mvc
 {

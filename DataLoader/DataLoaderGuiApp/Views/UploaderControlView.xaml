@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Ogdi.Data.DataLoaderGuiApp.Views.UploaderControlView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:DataLoader="clr-namespace:Ogdi.Data.DataLoader;assembly=DataLoader"
     xmlns:DataLoaderUIMvvm1="clr-namespace:Ogdi.Data.DataLoaderGuiApp"
@@ -29,12 +30,12 @@
 			</DataTemplate>
 			
 			<GridView x:Key="GridView">
-				<GridViewColumn Header="Dataset" DisplayMemberBinding="{Binding Name}" Width="100"/>
-				<GridViewColumn Header="Is Planned?" DisplayMemberBinding="{Binding PlannedAsString}" Width="100"/>
-				<GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" Width="80"/>
-                <GridViewColumn Header="Progress" CellTemplate="{StaticResource Progress}" Width="200"/>
-                <GridViewColumn Header="Upload Mode" CellTemplate="{StaticResource OverwriteSelector}" Width="100"/>
-                <GridViewColumn Header="Preserve Original Dataset Order" CellTemplate="{StaticResource SourceOrderSelector}" Width="190"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Dataset}" DisplayMemberBinding="{Binding Name}" Width="120"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Planned}" DisplayMemberBinding="{Binding PlannedAsString}" Width="100"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Status}" DisplayMemberBinding="{Binding State}" Width="80"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Progress}" CellTemplate="{StaticResource Progress}" Width="180"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Mode}" CellTemplate="{StaticResource OverwriteSelector}" Width="100"/>
+                <GridViewColumn Header="{x:Static r:ViewR.Order}" CellTemplate="{StaticResource SourceOrderSelector}" Width="190"/>
 			</GridView>
 
 		</Grid.Resources>

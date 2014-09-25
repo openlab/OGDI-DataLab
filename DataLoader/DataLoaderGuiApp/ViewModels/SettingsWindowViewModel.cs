@@ -35,13 +35,13 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
         {
             if (string.IsNullOrEmpty(AccountName))
             {
-                MessageBox.Show("Please enter your account name", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Ressources.ViewR.AccountError, "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (string.IsNullOrEmpty(AccountKey))
             {
-                MessageBox.Show("Please enter your account key", "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Ressources.ViewR.KeyError, "Endpoint Settings", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

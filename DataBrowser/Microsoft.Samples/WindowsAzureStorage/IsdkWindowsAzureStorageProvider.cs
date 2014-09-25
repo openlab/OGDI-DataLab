@@ -215,6 +215,31 @@ namespace Ogdi.InteractiveSdk.Mvc
             return xmlData;
         }
 
+        private List<string> GetTypeColumns(string container, string tableName)
+        {
+            // Set the filter
+            string tableNameFilter = "entityset eq '" + tableName + "'";
+
+            XElement metaDataXML = GetMetadata(container,
+                "EntityMetadata", tableNameFilter);
+
+            // Remove the unnecessary columns
+            var properties = metaDataXML.Elements("properties");
+            properties.Elements("entityset").Remove();
+            properties.Elements("entitykind").Remove();
+
+            // Set the column list
+            var propertyMetaData = metaDataXML.Elements("properties").First().Elements();
+            List<string> columns = new List<string>();
+            foreach (var property in propertyMetaData)
+            {
+                columns.Add(property.Value.ToString());
+            }
+            return columns;
+        }
+
+
+
         /// <summary>
         /// This method will return complete data for selected entitySet.
         /// Get an XML element containing data from the specified table + container combination,
@@ -426,10 +451,12 @@ namespace Ogdi.InteractiveSdk.Mvc
         /// <returns>An string in csv format containing the results of the query.</returns>
         public override string GetdDataAsCsv(string container, string tableName, string filter)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("{0} - {1}", DateTime.Now.ToString(), "1"));            
+            System.Diagnostics.Trace.WriteLine(string.Format("{0} - {1}", DateTime.Now.ToString(), "1"));
 
             List<string> columns = GetColumns(container, tableName);
+            List<string> typecolumns = GetTypeColumns(container, tableName);
             XElement xml = GetDataAsXElement(container, tableName, filter);
+            int Index = 0;
 
             try
             {
@@ -445,24 +472,39 @@ namespace Ogdi.InteractiveSdk.Mvc
                 }
                 sbAllEntities.Remove(sbAllEntities.Length - 1, 1);
                 sbAllEntities.Append(Environment.NewLine);
-                                
+
                 foreach (var element in xml.Elements("properties"))
                 {
+                    Index = 0;
                     foreach (string column in columns)
                     {
                         Decimal parseTest = 0;
                         string value = GetElement(element, column);
                         if (!string.IsNullOrEmpty(value))
                         {
-                            if (Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture ,out parseTest))
+                            switch (typecolumns[Index])
                             {
-                                value = parseTest.ToString(CultureInfo.CreateSpecificCulture(currentUICulture.Name));
+                                case "System.Double":
+                                    if (Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out parseTest))
+                                    {
+                                        value = parseTest.ToString(CultureInfo.CreateSpecificCulture(currentUICulture.Name));
+                                    }
+                                    else
+                                    {
+                                        value = value.Replace(listSeparator, " ");
+                                        value = value.Replace('\n', ' ');
+                                    }
+                                    break;
+                                case "System.String":
+                                case "System.Int32":
+                                case "System.Int64":
+                                case "System.DateTime":
+                                case "System.Boolean":
+                                default:
+                                    value = value.Replace(listSeparator, " ");
+                                    value = value.Replace('\n', ' ');
+                                    break;
                             }
-                            else
-                            {
-                                value = value.Replace(listSeparator, " ");
-                                value = value.Replace('\n', ' ');
-                            }                      
                             sbAllEntities.Append(value);
                         }
                         else
@@ -470,6 +512,7 @@ namespace Ogdi.InteractiveSdk.Mvc
                             sbAllEntities.Append(string.Empty);
                         }
                         sbAllEntities.Append(listSeparator);
+                        Index++;
                     }
                     sbAllEntities.Remove(sbAllEntities.Length - 1, 1);
                     sbAllEntities.Append(Environment.NewLine);
@@ -483,6 +526,7 @@ namespace Ogdi.InteractiveSdk.Mvc
             }
 
         }
+
 
         // GetMetaData internally calls GetData method. This method is introduced to keep ogdi code more readable.
         // Wherever we need to get table's metadata, instead of GetData, we now call GetMetaData.

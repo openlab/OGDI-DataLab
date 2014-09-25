@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Ogdi.Data.DataLoaderGuiApp.Views.SettingsWindowView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="OGDI DataLab - Endpoint Settings" Width="720" SizeToContent="Height" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources" 
+    Title="{x:Static r:ViewR.OGDI_Setting}" Width="720" SizeToContent="Height" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     
     <Window.Resources>
         <Style x:Key="SettingTextBlock" TargetType="TextBlock">
@@ -23,7 +24,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Name="lblAccountName" Style="{DynamicResource SettingTextBlock}">Account Name</TextBlock>
+                <TextBlock Grid.Column="0" Name="lblAccountName" Style="{DynamicResource SettingTextBlock}" Text="{x:Static r:ViewR.Account}"></TextBlock>
                 <TextBox Grid.Column="1" Text="{Binding AccountName}" />
             </Grid>
 
@@ -33,14 +34,14 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Name="lblAccountKey" Style="{DynamicResource SettingTextBlock}">Account Key</TextBlock>
+                <TextBlock Grid.Column="0" Name="lblAccountKey" Style="{DynamicResource SettingTextBlock}" Text="{x:Static r:ViewR.Key}"></TextBlock>
                 <TextBox Grid.Column="1" Text="{Binding AccountKey}" />
             </Grid>
 
             <Border Background="#EEE" Height="46" Margin="0,10,0,0" Padding="0,10">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Command="{Binding OkCommand}" Style="{DynamicResource SettingButton}">OK</Button>
-                    <Button Command="{Binding CancelCommand}" Style="{DynamicResource SettingButton}">Cancel</Button>
+                    <Button Command="{Binding CancelCommand}" Style="{DynamicResource SettingButton}" Content="{x:Static r:ViewR.Cancel}"></Button>
                 </StackPanel>
             </Border>
         </StackPanel>

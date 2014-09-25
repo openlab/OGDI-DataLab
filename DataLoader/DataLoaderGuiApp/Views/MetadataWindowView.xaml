@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Views="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Views"
+        xmlns:r="clr-namespace:Ogdi.Data.DataLoaderGuiApp.Ressources"
         Title="OGDI DataLab - Metadata Designer"
         Width="750"
         SizeToContent="Height"
@@ -14,23 +15,23 @@
         </Grid.RowDefinitions>
         
         <TabControl TabStripPlacement="Top" >
-            <TabItem Header="Dataset Metadata">
+            <TabItem Header="{x:Static r:ViewR.Metadata}">
                 <ContentControl Content="{Binding Metadata}" Margin="0,0,0,10" />
             </TabItem>
-            <TabItem Header="Dataset Properties" Visibility="{Binding TabsVisibility}" >
+            <TabItem Header="{x:Static r:ViewR.Properties}" Visibility="{Binding TabsVisibility}" >
                 <ContentControl Content="{Binding ProcessorParams}" Margin="0,0,0,10" />
             </TabItem>
-            <TabItem Header="Dataset Columns" Visibility="{Binding TabsVisibility}" x:Name="ProducerParamsTab" >
+            <TabItem Header="{x:Static r:ViewR.Columns}" Visibility="{Binding TabsVisibility}" x:Name="ProducerParamsTab" >
                 <ContentControl Content="{Binding ProducerParams}" Margin="0,0,0,10" />
             </TabItem>
-            <TabItem Header="Dataset Columns Metadata" Visibility="{Binding TabsVisibility}" >
+            <TabItem Header="{x:Static r:ViewR.Columns_Metadata}" Visibility="{Binding TabsVisibility}" >
                 <ContentControl Content="{Binding TableColumnsMetadata}" Margin="0,0,0,10" />
             </TabItem>
         </TabControl>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
             <Button Name="SaveButton" Padding="2" Margin="1" MinWidth="100" Command="{Binding SaveCommand}">OK</Button>
-            <Button Name="CloseButton" Padding="2" Margin="5,1,1,1" MinWidth="100" Command="{Binding CloseCommand}">Cancel</Button>
+            <Button Name="CloseButton" Padding="2" Margin="5,1,1,1" MinWidth="100" Command="{Binding CloseCommand}" Content="{x:Static r:ViewR.Cancel}"></Button>
         </StackPanel>
         
     </Grid>

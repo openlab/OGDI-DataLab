@@ -123,6 +123,9 @@
   <data name="ClickToViewResultsAsXMLAtom" xml:space="preserve">
     <value>(Cliquez pour voir les résultats au format XML/Atom)</value>
   </data>
+  <data name="ColumnDisplayed" xml:space="preserve">
+    <value>Sélectionnez ou déselectionnez les colonnes à afficher</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Télécharger</value>
   </data>
@@ -130,6 +133,6 @@
     <value>URL de la requête complète:</value>
   </data>
   <data name="ThirtyItemsPerPage" xml:space="preserve">
-    <value>30 Eléments par page</value>
+    <value>30 éléments par page</value>
   </data>
 </root>

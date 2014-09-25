@@ -14,8 +14,8 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
             EntitySet = _instance.EntitySet;
         }
 
-        [RegularExpression("^[A-Za-z][A-Za-z0-9]{2,62}$", ErrorMessage = "Invalid table name.")]
-        [StringLength(62, MinimumLength = 3, ErrorMessage = "Entity Set must be at least 3 characters")]
+        [RegularExpression("^[A-Za-z][A-Za-z0-9]{2,62}$", ErrorMessageResourceName = "TableError", ErrorMessageResourceType = typeof(Ressources.ViewR))]
+        [StringLength(62, MinimumLength = 3, ErrorMessageResourceName = "TableLengthError", ErrorMessageResourceType = typeof(Ressources.ViewR))]
         public string EntitySet
         {
             get { return GetValue(() => EntitySet); }

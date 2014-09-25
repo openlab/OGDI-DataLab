@@ -53,7 +53,7 @@ namespace Ogdi.InteractiveSdk.Mvc
 			  UIConstants.DBPC_LanguageFilePath});
 
 			// Get the language xml into StreamReader
-			StreamReader streamReader = new StreamReader(pathOfXmlFile);
+			StreamReader streamReader = new StreamReader(pathOfXmlFile,true);
 
 			// Create an object of XmlSerializer
 			XmlSerializer xmlSerializer =

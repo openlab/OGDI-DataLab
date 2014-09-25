@@ -119,42 +119,17 @@
   </resheader>
   <data name="AboutPageContent" xml:space="preserve">
     <value>&lt;p&gt;
-            OGDI DataLab (Open Government Data Initiative) est est une initiative menée par les équipes Microsoft en charge du
-    &lt;a href="http://www.microsoft.com/france/entreprises/secteur-public/solutions-pour-secteur-public.aspx" target="_blank"&gt; Secteur Public&lt;/a&gt;
-    .
-    OGDI DataLab utilise la &lt;a href="http://www.microsoft.com/france/windows-azure/" target="_blank"&gt;plateforme Windows Azure&lt;/a&gt;
-    dans les nuages pour faciliter la publication et l'utilisation d’informations publiques (open data) variées provenant d'entités publiques 
-    (gouvernement, ministères, collectivités locales et territoriales, mairies, services déconcentrés de l'Etat, etc.). 
-    OGDI DataLab est également un kit de démarrage gratuit sous licence libre 
-    &lt;a href="http://www.microsoft.com/france/opensource/les-licences-open-source-microsoft.aspx" target="_blank"&gt; Microsoft Public License (Ms-PL) &lt;/a&gt;
-   
-    avec son 
-    &lt;a href="http://www.microsoft.com/france/opensource/les-licences-open-source-microsoft.aspx" target="_blank"&gt; code source &lt;/a&gt;
-   
-    qui peut être utilisé pour publier des données sur
-    l'Internet dans un format reposant sur les principes fondamentaux du Web avec des
-    interfaces programmatiques (API) ouvertes faciles d’utilisation. Les API d’OGDI DataLab
-    fondées sur le Web sont accessibles par une très large variété de technologies utilisées
-    aujourd’hui sur Internet telles que ASP.NET, JavaScript, Flash, Flex, PHP, Python, Ruby, Silverlight, Objective-C (iPhone, iOS), Android, etc. 
+ &lt;strong&gt;OGDI (Open Government Data Initiative) DataLab&lt;/strong&gt;est l’un des accélérateurs de la &lt;strong&gt;solution Open Data Clé en main&lt;/strong&gt;, une initiative communautaire menée par les équipes Microsoft en charge du &lt;a href="http://www.microsoft.com/government/ww/public-services/" target="_blank"&gt;Secteur Public&lt;/a&gt; pour mettre à disposition une solution complète en marque blanche prête à l’usage, interopérable, ouverte et évolutive pour l’Open Data. OGDI DataLab est une plateforme destinée à faciliter la publication et l'utilisation de données publiques variées provenant d'entités publiques (gouvernement, ministères, collectivités locales et territoriales, mairies, services déconcentrés de l'Etat, etc.). Cette plateforme permet ainsi de publier des (catalogues multiples de (jeux de)) données publiques sur l'Internet dans un format reposant sur les principes fondamentaux du Web avec des interfaces programmatiques (API) ouvertes faciles d’utilisation reposant notamment sur le standard &lt;a href="http://www.odata.org/documentation/" target="_blank"&gt;Odata&lt;/a&gt;. Ainsi, le service de données et les APIs d’OGDI DataLab sont accessibles par une très large variété de technologies utilisées aujourd’hui sur Internet telles que ASP.NET, JavaScript, Flash, Flex, PHP, Python, Ruby, Silverlight, Objective-C (iPhone, iOS), Android, etc.
 &lt;/p&gt;
-
 &lt;p&gt;
-    Que vous soyez une Administration, une Collectivité Territoriale, une entreprise
-    en contrat avec une telle entité, une entreprise souhaitant utiliser les informations
-    publiques, ou un développeur « citoyen », ces API ouvertes vous permettent de construire
-    des applications innovantes, des représentations graphiques avancées et des agrégations
-    (mash-up) de données dont pourront bénéficier les citoyens et usagers. Ce site est
-    construit à l’aide des composants logiciel proposés par le Kit de démarrage OGDI DataLab
-    et propose un accès interactif à certains ensembles de données accessibles au public
-    avec les exemples de code et ressources associées pour écrire des applications en
-    utilisant le modèle de programmation mis en œuvre par OGDI Datalab.
+Que vous soyez une Administration, une Collectivité Territoriale, une entreprise en contrat avec une telle entité, une entreprise souhaitant utiliser les informations publiques, ou un développeur « citoyen », les API ouvertes vous permettent de construire des applications innovantes, des représentations graphiques avancées et des agrégations (mash-up) de données dont pourront bénéficier les citoyens et usagers. Ce site d’illustration est construit à l’aide des composants logiciel proposés par défaut par l’accélérateur OGDI DataLab et propose un accès interactif à certains jeux de données accessibles au public avec les exemples de code et ressources associées pour écrire des applications modernes en utilisant le modèle de programmation mis en œuvre par OGDI Datalab.  
 &lt;/p&gt;
-
 &lt;p&gt;
-    Envoyez nous un mail à &lt;a href="mailto:ogdifrance@live.fr"&gt;ogdifrance@live.fr&lt;/a&gt;
-    si vous avez des données publiques que vous souhaitez que nous publions ou si vous
-    avez des questions.
-&lt;/ p&gt;</value>
+OGDI DataLab utilise la &lt;a href="http://azure.microsoft.com/" target="_blank"&gt;plateforme Microsoft Azure&lt;/a&gt; dans le cloud. OGDI DataLab est disponible sur la &lt;a href="https://github.com/openlab/OGDI-DataLab" target="_blank"&gt;GitHub&lt;/a&gt; sous license libre &lt;a href="http://www.microsoft.com/france/openness/open-source/default.aspx" target="_blank"&gt;Microsoft Public License (Ms-PL)&lt;/a&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+Envoyez-nous un courriel à &lt;a href="mailto:ogdifrance@live.fr"&gt;ogdifrance@live.fr&lt;/a&gt; si vous avez des données publiques que vous souhaitez que nous publions ou si vous avez des questions. 
+&lt;/p&gt;</value>
   </data>
   <data name="AboutPageHeading" xml:space="preserve">
     <value>&lt;h3&gt;A propos d'OGDI DataLab&lt;/h3&gt;</value>

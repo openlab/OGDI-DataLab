@@ -2,27 +2,87 @@
 
 @{ var modelEntitySet = this.Model.EntitySet; }
 <div class="dataset">
-	<div class="name"><h2>@modelEntitySet.Name</h2></div>
-	<div class="description">@modelEntitySet.Description</div>		
-	<div class="parameters">
-		<div class="left">
-			<div class="label"> @DataBrowserResources.DataSetView.Category </div>
-			<div>@modelEntitySet.CategoryValue</div>
-		</div>
-		<div class="left">
-			<div class="label"> @DataBrowserResources.DataSetView.Date</div>
-			<div>@modelEntitySet.LastUpdateDate.ToString(Ogdi.InteractiveSdk.Mvc.Globals.ShortDateFormat)</div>
-		</div>
-		<div class="left">
-			<div class="label"> @DataBrowserResources.DataSetView.Rating</div>
-			
-			<div class="rates"> @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(Model.EntitySet.ItemKey, Model.PositiveVotes, Model.NegativeVotes) { ReadOnly = false }) </div>
-		</div>
-		<div class="left">
-			<div class="label"> @DataBrowserResources.DataSetView.Views</div>
-			<div>@this.Model.Views</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
+    <div class="name">
+        <h2>@modelEntitySet.Name</h2>
+    </div>
+    <div class="description">@modelEntitySet.Description</div>
+    <div class="parameters">
+        <!-- Facebook -->
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/@ViewBag.LanguageFull/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 
+        <!-- Google+ -->
+        <script>
+                    window.___gcfg = {
+                        lang: @Html.Raw(Json.Encode(ViewBag.LanguageFullISO))
+                        };
+
+                    (function () {
+                        var po = document.createElement('script'); po.async = true;
+                        po.src = 'https://apis.google.com/js/plusone.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+        </script>
+
+        <!-- Twitter -->
+        <script>
+                    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");
+        </script>
+
+        <!-- LinkedIn -->
+        <script src="http://platform.linkedin.com/in.js">
+                    lang: @ViewBag.LanguageFull;
+        </script>
+        <div id="socialIcons" class="left">
+            <!-- Facebook -->
+            <div class="socialIcon">
+                <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="segoe ui"></div>
+            </div>
+
+            <!-- Google+ -->
+            <div class="socialIcon">
+                <div class="g-plusone" data-size="medium"></div>
+            </div>
+
+            <!-- Twitter -->
+            <div class="socialIcon">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-hashtags="OpenData">Tweet</a>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="socialIcon">
+                <script type="IN/Share" data-counter="right" data-showzero="true">
+                </script>
+            </div>
+        </div>
+        <div class="left">
+            <div class="label"> @DataBrowserResources.DataSetView.Rating</div>
+            <div class="rates">
+                @Html.Partial("Rates", new Ogdi.InteractiveSdk.Mvc.Models.Rating.RateInfo(Model.EntitySet.ItemKey, Model.PositiveVotes, Model.NegativeVotes) { ReadOnly = false })
+            </div>
+        </div>
+        <div class="left">
+            <div class="label"> @DataBrowserResources.DataSetView.Category </div>
+            <div>@modelEntitySet.CategoryValue</div>
+        </div>
+        <div class="left">
+            <div class="label"> @DataBrowserResources.DataSetView.Date</div>
+            <div>@modelEntitySet.LastUpdateDate.ToString(Ogdi.InteractiveSdk.Mvc.Globals.ShortDateFormat)</div>
+        </div>
+
+        <div class="left">
+            <div class="label"> @DataBrowserResources.DataSetView.Views</div>
+            <div>@this.Model.Views</div>
+        </div>
+    </div>
+    <label id="bmc" style="display:none;" hidden="hidden" >@ViewBag.BingCredential</label>
+
+</div>

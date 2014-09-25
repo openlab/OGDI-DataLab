@@ -118,7 +118,7 @@ namespace Ogdi.Data.DataLoaderGuiApp.ViewModels
 
             if (notConfigured.Count() > 0)
             {
-                MessageBox.Show("One or more items cannot be processed since they haven't been properly configured:\n - " + notConfigured.Aggregate((x, y) => y += "\n - " + x));
+                MessageBox.Show(Ressources.ViewR.ConfigItemError+":\n - " + notConfigured.Aggregate((x, y) => y += "\n - " + x));
             }
 
             _uploader.Run();

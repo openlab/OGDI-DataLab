@@ -18,7 +18,7 @@
     //      5. Right click on the project node in Solution Explorer
     //      6. Select Add Service Reference
     //      7. Enter service endpoint URL into the Address field
-    //         For this example, we are using the dc container and the url is http://ogdifrance.cloudapp.net:8080/v1/dc
+    //         For this example, we are using the dc container and the url is http://ogdi.cloudapp.net/v1/dc
     //      8. Right click on the project node in Solution Explorer
     //      9. Select Add Reference..
     //      10.In .Net tab select component name "System.Web.DataVisualization"
@@ -47,7 +47,7 @@
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        var context = new Ogdi.dcDataService(new Uri("http://ogdifrance.cloudapp.net:8080/v1/dc"));
+        var context = new Ogdi.dcDataService(new Uri("http://ogdi.cloudapp.net/v1/dc"));
 
         // NOTE: You can replace CrimeIncidents with any EntitySet available
         //       See http://ogdisdk.cloudapp.net/DataCatalog.aspx
@@ -57,7 +57,7 @@
                     select crimeIncident;
 
         // The query above translates into the following URL:
-        //      http://ogdifrance.cloudapp.net:8080/v1/dc/CrimeIncidents()
+        //      http://ogdi.cloudapp.net/v1/dc/CrimeIncidents()
 
         // Execute query
         List<Ogdi.CrimeIncidentsItem> results = query.ToList();

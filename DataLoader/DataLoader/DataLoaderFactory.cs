@@ -82,12 +82,6 @@ namespace Ogdi.Data.DataLoader
             var serializer = new XmlSerializer(typeof(DLParams));
             var p = (DLParams)serializer.Deserialize(stream);
             p.TableMetadataEntity.EntityKind = p.TableMetadataEntity.EntitySet + "Item";
-
-            if (p.ProducerParams.PlacemarkParams != null)
-            {
-                p.TableMetadataEntity.KML = true;
-            }
-
             if (p.ProcessorParams != null)
             {
                 p.ProcessorParams.EntityKind = p.TableMetadataEntity.EntityKind;

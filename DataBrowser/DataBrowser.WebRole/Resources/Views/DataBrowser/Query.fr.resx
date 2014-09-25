@@ -123,6 +123,9 @@
   <data name="Clear" xml:space="preserve">
     <value>clear-fr</value>
   </data>
+  <data name="EnterQuery" xml:space="preserve">
+    <value>Entrez votre requête ici</value>
+  </data>
   <data name="FilterExpression" xml:space="preserve">
     <value>Expression du filtre</value>
   </data>
