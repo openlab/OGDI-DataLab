@@ -108,7 +108,7 @@ namespace Ogdi.DataServices.v1
                     {
                         WebRequest request = CreateAzureBlobStorageRequest(XElement.Parse(kmlSnippetValue).Element("Blob").Value);
                         WebResponse response = request.GetResponse();
-                        StreamReader strReader = new StreamReader(response.GetResponseStream());
+                        StreamReader strReader = new StreamReader(response.GetResponseStream(),true);
                         _HttpContext.Response.Write(strReader.ReadToEnd());
                     }
                     else
@@ -219,7 +219,7 @@ namespace Ogdi.DataServices.v1
                         {
                             WebRequest request = CreateAzureBlobStorageRequest(XElement.Parse(rdfSnippetValue).Element("Blob").Value);
                             WebResponse response = request.GetResponse();
-                            StreamReader strReader = new StreamReader(response.GetResponseStream());
+                            StreamReader strReader = new StreamReader(response.GetResponseStream(),true);
                             string rdfSnippetString = strReader.ReadToEnd();
 
                             rdfNamespaces.Add(XElement.Parse(rdfSnippetValue).Element(rdfNamespace + "Description"));

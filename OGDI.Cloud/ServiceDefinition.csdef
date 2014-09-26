@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="DataBrowser.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
+<ServiceDefinition name="OGDI.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
   <WebRole name="DataBrowser.WebRole" vmsize="Small">
     <Sites>
       <Site name="Web">
@@ -24,6 +24,7 @@
       <Setting name="IsAnalytics" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ClientDiagnosticLevel" />
       <Setting name="UseCache" />
+      <Setting name="bingCredential"/>
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="DataBrowserIn" protocol="http" port="80" />
